@@ -4,7 +4,9 @@
  *
  * Functions computing the Tversky index.
  */
-import {intersection, difference} from 'set-functions';
+
+// TODO: fix this
+import {intersection, difference} from 'set-functions/dist/js/set-functions';
 import {seq} from '../helpers';
 
 /**
