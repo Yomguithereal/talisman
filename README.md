@@ -9,3 +9,12 @@ Very WIP. Much wow!
   /frequencies
   /ngrams
 ```
+
+## Goals
+
+* Completely modular
+* Straightforward & simple
+* Functional
+* Performant
+* Consistent API
+* Cross-platform
