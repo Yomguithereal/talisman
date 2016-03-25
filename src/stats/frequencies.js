@@ -4,6 +4,7 @@
  *
  * Functions related to sequences' frequencies.
  */
+import {seq} from '../helpers';
 
 /**
  * Function taking a sequence and computing its frequencies.
@@ -19,7 +20,7 @@ function frequencies(sequence) {
   const index = {};
 
   // Handling strings
-  sequence = typeof sequence === 'string' ? sequence.split('') : sequence;
+  sequence = seq(sequence);
 
   for (let i = 0, l = sequence.length; i < l; i++) {
     const element = sequence[i];
