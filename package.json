@@ -15,13 +15,14 @@
   "keywords": [
     "tal",
     "nlp",
-    "natural",
-    "language",
-    "processing",
+    "natural language processing",
     "stats",
     "tokenizer"
   ],
-  "author": "yomguithereal <kropotkinepiotr@gmail.com>",
+  "author": {
+    "name": "Guillaume Plique",
+    "url": "http://github.com/Yomguithereal"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/yomguithereal/talisman/issues"
