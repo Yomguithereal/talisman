@@ -1,7 +1,7 @@
 {
   "name": "talisman",
   "version": "0.0.1",
-  "description": "A simple & straightforward NLP library for JavaScript.",
+  "description": "A straightforward NLP library for JavaScript.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint src test",
