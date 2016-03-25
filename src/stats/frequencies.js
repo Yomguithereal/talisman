@@ -18,7 +18,12 @@
 function frequencies(sequence) {
   const index = {};
 
-  for (const element of sequence) {
+  // Handling strings
+  sequence = typeof sequence === 'string' ? sequence.split('') : sequence;
+
+  for (let i = 0, l = sequence.length; i < l; i++) {
+    const element = sequence[i];
+
     if (!index[element])
       index[element] = 0;
     index[element]++;
