@@ -7,4 +7,5 @@ Very WIP. Much wow!
 ```
 /stats
   /frequencies
+  /ngrams
 ```
