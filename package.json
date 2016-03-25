@@ -4,6 +4,7 @@
   "description": "A straightforward NLP library for JavaScript.",
   "main": "index.js",
   "scripts": {
+    "check": "npm test && npm run lint",
     "lint": "eslint src test",
     "test": "mocha --compilers js:babel-core/register --recursive -R spec ./test"
   },

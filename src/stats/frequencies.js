@@ -2,8 +2,11 @@
  * Talisman stats/frequencies
  * ===========================
  *
- * Exporting a function taking a sequence and computing the frequencies of this
- * sequence.
+ * Functions related to sequences' frequencies.
+ */
+
+/**
+ * Function taking a sequence and computing its frequencies.
  *
  * @param  {mixed}  sequence - The sequence to process.
  * @return {object}          - A dict of the sequence's frequencies.
@@ -12,7 +15,7 @@
  *   // frequencies([1, 1, 2, 3, 3, 3]) => {1: 2, 2: 1, 3: 3}
  *   // frequencies('test') => {t: 2, e: 1, s: 1}
  */
-export default function frequencies(sequence) {
+function frequencies(sequence) {
   const index = {};
 
   for (const element of sequence) {
@@ -23,3 +26,34 @@ export default function frequencies(sequence) {
 
   return index;
 }
+
+/**
+ * Relative version of the `frequencies` function.
+ *
+ * @param  {mixed}  sequence - The sequence to process.
+ * @return {object}          - A dict of the sequence's relative frequencies.
+ *
+ * @example
+ *   // frequencies([1, 1, 2, 3, 3, 3]) => {1: ~0.33, 2: ~0.16, 3: 0.5}
+ *   // frequencies('test') => {t: 0.5, e: 0.25, s: 0.25}
+ */
+function relativeFrequencies(sequence) {
+  const index = frequencies(sequence),
+        relativeIndex = {};
+
+  const length = sequence.length;
+
+  for (const k in index)
+    relativeIndex[k] = index[k] / length;
+
+  return relativeIndex;
+}
+
+/**
+ * Exporting
+ */
+export default frequencies;
+export {
+  frequencies as absolute,
+  relativeFrequencies as relative
+};
