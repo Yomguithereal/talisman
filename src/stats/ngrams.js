@@ -14,10 +14,10 @@ const identity = x => x;
 /**
  * Function taking a sequence and computing its ngrams.
  *
- * @param  {number}  n         - Nb of elements in the subsequence.
- * @param  {mixed}   sequence  - The sequence to process.
- * @param  {function} [hasher] - A function optionally used to hash the ngrams.
- * @return {array}             - The array of resulting ngrams.
+ * @param  {number}   n         - Nb of elements in the subsequence.
+ * @param  {mixed}    sequence  - The sequence to process.
+ * @param  {function} [hasher]  - A function optionally used to hash the ngrams.
+ * @return {array}              - The array of resulting ngrams.
  *
  * @throws {Error} The function expects a positive n > 0.
  */
