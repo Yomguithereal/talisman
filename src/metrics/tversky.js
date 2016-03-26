@@ -1,6 +1,6 @@
 /**
- * Talisman distances/tversky
- * ===========================
+ * Talisman metrics/tversky
+ * =========================
  *
  * Functions computing the Tversky index.
  */

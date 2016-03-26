@@ -1,6 +1,6 @@
 /**
- * Talisman distances/levenshtein
- * ===============================
+ * Talisman metrics/levenshtein
+ * =============================
  *
  * Functions computing the Levenshtein distance.
  */

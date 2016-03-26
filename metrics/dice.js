@@ -17,8 +17,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Hashing the bigrams to be able to compare them referentially.
  */
 /**
- * Talisman distances/dice
- * ========================
+ * Talisman metrics/dice
+ * ======================
  *
  * Functions computing the Dice coefficient.
  */

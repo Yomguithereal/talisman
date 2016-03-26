@@ -13,8 +13,8 @@ var _helpers = require('../helpers');
  * Helpers
  */
 /**
- * Talisman distances/tversky
- * ===========================
+ * Talisman metrics/tversky
+ * =========================
  *
  * Functions computing the Tversky index.
  */

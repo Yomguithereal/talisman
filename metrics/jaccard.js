@@ -23,8 +23,8 @@ var jaccard = function jaccard(x, y) {
  * Jaccard distance is 1 - the Jaccard index.
  */
 /**
- * Talisman distances/jaccard
- * ===========================
+ * Talisman metrics/jaccard
+ * =========================
  *
  * Functions computing the Jaccard distance/similarity.
  */

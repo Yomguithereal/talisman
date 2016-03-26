@@ -1,6 +1,6 @@
 /**
- * Talisman distances/dice tests
- * ==============================
+ * Talisman metrics/dice tests
+ * ============================
  *
  */
 import assert from 'assert';
@@ -8,12 +8,12 @@ import dice, {
   index,
   similarity,
   distance
-} from '../../src/distances/dice';
+} from '../../src/metrics/dice';
 import sorensen, {
   index as sorensenIndex,
   similarity as sorensenSimilarity,
   distance as sorensenDistance
-} from '../../src/distances/sorensen';
+} from '../../src/metrics/sorensen';
 
 describe('dice', function() {
 

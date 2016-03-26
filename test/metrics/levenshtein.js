@@ -1,10 +1,10 @@
 /**
- * Talisman distances/levenshtein tests
- * =====================================
+ * Talisman metrics/levenshtein tests
+ * ===================================
  *
  */
 import assert from 'assert';
-import levenshtein from '../../src/distances/levenshtein';
+import levenshtein from '../../src/metrics/levenshtein';
 
 describe('levenshtein', function() {
   it('should correctly compute the Levenshtein distance.', function() {

@@ -1,6 +1,6 @@
 /**
- * Talisman distances/jaccard tests
- * =================================
+ * Talisman metrics/jaccard tests
+ * ===============================
  *
  */
 import assert from 'assert';
@@ -8,7 +8,7 @@ import jaccard, {
   index,
   similarity,
   distance
-} from '../../src/distances/jaccard';
+} from '../../src/metrics/jaccard';
 
 describe('jaccard', function() {
 

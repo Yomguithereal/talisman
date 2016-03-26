@@ -1,6 +1,6 @@
 /**
- * Talisman distances/jaccard
- * ===========================
+ * Talisman metrics/jaccard
+ * =========================
  *
  * Functions computing the Jaccard distance/similarity.
  */

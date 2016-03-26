@@ -1,6 +1,6 @@
 /**
- * Talisman distances/sorensen
- * ============================
+ * Talisman metrics/sorensen
+ * ==========================
  *
  * Functions computing the Sorensen coefficient.
  */

@@ -5,10 +5,10 @@
  */
 require('./helpers.js');
 
-describe('distances', function() {
-  require('./distances/dice.js');
-  require('./distances/jaccard.js');
-  require('./distances/levenshtein.js');
+describe('metrics', function() {
+  require('./metrics/dice.js');
+  require('./metrics/jaccard.js');
+  require('./metrics/levenshtein.js');
 });
 
 describe('phonetics', function() {

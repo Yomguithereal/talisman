@@ -1,6 +1,6 @@
 /**
- * Talisman distances/dice
- * ========================
+ * Talisman metrics/dice
+ * ======================
  *
  * Functions computing the Dice coefficient.
  */
