@@ -24,4 +24,8 @@ describe('tokenizers', function() {
   describe('sentences', function() {
     require('./tokenizers/sentences/naive.js');
   });
+
+  describe('words', function() {
+    require('./tokenizers/words/treebank.js');
+  });
 });
