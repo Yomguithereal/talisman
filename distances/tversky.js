@@ -1,3 +1,17 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = tversky;
+
+var _setFunctions = require('set-functions');
+
+var _helpers = require('../helpers');
+
+/**
+ * Helpers
+ */
 /**
  * Talisman distances/tversky
  * ===========================
@@ -6,20 +20,13 @@
  */
 
 // TODO: fix this
-import {intersection, difference} from 'set-functions';
-import {seq} from '../helpers';
-
-/**
- * Helpers
- */
 function I(X, Y) {
-  return intersection(X, Y).size;
+  return (0, _setFunctions.intersection)(X, Y).size;
 }
 
 function R(X, Y) {
-  return difference(X, Y).size;
+  return (0, _setFunctions.difference)(X, Y).size;
 }
-
 
 /**
  * Function returning the asymmetric Tversky index between both sequences.
@@ -31,9 +38,9 @@ function R(X, Y) {
  * @return {number}       - The asymmetric Tversky index.
  */
 function asymmetricTversky(x, y, alpha, beta) {
-  const XIY = I(x, y);
+  var XIY = I(x, y);
 
-  return XIY / (XIY + (alpha * R(x, y)) + (beta * R(y, x)));
+  return XIY / (XIY + alpha * R(x, y) + beta * R(y, x));
 }
 
 /**
@@ -46,13 +53,13 @@ function asymmetricTversky(x, y, alpha, beta) {
  * @return {number}       - The symmetric Tversky index.
  */
 function symmetricTversky(x, y, alpha, beta) {
-  const XIY = I(x, y),
-        XminusY = R(x, y),
-        YminusX = R(y, x),
-        a = Math.min(XminusY, YminusX),
-        b = Math.max(XminusY, YminusX);
+  var XIY = I(x, y),
+      XminusY = R(x, y),
+      YminusX = R(y, x),
+      a = Math.min(XminusY, YminusX),
+      b = Math.max(XminusY, YminusX);
 
-  return XIY / (XIY + (beta * (alpha * a + Math.pow(alpha - 1, b))));
+  return XIY / (XIY + beta * (alpha * a + Math.pow(alpha - 1, b)));
 }
 
 /**
@@ -66,23 +73,23 @@ function symmetricTversky(x, y, alpha, beta) {
  *
  * @throws {Error} The function expects both alpha & beta to be >= 0.
  */
-export default function tversky(params, x, y) {
+function tversky(params, x, y) {
   params = params || {};
 
-  const {
-    alpha = 1,
-    beta = 1,
-    symmetric = false
-  } = params;
+  var _params = params;
+  var _params$alpha = _params.alpha;
+  var alpha = _params$alpha === undefined ? 1 : _params$alpha;
+  var _params$beta = _params.beta;
+  var beta = _params$beta === undefined ? 1 : _params$beta;
+  var _params$symmetric = _params.symmetric;
+  var symmetric = _params$symmetric === undefined ? false : _params$symmetric;
 
-  if (alpha < 0 || beta < 0)
-    throw Error('talisman/distances/tversky: alpha & beta parameters should be >= 0.');
+
+  if (alpha < 0 || beta < 0) throw Error('talisman/distances/tversky: alpha & beta parameters should be >= 0.');
 
   // Casting to sets
-  x = new Set(seq(x));
-  y = new Set(seq(y));
+  x = new Set((0, _helpers.seq)(x));
+  y = new Set((0, _helpers.seq)(y));
 
-  return symmetric ?
-    symmetricTversky(x, y, alpha, beta) :
-    asymmetricTversky(x, y, alpha, beta);
+  return symmetric ? symmetricTversky(x, y, alpha, beta) : asymmetricTversky(x, y, alpha, beta);
 }

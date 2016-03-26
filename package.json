@@ -47,6 +47,6 @@
     "extends": "@yomguithereal/eslint-config/es6"
   },
   "dependencies": {
-    "set-functions": "^0.1.0"
+    "set-functions": "^0.2.0"
   }
 }

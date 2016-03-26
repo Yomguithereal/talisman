@@ -2,14 +2,6 @@
 
 Very WIP. Much wow!
 
-## Current modules
-
-```
-/stats
-  /frequencies
-  /ngrams
-```
-
 ## Goals
 
 * Completely modular
