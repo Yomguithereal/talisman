@@ -4,7 +4,7 @@ node_modules
 .DS_Store
 
 # Transpiled modules
-/distances
+/metrics
 /phonetics
 /regex
 /stats
