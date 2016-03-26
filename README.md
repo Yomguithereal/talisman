@@ -2,6 +2,35 @@
 
 Very WIP. Much wow!
 
+## Current modules
+
+* metrics
+  * cosine
+  * dice
+  * euclidean
+  * hamming
+  * jaccard
+  * levenshtein
+  * manhattan
+  * sorensen
+  * tversky
+* phonetics
+  * metaphone
+  * soundex
+* regex
+  * classes
+* stats
+  * frequencies
+  * ngrams
+* stemmers
+  * lancaster
+  * porter
+* tokenizers
+  * sentences
+    * naive
+  * words
+    * treebank
+
 ## Goals
 
 * Completely modular
