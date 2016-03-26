@@ -74,7 +74,7 @@ export default function tversky(params, x, y) {
   } = params;
 
   if (alpha < 0 || beta < 0)
-    throw Error('talisman/distances/tversky: alpha & beta parameters should be >= 0.');
+    throw Error('talisman/metrics/tversky: alpha & beta parameters should be >= 0.');
 
   // Casting to sets
   x = new Set(seq(x));

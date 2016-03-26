@@ -7,6 +7,7 @@ require('./helpers.js');
 
 describe('metrics', function() {
   require('./metrics/dice.js');
+  require('./metrics/hamming.js');
   require('./metrics/jaccard.js');
   require('./metrics/levenshtein.js');
 });

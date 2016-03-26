@@ -83,7 +83,7 @@ function tversky(params, x, y) {
   var symmetric = _params$symmetric === undefined ? false : _params$symmetric;
 
 
-  if (alpha < 0 || beta < 0) throw Error('talisman/distances/tversky: alpha & beta parameters should be >= 0.');
+  if (alpha < 0 || beta < 0) throw Error('talisman/metrics/tversky: alpha & beta parameters should be >= 0.');
 
   // Casting to sets
   x = new Set((0, _helpers.seq)(x));
