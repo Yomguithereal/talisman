@@ -4,8 +4,6 @@
  *
  * Functions computing the Tversky index.
  */
-
-// TODO: fix this
 import {intersection, difference} from 'set-functions';
 import {seq} from '../helpers';
 

@@ -1,5 +1,5 @@
 /**
- * Talisman distances/dicd tests
+ * Talisman distances/dice tests
  * ==============================
  *
  */
