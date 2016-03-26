@@ -6,6 +6,7 @@
 require('./helpers.js');
 
 describe('metrics', function() {
+  require('./metrics/cosine.js');
   require('./metrics/dice.js');
   require('./metrics/euclidean.js');
   require('./metrics/hamming.js');
