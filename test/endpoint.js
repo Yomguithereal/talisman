@@ -11,6 +11,7 @@ describe('metrics', function() {
   require('./metrics/hamming.js');
   require('./metrics/jaccard.js');
   require('./metrics/levenshtein.js');
+  require('./metrics/manhattan.js');
 });
 
 describe('phonetics', function() {
