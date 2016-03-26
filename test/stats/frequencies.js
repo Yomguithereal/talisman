@@ -6,7 +6,7 @@
 import assert from 'assert';
 import {absolute, relative} from '../../src/stats/frequencies';
 
-describe('stats/frequencies', function() {
+describe('frequencies', function() {
 
   describe('absolute', function() {
     it('should compute correct frequencies of the given sequence.', function() {

@@ -10,7 +10,7 @@ import jaccard, {
   distance
 } from '../../src/distances/jaccard';
 
-describe('distances/jaccard', function() {
+describe('jaccard', function() {
 
  it('should compute the jaccard index & aliases correctly.', function() {
   const tests = [

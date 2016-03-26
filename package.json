@@ -8,7 +8,7 @@
     "dist": "babel src --out-dir ./",
     "lint": "eslint src test",
     "prepublish": "npm run dist",
-    "test": "mocha --compilers js:babel-core/register --recursive -R spec ./test"
+    "test": "mocha --compilers js:babel-core/register -R spec ./test/endpoint.js"
   },
   "repository": {
     "type": "git",

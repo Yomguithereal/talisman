@@ -10,7 +10,7 @@ import dice, {
   distance
 } from '../../src/distances/dice';
 
-describe('distances/dice', function() {
+describe('dice', function() {
 
  it('should compute the dice index & aliases correctly.', function() {
   const tests = [
@@ -27,8 +27,6 @@ describe('distances/dice', function() {
     ['', '', 1],
     ['h', 'g', 0]
   ];
-
-// TODO: check cases where size is one and string is different
 
   tests.forEach(function([x, y, i]) {
     assert.strictEqual(dice(x, y), i, `${x} / ${y}`);

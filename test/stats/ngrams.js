@@ -10,7 +10,7 @@ import ngrams, {
   quadrigrams
 } from '../../src/stats/ngrams';
 
-describe('stats/ngrams', function() {
+describe('ngrams', function() {
 
   it('should throw if n is < 1.', function() {
     assert.throws(function() {
