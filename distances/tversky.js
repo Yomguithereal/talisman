@@ -18,8 +18,6 @@ var _helpers = require('../helpers');
  *
  * Functions computing the Tversky index.
  */
-
-// TODO: fix this
 function I(X, Y) {
   return (0, _setFunctions.intersection)(X, Y).size;
 }

@@ -11,6 +11,10 @@ describe('distances', function() {
   require('./distances/levenshtein.js');
 });
 
+describe('phonetics', function() {
+  require('./phonetics/metaphone.js');
+});
+
 describe('stats', function() {
   require('./stats/frequencies.js');
   require('./stats/ngrams.js');

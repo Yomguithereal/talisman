@@ -4,5 +4,9 @@ node_modules
 .DS_Store
 
 # Transpiled modules
-helpers.js
+/distances
+/phonetics
+/regex
 /stats
+/tokenizers
+helpers.js

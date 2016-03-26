@@ -31,7 +31,11 @@ var hasher = function hasher(subsequence) {
  * sequences' bigrams.
  */
 var dice = function dice(x, y) {
+
+  // Shortcuts
   if (x === y) return 1;
+
+  if (x.length === 1 && y.length === 1 && x !== y) return 0;
 
   // Computing the sequences' bigrams
   x = (0, _ngrams.bigrams)(x, hasher);
