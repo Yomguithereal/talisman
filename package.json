@@ -45,7 +45,10 @@
     ]
   },
   "eslintConfig": {
-    "extends": "@yomguithereal/eslint-config/es6"
+    "extends": "@yomguithereal/eslint-config/es6",
+    "rules": {
+      "no-return-assign": 0
+    }
   },
   "dependencies": {
     "lodash.deburr": "^4.0.0",
