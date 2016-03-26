@@ -24,6 +24,10 @@ describe('stats', function() {
   require('./stats/ngrams.js');
 });
 
+describe('stemmers', function() {
+  require('./stemmers/porter.js');
+});
+
 describe('tokenizers', function() {
   describe('sentences', function() {
     require('./tokenizers/sentences/naive.js');
