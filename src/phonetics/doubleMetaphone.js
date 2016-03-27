@@ -356,6 +356,99 @@ const LOOKUPS = {
     }
 
     return ['R', 'R', offset];
+  },
+
+  SH(string, pos) {
+    return /^H(EIM|OEK|OLM|OLZ)$/.test(string.slice(pos + 1, 4)) ?
+      ['S', 'S', 2] :
+      ['X', 'X', 2];
+  },
+
+  SC(string, pos) {
+    if (string.slice(pos + 2, 1) === 'H') {
+      if (/^OO|ER|EN|UY|ED|EM$/.test(string.slice(pos + 3, 2))) {
+        return [
+          /^E(R|N)$/.test(string.slice(pos + 3, 2) ? 'X' : ['S', 'K']),
+          ['S', 'K'],
+          3
+        ];
+      }
+
+      return [
+        'X',
+        (
+          !pos &&
+          !isVowel(string.slice(3, 1)) &&
+          string.slice(pos + 3, 1) !== 'W'
+        ) ? 'S' : 'X',
+        3
+      ];
+    }
+
+    if (/^I|E|Y$/.test(string.slice(pos + 2, 1))) {
+      return ['S', 'S', 3];
+    }
+
+    return [['S', 'K'], ['S', 'K'], 3];
+  },
+
+  S(string, pos, lastIndex) {
+    if (/^(I|Y)SL$/.test(string.slice(pos - 1, 3))) {
+      return [null, null, 1];
+    }
+
+    if (!pos && string.slice(pos, 5) === 'SUGAR') {
+      return ['X', 'S', 1];
+    }
+
+    if (string.slice(pos, 2) === 'SH') {
+      return LOOKUPS.SH(string, pos);
+    }
+
+    if (/^SI(O|A)$/.test(string.slice(pos, 3)) ||
+        string.slice(pos, 4) === 'SIAN') {
+      return ['S', isSlavoGermanic(string) ? 'S' : 'X', 3];
+    }
+
+    if ((!pos && /^M|N|L|W$/.test(string.slice(pos + 1, 1))) ||
+        string.slice(pos + 1, 1) === 'Z') {
+      return ['S', 'X', string.slice(pos + 1, 1) === 'Z' ? 2 : 1];
+    }
+
+    if (string.slice(pos, 2) === 'SC') {
+      return LOOKUPS.SC(string, pos);
+    }
+
+    return [
+      !(lastIndex === pos &&
+        /^(A|O)I$/.test(string.slice(pos - 2, 2))) ? 'S' : null,
+      'S',
+      /^S|Z$/.test(string.slice(pos + 1, 1)) ? 2 : 1
+    ];
+  },
+
+  TH(string, pos) {
+    if (/^(O|A)M$/.test(string.slice(pos + 2, 2)) ||
+        /^V(A|O)N /.test(string.slice(0, 4)) ||
+        string.slice(0, 3) === 'SCH') {
+      return ['T', 'T', 2];
+    }
+
+    return ['0', 'T', 2];
+  },
+
+  T(string, pos) {
+    if (string.slice(pos, 4) === 'TION' ||
+        /^T(IA|CH)$/.test(string.slice(pos, 3))) {
+      return ['X', 'X', 3];
+    }
+
+    if (string.slice(pos, 2) === 'TH' ||
+        string.slice(pos, 3) === 'TTH') {
+      return LOOKUPS.TH(string, pos);
+    }
+
+    return ['T', 'T', /^T|D$/.test(string.slice(pos + 1, 1)) ? 2 : 1];
   }
 };
 
