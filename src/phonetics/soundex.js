@@ -22,7 +22,7 @@ LETTERS.forEach((letter, i) => TRANSLATIONS[letter] = CODES[i]);
 function pad(code) {
   while (code.length < 4)
     code += '0';
-  return code;
+  return code.slice(0, 4);
 }
 
 /**
@@ -66,5 +66,5 @@ export default function soundex(name) {
 
   code = code.replace(/0/g, '');
 
-  return pad(firstLetter + code).slice(0, 4);
+  return pad(firstLetter + code);
 }

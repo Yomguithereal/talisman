@@ -15,6 +15,7 @@ Very WIP. Much wow!
   * sorensen
   * tversky
 * phonetics
+  * caverphone
   * metaphone
   * soundex
 * regex
