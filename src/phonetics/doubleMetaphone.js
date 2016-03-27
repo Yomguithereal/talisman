@@ -247,6 +247,115 @@ const LOOKUPS = {
     }
 
     return ['K', 'K', nextLetter === 'G' ? 2 : 1];
+  },
+
+  H(string, pos) {
+    if ((!pos || isVowel(string.slice(pos - 1, 1))) &&
+        isVowel(string.slice(pos + 1, 1))) {
+      return ['H', 'H', 2];
+    }
+
+    return [null, null, 1];
+  },
+
+  J(string, pos, lastIndex) {
+    if (string.slice(pos, 4) === 'JOSE' ||
+        string.slice(0, 4) === 'SAN ') {
+
+      if ((!pos && string.slice(pos + 4, 1) === ' ') ||
+          string.slice(0, 4) === 'SAN ') {
+        return ['H', 'H', 1];
+      }
+
+      return ['J', 'H', 1];
+    }
+
+    const offset = string.slice(pos + 1, 1) === 'J' ? 2 : 1;
+
+    if (!pos && string.slice(pos, 4) !== 'JOSE') {
+      return ['J', 'A', offset];
+    }
+
+    if (isVowel(string.slice(pos - 1, 1)) &&
+        !isSlavoGermanic(string) &&
+        /^A|O$/.test(string.slice(pos + 1, 1))) {
+      return ['J', 'J', offset];
+    }
+
+    if (lastIndex === pos) {
+      return ['J', null, offset];
+    }
+
+    if (!/^L|T|K|S|N|M|B|Z$/.test(string.slice(pos + 1, 1)) &&
+        !/^S|K|L$/.test(string.slice(pos - 1, 1))) {
+      return ['J', 'J', offset];
+    }
+
+    return [null, null, offset];
+  },
+
+  K(string, pos) {
+    return ['K', 'K', string.slice(pos + 1, 1) === 'K' ? 2 : 1];
+  },
+
+  L(string, pos, lastIndex, length) {
+    if (string.slice(pos + 1, 1) === 'L') {
+
+      if ((pos === length - 3 &&
+           /^(ILL(O|A)|ALLE)$/.test(string.slice(pos - 1, 4))) ||
+          ((/^(A|O)S$/.test(string.slice(lastIndex - 1, 2) ||
+            /^A|O$/.test(string.slice(lastIndex, 1)))) &&
+            string.slice(pos - 1, 4) === 'ALLE')) {
+        return ['L', null, 2];
+      }
+
+      return ['L', 'L', 2];
+    }
+
+    return ['L', 'L', 1];
+  },
+
+  M(string, pos, lastIndex) {
+    if (((string.slice(pos - 1, 3) === 'UMB') &&
+          (pos === lastIndex - 1 || string.slice(pos + 2, 2) === 'ER')) ||
+        string.slice(pos + 1, 1) === 'M') {
+      return ['M', 'M', 2];
+    }
+
+    return ['M', 'M', 1];
+  },
+
+  N(string, pos) {
+    return ['N', 'N', string.slice(pos + 1, 1) === 'N' ? 2 : 1];
+  },
+
+  Ñ() {
+    return ['N', 'N', 1];
+  },
+
+  P(string, pos) {
+    if (string.slice(pos + 1, 1) === 'H') {
+      return ['F', 'F', 2];
+    }
+
+    return ['P', 'P', /^P|B$/.test(string.slice(pos + 1, 1)) ? 2 : 1];
+  },
+
+  Q(string, pos) {
+    return ['K', 'K', string.slice(pos + 1, 1) === 'Q' ? 2 : 1];
+  },
+
+  R(string, pos, lastIndex) {
+    const offset = string.slice(pos + 1, 1) === 'R' ? 2 : 1;
+
+    if (pos === lastIndex &&
+        !isSlavoGermanic(string) &&
+        string.slice(pos - 2, 2) === 'IE' &&
+        !/^M(E|A)$/.test(string.slice(pos - 4, 2))) {
+      return [null, 'R', offset];
+    }
+
+    return ['R', 'R', offset];
   }
 };
 
