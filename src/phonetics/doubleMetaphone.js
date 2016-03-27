@@ -37,42 +37,42 @@ const CHSet1 = new Set(['HARAC', 'HARIS']),
 
 const LOOKUPS = {
   B(string, pos) {
-    return ['P', 'P', string.slice(pos + 1, 1) === 'B' ? 2 : 1];
+    return ['P', 'P', string.substr(pos + 1, 1) === 'B' ? 2 : 1];
   },
 
   CH(string, pos) {
-    if (pos && string.slice(pos, 4) === 'CHAE') {
+    if (pos && string.substr(pos, 4) === 'CHAE') {
       return ['K', 'X', 2];
     }
 
     else if (!pos &&
-             (CHSet1.has(string.slice(pos + 1, 5)) ||
-              CHSet2.has(string.slice(pos + 1, 3))) &&
-             string.slice(0, 5) !== 'CHORE') {
+             (CHSet1.has(string.substr(pos + 1, 5)) ||
+              CHSet2.has(string.substr(pos + 1, 3))) &&
+             string.substr(0, 5) !== 'CHORE') {
       return ['K', 'K', 2];
     }
 
-    else if (CHSet3.has(string.slice(0, 4)) ||
-             string.slice(0, 3) === 'SCH' ||
-             CHSet4.has(string.slice(pos - 2, 6)) ||
-             ChSet5.has(string.slice(pos + 2, 1)) ||
-             ((!pos || CHSet6.has(string.slice(pos - 1, 1))) &&
-              CHSet7.has(string.slice(pos + 2, 1)))) {
+    else if (CHSet3.has(string.substr(0, 4)) ||
+             string.substr(0, 3) === 'SCH' ||
+             CHSet4.has(string.substr(pos - 2, 6)) ||
+             ChSet5.has(string.substr(pos + 2, 1)) ||
+             ((!pos || CHSet6.has(string.substr(pos - 1, 1))) &&
+              CHSet7.has(string.substr(pos + 2, 1)))) {
       return ['K', 'K', 2];
     }
 
     else if (pos) {
-      return [string.slice(0, 2) === 'MC' ? 'K' : 'X', 'K', 2];
+      return [string.substr(0, 2) === 'MC' ? 'K' : 'X', 'K', 2];
     }
 
     return ['X', 'X', 2];
   },
 
   CC(string, pos) {
-    if (/^I|E|H$/.test(string.slice(pos + 2, 1)) &&
-        string.slice(pos + 2, 2) !== 'HU') {
-      if ((pos === 1 && string.slice(pos - 1) === 'A') ||
-          /^UCCE(E|S)$/.test(string.slice(pos - 1), 5)) {
+    if (/^I|E|H$/.test(string.substr(pos + 2, 1)) &&
+        string.substr(pos + 2, 2) !== 'HU') {
+      if ((pos === 1 && string.substr(pos - 1, 1) === 'A') ||
+          /^UCCE(E|S)$/.test(string.substr(pos - 1, 5))) {
         return [['K', 'S'], ['K', 'S'], 3];
       }
       else {
@@ -85,56 +85,56 @@ const LOOKUPS = {
 
   C(string, pos) {
     if (pos > 1 &&
-        isVowel(string.slice(pos - 2), 1) &&
-        string.slice(pos - 1, 3) === 'ACH' &&
-        string.slice(pos + 2, 1) !== 'I' &&
-        (string.slice(pos + 2, 1) !== 'E' ||
-         /^(B|M)ACHER$/.test(string.slice(pos - 2, 6)))) {
+        isVowel(string.substr(pos - 2, 1)) &&
+        string.substr(pos - 1, 3) === 'ACH' &&
+        string.substr(pos + 2, 1) !== 'I' &&
+        (string.substr(pos + 2, 1) !== 'E' ||
+         /^(B|M)ACHER$/.test(string.substr(pos - 2, 6)))) {
       return ['K', 'K', 2];
     }
 
-    if (!pos && string.slice(pos - 2, 6) === 'CAESAR') {
+    if (!pos && string.substr(pos, 6) === 'CAESAR') {
       return ['S', 'S', 2];
     }
 
-    if (string.slice(pos, 4) === 'CHIA') {
+    if (string.substr(pos, 4) === 'CHIA') {
       return ['K', 'K', 2];
     }
 
-    if (string.slice(pos, 2) === 'CH') {
+    if (string.substr(pos, 2) === 'CH') {
       return LOOKUPS.CH(string, pos);
     }
 
-    if (string.slice(pos, 2) === 'CZ' &&
-        string.slice(pos - 2, 4) !== 'WICZ') {
+    if (string.substr(pos, 2) === 'CZ' &&
+        string.substr(pos - 2, 4) !== 'WICZ') {
       return ['S', 'X', 2];
     }
 
-    if (string.slice(pos, 3) === 'CIA') {
+    if (string.substr(pos + 1, 3) === 'CIA') {
       return ['X', 'X', 3];
     }
 
-    if (string.slice(pos + 1, 2) === 'CC' &&
-        !(pos === 1 || string.slice(0, 1) === 'M')) {
+    if (string.substr(pos, 2) === 'CC' &&
+        !(pos === 1 || string.substr(0, 1) === 'M')) {
       return LOOKUPS.CC(string, pos);
     }
 
-    if (/^C(K|G|Q)$/.test(string.slice(pos, 2))) {
+    if (/^C(K|G|Q)$/.test(string.substr(pos, 2))) {
       return ['K', 'K', 2];
     }
 
-    if (/^C(I|E|Y)$/.test(string.slice(pos, 2))) {
-      return ['S', /^CI(O|E|A)$/.test(string.slice(pos, 3)) ? 'X' : 'S', 2];
+    if (/^C(I|E|Y)$/.test(string.substr(pos, 2))) {
+      return ['S', /^CI(O|E|A)$/.test(string.substr(pos, 3)) ? 'X' : 'S', 2];
     }
 
-    if (/^ (C|Q|G)$/.test(string.slice(pos + 1, 2))) {
-      return ['K', 'K', 2];
+    if (/^ (C|Q|G)$/.test(string.substr(pos + 1, 2))) {
+      return ['K', 'K', 3];
     }
 
     let offset = 1;
 
-    if (/^C|K|Q$/.test(string.slice(pos + 1, 1)) &&
-        !CSet1.has(string.slice(pos + 1, 2))) {
+    if (/^C|K|Q$/.test(string.substr(pos + 1, 1)) &&
+        !CSet1.has(string.substr(pos + 1, 2))) {
       offset = 2;
     }
 
@@ -146,43 +146,43 @@ const LOOKUPS = {
   },
 
   D(string, pos) {
-    if (string.slice(pos, 2) === 'DG') {
-      return /^I|E|Y$/.test(string.slice(pos + 2, 1)) ?
+    if (string.substr(pos, 2) === 'DG') {
+      return /^I|E|Y$/.test(string.substr(pos + 2, 1)) ?
         ['J', 'J', 3] :
         [['T', 'K'], ['T', 'K'], 2];
     }
 
-    return ['T', 'T', /^D(T|D)$/.test(string.slice(pos, 2)) ? 2 : 1];
+    return ['T', 'T', /^D(T|D)$/.test(string.substr(pos, 2)) ? 2 : 1];
   },
 
   F(string, pos) {
-    return ['F', 'F', string.slice(pos + 1, 1) === 'F' ? 2 : 1];
+    return ['F', 'F', string.substr(pos + 1, 1) === 'F' ? 2 : 1];
   },
 
   GH(string, pos) {
-    if (pos && !isVowel(string.slice(pos - 1), 1)) {
+    if (pos && !isVowel(string.substr(pos - 1, 1))) {
       return ['K', 'K', 2];
     }
 
     if (!pos) {
-      return string.slice(pos + 2, 1) === 'I' ?
+      return string.substr(pos + 2, 1) === 'I' ?
         ['J', 'J', 2] :
         ['K', 'K', 2];
     }
 
-    if ((pos > 1 && /^B|H|D$/.test(string.slice(pos - 2, 1))) ||
-        (pos > 2 && /^B|H|D$/.test(string.slice(pos - 3, 1))) ||
-        (pos > 3 && /^B|H$/.test(string.slice(pos - 4, 1)))) {
+    if ((pos > 1 && /^B|H|D$/.test(string.substr(pos - 2, 1))) ||
+        (pos > 2 && /^B|H|D$/.test(string.substr(pos - 3, 1))) ||
+        (pos > 3 && /^B|H$/.test(string.substr(pos - 4, 1)))) {
       return [null, null, 2];
     }
 
     if (pos > 2 &&
-        string.slice(pos - 1, 1) === 'U' &&
-        /^C|G|L|R|T$/.test(string.slice(pos - 3, 1))) {
+        string.substr(pos - 1, 1) === 'U' &&
+        /^C|G|L|R|T$/.test(string.substr(pos - 3, 1))) {
       return ['F', 'F', 2];
     }
 
-    if (pos && string.slice(pos - 1, 1) !== 'I') {
+    if (pos && string.substr(pos - 1, 1) !== 'I') {
       return ['K', 'K', 2];
     }
 
@@ -190,12 +190,12 @@ const LOOKUPS = {
   },
 
   GN(string, pos) {
-    if (pos === 1 && isVowel(string.slice(0, 1)) && !isSlavoGermanic(string)) {
+    if (pos === 1 && isVowel(string.substr(0, 1)) && !isSlavoGermanic(string)) {
       return [['K', 'N'], 'N', 2];
     }
 
-    if (string.slice(pos + 2, 2) !== 'EY' &&
-        string.slice(pos + 1, 1) !== 'Y' &&
+    if (string.substr(pos + 2, 2) !== 'EY' &&
+        string.substr(pos + 1, 1) !== 'Y' &&
         !isSlavoGermanic(string)) {
       return ['N', ['K', 'N'], 2];
     }
@@ -204,8 +204,8 @@ const LOOKUPS = {
   },
 
   G(string, pos) {
-    const nextLetter = string.slice(pos + 1, 1),
-          nextPair = string.slice(pos + 1, 2);
+    const nextLetter = string.substr(pos + 1, 1),
+          nextPair = string.substr(pos + 1, 2);
 
     if (nextLetter === 'H') {
       return LOOKUPS.GH(string, pos);
@@ -226,22 +226,22 @@ const LOOKUPS = {
     }
 
     if ((nextPair === 'ER' || nextLetter === 'Y') &&
-        !/^(D|R|M)ANGER$/.test(string.slice(0, 6)) &&
-        !/^E|I$/.test(string.slice(pos - 1, 1)) &&
-        !/^(R|O)GY$/.test(string.slice(pos - 1, 3))) {
+        !/^(D|R|M)ANGER$/.test(string.substr(0, 6)) &&
+        !/^E|I$/.test(string.substr(pos - 1, 1)) &&
+        !/^(R|O)GY$/.test(string.substr(pos - 1, 3))) {
       return ['K', 'J', 2];
     }
 
     if (/^E|I|Y$/.test(nextLetter) ||
-        /^(A|O)GGI$/.test(string.slice(pos - 1, 4))) {
+        /^(A|O)GGI$/.test(string.substr(pos - 1, 4))) {
 
-      if (/^V(A|O)N /.test(string.slice(0, 4)) ||
-          string.slice(0, 3) === 'SCH' ||
-          string.slice(pos + 1, 2 === 'ET')) {
+      if (/^V(A|O)N /.test(string.substr(0, 4)) ||
+          string.substr(0, 3) === 'SCH' ||
+          string.substr(pos + 1, 2 === 'ET')) {
         return ['K', 'K', 2];
       }
 
-      return string.slice(pos + 1, 4) === 'IER ' ?
+      return string.substr(pos + 1, 4) === 'IER ' ?
         ['J', 'J', 2] :
         ['J', 'K', 2];
     }
@@ -250,8 +250,8 @@ const LOOKUPS = {
   },
 
   H(string, pos) {
-    if ((!pos || isVowel(string.slice(pos - 1, 1))) &&
-        isVowel(string.slice(pos + 1, 1))) {
+    if ((!pos || isVowel(string.substr(pos - 1, 1))) &&
+        isVowel(string.substr(pos + 1, 1))) {
       return ['H', 'H', 2];
     }
 
@@ -259,35 +259,35 @@ const LOOKUPS = {
   },
 
   J(string, pos, lastIndex) {
-    if (string.slice(pos, 4) === 'JOSE' ||
-        string.slice(0, 4) === 'SAN ') {
+    if (string.substr(pos, 4) === 'JOSE' ||
+        string.substr(0, 4) === 'SAN ') {
 
-      if ((!pos && string.slice(pos + 4, 1) === ' ') ||
-          string.slice(0, 4) === 'SAN ') {
+      if ((!pos && string.substr(pos + 4, 1) === ' ') ||
+          string.substr(0, 4) === 'SAN ') {
         return ['H', 'H', 1];
       }
 
       return ['J', 'H', 1];
     }
 
-    const offset = string.slice(pos + 1, 1) === 'J' ? 2 : 1;
+    const offset = string.substr(pos + 1, 1) === 'J' ? 2 : 1;
 
-    if (!pos && string.slice(pos, 4) !== 'JOSE') {
+    if (!pos && string.substr(pos, 4) !== 'JOSE') {
       return ['J', 'A', offset];
     }
 
-    if (isVowel(string.slice(pos - 1, 1)) &&
+    if (isVowel(string.substr(pos - 1, 1)) &&
         !isSlavoGermanic(string) &&
-        /^A|O$/.test(string.slice(pos + 1, 1))) {
-      return ['J', 'J', offset];
+        /^A|O$/.test(string.substr(pos + 1, 1))) {
+      return ['J', 'H', offset];
     }
 
     if (lastIndex === pos) {
       return ['J', null, offset];
     }
 
-    if (!/^L|T|K|S|N|M|B|Z$/.test(string.slice(pos + 1, 1)) &&
-        !/^S|K|L$/.test(string.slice(pos - 1, 1))) {
+    if (!/^L|T|K|S|N|M|B|Z$/.test(string.substr(pos + 1, 1)) &&
+        !/^S|K|L$/.test(string.substr(pos - 1, 1))) {
       return ['J', 'J', offset];
     }
 
@@ -295,17 +295,17 @@ const LOOKUPS = {
   },
 
   K(string, pos) {
-    return ['K', 'K', string.slice(pos + 1, 1) === 'K' ? 2 : 1];
+    return ['K', 'K', string.substr(pos + 1, 1) === 'K' ? 2 : 1];
   },
 
   L(string, pos, lastIndex, length) {
-    if (string.slice(pos + 1, 1) === 'L') {
+    if (string.substr(pos + 1, 1) === 'L') {
 
       if ((pos === length - 3 &&
-           /^(ILL(O|A)|ALLE)$/.test(string.slice(pos - 1, 4))) ||
-          ((/^(A|O)S$/.test(string.slice(lastIndex - 1, 2) ||
-            /^A|O$/.test(string.slice(lastIndex, 1)))) &&
-            string.slice(pos - 1, 4) === 'ALLE')) {
+           /^(ILL(O|A)|ALLE)$/.test(string.substr(pos - 1, 4))) ||
+          ((/^(A|O)S$/.test(string.substr(lastIndex - 1, 2) ||
+            /^A|O$/.test(string.substr(lastIndex, 1)))) &&
+            string.substr(pos - 1, 4) === 'ALLE')) {
         return ['L', null, 2];
       }
 
@@ -316,9 +316,9 @@ const LOOKUPS = {
   },
 
   M(string, pos, lastIndex) {
-    if (((string.slice(pos - 1, 3) === 'UMB') &&
-          (pos === lastIndex - 1 || string.slice(pos + 2, 2) === 'ER')) ||
-        string.slice(pos + 1, 1) === 'M') {
+    if (((string.substr(pos - 1, 3) === 'UMB') &&
+          (pos === lastIndex - 1 || string.substr(pos + 2, 2) === 'ER')) ||
+        string.substr(pos + 1, 1) === 'M') {
       return ['M', 'M', 2];
     }
 
@@ -326,7 +326,7 @@ const LOOKUPS = {
   },
 
   N(string, pos) {
-    return ['N', 'N', string.slice(pos + 1, 1) === 'N' ? 2 : 1];
+    return ['N', 'N', string.substr(pos + 1, 1) === 'N' ? 2 : 1];
   },
 
   Ñ() {
@@ -334,24 +334,24 @@ const LOOKUPS = {
   },
 
   P(string, pos) {
-    if (string.slice(pos + 1, 1) === 'H') {
+    if (string.substr(pos + 1, 1) === 'H') {
       return ['F', 'F', 2];
     }
 
-    return ['P', 'P', /^P|B$/.test(string.slice(pos + 1, 1)) ? 2 : 1];
+    return ['P', 'P', /^P|B$/.test(string.substr(pos + 1, 1)) ? 2 : 1];
   },
 
   Q(string, pos) {
-    return ['K', 'K', string.slice(pos + 1, 1) === 'Q' ? 2 : 1];
+    return ['K', 'K', string.substr(pos + 1, 1) === 'Q' ? 2 : 1];
   },
 
   R(string, pos, lastIndex) {
-    const offset = string.slice(pos + 1, 1) === 'R' ? 2 : 1;
+    const offset = string.substr(pos + 1, 1) === 'R' ? 2 : 1;
 
     if (pos === lastIndex &&
         !isSlavoGermanic(string) &&
-        string.slice(pos - 2, 2) === 'IE' &&
-        !/^M(E|A)$/.test(string.slice(pos - 4, 2))) {
+        string.substr(pos - 2, 2) === 'IE' &&
+        !/^M(E|A)$/.test(string.substr(pos - 4, 2))) {
       return [null, 'R', offset];
     }
 
@@ -359,16 +359,16 @@ const LOOKUPS = {
   },
 
   SH(string, pos) {
-    return /^H(EIM|OEK|OLM|OLZ)$/.test(string.slice(pos + 1, 4)) ?
+    return /^H(EIM|OEK|OLM|OLZ)$/.test(string.substr(pos + 1, 4)) ?
       ['S', 'S', 2] :
       ['X', 'X', 2];
   },
 
   SC(string, pos) {
-    if (string.slice(pos + 2, 1) === 'H') {
-      if (/^OO|ER|EN|UY|ED|EM$/.test(string.slice(pos + 3, 2))) {
+    if (string.substr(pos + 2, 1) === 'H') {
+      if (/^OO|ER|EN|UY|ED|EM$/.test(string.substr(pos + 3, 2))) {
         return [
-          /^E(R|N)$/.test(string.slice(pos + 3, 2) ? 'X' : ['S', 'K']),
+          /^E(R|N)$/.test(string.substr(pos + 3, 2)) ? 'X' : ['S', 'K'],
           ['S', 'K'],
           3
         ];
@@ -378,14 +378,14 @@ const LOOKUPS = {
         'X',
         (
           !pos &&
-          !isVowel(string.slice(3, 1)) &&
-          string.slice(pos + 3, 1) !== 'W'
+          !isVowel(string.substr(3, 1)) &&
+          string.substr(pos + 3, 1) !== 'W'
         ) ? 'S' : 'X',
         3
       ];
     }
 
-    if (/^I|E|Y$/.test(string.slice(pos + 2, 1))) {
+    if (/^I|E|Y$/.test(string.substr(pos + 2, 1))) {
       return ['S', 'S', 3];
     }
 
@@ -393,44 +393,44 @@ const LOOKUPS = {
   },
 
   S(string, pos, lastIndex) {
-    if (/^(I|Y)SL$/.test(string.slice(pos - 1, 3))) {
+    if (/^(I|Y)SL$/.test(string.substr(pos - 1, 3))) {
       return [null, null, 1];
     }
 
-    if (!pos && string.slice(pos, 5) === 'SUGAR') {
+    if (!pos && string.substr(pos, 5) === 'SUGAR') {
       return ['X', 'S', 1];
     }
 
-    if (string.slice(pos, 2) === 'SH') {
+    if (string.substr(pos, 2) === 'SH') {
       return LOOKUPS.SH(string, pos);
     }
 
-    if (/^SI(O|A)$/.test(string.slice(pos, 3)) ||
-        string.slice(pos, 4) === 'SIAN') {
+    if (/^SI(O|A)$/.test(string.substr(pos, 3)) ||
+        string.substr(pos, 4) === 'SIAN') {
       return ['S', isSlavoGermanic(string) ? 'S' : 'X', 3];
     }
 
-    if ((!pos && /^M|N|L|W$/.test(string.slice(pos + 1, 1))) ||
-        string.slice(pos + 1, 1) === 'Z') {
-      return ['S', 'X', string.slice(pos + 1, 1) === 'Z' ? 2 : 1];
+    if ((!pos && /^M|N|L|W$/.test(string.substr(pos + 1, 1))) ||
+        string.substr(pos + 1, 1) === 'Z') {
+      return ['S', 'X', string.substr(pos + 1, 1) === 'Z' ? 2 : 1];
     }
 
-    if (string.slice(pos, 2) === 'SC') {
+    if (string.substr(pos, 2) === 'SC') {
       return LOOKUPS.SC(string, pos);
     }
 
     return [
       !(lastIndex === pos &&
-        /^(A|O)I$/.test(string.slice(pos - 2, 2))) ? 'S' : null,
+        /^(A|O)I$/.test(string.substr(pos - 2, 2))) ? 'S' : null,
       'S',
-      /^S|Z$/.test(string.slice(pos + 1, 1)) ? 2 : 1
+      /^S|Z$/.test(string.substr(pos + 1, 1)) ? 2 : 1
     ];
   },
 
   TH(string, pos) {
-    if (/^(O|A)M$/.test(string.slice(pos + 2, 2)) ||
-        /^V(A|O)N /.test(string.slice(0, 4)) ||
-        string.slice(0, 3) === 'SCH') {
+    if (/^(O|A)M$/.test(string.substr(pos + 2, 2)) ||
+        /^V(A|O)N /.test(string.substr(0, 4)) ||
+        string.substr(0, 3) === 'SCH') {
       return ['T', 'T', 2];
     }
 
@@ -438,25 +438,25 @@ const LOOKUPS = {
   },
 
   T(string, pos) {
-    if (string.slice(pos, 4) === 'TION' ||
-        /^T(IA|CH)$/.test(string.slice(pos, 3))) {
+    if (string.substr(pos, 4) === 'TION' ||
+        /^T(IA|CH)$/.test(string.substr(pos, 3))) {
       return ['X', 'X', 3];
     }
 
-    if (string.slice(pos, 2) === 'TH' ||
-        string.slice(pos, 3) === 'TTH') {
+    if (string.substr(pos, 2) === 'TH' ||
+        string.substr(pos, 3) === 'TTH') {
       return LOOKUPS.TH(string, pos);
     }
 
-    return ['T', 'T', /^T|D$/.test(string.slice(pos + 1, 1)) ? 2 : 1];
+    return ['T', 'T', /^T|D$/.test(string.substr(pos + 1, 1)) ? 2 : 1];
   },
 
   V(string, pos) {
-    return ['F', 'F', string.slice(pos + 1, 1) === 'V' ? 2 : 1];
+    return ['F', 'F', string.substr(pos + 1, 1) === 'V' ? 2 : 1];
   },
 
   W(string, pos, lastIndex) {
-    if (string.slice(pos, 2) === 'WR') {
+    if (string.substr(pos, 2) === 'WR') {
       return ['R', 'R', 2];
     }
 
@@ -464,20 +464,20 @@ const LOOKUPS = {
           secondary = [];
 
     if (!pos &&
-        (isVowel(string.slice(pos + 1, 1) ||
-         string.slice(pos, 2) === 'WH'))) {
+        (isVowel(string.substr(pos + 1, 1) ||
+         string.substr(pos, 2) === 'WH'))) {
       primary.push('A');
-      secondary.push(isVowel(string.slice(pos + 1, 1)) ? 'F' : 'A');
+      secondary.push(isVowel(string.substr(pos + 1, 1)) ? 'F' : 'A');
     }
 
-    if ((pos === lastIndex && isVowel(string.slice(pos - 1, 1))) ||
-        string.slice(0, 3) === 'SCH' ||
-        /^EWSKI|EWSKY|OWSKI|OWSKY$/.test(string.slice(pos - 1, 5))) {
+    if ((pos === lastIndex && isVowel(string.substr(pos - 1, 1))) ||
+        string.substr(0, 3) === 'SCH' ||
+        /^EWSKI|EWSKY|OWSKI|OWSKY$/.test(string.substr(pos - 1, 5))) {
       return [primary, secondary.concat('F'), 1];
     }
 
-    if (/^WI(C|T)Z$/.test(string.slice(pos, 4))) {
-      return [primary.concat(['T', 'S'], secondary.concat(['F', 'X'])), 4];
+    if (/^WI(C|T)Z$/.test(string.substr(pos, 4))) {
+      return [primary.concat(['T', 'S']), secondary.concat(['F', 'X']), 4];
     }
 
     return [primary, secondary, 1];
@@ -488,11 +488,11 @@ const LOOKUPS = {
       return ['S', 'S', 1];
     }
 
-    const offset = /^C|X$"/.test(string.slice(pos + 1, 1)) ? 2 : 1;
+    const offset = /^C|X$"/.test(string.substr(pos + 1, 1)) ? 2 : 1;
 
     if (pos === lastIndex &&
-        (/^(I|E)AU$/.test(string.slice(pos - 3, 3))) ||
-         /^(A|O)U$/.test(string.slice(pos - 2, 2))) {
+        (/^(I|E)AU$/.test(string.substr(pos - 3, 3))) ||
+         /^(A|O)U$/.test(string.substr(pos - 2, 2))) {
       return [null, null, offset];
     }
 
@@ -500,16 +500,16 @@ const LOOKUPS = {
   },
 
   Z(string, pos) {
-    if (string.slice(pos + 1, 1) === 'H') {
+    if (string.substr(pos + 1, 1) === 'H') {
       return ['J', 'J', 2];
     }
 
-    const offset = string.slice(pos + 1, 1) === 'Z' ? 2 : 1;
+    const offset = string.substr(pos + 1, 1) === 'Z' ? 2 : 1;
 
-    if (/^Z(O|I|A)$/.test(string.slice(pos + 1, 2)) ||
+    if (/^Z(O|I|A)$/.test(string.substr(pos + 1, 2)) ||
         (pos &&
          isSlavoGermanic(string) &&
-         string.slice(pos - 1, 1) === 'T')) {
+         string.substr(pos - 1, 1) === 'T')) {
       return ['S', ['T', 'S'], offset];
     }
 
@@ -583,4 +583,6 @@ export default function doubleMetaphone(word) {
     // Incrementing position
     pos += offset;
   }
+
+  return [primary.join('').slice(0, 4), secondary.join('').slice(0, 4)];
 }

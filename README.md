@@ -17,6 +17,7 @@ Very WIP. Much wow!
 * phonetics
   * caverphone
   * cologne
+  * doubleMetaphone
   * metaphone
   * soundex
 * regex
