@@ -4,6 +4,7 @@
  *
  * The Soundex algorithm.
  */
+import {squeeze} from '../helpers';
 import deburr from 'lodash/deburr';
 
 /**
@@ -55,16 +56,8 @@ export default function soundex(name) {
   if (tail.charAt(0) === TRANSLATIONS[firstLetter])
     tail = tail.slice(1);
 
-  // Dropping consecutive duplicate letters
-  let code = '';
-  for (let i = 0, l = tail.length, memo = null; i < l; i++) {
-    if (tail[i] !== memo) {
-      memo = tail[i];
-      code += memo;
-    }
-  }
-
-  code = code.replace(/0/g, '');
+  // Composing the code from the tail
+  const code = squeeze(tail).replace(/0/g, '');
 
   return pad(firstLetter + code);
 }

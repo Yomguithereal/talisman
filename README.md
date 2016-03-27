@@ -16,6 +16,7 @@ Very WIP. Much wow!
   * tversky
 * phonetics
   * caverphone
+  * cologne
   * metaphone
   * soundex
 * regex

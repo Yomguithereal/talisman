@@ -17,6 +17,7 @@ describe('metrics', function() {
 
 describe('phonetics', function() {
   require('./phonetics/caverphone.js');
+  require('./phonetics/cologne.js');
   require('./phonetics/metaphone.js');
   require('./phonetics/soundex.js');
 });
