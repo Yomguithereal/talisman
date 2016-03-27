@@ -29,6 +29,7 @@ Very WIP. Much wow!
   * sentences
     * naive
   * words
+    * naive
     * treebank
 
 ## Goals
