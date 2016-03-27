@@ -7,15 +7,6 @@
  */
 
 /**
- * Lookups.
- */
-const LOOKUPS = {
-  B(string, pos) {
-    return ['P', 'P', string.slice(pos + 1, 1) === 'B' ? 2 : 1];
-  }
-};
-
-/**
  * Helpers.
  */
 const STARTING_REGEX = /^GN|KN|PN|WR|PS$/;
@@ -31,6 +22,125 @@ const VOWELS = new Set(['A', 'E', 'I', 'O', 'U', 'Y']);
 function isVowel(string) {
   return string.length === 1 && VOWELS.has(string);
 }
+
+/**
+ * Lookups.
+ */
+const CHSet1 = new Set(['HARAC', 'HARIS']),
+      CHSet2 = new Set(['HOR', 'HYM', 'HIA', 'HEM']),
+      CHSet3 = new Set(['VAN ', 'VON ']),
+      CHSet4 = new Set(['ORCHES', 'ARCHIT', 'ORCHID']),
+      ChSet5 = new Set(['T', 'S']),
+      CHSet6 = new Set(['A', 'O', 'U', 'E']),
+      CHSet7 = new Set(['L', 'R', 'N', 'M', 'B', 'H', 'F', 'V', 'W', ' ']),
+      CSet1 = new Set(['CE', 'CI']);
+
+const LOOKUPS = {
+  B(string, pos) {
+    return ['P', 'P', string.slice(pos + 1, 1) === 'B' ? 2 : 1];
+  },
+
+  CH(string, pos) {
+    if (pos && string.slice(pos, 4) === 'CHAE') {
+      return ['K', 'X', 2];
+    }
+
+    else if (!pos &&
+             (CHSet1.has(string.slice(pos + 1, 5)) ||
+              CHSet2.has(string.slice(pos + 1, 3))) &&
+             string.slice(0, 5) !== 'CHORE') {
+      return ['K', 'K', 2];
+    }
+
+    else if (CHSet3.has(string.slice(0, 4)) ||
+             string.slice(0, 3) === 'SCH' ||
+             CHSet4.has(string.slice(pos - 2, 6)) ||
+             ChSet5.has(string.slice(pos + 2, 1)) ||
+             ((!pos || CHSet6.has(string.slice(pos - 1, 1))) &&
+              CHSet7.has(string.slice(pos + 2, 1)))) {
+      return ['K', 'K', 2];
+    }
+
+    else if (pos) {
+      return [string.slice(0, 2) === 'MC' ? 'K' : 'X', 'K', 2];
+    }
+
+    return ['X', 'X', 2];
+  },
+
+  CC(string, pos) {
+    if (/^I|E|H$/.test(string.slice(pos + 2, 1)) &&
+        string.slice(pos + 2, 2) !== 'HU') {
+      if ((pos === 1 && string.slice(pos - 1) === 'A') ||
+          /^UCCE(E|S)$/.test(string.slice(pos - 1), 5)) {
+        return [['K', 'S'], ['K', 'S'], 3];
+      }
+      else {
+        return ['X', 'X', 3];
+      }
+    }
+
+    return ['K', 'K', 2];
+  },
+
+  C(string, pos) {
+    if (pos > 1 &&
+        isVowel(string.slice(pos - 2), 1) &&
+        string.slice(pos - 1, 3) === 'ACH' &&
+        string.slice(pos + 2, 1) !== 'I' &&
+        (string.slice(pos + 2, 1) !== 'E' ||
+         /^(B|M)ACHER$/.test(string.slice(pos - 2, 6)))) {
+      return ['K', 'K', 2];
+    }
+
+    if (!pos && string.slice(pos - 2, 6) === 'CAESAR') {
+      return ['S', 'S', 2];
+    }
+
+    if (string.slice(pos, 4) === 'CHIA') {
+      return ['K', 'K', 2];
+    }
+
+    if (string.slice(pos, 2) === 'CH') {
+      return LOOKUPS.CH(string, pos);
+    }
+
+    if (string.slice(pos, 2) === 'CZ' &&
+        string.slice(pos - 2, 4) !== 'WICZ') {
+      return ['S', 'X', 2];
+    }
+
+    if (string.slice(pos, 3) === 'CIA') {
+      return ['X', 'X', 3];
+    }
+
+    if (string.slice(pos + 1, 2) === 'CC' &&
+        !(pos === 1 || string.slice(0, 1) === 'M')) {
+      return LOOKUPS.CC(string, pos);
+    }
+
+    if (/^C(K|G|Q)$/.test(string.slice(pos, 2))) {
+      return ['K', 'K', 2];
+    }
+
+    if (/^C(I|E|Y)$/.test(string.slice(pos, 2))) {
+      return ['S', /^CI(O|E|A)$/.test(string.slice(pos, 3)) ? 'X' : 'S', 2];
+    }
+
+    if (/^ (C|Q|G)$/.test(string.slice(pos + 1, 2))) {
+      return ['K', 'K', 2];
+    }
+
+    let offset = 1;
+
+    if (/^C|K|Q$/.test(string.slice(pos + 1, 1)) &&
+        !CSet1.has(string.slice(pos + 1, 2))) {
+      offset = 2;
+    }
+
+    return ['K', 'K', offset];
+  }
+};
 
 /**
  * Function taking a single word and computing its double metaphone code.
@@ -53,8 +163,8 @@ export default function doubleMetaphone(word) {
         lastIndex = length - 1;
 
   // Codes
-  const primary = [],
-        secondary = [];
+  let primary = [],
+      secondary = [];
 
   // Iterating
   let pos = startPosition;
@@ -90,9 +200,9 @@ export default function doubleMetaphone(word) {
       offset = newOffset;
 
       if (one)
-        primary.push(one);
+        primary = primary.concat(one);
       if (two)
-        secondary.push(two);
+        secondary = secondary.concat(two);
     }
 
     // Incrementing position
