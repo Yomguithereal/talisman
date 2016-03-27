@@ -139,6 +139,114 @@ const LOOKUPS = {
     }
 
     return ['K', 'K', offset];
+  },
+
+  Ç() {
+    return ['S', 'S', 1];
+  },
+
+  D(string, pos) {
+    if (string.slice(pos, 2) === 'DG') {
+      return /^I|E|Y$/.test(string.slice(pos + 2, 1)) ?
+        ['J', 'J', 3] :
+        [['T', 'K'], ['T', 'K'], 2];
+    }
+
+    return ['T', 'T', /^D(T|D)$/.test(string.slice(pos, 2)) ? 2 : 1];
+  },
+
+  F(string, pos) {
+    return ['F', 'F', string.slice(pos + 1, 1) === 'F' ? 2 : 1];
+  },
+
+  GH(string, pos) {
+    if (pos && !isVowel(string.slice(pos - 1), 1)) {
+      return ['K', 'K', 2];
+    }
+
+    if (!pos) {
+      return string.slice(pos + 2, 1) === 'I' ?
+        ['J', 'J', 2] :
+        ['K', 'K', 2];
+    }
+
+    if ((pos > 1 && /^B|H|D$/.test(string.slice(pos - 2, 1))) ||
+        (pos > 2 && /^B|H|D$/.test(string.slice(pos - 3, 1))) ||
+        (pos > 3 && /^B|H$/.test(string.slice(pos - 4, 1)))) {
+      return [null, null, 2];
+    }
+
+    if (pos > 2 &&
+        string.slice(pos - 1, 1) === 'U' &&
+        /^C|G|L|R|T$/.test(string.slice(pos - 3, 1))) {
+      return ['F', 'F', 2];
+    }
+
+    if (pos && string.slice(pos - 1, 1) !== 'I') {
+      return ['K', 'K', 2];
+    }
+
+    return [null, null, 2];
+  },
+
+  GN(string, pos) {
+    if (pos === 1 && isVowel(string.slice(0, 1)) && !isSlavoGermanic(string)) {
+      return [['K', 'N'], 'N', 2];
+    }
+
+    if (string.slice(pos + 2, 2) !== 'EY' &&
+        string.slice(pos + 1, 1) !== 'Y' &&
+        !isSlavoGermanic(string)) {
+      return ['N', ['K', 'N'], 2];
+    }
+
+    return [['K', 'N'], ['K', 'N'], 2];
+  },
+
+  G(string, pos) {
+    const nextLetter = string.slice(pos + 1, 1),
+          nextPair = string.slice(pos + 1, 2);
+
+    if (nextLetter === 'H') {
+      return LOOKUPS.GH(string, pos);
+    }
+
+    if (nextLetter === 'N') {
+      return LOOKUPS.GN(string, pos);
+    }
+
+    if (nextPair === 'LI' && !isSlavoGermanic(string)) {
+      return [['K', 'L'], 'L', 2];
+    }
+
+    if (!pos &&
+        (nextLetter === 'Y' ||
+         /^(E(S|P|B|L|Y|I|R)|I(B|L|N|E))$/.test(nextPair))) {
+      return ['K', 'J', 2];
+    }
+
+    if ((nextPair === 'ER' || nextLetter === 'Y') &&
+        !/^(D|R|M)ANGER$/.test(string.slice(0, 6)) &&
+        !/^E|I$/.test(string.slice(pos - 1, 1)) &&
+        !/^(R|O)GY$/.test(string.slice(pos - 1, 3))) {
+      return ['K', 'J', 2];
+    }
+
+    if (/^E|I|Y$/.test(nextLetter) ||
+        /^(A|O)GGI$/.test(string.slice(pos - 1, 4))) {
+
+      if (/^V(A|O)N /.test(string.slice(0, 4)) ||
+          string.slice(0, 3) === 'SCH' ||
+          string.slice(pos + 1, 2 === 'ET')) {
+        return ['K', 'K', 2];
+      }
+
+      return string.slice(pos + 1, 4) === 'IER ' ?
+        ['J', 'J', 2] :
+        ['J', 'K', 2];
+    }
+
+    return ['K', 'K', nextLetter === 'G' ? 2 : 1];
   }
 };
 
