@@ -449,6 +449,71 @@ const LOOKUPS = {
     }
 
     return ['T', 'T', /^T|D$/.test(string.slice(pos + 1, 1)) ? 2 : 1];
+  },
+
+  V(string, pos) {
+    return ['F', 'F', string.slice(pos + 1, 1) === 'V' ? 2 : 1];
+  },
+
+  W(string, pos, lastIndex) {
+    if (string.slice(pos, 2) === 'WR') {
+      return ['R', 'R', 2];
+    }
+
+    const primary = [],
+          secondary = [];
+
+    if (!pos &&
+        (isVowel(string.slice(pos + 1, 1) ||
+         string.slice(pos, 2) === 'WH'))) {
+      primary.push('A');
+      secondary.push(isVowel(string.slice(pos + 1, 1)) ? 'F' : 'A');
+    }
+
+    if ((pos === lastIndex && isVowel(string.slice(pos - 1, 1))) ||
+        string.slice(0, 3) === 'SCH' ||
+        /^EWSKI|EWSKY|OWSKI|OWSKY$/.test(string.slice(pos - 1, 5))) {
+      return [primary, secondary.concat('F'), 1];
+    }
+
+    if (/^WI(C|T)Z$/.test(string.slice(pos, 4))) {
+      return [primary.concat(['T', 'S'], secondary.concat(['F', 'X'])), 4];
+    }
+
+    return [primary, secondary, 1];
+  },
+
+  X(string, pos, lastIndex) {
+    if (!pos) {
+      return ['S', 'S', 1];
+    }
+
+    const offset = /^C|X$"/.test(string.slice(pos + 1, 1)) ? 2 : 1;
+
+    if (pos === lastIndex &&
+        (/^(I|E)AU$/.test(string.slice(pos - 3, 3))) ||
+         /^(A|O)U$/.test(string.slice(pos - 2, 2))) {
+      return [null, null, offset];
+    }
+
+    return [['K', 'S'], ['K', 'S'], offset];
+  },
+
+  Z(string, pos) {
+    if (string.slice(pos + 1, 1) === 'H') {
+      return ['J', 'J', 2];
+    }
+
+    const offset = string.slice(pos + 1, 1) === 'Z' ? 2 : 1;
+
+    if (/^Z(O|I|A)$/.test(string.slice(pos + 1, 2)) ||
+        (pos &&
+         isSlavoGermanic(string) &&
+         string.slice(pos - 1, 1) === 'T')) {
+      return ['S', ['T', 'S'], offset];
+    }
+
+    return ['S', 'S', offset];
   }
 };
 
