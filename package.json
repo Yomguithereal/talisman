@@ -51,8 +51,7 @@
     }
   },
   "dependencies": {
-    "lodash.deburr": "^4.0.0",
-    "lodash.words": "^4.0.0",
+    "lodash": "^4.6.1",
     "set-functions": "^0.2.0"
   }
 }

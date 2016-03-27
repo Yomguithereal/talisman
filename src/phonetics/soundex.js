@@ -4,7 +4,7 @@
  *
  * The Soundex algorithm.
  */
-import deburr from 'lodash.deburr';
+import deburr from 'lodash/deburr';
 
 /**
  * Translations.

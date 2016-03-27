@@ -4,7 +4,7 @@
  *
  * The metaphone algorithm.
  */
-import deburr from 'lodash.deburr';
+import deburr from 'lodash/deburr';
 
 /**
  * Series of rules to apply.
