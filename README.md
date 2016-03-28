@@ -10,6 +10,8 @@ Very WIP. Much wow!
   * euclidean
   * hamming
   * jaccard
+  * jaro
+  * jaro-winkler
   * levenshtein
   * manhattan
   * sorensen

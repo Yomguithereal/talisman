@@ -11,6 +11,7 @@ describe('metrics', function() {
   require('./metrics/euclidean.js');
   require('./metrics/hamming.js');
   require('./metrics/jaccard.js');
+  require('./metrics/jaro-winkler.js');
   require('./metrics/levenshtein.js');
   require('./metrics/manhattan.js');
 });
