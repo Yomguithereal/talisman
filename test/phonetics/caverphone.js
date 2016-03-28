@@ -1,6 +1,6 @@
 /**
  * Talisman phonetics/caverphone tests
- * =================================
+ * ====================================
  *
  */
 import assert from 'assert';
@@ -41,7 +41,7 @@ describe('caverphone', function() {
     const tests = [
       ['PTA1111111', 'Peter'],
       ['ANRKSN1111', 'Henrichsen'],
-      ['STFNSN1111', 'Stevenson'],
+      ['STFNSN1111', 'Stevenson']
     ];
 
     tests.forEach(function([code, word]) {

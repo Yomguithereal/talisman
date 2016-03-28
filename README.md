@@ -19,6 +19,7 @@ Very WIP. Much wow!
   * cologne
   * doubleMetaphone
   * metaphone
+  * nysiis
   * soundex
 * regex
   * classes
