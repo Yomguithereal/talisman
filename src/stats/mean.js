@@ -12,7 +12,7 @@
  * @return {array}         - A mean vector.
  */
 export default function mean(vectors) {
-  let sum = (new Array(vectors[0].length)).fill(0);
+  const sum = (new Array(vectors[0].length)).fill(0);
 
   for (let i = 0, l = vectors.length; i < l; i++) {
     const vector = vectors[i];
