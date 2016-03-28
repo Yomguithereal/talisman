@@ -22,6 +22,7 @@ Very WIP. Much wow!
   * cologne
   * doubleMetaphone
   * metaphone
+  * mra
   * nysiis
   * soundex
 * regex
