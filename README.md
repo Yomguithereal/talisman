@@ -14,6 +14,7 @@ Very WIP. Much wow!
   * jaro-winkler
   * levenshtein
   * manhattan
+  * mra
   * overlap
   * sorensen
   * tversky
