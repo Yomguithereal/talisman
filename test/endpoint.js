@@ -5,6 +5,10 @@
  */
 require('./helpers.js');
 
+describe('clustering', function() {
+  require('./clustering/k-means.js');
+});
+
 describe('metrics', function() {
   require('./metrics/cosine.js');
   require('./metrics/dice.js');
@@ -30,6 +34,7 @@ describe('phonetics', function() {
 
 describe('stats', function() {
   require('./stats/frequencies.js');
+  require('./stats/mean.js');
   require('./stats/ngrams.js');
 });
 

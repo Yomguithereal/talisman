@@ -4,6 +4,8 @@ Very WIP. Much wow!
 
 ## Current modules
 
+* clustering
+  * k-means
 * metrics
   * cosine
   * dice
@@ -30,6 +32,7 @@ Very WIP. Much wow!
   * classes
 * stats
   * frequencies
+  * mean
   * ngrams
 * stemmers
   * lancaster

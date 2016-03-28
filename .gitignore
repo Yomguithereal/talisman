@@ -4,6 +4,7 @@ node_modules
 .DS_Store
 
 # Transpiled modules
+/clustering
 /metrics
 /phonetics
 /regex
