@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Yomguithereal/talisman.svg)](https://travis-ci.org/Yomguithereal/talisman)
+
+
 # Talisman
 
 Very WIP. Much wow!
@@ -38,6 +41,7 @@ Very WIP. Much wow!
   * tfidf
 * stemmers
   * lancaster
+  * lovins
   * porter
 * tokenizers
   * sentences

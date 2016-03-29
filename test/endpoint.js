@@ -43,6 +43,7 @@ describe('stats', function() {
 
 describe('stemmers', function() {
   require('./stemmers/lancaster.js');
+  require('./stemmers/lovins.js');
   require('./stemmers/porter.js');
 });
 
