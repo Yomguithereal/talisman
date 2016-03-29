@@ -3,7 +3,10 @@
  * =============================
  *
  */
-require('./helpers.js');
+describe('helpers', function() {
+  require('./helpers');
+  require('./helpers/vectors.js');
+});
 
 describe('clustering', function() {
   require('./clustering/k-means.js');
@@ -34,7 +37,6 @@ describe('phonetics', function() {
 
 describe('stats', function() {
   require('./stats/frequencies.js');
-  require('./stats/mean.js');
   require('./stats/ngrams.js');
   require('./stats/tfidf.js');
 });

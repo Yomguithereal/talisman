@@ -6,6 +6,8 @@ Very WIP. Much wow!
 
 * clustering
   * k-means
+* helpers
+  * vectors
 * metrics
   * cosine
   * dice
@@ -32,7 +34,6 @@ Very WIP. Much wow!
   * classes
 * stats
   * frequencies
-  * mean
   * ngrams
   * tfidf
 * stemmers

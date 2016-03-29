@@ -16,6 +16,7 @@
  * Statistics in Medicine 14 (5–7): 491–8.
  */
 import {seq} from '../helpers';
+import {vec} from '../helpers/vectors';
 
 /**
  * Function returning the Jaro score between two sequences.
@@ -47,8 +48,8 @@ export default function jaro(a, b) {
 
   // Finding matches
   const range = Math.max(((max.length / 2) | 0) - 1, 0),
-        indexes = (new Array(min.length)).fill(-1),
-        flags = (new Array(max.length)).fill(false);
+        indexes = vec(min.length, -1),
+        flags = vec(max.length, false);
 
   let matches = 0;
 

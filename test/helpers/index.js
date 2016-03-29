@@ -7,7 +7,7 @@ import assert from 'assert';
 import {
   seq,
   squeeze
-} from '../src/helpers';
+} from '../../src/helpers';
 
 describe('helpers', function() {
 
