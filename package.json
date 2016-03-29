@@ -1,7 +1,7 @@
 {
   "name": "talisman",
   "version": "0.0.1",
-  "description": "A straightforward NLP library for JavaScript.",
+  "description": "A straightforward NLP & machine learning library for JavaScript.",
   "main": "index.js",
   "scripts": {
     "check": "npm test && npm run lint",
