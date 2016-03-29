@@ -34,6 +34,7 @@ Very WIP. Much wow!
   * frequencies
   * mean
   * ngrams
+  * tfidf
 * stemmers
   * lancaster
   * porter
