@@ -3,6 +3,13 @@
  * =========================
  *
  * Functions computing the Tversky index.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Tversky_index
+ *
+ * [Article]:
+ * Tversky, Amos (1977). "Features of Similarity".
+ * Psychological Reviews 84 (4): 327–352.
  */
 import {intersection, difference} from 'set-functions';
 import {seq} from '../helpers';

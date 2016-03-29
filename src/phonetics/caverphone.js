@@ -3,6 +3,18 @@
  * ==============================
  *
  * The caverphone algorithm, original & revisited.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Caverphone
+ *
+ * Original algorithm:
+ * http://caversham.otago.ac.nz/files/working/ctp060902.pdf
+ * Revisited algorithm:
+ * http://caversham.otago.ac.nz/files/working/ctp150804.pdf
+ *
+ * [Author]:
+ * David Hood (Caversham project)
+ * http://caversham.otago.ac.nz/
  */
 import deburr from 'lodash/deburr';
 

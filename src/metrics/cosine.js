@@ -3,6 +3,8 @@
  * ========================
  *
  * Function computing the cosine similarity.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/Cosine_similarity
  */
 
 /**

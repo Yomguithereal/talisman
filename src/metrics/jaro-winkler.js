@@ -3,6 +3,15 @@
  * ==============================
  *
  * Function computing the Jaro-Winkler score.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance
+ *
+ * [Article]:
+ * Winkler, W. E. (1990). "String Comparator Metrics and Enhanced Decision Rules
+ * in the Fellegi-Sunter Model of Record Linkage".
+ * Proceedings of the Section on Survey Research Methods
+ * (American Statistical Association): 354–359.
  */
 import jaro from './jaro';
 import {seq} from '../helpers';

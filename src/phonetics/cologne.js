@@ -3,6 +3,14 @@
  * ===========================
  *
  * The cologne algorithm.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Cologne_phonetics
+ *
+ * [Article]:
+ * Hans Joachim Postel: Die Kölner Phonetik. Ein Verfahren zur Identifizierung
+ * von Personennamen auf der Grundlage der Gestaltanalyse.
+ * in: IBM-Nachrichten, 19. Jahrgang, 1969, S. 925-931.
  */
 import {squeeze} from '../helpers';
 import deburr from 'lodash/deburr';

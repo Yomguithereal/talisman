@@ -3,6 +3,8 @@
  * =====================
  *
  * Helpers related to TF/IDF computations.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/Tf%E2%80%93idf
  */
 import {relative as frequencies} from './frequencies';
 import words from '../tokenizers/words/naive';

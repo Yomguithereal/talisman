@@ -3,6 +3,15 @@
  * =====================
  *
  * Functions applying the Match Rating Approach comparison.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Match_rating_approach
+ *
+ * [Article]:
+ * Moore, G B.; Kuhns, J L.; Treffzs, J L.; Montgomery, C A. (Feb 1, 1977).
+ * Accessing Individual Records from Personal Data Files Using Nonunique
+ * Identifiers.
+ * US National Institute of Standards and Technology. p. 17. NIST SP - 500-2.
  */
 import codex from '../phonetics/mra';
 

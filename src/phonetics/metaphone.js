@@ -3,6 +3,12 @@
  * =============================
  *
  * The metaphone algorithm.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Metaphone
+ *
+ * [Author]:
+ * Lawrence Philips, 1990
  */
 import deburr from 'lodash/deburr';
 

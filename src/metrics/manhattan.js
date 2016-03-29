@@ -3,6 +3,8 @@
  * ===========================
  *
  * Function computing the Manhattan distance.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/Taxicab_geometry
  */
 
 /**

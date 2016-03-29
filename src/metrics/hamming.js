@@ -3,6 +3,13 @@
  * =========================
  *
  * Function computing the Hamming distance.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Hamming_distance
+ *
+ * [Article]:
+ * Hamming, Richard W. (1950), "Error detecting and error correcting codes",
+ * Bell System Technical Journal 29 (2): 147–160
  */
 import {seq} from '../helpers';
 

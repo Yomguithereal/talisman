@@ -3,6 +3,8 @@
  * ====================================
  *
  * Naive algorithmic sentence tokenizer.
+ *
+ * [Author]: Guillaume PLIQUE
  */
 import {SIMPLE_QUOTES, DOUBLE_QUOTES} from '../../regex/classes';
 

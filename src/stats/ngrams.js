@@ -3,6 +3,8 @@
  * ======================
  *
  * Functions related to ngrams' computation.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/N-gram
  */
 import {seq} from '../helpers';
 

@@ -3,6 +3,13 @@
  * ======================
  *
  * Functions computing the Dice coefficient.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient
+ *
+ * [Article]:
+ * Dice, Lee R. (1945). "Measures of the Amount of Ecologic Association
+ * Between Species". Ecology 26 (3): 297–302.
  */
 import tversky from './tversky';
 import {bigrams} from '../stats/ngrams';

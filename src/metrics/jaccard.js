@@ -3,6 +3,13 @@
  * =========================
  *
  * Functions computing the Jaccard distance/similarity.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Jaccard_index
+ *
+ * [Article]:
+ * Jaccard, Paul (1912), "The distribution of the flora in the alpine zone",
+ * New Phytologist 11: 37–50
  */
 import tversky from './tversky';
 

@@ -3,6 +3,17 @@
  * ======================
  *
  * Function computing the Jaro score.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance
+ *
+ * [Articles]:
+ * Jaro, M. A. (1989). "Advances in record linkage methodology as applied to
+ * the 1985 census of Tampa Florida".
+ * Journal of the American Statistical Association 84 (406): 414–20
+ *
+ * Jaro, M. A. (1995). "Probabilistic linkage of large public health data file".
+ * Statistics in Medicine 14 (5–7): 491–8.
  */
 import {seq} from '../helpers';
 

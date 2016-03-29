@@ -3,6 +3,8 @@
  * ============================
  *
  * Function related to k-means clustering.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/K-means_clustering
  */
 import euclidean from '../metrics/euclidean';
 import mean from '../stats/mean';

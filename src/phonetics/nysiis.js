@@ -3,6 +3,9 @@
  * ==========================
  *
  * The nysiis algorithm, original & refined.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/New_York_State_Identification_and_Intelligence_System
  */
 import {squeeze} from '../helpers';
 import deburr from 'lodash/deburr';

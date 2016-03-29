@@ -3,6 +3,15 @@
  * =======================
  *
  * Functions related to the computation of the Match Rating Approach codex.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Match_rating_approach
+ *
+ * [Article]:
+ * Moore, G B.; Kuhns, J L.; Treffzs, J L.; Montgomery, C A. (Feb 1, 1977).
+ * Accessing Individual Records from Personal Data Files Using Nonunique
+ * Identifiers.
+ * US National Institute of Standards and Technology. p. 17. NIST SP - 500-2.
  */
 import {squeeze} from '../helpers';
 import deburr from 'lodash/deburr';

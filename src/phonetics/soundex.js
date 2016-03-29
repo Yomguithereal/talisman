@@ -3,6 +3,12 @@
  * ===========================
  *
  * The Soundex algorithm.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/Soundex
+ *
+ * [Authors]:
+ * Robert C. Russel
+ * Margaret King Odell
  */
 import {squeeze} from '../helpers';
 import deburr from 'lodash/deburr';

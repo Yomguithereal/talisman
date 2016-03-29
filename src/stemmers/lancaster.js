@@ -3,6 +3,10 @@
  * ============================
  *
  * The Lancaster stemmer.
+ *
+ * [Article]:
+ * A word stemmer based on the Lancaster stemming algorithm.
+ * Paice, Chris D. "Another Stemmer." ACM SIGIR Forum 24.3 (1990): 56-61.
  */
 
 /**

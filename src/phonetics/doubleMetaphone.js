@@ -4,6 +4,12 @@
  * ===================================
  *
  * The double metaphone algorithm.
+ *
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Metaphone#Double_Metaphone
+ *
+ * [Author]:
+ * Lawrence Philips, 2000
  */
 
 /**

@@ -4,6 +4,14 @@
  * =========================
  *
  * The classical Porter stemmer.
+ *
+ * [Reference]:
+ * http://tartarus.org/martin/PorterStemmer/
+ *
+ * [Article]:
+ * C.J. van Rijsbergen, S.E. Robertson and M.F. Porter, 1980. New models in
+ * probabilistic information retrieval. London: British Library.
+ * (British Library Research and Development Report, no. 5587).
  */
 
 /**

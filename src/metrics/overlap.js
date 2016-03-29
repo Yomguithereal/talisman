@@ -3,6 +3,8 @@
  * =========================
  *
  * Function computing the overlap coefficient.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/Overlap_coefficient
  */
 import {intersection} from 'set-functions';
 import {seq} from '../helpers';

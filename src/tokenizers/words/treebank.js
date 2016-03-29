@@ -3,6 +3,9 @@
  * ===================================
  *
  * Implementation of the Treebank word tokenizer.
+ *
+ * [Original script]:
+ * http://www.cis.upenn.edu/~treebank/tokenizer.sed
  */
 
 /**

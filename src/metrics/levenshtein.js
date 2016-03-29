@@ -3,6 +3,13 @@
  * =============================
  *
  * Functions computing the Levenshtein distance.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/Levenshtein_distance
+ *
+ * [Article]:
+ * Levenshtein, Vladimir I. (February 1966). "Binary codes capable of
+ * correcting deletions, insertions, and reversals".
+ * Soviet Physics Doklady 10 (8): 707–710.
  */
 import {seq} from '../helpers';
 
