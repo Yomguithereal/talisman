@@ -5,10 +5,10 @@ node_modules
 
 # Transpiled modules
 /clustering
+/helpers
 /metrics
 /phonetics
 /regex
 /stats
 /stemmers
 /tokenizers
-helpers.js
