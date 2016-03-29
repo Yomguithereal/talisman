@@ -12,7 +12,7 @@
  * @param  {mixed}  b     - The second vector.
  * @return {number}       - The squared euclidean distance between a & b.
  *
- * @throws {Error} The function expects vector of same dimensions.
+ * @throws {Error} The function expects vectors of same dimension.
  */
 export function squared(a, b) {
   if (a.length !== b.length)

@@ -13,7 +13,7 @@ import {seq} from '../helpers';
  * @param  {mixed}  b     - The second sequence to process.
  * @return {number}       - The Hamming distance between a & b.
  *
- * @throws {Error} The function expects sequences of equal lengths.
+ * @throws {Error} The function expects sequences of equal length.
  */
 export default function hamming(a, b) {
 

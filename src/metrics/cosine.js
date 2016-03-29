@@ -12,7 +12,7 @@
  * @param  {mixed}  b     - The second vector.
  * @return {number}       - The cosine similarity between a & b.
  *
- * @throws {Error} The function expects vector of same dimensions.
+ * @throws {Error} The function expects vectors of same dimension.
  */
 export default function cosine(a, b) {
   if (a.length !== b.length)
