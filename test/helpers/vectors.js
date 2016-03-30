@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import {mean, vec} from '../../src/helpers/vectors';
+import {dot, mean, vec} from '../../src/helpers/vectors';
 
 describe('vectors', function() {
 
@@ -34,6 +34,32 @@ describe('vectors', function() {
 
       tests.forEach(function({vectors, result}) {
         assert.deepEqual(mean(vectors), result);
+      });
+    });
+  });
+
+  describe('#.dot', function() {
+    it('should correctly compute the scalar product of two vectors.', function() {
+      const tests = [
+        {
+          a: [4],
+          b: [2],
+          product: 8
+        },
+        {
+          a: [4, 3],
+          b: [6, 7],
+          product: 45
+        },
+        {
+          a: [1, 3, -5],
+          b: [4, -2, -1],
+          product: 3
+        }
+      ];
+
+      tests.forEach(function({a, b, product}) {
+        assert.strictEqual(dot(a, b), product);
       });
     });
   });

@@ -45,3 +45,19 @@ export function mean(vectors) {
 
   return sum;
 }
+
+/**
+ * Function returning the scalar product of two vectors.
+ *
+ * @param  {array}  a - The first vector.
+ * @param  {array}  b - The second vector.
+ * @return {number}   - The scalar product.
+ */
+export function dot(a, b) {
+  let product = 0;
+
+  for (let i = 0, l = a.length; i < l; i++)
+    product += (a[i] * b[i]);
+
+  return product;
+}
