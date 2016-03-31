@@ -6,7 +6,8 @@
 import assert from 'assert';
 import {
   seq,
-  squeeze
+  squeeze,
+  weightedRandomIndex
 } from '../../src/helpers';
 
 describe('helpers', function() {
@@ -30,6 +31,13 @@ describe('helpers', function() {
     it('should work with arbitrary sequences.', function() {
       assert.deepEqual(squeeze([1, 2, 3]), [1, 2, 3]);
       assert.deepEqual(squeeze([1, 1, 2, 3, 3]), [1, 2, 3]);
+    });
+  });
+
+  describe('#.weightedRandomIndex', function() {
+    it('should return a number superior to zero and within the range of the list.', function() {
+      const randomIndex = weightedRandomIndex(3, [2 / 3, 1 / 6, 1 / 6]);
+      assert(randomIndex >= 0 && randomIndex < 3);
     });
   });
 });
