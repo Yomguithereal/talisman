@@ -36,7 +36,7 @@ describe('helpers', function() {
 
   describe('#.weightedRandomIndex', function() {
     it('should return a number superior to zero and within the range of the list.', function() {
-      const randomIndex = weightedRandomIndex(3, [2 / 3, 1 / 6, 1 / 6]);
+      const randomIndex = weightedRandomIndex([2 / 3, 1 / 6, 1 / 6]);
       assert(randomIndex >= 0 && randomIndex < 3);
     });
   });

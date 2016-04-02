@@ -43,12 +43,12 @@ export function squeeze(target) {
  * Function taking a length and a list of weights and aiming at
  * returning a random weighted index.
  *
- * @param {number} length  - The length of the list.
  * @param {array}  weights - List of weights (must sum to 1).
  * @param {number}         - The random weighted index.
  */
-export function weightedRandomIndex(length, weights) {
-  const target = Math.random();
+export function weightedRandomIndex(weights) {
+  const target = Math.random(),
+        length = weights.length;
 
   let sum = 0;
 
