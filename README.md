@@ -43,6 +43,8 @@ Very WIP. Much wow!
   * lancaster
   * lovins
   * porter
+  * latin
+    * schinke
 * tokenizers
   * sentences
     * naive

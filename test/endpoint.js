@@ -45,6 +45,7 @@ describe('stemmers', function() {
   require('./stemmers/lancaster.js');
   require('./stemmers/lovins.js');
   require('./stemmers/porter.js');
+  require('./stemmers/latin/schinke.js');
 });
 
 describe('tokenizers', function() {
