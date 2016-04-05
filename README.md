@@ -10,6 +10,18 @@ Talisman is a JavaScript library collecting series of algorithms related to the 
 * [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing)
 * [Machine learning](https://en.wikipedia.org/wiki/Machine_learning)
 
+## Installation
+
+You can install **Talisman** through npm:
+
+```js
+npm install talisman
+```
+
+## Documentation
+
+The library's full documentation can be found [here](http://yomguithereal.github.io/talisman/).
+
 ## Goals
 
 **Modularity**
@@ -42,18 +54,6 @@ Except for cases where classes might be useful (classifiers notably), **Talisman
 **Cross-platform**
 
 **Talisman** is cross-platform and can be used both on node.js and in the browser.
-
-## Installation
-
-You can install **Talisman** through npm:
-
-```js
-npm install talisman
-```
-
-## Documentation
-
-The library's full documentation can be found [here](http://yomguithereal.github.io/talisman/).
 
 ## License
 
