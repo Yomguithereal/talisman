@@ -24,7 +24,7 @@ The library's full documentation can be found [here](http://yomguithereal.github
 
 ## Goals
 
-**Modularity**
+**Modular**
 
 Talisman aims at being completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
 
