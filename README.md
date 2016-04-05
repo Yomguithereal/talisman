@@ -25,11 +25,11 @@ levenshtein('book', 'back');
 
 **Straightforward & simple**
 
-Need to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index.
+Just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index.
 
 Just apply the `jaccard` function and get going.
 
-Plus, the library's API should remain consistent and one should not struggle to understand how to apply two different distance metrics.
+Plus, the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
 
 **Functional**
 
