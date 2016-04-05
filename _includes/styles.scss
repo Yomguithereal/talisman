@@ -1,0 +1,45 @@
+
+$baseurl: '{{ site.baseurl }}';
+$grey-color: #828282;
+
+@import 'tufte';
+// @import 'syntax-highlighting';
+
+main {
+  margin-top: 20px;
+}
+
+amp-img {
+  background-color: grey;
+}
+
+article {
+  padding: 2.5rem 0;
+}
+
+header {
+  margin-top: 20px;
+}
+
+.post-meta {
+  margin-top: 10px;
+}
+
+pre {
+  width: 52.5%;
+  padding-left: 2.5%;
+  overflow-x: auto;
+}
+
+@media (max-width: 760px) {
+  pre {
+    width: 90%;
+    padding: 0;
+  }
+}
+
+code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}

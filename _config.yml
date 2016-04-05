@@ -1,0 +1,10 @@
+# Metadata
+title: Talisman
+description: >
+  A straightforward & modular NLP, machine learning & fuzzy matching library for JavaScript.
+baseurl: /talisman
+url: https://github.com/Yomguithereal/talisman
+
+# Configuration
+highlighter: rouge
+markdown: kramdown

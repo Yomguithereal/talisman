@@ -1,0 +1,48 @@
+---
+layout: home
+---
+
+* clustering
+  * k-means
+* helpers
+  * vectors
+* metrics
+  * cosine
+  * dice
+  * euclidean
+  * hamming
+  * jaccard
+  * jaro
+  * jaro-winkler
+  * levenshtein
+  * manhattan
+  * mra
+  * overlap
+  * sorensen
+  * tversky
+* phonetics
+  * caverphone
+  * cologne
+  * doubleMetaphone
+  * metaphone
+  * mra
+  * nysiis
+  * soundex
+* regex
+  * classes
+* stats
+  * frequencies
+  * ngrams
+  * tfidf
+* stemmers
+  * lancaster
+  * lovins
+  * porter
+  * latin
+    * schinke
+* tokenizers
+  * sentences
+    * naive
+  * words
+    * naive
+    * treebank
