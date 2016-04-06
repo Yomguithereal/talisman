@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "check": "npm test && npm run lint",
-    "dist": "babel src --out-dir ./",
+    "clean": "rimraf $npm_package_talisman_folders",
+    "dist": "npm run clean && babel src --out-dir ./ --plugins transform-es2015-modules-commonjs",
     "lint": "eslint src test",
     "prepublish": "npm run dist",
     "test": "mocha --compilers js:babel-core/register -R spec ./test/endpoint.js"
@@ -13,6 +14,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yomguithereal/talisman.git"
+  },
+  "talisman": {
+    "folders": "clustering helpers metrics phonetics regex stats stemmers tokenizers"
   },
   "keywords": [
     "caverphone",
@@ -57,10 +61,12 @@
     "@yomguithereal/eslint-config": "^2.1.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.7.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.7.4",
     "babel-preset-es2015": "^6.6.0",
     "chai": "^3.5.0",
     "eslint": "^2.4.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2"
   },
   "babel": {
     "presets": [
