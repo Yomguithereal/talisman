@@ -14,7 +14,7 @@ Talisman is a JavaScript library collecting series of algorithms related to the 
 
 You can install **Talisman** through npm:
 
-```js
+```bash
 npm install talisman
 ```
 
@@ -35,7 +35,7 @@ The library's full documentation can be found [here](http://yomguithereal.github
 Talisman aims at being completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
 
 ```js
-var levenshtein = require('talisman/metrics/levenshtein');
+import levenshtein from 'talisman/metrics/levenshtein';
 
 levenshtein('book', 'back');
 >>> 2
@@ -54,11 +54,11 @@ Plus, the library's API is fully consistent and one should not struggle to under
 Except for cases where classes might be useful (classifiers notably), **Talisman** only uses functions, only consumes raw data and will order functions' arguments to make partial application & currying etc. as easy as possible.
 
 ```js
-var tversky = require('talisman/metrics/tversky');
+import tversky from 'talisman/metrics/tversky';
 
 // The first argument of the tversky function is the options
 // You can therefore perform partial application etc.
-var jaccard = tversky.bind(null, {alpha: 1, beta: 1});
+const jaccard = tversky.bind(null, {alpha: 1, beta: 1});
 ```
 
 #### Performant
