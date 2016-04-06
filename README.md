@@ -53,6 +53,14 @@ Plus, the library's API is fully consistent and one should not struggle to under
 
 Except for cases where classes might be useful (classifiers notably), **Talisman** only uses functions, only consumes raw data and will order functions' arguments to make partial application & currying etc. as easy as possible.
 
+```js
+var tversky = require('talisman/metrics/tversky');
+
+// The first argument of the tversky function is the options
+// You can therefore perform partial application etc.
+const jaccard = tversky.bind(null, {alpha: 1, beta: 1});
+```
+
 #### Performant
 
 **Talisman** should be as performant as possible for a high-level programming language library.
