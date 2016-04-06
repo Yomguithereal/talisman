@@ -24,7 +24,13 @@ The library's full documentation can be found [here](http://yomguithereal.github
 
 ## Goals
 
-### Modular
+* Modular
+* Straightfoward & simple
+* Functional
+* Performant
+* Cross-platform
+
+#### Modular
 
 Talisman aims at being completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
 
@@ -35,7 +41,7 @@ levenshtein('book', 'back');
 >>> 2
 ```
 
-### Straightforward & simple
+#### Straightforward & simple
 
 Just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index.
 
@@ -43,15 +49,15 @@ Just apply the `jaccard` function and get going.
 
 Plus, the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
 
-### Functional
+#### Functional
 
 Except for cases where classes might be useful (classifiers notably), **Talisman** only uses functions, only consumes raw data and will order functions' arguments to make partial application & currying etc. as easy as possible.
 
-### Performant
+#### Performant
 
 **Talisman** should be as performant as possible for a high-level programming language library.
 
-### Cross-platform
+#### Cross-platform
 
 **Talisman** is cross-platform and can be used both on node.js and in the browser.
 
