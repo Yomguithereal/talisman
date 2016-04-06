@@ -60,9 +60,14 @@
 
 	var _metaphone2 = _interopRequireDefault(_metaphone);
 
+	var _soundex = __webpack_require__(182);
+
+	var _soundex2 = _interopRequireDefault(_soundex);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	(0, _reactDom.render)(_react2.default.createElement(_PhoneticTester2.default, { algorithm: _metaphone2.default }), document.getElementById('metaphone-mount'));
+	(0, _reactDom.render)(_react2.default.createElement(_PhoneticTester2.default, { algorithm: _soundex2.default }), document.getElementById('soundex-mount'));
 
 /***/ },
 /* 1 */
@@ -20625,6 +20630,166 @@
 	}
 
 	module.exports = isObjectLike;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = soundex;
+
+	var _helpers = __webpack_require__(183);
+
+	var _deburr = __webpack_require__(173);
+
+	var _deburr2 = _interopRequireDefault(_deburr);
+
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+
+	/**
+	 * Translations.
+	 */
+	/**
+	 * Talisman phonetics/soundex
+	 * ===========================
+	 *
+	 * The Soundex algorithm.
+	 *
+	 * [Reference]: https://en.wikipedia.org/wiki/Soundex
+	 *
+	 * [Authors]:
+	 * Robert C. Russel
+	 * Margaret King Odell
+	 */
+	var LETTERS = 'AEIOUYWHBPFVCSKGJQXZDTLMNR'.split(''),
+	    CODES = '000000DD111122222222334556'.split('');
+
+	var TRANSLATIONS = {};
+
+	LETTERS.forEach(function (letter, i) {
+	  return TRANSLATIONS[letter] = CODES[i];
+	});
+
+	/**
+	 * Helpers.
+	 */
+	function pad(code) {
+	  while (code.length < 4) {
+	    code += '0';
+	  }return code.slice(0, 4);
+	}
+
+	/**
+	 * Function taking a single name and computing its Soundex code.
+	 *
+	 * @param  {string}  name - The name to process.
+	 * @return {string}       - The soundex code.
+	 *
+	 * @throws {Error} The function expects the name to be a string.
+	 */
+	function soundex(name) {
+	  if (typeof name !== 'string') throw Error('talisman/phonetics/soundex: the given name is not a string.');
+
+	  name = (0, _deburr2.default)(name).toUpperCase().replace(/[^A-Z]/g, '');
+
+	  var firstLetter = name.charAt(0);
+
+	  // Process the code for the name's tail
+	  var tail = '';
+
+	  for (var i = 1, l = name.length; i < l; i++) {
+	    if (TRANSLATIONS[name[i]] !== 'D') tail += TRANSLATIONS[name[i]];
+	  }
+
+	  // Encoding the tail
+	  if (tail.charAt(0) === TRANSLATIONS[firstLetter]) tail = tail.slice(1);
+
+	  // Composing the code from the tail
+	  var code = (0, _helpers.squeeze)(tail).replace(/0/g, '');
+
+	  return pad(firstLetter + code);
+	}
+
+/***/ },
+/* 183 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.seq = seq;
+	exports.squeeze = squeeze;
+	exports.weightedRandomIndex = weightedRandomIndex;
+	/**
+	 * Talisman helpers
+	 * =================
+	 *
+	 * Miscellaneous helper functions.
+	 */
+
+	/**
+	 * Function normalizing the given variable into a proper array sequence.
+	 *
+	 * @param  {mixed} target - The variable to normalize as a sequence.
+	 * @return {array}        - The resulting sequence.
+	 */
+	function seq(target) {
+	  return typeof target === 'string' ? target.split('') : target;
+	}
+
+	/**
+	 * Function squeezing the given sequence by dropping consecutive duplicates.
+	 *
+	 * Note: the name was actually chosen to mimic Ruby's naming since I did not
+	 * find any equivalent in other standard libraries.
+	 *
+	 * @param  {mixed} target - The sequence to squeeze.
+	 * @return {array}        - The resulting sequence.
+	 */
+	function squeeze(target) {
+	  var isString = typeof target === 'string',
+	      sequence = seq(target),
+	      squeezed = [];
+
+	  for (var i = 0, l = sequence.length, memo = null; i < l; i++) {
+	    if (sequence[i] !== memo) {
+	      memo = sequence[i];
+	      squeezed.push(memo);
+	    }
+	  }
+
+	  return isString ? squeezed.join('') : squeezed;
+	}
+
+	/**
+	 * Function taking a length and a list of weights and aiming at
+	 * returning a random weighted index.
+	 *
+	 * @param {array}  weights - List of weights (must sum to 1).
+	 * @param {number}         - The random weighted index.
+	 */
+	function weightedRandomIndex(weights) {
+	  var target = Math.random(),
+	      length = weights.length;
+
+	  var sum = 0;
+
+	  for (var i = 0; i < length; i++) {
+	    sum += weights[i];
+
+	    if (target <= sum) return i;
+	  }
+
+	  return length - 1;
+	}
 
 /***/ }
 /******/ ]);

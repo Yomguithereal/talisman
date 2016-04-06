@@ -47,6 +47,10 @@ code {
 .modules-list ul {
   padding-left: 2.5%;
   list-style-type: none;
+
+  li {
+    padding: 0;
+  }
 }
 
 input[type=text] {

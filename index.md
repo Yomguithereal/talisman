@@ -23,7 +23,8 @@ npm install talisman
     <li>
       <strong><a href="{{ site.baseurl }}/phonetics">phonetics</a></strong>
       <ul>
-        <li><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></li>
+        <li>- <a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></li>
+        <li>- <a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></li>
       </ul>
     </li>
   </ul>

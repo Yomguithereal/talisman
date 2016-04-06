@@ -10,6 +10,7 @@ The `phonetics` module aims at gathering various algorithms whose goal is to pro
 Modules under the `talisman/phonetics` namespace:
 
 * [metaphone](#metaphone)
+* [soundex](#soundex)
 
 <h2 id="metaphone">metaphone</h2>
 
@@ -25,5 +26,20 @@ metaphone('Michael');
 ```
 
 <div id="metaphone-mount"></div>
+
+<h2 id="soundex">soundex</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Soundex">https://en.wikipedia.org/wiki/Soundex</a>
+</span>
+
+```js
+import soundex from 'talisman/phonetics/soundex';
+
+soundex('Michael');
+>>> 'M240'
+```
+
+<div id="soundex-mount"></div>
 
 <script src="{{ site.baseurl }}/assets/dist/phonetics.js"></script>
