@@ -2,6 +2,7 @@
 <html ⚡ lang="en">
   {% include head.html %}
   <body>
+    {% if page.title %}{% include header.html %}{% endif %}
     {{ content }}
   </body>
 </html>

@@ -3,7 +3,7 @@ $baseurl: '{{ site.baseurl }}';
 $grey-color: #828282;
 
 @import 'tufte';
-// @import 'syntax-highlighting';
+@import 'syntax-highlighting';
 
 main {
   margin-top: 20px;
@@ -42,4 +42,28 @@ code {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 1.125rem;
   line-height: 1.6;
+}
+
+.modules-list ul {
+  padding-left: 2.5%;
+  list-style-type: none;
+}
+
+input[type=text] {
+  font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  font-size: 1.3em;
+  width: 30%;
+  margin-left: 2.5%;
+  line-height: 2rem;
+  margin-top: 1.4rem;
+  margin-bottom: 1.4rem;
+  padding-right: 0;
+  vertical-align: baseline;
+  background: none;
+  border: none;
+}
+
+input[type=text]:focus {
+  outline: none;
+  border: none;
 }

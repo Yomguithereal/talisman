@@ -1,2 +1,8 @@
 <header>
+  <div class="page-links">
+    <a class="page-link" href="{{ site.baseurl }}/">{{ site.title | downcase }}</a>
+      {% if page.title %}
+      / <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title | downcase }}</a>
+      {% endif %}
+  </div>
 </header>

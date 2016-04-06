@@ -2,47 +2,33 @@
 layout: home
 ---
 
-* clustering
-  * k-means
-* helpers
-  * vectors
-* metrics
-  * cosine
-  * dice
-  * euclidean
-  * hamming
-  * jaccard
-  * jaro
-  * jaro-winkler
-  * levenshtein
-  * manhattan
-  * mra
-  * overlap
-  * sorensen
-  * tversky
-* phonetics
-  * caverphone
-  * cologne
-  * doubleMetaphone
-  * metaphone
-  * mra
-  * nysiis
-  * soundex
-* regex
-  * classes
-* stats
-  * frequencies
-  * ngrams
-  * tfidf
-* stemmers
-  * lancaster
-  * lovins
-  * porter
-  * latin
-    * schinke
-* tokenizers
-  * sentences
-    * naive
-  * words
-    * naive
-    * treebank
+Talisman is a JavaScript library collecting series of algorithms related to the three following domains:
+
+* [Fuzzy logic & fuzzy matching](https://en.wikipedia.org/wiki/Approximate_string_matching)
+* [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing)
+* [Machine learning](https://en.wikipedia.org/wiki/Machine_learning)
+
+## Installation
+
+You can install **Talisman** through npm:
+
+```bash
+npm install talisman
+```
+
+## List of available modules
+
+<div class="modules-list">
+  <ul>
+    <li>
+      <strong><a href="{{ site.baseurl }}/phonetics">phonetics</a></strong>
+      <ul>
+        <li><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## License
+
+[MIT]({{ site.url }}/blob/master/LICENSE.txt)
