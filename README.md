@@ -24,12 +24,12 @@ The library's full documentation can be found [here](http://yomguithereal.github
 
 ## Goals
 
-* **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
-* **Straightfoward & simple**: just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
-* **Consistent API**: the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
-* **Functional**: except for cases where classes might be useful (classifiers notably), *Talisman* only uses functions, only consumes raw data and will order functions' arguments to make partial application & currying etc. as easy as possible.
-* **Performant**: the library should be as performant as possible for a high-level programming language library.
-* **Cross-platform**: the library is cross-platform and can be used both on node.js and in the browser.
+* :package: **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
+* :bulb: **Straightfoward & simple**: just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
+* :dango: **Consistent API**: the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
+* :postal_horn: **Functional**: except for cases where classes might be useful (classifiers notably), *Talisman* only uses functions, only consumes raw data and will order functions' arguments to make partial application & currying etc. as easy as possible.
+* :zap: **Performant**: the library should be as performant as possible for a high-level programming language library.
+* :globe_with_meridians: **Cross-platform**: the library is cross-platform and can be used both on node.js and in the browser.
 
 ## Contribution
 
