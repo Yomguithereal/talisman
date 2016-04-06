@@ -24,11 +24,11 @@ The library's full documentation can be found [here](http://yomguithereal.github
 
 ## Goals
 
-* Modular
-* Straightfoward & simple
-* Functional
-* Performant
-* Cross-platform
+* *Modular*
+* *Straightfoward & simple*
+* *Functional*
+* *Performant*
+* *Cross-platform*
 
 #### Modular
 
@@ -58,7 +58,7 @@ var tversky = require('talisman/metrics/tversky');
 
 // The first argument of the tversky function is the options
 // You can therefore perform partial application etc.
-const jaccard = tversky.bind(null, {alpha: 1, beta: 1});
+var jaccard = tversky.bind(null, {alpha: 1, beta: 1});
 ```
 
 #### Performant
@@ -140,4 +140,3 @@ npm run lint
 ## License
 
 [MIT](./LICENSE.txt)
-
