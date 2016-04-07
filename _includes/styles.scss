@@ -44,9 +44,17 @@ code {
   line-height: 1.6;
 }
 
-.modules-list ul {
-  padding-left: 2.5%;
-  list-style-type: none;
+.modules-list > ul {
+
+  &, ul {
+    padding-left: 2.5%;
+    list-style-type: none;
+  }
+
+  & ul {
+    width: 100%;
+  }
+
   width: 55%;
 
   li {
