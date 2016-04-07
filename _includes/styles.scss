@@ -47,6 +47,7 @@ code {
 .modules-list ul {
   padding-left: 2.5%;
   list-style-type: none;
+  width: 55%;
 
   li {
     padding: 0;
@@ -71,3 +72,30 @@ input[type=text]:focus {
   outline: none;
   border: none;
 }
+
+::-webkit-input-placeholder {
+  color: $grey-color;
+}
+
+::-moz-placeholder {
+  color: $grey-color;
+}
+
+:-moz-placeholder {
+  color: $grey-color;
+}
+
+:-ms-input-placeholder {
+  color: $grey-color;
+}
+
+pre {
+  border: 1px solid $grey-color;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%
+}
+
+pre code {
+  font-size: 0.9em;
+}
+

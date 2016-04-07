@@ -9,8 +9,55 @@ The `phonetics` module aims at gathering various algorithms whose goal is to pro
 
 Modules under the `talisman/phonetics` namespace:
 
+* [caverphone](#caverphone)
+* [cologne](#cologne)
+* [doubleMetaphone](#double-metaphone)
 * [metaphone](#metaphone)
+* [mra](#mra)
+* [nysiis](#nysiis)
 * [soundex](#soundex)
+
+<h2 id="caverphone">caverphone</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Caverphone">https://en.wikipedia.org/wiki/Caverphone</a><br><br>
+</span>
+
+<span class="marginnote">
+  Original algorithm: <a href="http://caversham.otago.ac.nz/files/working/ctp060902.pdf">http://caversham.otago.ac.nz/files/working/ctp060902.pdf</a><br><br>
+</span>
+
+<span class="marginnote">
+  Revisited algorithm: <a href="http://caversham.otago.ac.nz/files/working/ctp150804.pdf">http://caversham.otago.ac.nz/files/working/ctp150804.pdf</a><br><br>
+</span>
+
+<span class="marginnote">
+  The Caversham project: <a href="http://caversham.otago.ac.nz/">http://caversham.otago.ac.nz/</a>
+</span>
+
+The caverphone algorithm, written by David Hood for the Caversham project, aims at encoding names and specifically targeting names from New Zealand.
+
+However, this shouldn't stop you from trying it on any dataset.
+
+The library packs both the original & the revisited version of the algorithm.
+
+```js
+import caverphone from 'talisman/phonetics/caverphone';
+// Alternatively
+import {original, revisited} from 'talisman/phonetics/caverphone';
+
+caverphone === original
+>>> true
+
+caverphone('Henrichsen');
+>>> 'ANRKSN1111'
+
+revisited('Henrichsen')
+>>> 'ANRKSN1111'
+```
+
+<div id="caverphone-original-mount"></div>
+<div id="caverphone-revisited-mount"></div>
 
 <h2 id="metaphone">metaphone</h2>
 
