@@ -28,6 +28,7 @@ export default class PhoneticTester extends Component {
                  placeholder={placeholder}
                  onChange={e => this.setState({value: e.target.value})}
                  value={this.state.value} />
+          <span className="bar" />
         </div>
         <div>
           <p style={{display: 'inline', fontSize: '1.3em'}}>

@@ -1,7 +1,7 @@
 
 $baseurl: '{{ site.baseurl }}';
 $black: #111;
-$grey-color: #828282;
+$grey: #828282;
 
 @import 'tufte';
 @import 'syntax-highlighting';
@@ -66,8 +66,7 @@ code {
 input[type=text] {
   font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
   font-size: 1.3em;
-  width: auto;
-  // margin-left: 2.5%;
+  width: 250px;
   line-height: 2rem;
   margin-top: 1.4rem;
   margin-bottom: 1.4rem;
@@ -75,32 +74,61 @@ input[type=text] {
   vertical-align: baseline;
   background: none;
   border: none;
-  border-bottom: 1px solid $grey-color;
+  border-bottom: 1px solid $grey;
 }
 
 input[type=text]:focus {
   outline: none;
-  border-bottom: 1px solid $black;
+}
+
+.bar  {
+  position: relative;
+  display: block;
+  width: 250px;
+}
+
+.bar:before, .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  position: absolute;
+  top: calc(-1.4rem - 1px);
+  background: $black;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+  left: 50%;
+}
+
+.bar:after {
+  right: 50%;
+}
+
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width: calc(50% + 1px);
 }
 
 ::-webkit-input-placeholder {
-  color: $grey-color;
+  color: $grey;
 }
 
 ::-moz-placeholder {
-  color: $grey-color;
+  color: $grey;
 }
 
 :-moz-placeholder {
-  color: $grey-color;
+  color: $grey;
 }
 
 :-ms-input-placeholder {
-  color: $grey-color;
+  color: $grey;
 }
 
 pre {
-  border: 1px solid $grey-color;
+  border: 1px solid $grey;
   padding-top: 2.5%;
   padding-bottom: 2.5%
 }
@@ -110,5 +138,5 @@ pre code {
 }
 
 .undocumented {
-  color: $grey-color;
+  color: $grey;
 }
