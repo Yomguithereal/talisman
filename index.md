@@ -49,7 +49,7 @@ npm install talisman
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#caverphone">caverphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#cologne">cologne</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#doubleMetaphone">doubleMetaphone</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#double-metaphone">doubleMetaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#mra">mra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#nysiis">nysiis</a></em></li>
