@@ -1,14 +1,18 @@
-var path = require('path');
+var webpack = require('webpack'),
+    path = require('path');
 
 module.exports = {
-  devtool: 'inline-source-map',
   entry: {
-    phonetics: './_js/phonetics'
+    metrics: './_js/metrics.js',
+    phonetics: './_js/phonetics.js'
   },
   output: {
     path: path.join(__dirname, 'assets', 'dist'),
     filename: '[name].js'
   },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendors'})
+  ],
   module: {
     loaders: [
       {

@@ -4,8 +4,8 @@
   "description": "Documentation for the talisman library.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --colors --progress",
-    "watch": "webpack --watch --colors --progress"
+    "build": "NODE_ENV=production && webpack --colors --progress -p",
+    "watch": "NODE_ENV=production && webpack --watch --colors --progress -p"
   },
   "repository": {
     "type": "git",
