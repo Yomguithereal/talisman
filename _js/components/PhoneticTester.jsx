@@ -19,17 +19,21 @@ export default class PhoneticTester extends Component {
     } = this.props;
 
     const value = this.state.value,
-          code = value ? codeRenderer(algorithm(value)) : null;
+          code = value ? codeRenderer(algorithm(value)) : '~';
 
     return (
       <div>
-        <input type="text"
-               placeholder={placeholder}
-               onChange={e => this.setState({value: e.target.value})}
-               value={this.state.value} />
-        <p style={{display: 'inline', fontSize: '1.3em'}}>
-          <strong>Result:</strong> {code}
-        </p>
+        <div>
+          <input type="text"
+                 placeholder={placeholder}
+                 onChange={e => this.setState({value: e.target.value})}
+                 value={this.state.value} />
+        </div>
+        <div>
+          <p style={{display: 'inline', fontSize: '1.3em'}}>
+            <span>{code}</span>
+          </p>
+        </div>
       </div>
     );
   }
