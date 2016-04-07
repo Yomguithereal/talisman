@@ -11,7 +11,12 @@ module.exports = {
     filename: '[name].js'
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendors'})
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendors'}),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    })
   ],
   module: {
     loaders: [
