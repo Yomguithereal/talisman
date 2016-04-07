@@ -5,7 +5,7 @@ title: Phonetics
 
 The `phonetics` module aims at gathering various algorithms whose goal is to produce an approximative phonetic representation of the given strings.
 
-## Summmary
+## Summary
 
 Modules under the `talisman/phonetics` namespace:
 
