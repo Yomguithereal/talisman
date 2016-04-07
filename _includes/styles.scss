@@ -1,5 +1,6 @@
 
 $baseurl: '{{ site.baseurl }}';
+$black: #111;
 $grey-color: #828282;
 
 @import 'tufte';
@@ -74,11 +75,12 @@ input[type=text] {
   vertical-align: baseline;
   background: none;
   border: none;
+  border-bottom: 1px solid $grey-color;
 }
 
 input[type=text]:focus {
   outline: none;
-  border: none;
+  border-bottom: 1px solid $black;
 }
 
 ::-webkit-input-placeholder {
