@@ -5,7 +5,7 @@ title: Phonetics
 
 The `phonetics` module aims at gathering various algorithms whose goal is to produce an approximative phonetic representation of the given strings.
 
-This phonetic representation can then be really useful when performing fuzzy matching.
+This phonetic representation is then really useful when performing fuzzy matching.
 
 ## Summary
 
@@ -18,6 +18,37 @@ Modules under the `talisman/phonetics` namespace:
 * [mra](#mra)
 * [nysiis](#nysiis)
 * [soundex](#soundex)
+
+## Use case
+
+Let's say we want to compare two fairly similar names like *Catherine* & *Kathryn*.
+
+One human would very easily agree that those two names do sound the same.
+
+But, for a computer, stating this simple fact is daunting since:
+
+```js
+'Catherine' !== 'Kathryn'
+```
+
+Phonetic algorithms are therefore a way to solve this problem because they will try to produce a phonetic representation of the given strings that can be used to match them if they sound roughly the same.
+
+```js
+// Using the metaphone algorithm, for instance
+import metaphone from 'talisman/phonetics/metaphone';
+
+const catherineCode = metaphone('Catherine'),
+      kathrynCode = metaphone('Kathryn');
+
+catherineCode
+>>> 'K0RN'
+
+kathrynCode
+>>> 'K0RN'
+
+catherineCode === kathrynCode
+>>> true
+```
 
 <h2 id="caverphone">caverphone</h2>
 
