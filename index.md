@@ -21,6 +21,30 @@ npm install talisman
 <div class="modules-list">
   <ul>
     <li>
+      <a href="{{ site.baseurl }}/clustering">clustering</a>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/clustering#k-means">k-means</a></em></li>
+      </ul>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/metrics">metrics</a>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#dice">dice</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#euclidean">euclidean</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#hamming">hamming</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaccard">jaccard</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro">jaro</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro-winkler">jaro-winkler</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#levenshtein">levenshtein</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#manhattan">manhattan</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#mra">mra</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#overlap">overlap</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#sorensen">sorensen</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#tversky">tversky</a></em></li>
+      </ul>
+    </li>
+    <li>
       <a href="{{ site.baseurl }}/phonetics">phonetics</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#caverphone">caverphone</a></em></li>
@@ -30,6 +54,46 @@ npm install talisman
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#mra">mra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#nysiis">nysiis</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></em></li>
+      </ul>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/stats">stats</a>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats#frequencies">frequencies</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats#ngrams">ngrams</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats#tfidf">tfidf</a></em></li>
+      </ul>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/stemmers">stemmers</a>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lancaster">lancaster</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lovins">lovins</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#porter">porter</a></em></li>
+        <li>
+          <a href="{{ site.baseurl }}/stemmers/latin">latin</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/latin#schinke">schinke</a></em></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
+      <ul>
+        <li>
+          <a href="{{ site.baseurl }}/tokenizers/sentences">sentences</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/sentences#naive">naive</a></em></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ site.baseurl }}/tokenizers/words">words</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/words#naive">naive</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/words#treebank">treebank</a></em></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
