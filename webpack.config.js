@@ -1,6 +1,7 @@
 var path = require('path');
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: {
     phonetics: './_js/phonetics'
   },

@@ -30,6 +30,27 @@ npm install talisman
   </ul>
 </div>
 
+## Contribution
+
+Contributions are of course welcome :)
+
+Be sure to lint & pass the unit tests before submitting your pull request.
+
+```bash
+# Cloning the repo
+git clone git@github.com:Yomguithereal/talisman.git
+cd talisman
+
+# Installing the deps
+npm install
+
+# Running the tests
+npm test
+
+# Linting the code
+npm run lint
+```
+
 ## License
 
 [MIT]({{ site.url }}/blob/master/LICENSE.txt)
