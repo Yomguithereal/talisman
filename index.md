@@ -18,15 +18,17 @@ npm install talisman
 
 ## List of available modules
 
+<span class="undocumented">Grey</span> modules are currently undocumented - I am working on it :).
+
 <div class="modules-list">
   <ul>
-    <li>
+    <li class="undocumented">
       <a href="{{ site.baseurl }}/clustering">clustering</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/clustering#k-means">k-means</a></em></li>
       </ul>
     </li>
-    <li>
+    <li class="undocumented">
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>
@@ -56,7 +58,7 @@ npm install talisman
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></em></li>
       </ul>
     </li>
-    <li>
+    <li class="undocumented">
       <a href="{{ site.baseurl }}/stats">stats</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/stats#frequencies">frequencies</a></em></li>
@@ -64,7 +66,7 @@ npm install talisman
         <li>&middot; <em><a href="{{ site.baseurl }}/stats#tfidf">tfidf</a></em></li>
       </ul>
     </li>
-    <li>
+    <li class="undocumented">
       <a href="{{ site.baseurl }}/stemmers">stemmers</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lancaster">lancaster</a></em></li>
@@ -78,7 +80,7 @@ npm install talisman
         </li>
       </ul>
     </li>
-    <li>
+    <li class="undocumented">
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
       <ul>
         <li>
