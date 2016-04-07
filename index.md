@@ -2,7 +2,7 @@
 layout: home
 ---
 
-Talisman is a JavaScript library collecting series of algorithms related to the three following domains:
+**Talisman** is a JavaScript library collecting series of algorithms related to the three following domains:
 
 * [Fuzzy logic & fuzzy matching](https://en.wikipedia.org/wiki/Approximate_string_matching)
 * [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing)
@@ -15,6 +15,10 @@ You can install **Talisman** through npm:
 ```bash
 npm install talisman
 ```
+
+## Source code
+
+The library's source code can be found on its Github [repository]({{ site.url }}).
 
 ## List of available modules
 
