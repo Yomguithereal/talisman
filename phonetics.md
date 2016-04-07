@@ -5,6 +5,8 @@ title: Phonetics
 
 The `phonetics` module aims at gathering various algorithms whose goal is to produce an approximative phonetic representation of the given strings.
 
+This phonetic representation can then be really useful when performing fuzzy matching.
+
 ## Summary
 
 Modules under the `talisman/phonetics` namespace:
@@ -59,6 +61,48 @@ revisited('Henrichsen')
 <div id="caverphone-original-mount"></div>
 <div id="caverphone-revisited-mount"></div>
 
+<h2 id="cologne">cologne</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Cologne_phonetics">https://en.wikipedia.org/wiki/Cologne_phonetics</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Hans Joachim Postel: Die Kölner Phonetik. Ein Verfahren zur Identifizierung von Personennamen auf der Grundlage der Gestaltanalyse. in: IBM-Nachrichten, 19. Jahrgang, 1969, S. 925-931.</em>
+</span>
+
+The "cologne" phonetic algorithm, written by Hans Joachim Postel, was primarily designed to match german names.
+
+```js
+import cologne from 'talisman/phonetics/cologne';
+
+cologne('Müller-Lüdenscheidt');
+>>> '65752682'
+```
+
+<div id="cologne-mount"></div>
+
+<h2 id="double-metaphone">doubleMetaphone</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Metaphone">https://en.wikipedia.org/wiki/Metaphone</a>
+</span>
+
+The double metaphone algorithm, created in 2000 by Lawrence Philips, is an improvement over the original [metaphone](#metaphone) algorithm.
+
+It is called "double" because the algorithm will try to produce two possibilities for the phonetic encoding of the given string.
+
+Note however, that unlike the original metaphone, the length of the produced code will never exceed 4 characters.
+
+```js
+import doubleMetaphone from 'talisman/phonetics/doubleMetaphone';
+
+doubleMetaphone('Smith');
+>>> ['SM0', 'XMT']
+```
+
+<div id="double-metaphone-mount"></div>
+
 <h2 id="metaphone">metaphone</h2>
 
 <span class="marginnote">
@@ -79,6 +123,48 @@ metaphone('Michael');
 ```
 
 <div id="metaphone-mount"></div>
+
+<h2 id="mra">mra</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Match_rating_approach">https://en.wikipedia.org/wiki/Match_rating_approach</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Moore, G B.; Kuhns, J L.; Treffzs, J L.; Montgomery, C A. (Feb 1, 1977). Accessing Individual Records from Personal Data Files Using Nonunique Identifiers. US National Institute of Standards and Technology. p. 17. NIST SP - 500-2.</em>
+</span>
+
+This algorithm will compute the Match Rating Approach codex used by the same method to establish the similarity between two names.
+
+This function is exported by the library for reference, but you should probably use [`talisman/metrics/mra`]({{ site.baseurl }}/metrics#mra) instead.
+
+```js
+import mra from 'talisman/phonetics/mra';
+
+mra('Kathryn');
+>>> 'KTHRYN'
+```
+
+<div id="mra-mount"></div>
+
+<h2 id="nysiis">nysiis</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/New_York_State_Identification_and_Intelligence_System">https://en.wikipedia.org/wiki/New_York_State_Identification_and_Intelligence_System</a>
+</span>
+
+The New York State Identification and Intelligence System is basically a more modern alternative to the original [Soundex](#soundex).
+
+Like its counterpart, it has been created to match names and is not really suited for dictionary words.
+
+```js
+import nysiis from 'talisman/phonetics/nysiis';
+
+nysiis('Michael');
+>>> 'MACAL'
+```
+
+<div id="nysiis-mount"></div>
 
 <h2 id="soundex">soundex</h2>
 

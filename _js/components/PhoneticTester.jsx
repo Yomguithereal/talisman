@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+const identity = v => v;
+
 export default class PhoneticTester extends Component {
   constructor(props) {
     super(props);
@@ -10,10 +12,14 @@ export default class PhoneticTester extends Component {
   }
 
   render() {
-    const algorithm = this.props.algorithm,
-          placeholder = this.props.placeholder || 'Test it here...',
-          value = this.state.value,
-          code = value ? algorithm(value) : null;
+    const {
+      algorithm,
+      placeholder = 'Test it here...',
+      codeRenderer = identity
+    } = this.props;
+
+    const value = this.state.value,
+          code = value ? codeRenderer(algorithm(value)) : null;
 
     return (
       <div>
