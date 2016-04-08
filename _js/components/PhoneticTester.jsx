@@ -1,33 +1,73 @@
 import React, {Component} from 'react';
-import {withState} from 'recompose';
+import {compose, withState} from 'recompose';
 import TextInput from './TextInput.jsx';
 
 const identity = v => v;
 
-const PhoneticTester = withState(
-  'value', 'setValue', '',
+const state = compose(
+  withState('wordOne', 'setWordOne', ''),
+  withState('wordTwo', 'setWordTwo', '')
+);
+
+const PhoneticTester = state(
   props => {
     const {
       algorithm,
-      placeholder = 'Test it here...',
       codeRenderer = identity,
-      value,
-      setValue
+      wordOne,
+      wordTwo,
+      setWordOne,
+      setWordTwo
     } = props;
 
-    const code = value ? codeRenderer(algorithm(value)) : '~';
+    const codeOne = wordOne ? codeRenderer(algorithm(wordOne)) : '~',
+          codeTwo = wordTwo ? codeRenderer(algorithm(wordTwo)) : '~';
+
+    let status = '\u00b7',
+        className = 'default';
+
+    if (codeOne !== '~' && codeTwo !== '~') {
+      if (codeOne === codeTwo) {
+        status = '=~';
+        className = 'success';
+      }
+      else {
+        status = '!~';
+        className = 'error';
+      }
+    }
 
     return (
-      <div>
-        <TextInput placeholder={placeholder}
-                   value={value}
-                   onChange={e => setValue(e.target.value)} />
-        <div>
-          <p style={{display: 'inline', fontSize: '1.3em'}}>
-            <span>{code}</span>
-          </p>
-        </div>
-      </div>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <TextInput placeholder="Word 1"
+                         value={wordOne}
+                         onChange={e => setWordOne(e.target.value)}
+                         status={className} />
+            </td>
+            <td style={{width: '15%', textAlign: 'center'}}>
+              <strong>{status}</strong>
+            </td>
+            <td>
+              <TextInput placeholder="Word 2"
+                         value={wordTwo}
+                         onChange={e => setWordTwo(e.target.value)}
+                         status={className} />
+            </td>
+          </tr>
+          <tr>
+            <td style={{fontSize: '1.3em', textAlign: 'center'}}>
+              {codeOne}
+            </td>
+            <td />
+            <td style={{fontSize: '1.3em', textAlign: 'center'}}>
+              {codeTwo}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 );

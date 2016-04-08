@@ -2,6 +2,8 @@
 $baseurl: '{{ site.baseurl }}';
 $black: #111;
 $grey: #828282;
+$red: #d14;
+$green: #63AC4F;
 
 @import 'tufte';
 @import 'syntax-highlighting';
@@ -66,7 +68,7 @@ code {
 input[type=text] {
   font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
   font-size: 1.3em;
-  width: 250px;
+  width: 100%;
   line-height: 2rem;
   margin-top: 1.4rem;
   margin-bottom: 1.4rem;
@@ -75,6 +77,14 @@ input[type=text] {
   background: none;
   border: none;
   border-bottom: 1px solid $grey;
+
+  &.success {
+    border-color: $green;
+  }
+
+  &.error {
+    border-color: $red;
+  }
 }
 
 input[type=text]:focus {
@@ -84,7 +94,15 @@ input[type=text]:focus {
 .bar  {
   position: relative;
   display: block;
-  width: 250px;
+  width: 100%;
+
+  &.success:before, &.success:after {
+    background: $green;
+  }
+
+  &.error:before, &.error:after {
+    background: $red;
+  }
 }
 
 .bar:before, .bar:after {

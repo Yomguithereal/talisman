@@ -89,7 +89,12 @@ revisited('Henrichsen')
 >>> 'ANRKSN1111'
 ```
 
+*Original version*
+
 <div id="caverphone-original-mount"></div>
+
+*Revisited version*
+
 <div id="caverphone-revisited-mount"></div>
 
 <h2 id="cologne">cologne</h2>
@@ -205,7 +210,12 @@ nysiis('Philbert');
 >>> 'FALBAD'
 ```
 
+*Original version*
+
 <div id="nysiis-original-mount"></div>
+
+*Refined version*
+
 <div id="nysiis-refined-mount"></div>
 
 <h2 id="soundex">soundex</h2>
