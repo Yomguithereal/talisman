@@ -1,35 +1,27 @@
 import React, {Component} from 'react';
+import {withState} from 'recompose';
+import TextInput from './TextInput.jsx';
 
 const identity = v => v;
 
-export default class PhoneticTester extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: ''
-    };
-  }
-
-  render() {
+const PhoneticTester = withState(
+  'value', 'setValue', '',
+  props => {
     const {
       algorithm,
       placeholder = 'Test it here...',
-      codeRenderer = identity
-    } = this.props;
+      codeRenderer = identity,
+      value,
+      setValue
+    } = props;
 
-    const value = this.state.value,
-          code = value ? codeRenderer(algorithm(value)) : '~';
+    const code = value ? codeRenderer(algorithm(value)) : '~';
 
     return (
       <div>
-        <div>
-          <input type="text"
-                 placeholder={placeholder}
-                 onChange={e => this.setState({value: e.target.value})}
-                 value={this.state.value} />
-          <span className="bar" />
-        </div>
+        <TextInput placeholder={placeholder}
+                   value={value}
+                   onChange={e => setValue(e.target.value)} />
         <div>
           <p style={{display: 'inline', fontSize: '1.3em'}}>
             <span>{code}</span>
@@ -38,4 +30,6 @@ export default class PhoneticTester extends Component {
       </div>
     );
   }
-}
+);
+
+export default PhoneticTester;

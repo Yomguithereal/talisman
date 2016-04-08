@@ -30,9 +30,13 @@
   "dependencies": {
     "react": "^15.0.0-rc.2",
     "react-dom": "^15.0.0-rc.2",
+    "recompose": "^0.15.1",
     "talisman": "^0.1.0"
   },
   "babel": {
-    "presets": ["react", "es2015"]
+    "presets": [
+      "react",
+      "es2015"
+    ]
   }
 }
