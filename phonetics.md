@@ -188,14 +188,25 @@ The New York State Identification and Intelligence System is basically a more mo
 
 Like its counterpart, it has been created to match names and is not really suited for dictionary words.
 
+The library packs both the original and the refined version of the algorithm.
+
 ```js
 import nysiis from 'talisman/phonetics/nysiis';
+// Alternatively
+import {original, refined} from 'talisman/phonetics/nysiis';
 
-nysiis('Michael');
->>> 'MACAL'
+nysiis === original
+>>> true
+
+nysiis('Philbert');
+>>> 'FFALBAD'
+
+nysiis('Philbert');
+>>> 'FALBAD'
 ```
 
-<div id="nysiis-mount"></div>
+<div id="nysiis-original-mount"></div>
+<div id="nysiis-refined-mount"></div>
 
 <h2 id="soundex">soundex</h2>
 

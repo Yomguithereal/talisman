@@ -7,7 +7,7 @@ import cologne from 'talisman/phonetics/cologne';
 import doubleMetaphone from 'talisman/phonetics/doubleMetaphone';
 import metaphone from 'talisman/phonetics/metaphone';
 import mra from 'talisman/phonetics/mra';
-import nysiis from 'talisman/phonetics/nysiis';
+import nysiis, {refined} from 'talisman/phonetics/nysiis';
 import soundex from 'talisman/phonetics/soundex';
 
 const doubleMetaphoneRenderer = code => `[${code[0]}, ${code[1]}]`;
@@ -18,5 +18,6 @@ render(<PhoneticTester algorithm={cologne} />, document.getElementById('cologne-
 render(<PhoneticTester algorithm={doubleMetaphone} codeRenderer={doubleMetaphoneRenderer} />, document.getElementById('double-metaphone-mount'));
 render(<PhoneticTester algorithm={metaphone} />, document.getElementById('metaphone-mount'));
 render(<PhoneticTester algorithm={mra} />, document.getElementById('mra-mount'));
-render(<PhoneticTester algorithm={nysiis} />, document.getElementById('nysiis-mount'));
+render(<PhoneticTester algorithm={nysiis} placeholder="Test the original version..." />, document.getElementById('nysiis-original-mount'));
+render(<PhoneticTester algorithm={refined} placeholder="Test the refined version..." />, document.getElementById('nysiis-refined-mount'));
 render(<PhoneticTester algorithm={soundex} />, document.getElementById('soundex-mount'));
