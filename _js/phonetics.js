@@ -10,12 +10,13 @@ import mra from 'talisman/phonetics/mra';
 import nysiis, {refined} from 'talisman/phonetics/nysiis';
 import soundex from 'talisman/phonetics/soundex';
 
-const doubleMetaphoneRenderer = code => `[${code[0]}, ${code[1]}]`;
+const doubleMetaphoneRenderer = code => `[${code[0]}, ${code[1]}]`,
+      doubleMetaphoneComparator = (a, b) => a[0] === b[0] || a[0] === b[1] || a[1] === b[0] || a[1] === b[1];
 
 render(<PhoneticTester algorithm={caverphone} placeholder="Test the original version..." />, document.getElementById('caverphone-original-mount'));
 render(<PhoneticTester algorithm={revisited} placeholder="Test the revisited version..." />, document.getElementById('caverphone-revisited-mount'));
 render(<PhoneticTester algorithm={cologne} />, document.getElementById('cologne-mount'));
-render(<PhoneticTester algorithm={doubleMetaphone} codeRenderer={doubleMetaphoneRenderer} />, document.getElementById('double-metaphone-mount'));
+render(<PhoneticTester algorithm={doubleMetaphone} codeRenderer={doubleMetaphoneRenderer} comparator={doubleMetaphoneComparator} />, document.getElementById('double-metaphone-mount'));
 render(<PhoneticTester algorithm={metaphone} />, document.getElementById('metaphone-mount'));
 render(<PhoneticTester algorithm={mra} />, document.getElementById('mra-mount'));
 render(<PhoneticTester algorithm={nysiis} placeholder="Test the original version..." />, document.getElementById('nysiis-original-mount'));

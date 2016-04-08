@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {compose, withState} from 'recompose';
 import TextInput from './TextInput.jsx';
 
-const identity = v => v;
+const identity = v => v,
+      equals = (a, b) => a === b;
 
 const state = compose(
   withState('wordOne', 'setWordOne', ''),
@@ -14,20 +15,24 @@ const PhoneticTester = state(
     const {
       algorithm,
       codeRenderer = identity,
+      comparator = equals,
       wordOne,
       wordTwo,
       setWordOne,
       setWordTwo
     } = props;
 
-    const codeOne = wordOne ? codeRenderer(algorithm(wordOne)) : '~',
-          codeTwo = wordTwo ? codeRenderer(algorithm(wordTwo)) : '~';
+    const codeOne = wordOne ? algorithm(wordOne) : null,
+          codeTwo = wordTwo ? algorithm(wordTwo) : null;
+
+    const renderedCodeOne = codeOne ? codeRenderer(codeOne) : '',
+          renderedCodeTwo = codeTwo ? codeRenderer(codeTwo) : '';
 
     let status = '\u00b7',
         className = 'default';
 
-    if (codeOne !== '~' && codeTwo !== '~') {
-      if (codeOne === codeTwo) {
+    if (codeOne && codeTwo) {
+      if (comparator(codeOne, codeTwo)) {
         status = '=~';
         className = 'success';
       }
@@ -59,11 +64,11 @@ const PhoneticTester = state(
           </tr>
           <tr>
             <td style={{fontSize: '1.3em', textAlign: 'center'}}>
-              {codeOne}
+              {renderedCodeOne}&nbsp;
             </td>
             <td />
             <td style={{fontSize: '1.3em', textAlign: 'center'}}>
-              {codeTwo}
+              {renderedCodeTwo}&nbsp;
             </td>
           </tr>
         </tbody>
