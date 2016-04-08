@@ -3,8 +3,8 @@ var webpack = require('webpack'),
 
 module.exports = {
   entry: {
-    metrics: './_js/metrics.js',
-    phonetics: './_js/phonetics.js'
+    phonetics: './_js/phonetics.js',
+    stemmers: './_js/stemmers.js'
   },
   output: {
     path: path.join(__dirname, 'assets', 'dist'),

@@ -3,6 +3,10 @@ layout: page
 title: Phonetics
 ---
 
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Phonetic_algorithm">https://en.wikipedia.org/wiki/Phonetic_algorithm</a><br><br>
+</span>
+
 The `phonetics` module aims at gathering various algorithms whose goal is to produce an approximative phonetic representation of the given strings.
 
 This phonetic representation is then really useful when performing fuzzy matching.
