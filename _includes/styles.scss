@@ -4,6 +4,8 @@ $black: #111;
 $grey: #828282;
 $red: #d14;
 $green: #008080;
+$brown: #976936;
+$dark-brown: darken($brown, 10%);
 
 @import 'tufte';
 @import 'syntax-highlighting';
@@ -77,7 +79,12 @@ span {
   }
 }
 
-input[type=text] {
+textarea {
+  resize: none;
+  height: 150px;
+}
+
+input[type=text], textarea {
   font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
   font-size: 1.3em;
   width: 100%;
@@ -99,11 +106,25 @@ input[type=text] {
   }
 }
 
-input[type=text]:focus {
+input[type=text]:focus, textarea:focus {
   outline: none;
 }
 
 .bar  {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  &.success:before, &.success:after {
+    background: $green;
+  }
+
+  &.error:before, &.error:after {
+    background: $red;
+  }
+}
+
+.bar-textarea  {
   position: relative;
   display: block;
   width: 100%;
@@ -129,6 +150,18 @@ input[type=text]:focus {
   -webkit-transition: 0.2s ease all;
 }
 
+.bar-textarea:before, .bar-textarea:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  position: absolute;
+  top: calc(-1.4rem - 6px);
+  background: $black;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
 .bar:before {
   left: 50%;
 }
@@ -137,8 +170,20 @@ input[type=text]:focus {
   right: 50%;
 }
 
+.bar-textarea:before {
+  left: 50%;
+}
+
+.bar-textarea:after {
+  right: 50%;
+}
+
 input:focus ~ .bar:before, input:focus ~ .bar:after {
-  width: calc(50% + 1px);
+  width: calc(50%);
+}
+
+textarea:focus ~ .bar-textarea:before, textarea:focus ~ .bar-textarea:after {
+  width: calc(50% + 2px);
 }
 
 ::-webkit-input-placeholder {
@@ -173,4 +218,18 @@ pre code {
 
 .type {
   color: $red;
+}
+
+.token {
+  background-color: $brown;
+  border-bottom: 1px solid $dark-brown;
+  border-right: 1px solid $dark-brown;
+  color: white;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  line-height: 1.9em;
+  font-size: 0.9em;
 }

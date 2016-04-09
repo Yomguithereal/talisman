@@ -84,7 +84,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         </li>
       </ul>
     </li>
-    <li class="undocumented">
+    <li>
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
       <ul>
         <li>

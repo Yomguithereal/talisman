@@ -38,7 +38,7 @@ const clusters = kMeans(dataset, [k = 8, options = {}]);
 *arguments*
 
 * **dataset**: <code class="type">array</code> - your dataset should be an array of vectors.
-* **k**: <code class="type">number</code> (8) - the number of clusters to produce.
-* **options**: <code class="type">object</code> - possible options:
-  * **distance** <code class="type">function</code> - the distance function to use. Will default to [`talisman/metrics/euclidean`]({{ site.baseurl }}/metrics#euclidean).
-  * **maxIterations** <code class="type">number</code> (300) - maximum number of iterations to perform.
+* **[k]**: <code class="type">number</code> (8) - the number of clusters to produce.
+* **[options]**: <code class="type">object</code> - possible options:
+  * **[distance]** <code class="type">function</code> - the distance function to use. Will default to [`talisman/metrics/euclidean`]({{ site.baseurl }}/metrics#euclidean).
+  * **[maxIterations]** <code class="type">number</code> (300) - maximum number of iterations to perform.

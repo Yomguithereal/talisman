@@ -280,8 +280,8 @@ custom(parameters, 'Duane', 'Dwayne');
 
 Options are the following:
 
-* **boostThreshold** <code class="type">number</code> (0.7): boost threshold comprised between 0 and 1.
-* **scalingFactor** <code class="type">number</code> (0.1): scaling factor. Should not exceed 0.25.
+* **[boostThreshold]** <code class="type">number</code> (0.7): boost threshold comprised between 0 and 1.
+* **[scalingFactor]** <code class="type">number</code> (0.1): scaling factor. Should not exceed 0.25.
 
 <h2 id="levenshtein">levenshtein</h2>
 
@@ -413,9 +413,9 @@ jaccard('context', 'contact');
 
 *Parameters*
 
-* **symmetric** <code class="type">boolean</code> (false) - whether to compute the symmetric or the asymmetric index.
-* **alpha** <code class="type">number</code> (1) - alpha parameter. Must be >= 0.
-* **beta** <code class="type">number</code> (1) - beta parameter. Must be >= 0.
+* **[symmetric]** <code class="type">boolean</code> (false) - whether to compute the symmetric or the asymmetric index.
+* **[alpha]** <code class="type">number</code> (1) - alpha parameter. Must be >= 0.
+* **[beta]** <code class="type">number</code> (1) - beta parameter. Must be >= 0.
 
 <div id="tversky-mount"></div>
 
