@@ -3,6 +3,7 @@ var webpack = require('webpack'),
 
 module.exports = {
   entry: {
+    'latin-stemmers': './_js/latin-stemmers.js',
     phonetics: './_js/phonetics.js',
     stemmers: './_js/stemmers.js'
   },
