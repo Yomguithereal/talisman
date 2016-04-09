@@ -22,8 +22,11 @@ Stemming latin words being notoriously difficult, this stemmer will output two d
 ```js
 import schinke from 'talisman/stemmers/latin/schinke';
 
-schinke('building');
->>> 'build'
+schinke('aquila');
+>>> {
+  noun: 'aquil',
+  verb: 'aquila'
+}
 ```
 
 <div id="schinke-mount"></div>
