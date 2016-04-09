@@ -111,7 +111,7 @@ lovins('building');
   <em>C.J. van Rijsbergen, S.E. Robertson and M.F. Porter, 1980. New models in probabilistic information retrieval. London: British Library. (British Library Research and Development Report, no. 5587).</em>
 </span>
 
-Martin Porter's stemmer is probably the most popular for the English language.
+Martin Porter's stemmer is probably the most popular stemmer for the English language.
 
 This is often the first one to try on your dataset to see if stemming is relevant for your use case.
 

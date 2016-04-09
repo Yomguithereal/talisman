@@ -26,7 +26,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 <div class="modules-list">
   <ul>
-    <li class="undocumented">
+    <li>
       <a href="{{ site.baseurl }}/clustering">clustering</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/clustering#k-means">k-means</a></em></li>
@@ -76,7 +76,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lancaster">lancaster</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lovins">lovins</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#porter">porter</a></em></li>
-        <li>
+        <li class="undocumented">
           <a href="{{ site.baseurl }}/stemmers/latin">latin</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/latin#schinke">schinke</a></em></li>
