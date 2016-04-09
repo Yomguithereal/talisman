@@ -22,8 +22,6 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 ## List of available modules
 
-<span class="undocumented">Grey</span> modules are currently undocumented - I am working on it :).
-
 <div class="modules-list">
   <ul>
     <li>
@@ -62,7 +60,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></em></li>
       </ul>
     </li>
-    <li class="undocumented">
+    <li>
       <a href="{{ site.baseurl }}/stats">stats</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/stats#frequencies">frequencies</a></em></li>

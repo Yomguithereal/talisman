@@ -4,7 +4,7 @@ title: Phonetics
 ---
 
 <span class="marginnote">
-  Reference: <a href="https://en.wikipedia.org/wiki/Phonetic_algorithm">https://en.wikipedia.org/wiki/Phonetic_algorithm</a><br><br>
+  Reference: <a href="https://en.wikipedia.org/wiki/Phonetic_algorithm">https://en.wikipedia.org/wiki/Phonetic_algorithm</a>
 </span>
 
 The `phonetics` module aims at gathering various algorithms whose goal is to produce an approximative phonetic representation of the given strings.
