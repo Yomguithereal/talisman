@@ -24,14 +24,17 @@ const TokenizerTester = state(
 
     return (
       <div style={{width: '55%'}}>
-        <Component placeholder="Enter raw text here..."
-                   value={input}
-                   onChange={e => setInput(e.target.value)} />
-        <p style={{width: '100%'}}>
-          {tokens.map(token => flow ?
-            <span className="token">{token}</span> :
-            <div className="token">{token}</div>)}
-        </p>
+        <div>
+          <Component placeholder="Enter raw text here..."
+                     value={input}
+                     onChange={e => setInput(e.target.value)} />
+          <p style={{width: '100%'}}>
+            {tokens.map(token => flow ?
+              <span className="token" style={{float: 'left'}}>{token}</span> :
+              <div className="token">{token}</div>)}
+          </p>
+        </div>
+        <div style={{clear: 'both'}} />
       </div>
     );
   }

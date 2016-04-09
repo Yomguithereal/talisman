@@ -8,6 +8,7 @@ module.exports = {
     phonetics: './_js/phonetics.js',
     'sentences-tokenizers': './_js/sentences-tokenizers.js',
     stemmers: './_js/stemmers.js',
+    'words-tokenizers': './_js/words-tokenizers.js'
   },
   output: {
     path: path.join(__dirname, 'assets', 'dist'),

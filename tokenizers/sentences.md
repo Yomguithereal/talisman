@@ -11,7 +11,7 @@ Sentences tokenizers take raw text and output a list of this text's sentences.
 
 * [naive](#naive)
 
-## naive
+<h2 id="naive">naive</h2>
 
 <span class="marginnote">
   Author: <a href="https://github.com/Yomguithereal">Guillaume Plique</a>
