@@ -337,6 +337,8 @@ manhattan([1, 3], [4, 5]);
 
 Assesses the similarity between two names by using the Match Rating Approach comparison.
 
+Note that if the difference between the strings' codex' lengths is superior to 3, the comparison won't be done as the algorithm will deem the strings too different.
+
 ```js
 import mra from 'talisman/metrics/mra';
 

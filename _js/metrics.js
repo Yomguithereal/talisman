@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import MetricTester from './components/MetricTester.jsx';
+import MRATester from './components/MRATester.jsx';
 
 import cosine from 'talisman/metrics/cosine';
 import dice from 'talisman/metrics/dice';
@@ -26,8 +27,8 @@ render(<MetricTester metric={jaro} />, document.getElementById('jaro-mount'));
 render(<MetricTester metric={jaroWinkler} />, document.getElementById('jaro-winkler-mount'));
 render(<MetricTester metric={levenshtein} integerResult={true} />, document.getElementById('levenshtein-mount'));
 render(<MetricTester metric={manhattan} enforceNumbers={true} sameDimension={true} />, document.getElementById('manhattan-mount'));
+render(<MRATester metric={mra} />, document.getElementById('mra-mount'));
 render(<MetricTester metric={overlap} />, document.getElementById('overlap-mount'));
 
 // TODO: custom Jaro-Winkler
-// TODO: mra
 // TODO: Tversky
