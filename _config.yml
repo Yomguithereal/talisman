@@ -11,4 +11,5 @@ markdown: kramdown
 exclude:
   - node_modules
   - package.json
+  - README.md
   - webpack.config.js
