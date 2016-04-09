@@ -32,7 +32,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/clustering#k-means">k-means</a></em></li>
       </ul>
     </li>
-    <li class="undocumented">
+    <li>
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>

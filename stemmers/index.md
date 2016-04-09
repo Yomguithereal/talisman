@@ -7,7 +7,6 @@ title: Stemmers
   Reference: <a href="https://en.wikipedia.org/wiki/Stemming">https://en.wikipedia.org/wiki/Stemming</a>
 </span>
 
-
 The `stemmers` module gathers several algorithms aiming at computing the "stem" of the given words.
 
 Note that this stem will not compulsorily be grammatically correct since the goal of a stemmers is just to enable fuzzy comparisons between similar words.
