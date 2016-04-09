@@ -17,7 +17,8 @@ const MetricTester = state(
       sequenceOne,
       sequenceTwo,
       setSequenceOne,
-      setSequenceTwo
+      setSequenceTwo,
+      integer = false
     } = props;
 
     let proxyOne = sequenceOne.split(/,\s*/),
@@ -26,14 +27,18 @@ const MetricTester = state(
     let result = '~';
 
     // If the sequence is only one element, we keep the single element
-    if (proxyOne.length === 1)
+    if (proxyOne.length === 1 && proxyTwo.length === 1) {
       proxyOne = proxyOne[0];
-    if (proxyTwo.length === 1)
       proxyTwo = proxyTwo[0];
+    }
 
+    if (sequenceOne && sequenceTwo) {
+      result = metric(proxyOne, proxyTwo)
 
-    if (sequenceOne && sequenceTwo)
-      result = metric(proxyOne, proxyTwo).toFixed(2);
+      // Beautifying the result
+      if (!integer && result && result !== 1)
+      result = result.toFixed(2);
+    }
 
     return (
       <table>

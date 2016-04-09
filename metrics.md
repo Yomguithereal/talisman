@@ -20,6 +20,7 @@ Modules under the `talisman/metrics` namespace:
 * [jaccard](#jaccard)
 * [jaro](#jaro)
 * [jaro-winkler](#jaro-winkler)
+* [levenshtein](#levenshtein)
 * [manhattan](#manhattan)
 * [mra](#mra)
 * [overlap](#overlap)
@@ -255,6 +256,8 @@ jaroWinkler('Duane', 'Dwayne');
 distance(a, b) === 1 - similarity(a, b)
 ```
 
+<div id="jaro-winkler-mount"></div>
+
 *Using custom parameters*
 
 ```js
@@ -274,7 +277,28 @@ Options are the following:
 * **boostThreshold** <code class="type">number</code> (0.7): boost threshold comprised between 0 and 1.
 * **scalingFactor** <code class="type">number</code> (0.1): scaling factor. Should not exceed 0.25.
 
-<div id="jaro-winkler-mount"></div>
+<h2 id="levenshtein">levenshtein</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">https://en.wikipedia.org/wiki/Levenshtein_distance</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Levenshtein, Vladimir I. (February 1966). "Binary codes capable of correcting deletions, insertions, and reversals". Soviet Physics Doklady 10 (8): 707–710.</em>
+</span>
+
+The Levenshtein distance is probably the most known metric dealing with edit distance.
+
+This function therefore computes the absolute edit distance between two sequences, usually strings.
+
+```js
+import levenshtein from 'talisman/metrics/levenshtein';
+
+levenshtein('book', 'back');
+>>> 2
+```
+
+<div id="levenshtein-mount"></div>
 
 <h2 id="manhattan">manhattan</h2>
 
@@ -361,7 +385,7 @@ The `sorensen` module is just an alias of the [dice](#dice) one.
 
 Computes the Tversky index between two strings.
 
-Note that the Tversky index can be seens as a generalization of both the [Jaccard](#jaccard) index and the [Dice](#coefficient).
+Note that the Tversky index can be seens as a generalization of both the [Jaccard](#jaccard) index and the [Dice](#dice) coefficient.
 
 ```js
 import tversky from 'talisman/metrics/tversky';
