@@ -7,6 +7,8 @@ The `metrics` module typically gathers functions aiming at finding a theoretical
 
 They range from computing the edit distance between two strings to retrieving the distance between two points in space.
 
+**Note**: in all the testers below, know that you can separate sequences' elements by using a comma if you want to compare things different from single strings.
+
 ## Summary
 
 Modules under the `talisman/metrics` namespace:
@@ -384,3 +386,6 @@ jaccard('context', 'contact');
 * **beta** <code class="type">number</code> (1) - beta parameter. Must be >= 0.
 
 <div id="tversky-mount"></div>
+
+<script src="{{ site.baseurl }}/assets/dist/metrics.js"></script>
+
