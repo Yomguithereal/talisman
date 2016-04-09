@@ -135,7 +135,13 @@ squared([1, 3], [4, 5]);
 >>> 13
 ```
 
+*Euclidean distance*
+
 <div id="euclidean-mount"></div>
+
+*Squared euclidean distance*
+
+<div id="euclidean-squared-mount"></div>
 
 <h2 id="hamming">hamming</h2>
 

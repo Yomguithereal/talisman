@@ -67,6 +67,16 @@ ul {
   }
 }
 
+span {
+  &.success {
+    color: $green;
+  }
+
+  &.error {
+    color: $red;
+  }
+}
+
 input[type=text] {
   font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
   font-size: 1.3em;
