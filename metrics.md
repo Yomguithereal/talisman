@@ -328,6 +328,19 @@ mra('Catherine', 'Kathryn');
 
 <h2 id="overlap">overlap</h2>
 
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Overlap_coefficient">https://en.wikipedia.org/wiki/Overlap_coefficient</a>
+</span>
+
+Computes the overlap coefficient between two sequences.
+
+```js
+import overlap from 'talisman/metrics/overlap';
+
+overlap('abc', 'abcde');
+>>> 1
+```
+
 <div id="overlap-mount"></div>
 
 <h2 id="sorensen">sorensen</h2>
@@ -335,5 +348,39 @@ mra('Catherine', 'Kathryn');
 The `sorensen` module is just an alias of the [dice](#dice) one.
 
 <h2 id="tversky">tversky</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Tversky_index">https://en.wikipedia.org/wiki/Tversky_index</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Tversky, Amos (1977). "Features of Similarity". Psychological Reviews 84 (4): 327–352.</em>
+</span>
+
+Computes the Tversky index between two strings.
+
+Note that the Tversky index can be seens as a generalization of both the [Jaccard](#jaccard) index and the [Dice](#coefficient).
+
+```js
+import tversky from 'talisman/metrics/tversky';
+
+const parameters = {
+  symmetric: false,
+  alpha: 1,
+  beta: 1
+};
+
+// Tversky with alpha = beta = 1 is the Jaccard index
+const jaccard = tversky.bind(null, parameters);
+
+jaccard('context', 'contact');
+>>> ~0.57
+```
+
+*Parameters*
+
+* **symmetric** <code class="type">boolean</code> (false) - whether to compute the symmetric or the asymmetric index.
+* **alpha** <code class="type">number</code> (1) - alpha parameter. Must be >= 0.
+* **beta** <code class="type">number</code> (1) - beta parameter. Must be >= 0.
 
 <div id="tversky-mount"></div>
