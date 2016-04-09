@@ -16,8 +16,7 @@ import words from '../tokenizers/words/naive';
  * @param {array} docs - Initial documents.
  */
 export class TfIdf {
-  constructor(docs) {
-    docs = docs || [];
+  constructor() {
 
     // Properties
     this.docs = {};
