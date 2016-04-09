@@ -43,6 +43,13 @@ It is able to split expressions such as *isn't* into two proper tokens.
 
 Note that it won't strip punctuation and keep it as tokens.
 
+```js
+import treebank from 'talisman/tokenizers/words/treebank';
+
+treebank("It wasn't me!");
+>>> ['It', 'was', 'n\'t', 'me', '!']
+```
+
 <div id="treebank-mount"></div>
 
 <script src="{{ site.baseurl }}/assets/dist/words-tokenizers.js"></script>
