@@ -276,9 +276,53 @@ Options are the following:
 
 <h2 id="manhattan">manhattan</h2>
 
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Taxicab_geometry">https://en.wikipedia.org/wiki/Taxicab_geometry</a>
+</span>
+
+Computes the Manhattan distance between two points in a N-dimensions space.
+
+This distance if also often called the "city block" distance because it won't draw a straight line between both points but rather follow the other edges of the triangle.
+
+```js
+import manhattan from 'talisman/metrics/manhattan';
+
+manhattan([1, 3], [4, 5]);
+>>> 5
+```
+
 <div id="manhattan-mount"></div>
 
 <h2 id="mra">mra</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Match_rating_approach">https://en.wikipedia.org/wiki/Match_rating_approach</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Moore, G B.; Kuhns, J L.; Treffzs, J L.; Montgomery, C A. (Feb 1, 1977). Accessing Individual Records from Personal Data Files Using Nonunique Identifiers. US National Institute of Standards and Technology. p. 17. NIST SP - 500-2.</em>
+</span>
+
+Assesses the similarity between two names by using the Match Rating Approach comparison.
+
+```js
+import mra from 'talisman/metrics/mra';
+
+mra('Catherine', 'Kathryn');
+>>> {
+  minimum: 3,
+  similarity: 4,
+  codex: ['CTHRN', 'KTHRYN'],
+  matching: true
+}
+```
+
+*Output*
+
+* **minimum** <code class="type">number</code> - The minimum similarity score needed for the names to be considered similar.
+* **similarity** <code class="type">number</code> - The similarity score.
+* **codex** <code class="type">array</code> - Both codex produced by [`talisman/phonetics/mra`]({{ site.baseurl }}/phonetics#mra).
+* **matching** <code class="type">boolean</code> - Whether the comparison deemed both names similar or not.
 
 <div id="mra-mount"></div>
 
