@@ -2,6 +2,7 @@
 
 ## 0.2.0
 
+* Adding `metrics/canberra`.
 * Adding `metrics/chebyshev`.
 
 ## 0.1.0
