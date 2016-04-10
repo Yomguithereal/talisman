@@ -20,9 +20,12 @@
     "folders": "clustering helpers metrics phonetics regex stats stemmers tokenizers"
   },
   "keywords": [
+    "bayes",
     "caverphone",
+    "chebyshev",
     "cologne",
     "cosine",
+    "classifier",
     "clustering",
     "dice",
     "fuzzy",

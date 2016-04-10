@@ -13,6 +13,7 @@ describe('clustering', function() {
 });
 
 describe('metrics', function() {
+  require('./metrics/chebyshev.js');
   require('./metrics/cosine.js');
   require('./metrics/dice.js');
   require('./metrics/euclidean.js');
