@@ -7,14 +7,17 @@
  * [Reference]:
  * https://en.wikipedia.org/wiki/Daitch%E2%80%93Mokotoff_Soundex
  */
+import deburr from 'lodash/deburr';
 
 /**
  * Rules.
+ *
+ * [Note]:
+ * For the (RS|RZ) part, the original algo says (94, 4) but most
+ * implementations drop it to only (94).
  */
 
 // TODO: optimize to cut O(n * m)
-// TODO: check the rules apply order
-// TODO: add some deburr
 const RULES = [
   [/^(AI|AJ|AY)/, 0, 1, null],
   [/^AU/, 0, 7, null],
@@ -24,9 +27,9 @@ const RULES = [
   [/^CHS/, 5, 54, 54],
   [/^CH/, [5, 4], [5, 4], [5, 4]],
   [/^CK/, [5, 45], [5, 45], [5, 45]],
-  [/^(CZ|CS|CSZ|CZS)/, 4, 4, 4],
+  [/^(CSZ|CZS|CZ|CS)/, 4, 4, 4],
   [/^C/, [5, 4], [5, 4], [5, 4]],
-  [/^(DRZ|DRS|DS|DSH|DSZ|DZ|DZH|DZS)/, 4, 4, 4],
+  [/^(DRZ|DRS|DSH|DSZ|DZH|DZS|DS|DZ)/, 4, 4, 4],
   [/^(DT|D)/, 3, 3, 3],
   [/^(EI|EJ|EY)/, 0, 1, null],
   [/^EU/, 1, 1, null],
@@ -47,8 +50,6 @@ const RULES = [
   [/^O/, 0, null, null],
   [/^(PF|PH|P)/, 7, 7, 7],
   [/^Q/, 5, 5, 5],
-
-  // NOTE: the original algo says (94, 4) but most implementations only 94
   [/^(RZ|RS)/, [94, 4], [94, 4], [94, 4]],
   [/^R/, 9, 9, 9],
   [/^(SCHTSCH|SCHTSH|SCHTCH|SHTCH|SHCH|SHTSH)/, 2, 4, 4],
@@ -126,7 +127,7 @@ export default function daitchMokotoff(name) {
 
   const code = [];
 
-  let current = name
+  let current = deburr(name)
     .toUpperCase()
     .replace(/[^A-ZĄĘŢ]/g, '');
 
