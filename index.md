@@ -53,6 +53,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#caverphone">caverphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#cologne">cologne</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#daitch-mokotoff">daitch-mokotoff</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#double-metaphone">doubleMetaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#mra">mra</a></em></li>

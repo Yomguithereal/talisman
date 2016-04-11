@@ -17,7 +17,8 @@ Modules under the `talisman/phonetics` namespace:
 
 * [caverphone](#caverphone)
 * [cologne](#cologne)
-* [doubleMetaphone](#double-metaphone)
+* [daitch-mokotoff](#daitch-mokotoff)
+* [double-metaphone](#double-metaphone)
 * [metaphone](#metaphone)
 * [mra](#mra)
 * [nysiis](#nysiis)
@@ -122,7 +123,28 @@ cologne('Müller-Lüdenscheidt');
 
 <div id="cologne-mount"></div>
 
-<h2 id="double-metaphone">doubleMetaphone</h2>
+<h2 id="daitch-mokotoff">daitch-mokotoff</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Daitch%E2%80%93Mokotoff_Soundex">https://en.wikipedia.org/wiki/Daitch%E2%80%93Mokotoff_Soundex</a>
+</span>
+
+The Daitch-Mokotoff Soundex is a refinement of the American [Soundex](#soundex) to match more properly Slavic & Yiddish names.
+
+Note that sometimes, this algorithm give different solutions for encoding a sound.
+
+Thus, the function will always return an array of possible encodings listing all the possible permutations (at least one, obviously).
+
+```js
+import daitchMokotoff from 'talisman/phonetics/daitch-mokotoff';
+
+daitchMokotoff('Peters');
+>>> ['739400', '734000']
+```
+
+<div id="daitch-mokotoff-mount"></div>
+
+<h2 id="double-metaphone">double-metaphone</h2>
 
 <span class="marginnote">
   Reference: <a href="https://en.wikipedia.org/wiki/Metaphone">https://en.wikipedia.org/wiki/Metaphone</a>
@@ -135,7 +157,7 @@ It is called "double" because the algorithm will try to produce two possibilitie
 Note however, that unlike the original metaphone, the length of the produced code will never exceed 4 characters.
 
 ```js
-import doubleMetaphone from 'talisman/phonetics/doubleMetaphone';
+import doubleMetaphone from 'talisman/phonetics/double-metaphone';
 
 doubleMetaphone('Smith');
 >>> ['SM0', 'XMT']
