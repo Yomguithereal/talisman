@@ -9,7 +9,7 @@ import doubleMetaphone from 'talisman/phonetics/double-metaphone';
 import metaphone from 'talisman/phonetics/metaphone';
 import mra from 'talisman/phonetics/mra';
 import nysiis, {refined} from 'talisman/phonetics/nysiis';
-import soundex from 'talisman/phonetics/soundex';
+import soundex, {refined as refinedSoundex} from 'talisman/phonetics/soundex';
 
 const doubleMetaphoneRenderer = code => `[${code[0]}, ${code[1]}]`,
       doubleMetaphoneComparator = (a, b) => a[0] === b[0] || a[0] === b[1] || a[1] === b[0] || a[1] === b[1];
@@ -31,3 +31,4 @@ render(<PhoneticTester algorithm={mra} />, document.getElementById('mra-mount'))
 render(<PhoneticTester algorithm={nysiis} />, document.getElementById('nysiis-original-mount'));
 render(<PhoneticTester algorithm={refined} />, document.getElementById('nysiis-refined-mount'));
 render(<PhoneticTester algorithm={soundex} />, document.getElementById('soundex-mount'));
+render(<PhoneticTester algorithm={refinedSoundex} />, document.getElementById('soundex-refined-mount'));

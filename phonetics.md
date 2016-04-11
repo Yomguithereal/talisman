@@ -254,13 +254,26 @@ The Soundex algorithm, created by Robert Russell and Margaret Odell, is often co
 
 Note that it aims at matching anglo-saxons names and won't work well on dictionary words.
 
+You are also free to use the refined version of this algorithm, as found in the Apache projects.
+
 ```js
 import soundex from 'talisman/phonetics/soundex';
+// Alternatively
+import {refined} from 'talisman/phonetics/refined';
 
 soundex('Michael');
 >>> 'M240'
+
+refined('Michael');
+>>> 'M80307'
 ```
 
+*Original version*
+
 <div id="soundex-mount"></div>
+
+*Refined version*
+
+<div id="soundex-refined-mount"></div>
 
 <script src="{{ site.baseurl }}/assets/dist/phonetics.js"></script>
