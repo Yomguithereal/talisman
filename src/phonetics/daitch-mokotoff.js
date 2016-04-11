@@ -13,6 +13,8 @@
  */
 
 // TODO: optimize to cut O(n * m)
+// TODO: check the rules apply order
+// TODO: add some deburr
 const RULES = [
   [/^(AI|AJ|AY)/, 0, 1, null],
   [/^AU/, 0, 7, null],
@@ -21,11 +23,11 @@ const RULES = [
   [/^B/, 7, 7, 7],
   [/^CHS/, 5, 54, 54],
   [/^CH/, [5, 4], [5, 4], [5, 4]],
-  [/^CK/, [5, 45], [5, 45]],
+  [/^CK/, [5, 45], [5, 45], [5, 45]],
   [/^(CZ|CS|CSZ|CZS)/, 4, 4, 4],
   [/^C/, [5, 4], [5, 4], [5, 4]],
   [/^(DRZ|DRS|DS|DSH|DSZ|DZ|DZH|DZS)/, 4, 4, 4],
-  [/^(D|DT)/, 3, 3, 3],
+  [/^(DT|D)/, 3, 3, 3],
   [/^(EI|EJ|EY)/, 0, 1, null],
   [/^EU/, 1, 1, null],
   [/^Ę/, null, null, [6, null]],
@@ -35,7 +37,7 @@ const RULES = [
   [/^H/, 5, 5, null],
   [/^(IA|IE|IO|IU)/, 1, null, null],
   [/^I/, 0, null, null],
-  [/^J/, [1, 4], [1, 4], [1, 4]],
+  [/^J/, [1, 4], [null, 4], [null, 4]],
   [/^KS/, 5, 54, 54],
   [/^(KH|K)/, 5, 5, 5],
   [/^L/, 8, 8, 8],
@@ -43,8 +45,10 @@ const RULES = [
   [/^(M|N)/, 6, 6, 6],
   [/^(OI|OJ|OY)/, 0, 1, null],
   [/^O/, 0, null, null],
-  [/^(P|PF|PH)/, 7, 7, 7],
+  [/^(PF|PH|P)/, 7, 7, 7],
   [/^Q/, 5, 5, 5],
+
+  // NOTE: the original algo says (94, 4) but most implementations only 94
   [/^(RZ|RS)/, [94, 4], [94, 4], [94, 4]],
   [/^R/, 9, 9, 9],
   [/^(SCHTSCH|SCHTSH|SCHTCH|SHTCH|SHCH|SHTSH)/, 2, 4, 4],
@@ -77,6 +81,34 @@ function pad(code) {
   return (code + '000000').slice(0, 6);
 }
 
+function permutations(code) {
+  const codes = [''];
+
+  for (let i = 0, l = code.length; i < l; i++) {
+    const current = code[i];
+
+    if (typeof current === 'object') {
+
+      // Doubling the codes
+      for (let j = 0, m = codes.length; j < m; j++)
+        codes.push(codes[j]);
+
+      // Filling the codes
+      for (let j = 0, m = codes.length; j < m; j++) {
+        const s = current[(j < m / 2) ? 0 : 1];
+        codes[j] += (s !== null ? s : '');
+      }
+    }
+    else {
+
+      for (let j = 0, m = codes.length; j < m; j++)
+        codes[j] += current;
+    }
+  }
+
+  return codes;
+}
+
 const VOWELS = new Set(['A', 'E', 'I', 'O', 'U', 'Y']);
 
 /**
@@ -94,13 +126,22 @@ export default function daitchMokotoff(name) {
 
   const code = [];
 
-  let current = name.toUpperCase().replace(/[^A-ZĄĘŢ]/g, ''),
-      start = true;
+  let current = name
+    .toUpperCase()
+    .replace(/[^A-ZĄĘŢ]/g, '');
+
+  let start = true,
+      lastPattern;
 
   // Applying the rules
   while (current.length) {
     for (let i = 0, l = RULES.length; i < l; i++) {
-      const [pattern, firstLetter, vowelNext, usual] = RULES[i];
+      const [
+        pattern,
+        firstLetter,
+        vowelNext,
+        usual
+      ] = RULES[i];
 
       const match = current.match(pattern);
 
@@ -111,12 +152,13 @@ export default function daitchMokotoff(name) {
         if (start)
           correctCode = firstLetter;
 
-        if (VOWELS.has(current.charAt(match[0].length)))
+        else if (VOWELS.has(current.charAt(match[0].length)))
           correctCode = vowelNext;
 
-        if (correctCode !== null)
+        if (lastPattern !== pattern && correctCode !== null)
           code.push(correctCode);
 
+        lastPattern = pattern;
         current = current.slice(match[0].length);
         break;
       }
@@ -125,6 +167,5 @@ export default function daitchMokotoff(name) {
     start = false;
   }
 
-  // TODO: permutations
-  return code;
+  return permutations(code).map(pad);
 }
