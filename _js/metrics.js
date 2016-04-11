@@ -3,6 +3,8 @@ import {render} from 'react-dom';
 import MetricTester from './components/MetricTester.jsx';
 import MRATester from './components/MRATester.jsx';
 
+import canberra from 'talisman/metrics/canberra';
+import chebyshev from 'talisman/metrics/chebyshev';
 import cosine from 'talisman/metrics/cosine';
 import dice from 'talisman/metrics/dice';
 import euclidean, {squared} from 'talisman/metrics/euclidean';
@@ -17,7 +19,9 @@ import overlap from 'talisman/metrics/overlap';
 import sorensen from 'talisman/metrics/sorensen';
 import tversky from 'talisman/metrics/tversky';
 
+render(<MetricTester metric={canberra} enforceNumbers={true} sameDimension={true} />, document.getElementById('canberra-mount'));
 render(<MetricTester metric={cosine} enforceNumbers={true} sameDimension={true} />, document.getElementById('cosine-mount'));
+render(<MetricTester metric={chebyshev} enforceNumbers={true} sameDimension={true} />, document.getElementById('chebyshev-mount'));
 render(<MetricTester metric={dice} />, document.getElementById('dice-mount'));
 render(<MetricTester metric={euclidean} enforceNumbers={true} sameDimension={true} />, document.getElementById('euclidean-mount'));
 render(<MetricTester metric={squared} enforceNumbers={true} sameDimension={true} />, document.getElementById('euclidean-squared-mount'));
@@ -32,3 +36,4 @@ render(<MetricTester metric={overlap} />, document.getElementById('overlap-mount
 
 // TODO: custom Jaro-Winkler
 // TODO: Tversky
+// TODO: Minkowski

@@ -13,6 +13,8 @@ They range from computing the edit distance between two strings to retrieving th
 
 Modules under the `talisman/metrics` namespace:
 
+* [canberra](#canberra)
+* [chebyshev](#chebyshev)
 * [cosine](#cosine)
 * [dice](#dice)
 * [euclidean](#euclidean)
@@ -22,6 +24,7 @@ Modules under the `talisman/metrics` namespace:
 * [jaro-winkler](#jaro-winkler)
 * [levenshtein](#levenshtein)
 * [manhattan](#manhattan)
+* [minkowski](#minkowski)
 * [mra](#mra)
 * [overlap](#overlap)
 * [sorensen](#sorensen)
@@ -58,6 +61,40 @@ compare('healed', 'sealed');
 compare('healed', 'sold');
 >>> false
 ```
+
+<h2 id="canberra">canberra</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Canberra_distance">https://en.wikipedia.org/wiki/Canberra_distance</a>
+</span>
+
+The Canberra distance is a weighted version of the [Manhattan](#manhattan) distance.
+
+```js
+import canberra from 'talisman/metrics/canberra';
+
+canberra([1, 3], [4, 5]);
+>>> 0.85
+```
+
+<div id="canberra-mount"></div>
+
+<h2 id="chebyshev">chebyshev</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Chebyshev_distance">https://en.wikipedia.org/wiki/Chebyshev_distance</a>
+</span>
+
+The Chebyshev distance between two vectors is the greatest of their differences along any coordinate dimension.
+
+```js
+import chebyshev from 'talisman/metrics/chebyshev';
+
+chebyshev([1, 3], [4, 5]);
+>>> 3
+```
+
+<div id="chebyshev-mount"></div>
 
 <h2 id="cosine">cosine</h2>
 
@@ -324,6 +361,30 @@ manhattan([1, 3], [4, 5]);
 ```
 
 <div id="manhattan-mount"></div>
+
+<h2 id="minkowski">minkowski</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Minkowski_distance">https://en.wikipedia.org/wiki/Minkowski_distance</a>
+</span>
+
+The Minkowski distance is a generalization of both the [euclidean](#euclidean) & the [Manhattan](#manhattan) distance.
+
+```js
+import minkowski from 'talisman/metrics/minkowski';
+
+minkowski(1, [1, 3], [4, 5]);
+>>> 5
+
+const manhattan = minkowski.bind(null, 1);
+const euclidean = minkowski.bind(null, 2);
+```
+
+*Arguments*
+
+* **p** <code class="type">number</code> - value for p. Must >= 1.
+* **a** <code class="type">array</code> - the first vector.
+* **b** <code class="type">array</code> - the second vector.
 
 <h2 id="mra">mra</h2>
 

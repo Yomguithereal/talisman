@@ -33,6 +33,8 @@ The library's source code can be found on its Github [repository]({{ site.url }}
     <li>
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#canberra">canberra</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#chebyshev">chebyshev</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#dice">dice</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#euclidean">euclidean</a></em></li>
@@ -42,6 +44,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro-winkler">jaro-winkler</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#levenshtein">levenshtein</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#manhattan">manhattan</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#minkowski">minkowski</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#mra">mra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#overlap">overlap</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#sorensen">sorensen</a></em></li>
