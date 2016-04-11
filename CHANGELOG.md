@@ -5,6 +5,7 @@
 * Adding `phonetics/daitch-mokotoff`.
 * Adding `metrics/canberra`.
 * Adding `metrics/chebyshev`.
+* Adding the refined version of the Soundex.
 * Changing `phonetics/doubleMetaphone` to `phonetics/double-metaphone`.
 
 ## 0.1.0
