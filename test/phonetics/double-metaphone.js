@@ -1,10 +1,10 @@
 /**
- * Talisman phonetics/doubleMetaphone tests
+ * Talisman phonetics/double-metaphone tests
  * =========================================
  *
  */
 import assert from 'assert';
-import doubleMetaphone from '../../src/phonetics/doubleMetaphone';
+import doubleMetaphone from '../../src/phonetics/double-metaphone';
 
 describe('doubleMetaphone', function() {
 

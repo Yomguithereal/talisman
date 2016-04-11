@@ -1,7 +1,7 @@
 /* eslint no-constant-condition: 0 */
 /**
- * Talisman phonetics/doubleMetaphone
- * ===================================
+ * Talisman phonetics/double-metaphone
+ * ====================================
  *
  * The double metaphone algorithm.
  *

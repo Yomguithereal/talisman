@@ -5,6 +5,7 @@
 * Adding `phonetics/daitch-mokotoff`.
 * Adding `metrics/canberra`.
 * Adding `metrics/chebyshev`.
+* Changing `phonetics/doubleMetaphone` to `phonetics/double-metaphone`.
 
 ## 0.1.0
 
