@@ -28,6 +28,7 @@
     "cosine",
     "classifier",
     "clustering",
+    "daitch-mokotoff",
     "dice",
     "fuzzy",
     "hamming",

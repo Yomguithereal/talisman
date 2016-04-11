@@ -2,6 +2,7 @@
 
 ## 0.2.0
 
+* Adding `phonetics/daitch-mokotoff`.
 * Adding `metrics/canberra`.
 * Adding `metrics/chebyshev`.
 
