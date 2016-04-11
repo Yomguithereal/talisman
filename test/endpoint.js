@@ -23,6 +23,7 @@ describe('metrics', function() {
   require('./metrics/jaro-winkler.js');
   require('./metrics/levenshtein.js');
   require('./metrics/manhattan.js');
+  require('./metrics/minkowski.js');
   require('./metrics/mra.js');
   require('./metrics/overlap.js');
 });
