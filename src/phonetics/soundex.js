@@ -27,9 +27,7 @@ LETTERS.forEach((letter, i) => TRANSLATIONS[letter] = CODES[i]);
  * Helpers.
  */
 function pad(code) {
-  while (code.length < 4)
-    code += '0';
-  return code.slice(0, 4);
+  return (code + '0000').slice(0, 4);
 }
 
 /**
