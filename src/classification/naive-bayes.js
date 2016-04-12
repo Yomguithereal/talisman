@@ -46,6 +46,7 @@ export default class NaiveBayes {
     }
 
     // Then we can compute the summaries per label
+    // TODO: clean this up
     for (const label in byLabel) {
       const summary = {};
 

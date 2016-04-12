@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+* Adding some helpers to the `stats` namespace.
+
 ## 0.2.0
 
 * Adding `phonetics/daitch-mokotoff`.
