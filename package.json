@@ -17,7 +17,7 @@
     "url": "git+https://github.com/yomguithereal/talisman.git"
   },
   "talisman": {
-    "folders": "clustering helpers metrics phonetics regex stats stemmers tokenizers"
+    "folders": "classification clustering helpers metrics phonetics regex stats stemmers tokenizers"
   },
   "keywords": [
     "bayes",
