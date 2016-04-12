@@ -4,7 +4,13 @@
  *
  */
 import assert from 'assert';
-import {mean, variance, standardDeviation} from '../../src/stats';
+import {
+  mean,
+  variance,
+  stdev,
+  sampleVariance,
+  sampleStdev
+  } from '../../src/stats';
 
 describe('index', function() {
   const data = [13, 14, 15, 8, 20];
@@ -37,22 +43,30 @@ describe('index', function() {
     it('should be possible to pass the pre-computed mean.', function() {
       assert.strictEqual(variance(data, mean(data)), 14.8);
     });
+
+    it('should be possible to use Bessel\'s correction.', function() {
+      assert.strictEqual(sampleVariance(data), 18.5);
+    });
   });
 
-  describe('#.standardDeviation', function() {
+  describe('#.stdev', function() {
 
     it('should throw with an empty list.', function() {
       assert.throws(function() {
-        standardDeviation([]);
+        stdev([]);
       }, /empty/);
     });
 
     it('should correctly compute the standard deviation.', function() {
-      assert.strictEqual(standardDeviation(data), Math.sqrt(14.8));
+      assert.strictEqual(stdev(data), Math.sqrt(14.8));
     });
 
     it('should be possible to pass the pre-computed mean.', function() {
-      assert.strictEqual(standardDeviation(data, mean(data)), Math.sqrt(14.8));
+      assert.strictEqual(stdev(data, mean(data)), Math.sqrt(14.8));
+    });
+
+    it('should be possible to use Bessel\'s correction.', function() {
+      assert.strictEqual(sampleStdev(data), Math.sqrt(18.5));
     });
   });
 });
