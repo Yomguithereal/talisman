@@ -10,7 +10,7 @@ import {
   weightedRandomIndex
 } from '../../src/helpers';
 
-describe('helpers', function() {
+describe('index', function() {
 
   describe('#.seq', function() {
 

@@ -83,7 +83,7 @@ export default function soundex(name) {
  */
 export function refined(name) {
   if (typeof name !== 'string')
-    throw Error('talisman/phonetics/soundex:refined: the given name is not a string.');
+    throw Error('talisman/phonetics/soundex#refined: the given name is not a string.');
 
   name = deburr(name)
     .toUpperCase()
