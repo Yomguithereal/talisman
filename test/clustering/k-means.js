@@ -5,7 +5,6 @@
  */
 import {assert} from 'chai';
 import kMeans from '../../src/clustering/k-means';
-// import {distance as jaccard} from '../../src/metrics/jaccard';
 
 describe('k-means', function() {
 
@@ -45,23 +44,4 @@ describe('k-means', function() {
 
     assert.sameDeepMembers(clusters, [k1, k2]);
   });
-
-  // it('should be possible to use a custom distance metric.', function() {
-  //   const data = [
-  //     'Marie',
-  //     'Mary',
-  //     'Maria',
-  //     'Jean',
-  //     'Jeanne',
-  //     'Jeannie'
-  //   ].map(name => name.split('').map(c => c.charCodeAt(c)));
-
-  //   const clusters = kMeans(data, 2, {distance: jaccard, maxIterations: 100})
-  //     .map(cluster => cluster.map(c => String.fromCharCode(...c)));
-
-  //   const k1 = ['Marie', 'Mary', 'Maria'],
-  //         k2 = ['Jean', 'Jeanne', 'Jeannie'];
-
-  //   assert.sameDeepMembers(clusters, [k1, k2]);
-  // });
 });
