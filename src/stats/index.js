@@ -28,7 +28,7 @@ export function mean(sequence) {
 }
 
 /**
- * Function adding a value to the given mean.
+ * Function adding a value to the given mean in constant time.
  *
  * @param  {number}  previousMean - The mean to adjust.
  * @param  {number}  nbValues     - The number of values in the given mean.
@@ -40,7 +40,7 @@ export function addToMean(previousMean, nbValues, value) {
 }
 
 /**
- * Function substracting a value from the given mean.
+ * Function substracting a value from the given mean in constant time.
  *
  * @param  {number}  previousMean - The mean to adjust.
  * @param  {number}  nbValues     - The number of values in the given mean.
@@ -52,16 +52,16 @@ export function substractFromMean(previousMean, nbValues, value) {
 }
 
 /**
- * Function combining two means into one.
+ * Function combining two means into one in constant time.
  *
- * @param  {number}  a  - The first mean.
- * @param  {number}  na - Number of values for a.
- * @param  {number}  b  - The second mean.
- * @param  {number}  nb - Number of values for b.
- * @return {number}     - The new mean.
+ * @param  {number} ma - The first mean.
+ * @param  {number} na - Number of values for a.
+ * @param  {number} mb - The second mean.
+ * @param  {number} nb - Number of values for b.
+ * @return {number}    - The new mean.
  */
-export function combineMeans(a, na, b, nb) {
-  return (a * na + b * nb) / (na + nb);
+export function combineMeans(ma, na, mb, nb) {
+  return (ma * na + mb * nb) / (na + nb);
 }
 
 /**
@@ -92,7 +92,7 @@ function genericVariance(correction, sequence, precomputedMean = null) {
 }
 
 /**
- * Function computing the standard deviation of the givn sequence.
+ * Function computing the standard deviation of the given sequence.
  *
  * @param  {boolean} correction        - Whether to use Bessel's correction.
  * @param  {array}   sequence          - The sequence to process.
@@ -121,3 +121,24 @@ export {
   sampleVariance,
   sampleStdev
 };
+
+/**
+ * Function combining two variances into one in constant time.
+ *
+ * @param  {number} ma             - The first mean.
+ * @param  {number} va             - The first variance.
+ * @param  {number} na             - Number of values for a.
+ * @param  {number} mb             - The second mean.
+ * @param  {number} vb             - The second variance.
+ * @param  {number} nb             - Number of values for b.
+ * @param  {number} [combinedMean] - Precomputed combined mean.
+ * @return {number}                - The new mean.
+ */
+export function combineVariances(ma, va, na, mb, vb, nb, combinedMean = null) {
+  combinedMean = combinedMean || combineMeans(ma, na, mb, nb);
+
+  return (
+    na * (va + Math.pow(ma - combinedMean, 2)) +
+    nb * (vb + Math.pow(mb - combinedMean, 2))
+  ) / (na + nb);
+}

@@ -12,7 +12,8 @@ import {
   variance,
   stdev,
   sampleVariance,
-  sampleStdev
+  sampleStdev,
+  combineVariances
 } from '../../src/stats';
 
 describe('index', function() {
@@ -104,6 +105,18 @@ describe('index', function() {
 
     it('should be possible to use Bessel\'s correction.', function() {
       assert.strictEqual(sampleStdev(data), Math.sqrt(18.5));
+    });
+  });
+
+  describe('#.combineVariances', function() {
+    it('should correctly combine two means.', function() {
+      const before = [13, 14, 15, 8, 20],
+            after = [13, 14, 15, 8, 20, 54];
+
+      assert.strictEqual(
+        combineVariances(mean(before), variance(before), before.length, mean(after), variance(after), after.length),
+        variance(before.concat(after))
+      );
     });
   });
 });
