@@ -14,9 +14,9 @@ import {
   sampleVariance,
   sampleStdev,
   combineVariances
-} from '../../src/stats';
+} from '../../src/stats/descriptive';
 
-describe('index', function() {
+describe('descriptive', function() {
   const data = [13, 14, 15, 8, 20];
 
   describe('#.mean', function() {

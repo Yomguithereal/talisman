@@ -40,7 +40,7 @@ describe('phonetics', function() {
 });
 
 describe('stats', function() {
-  require('./stats');
+  require('./stats/descriptive');
   require('./stats/frequencies.js');
   require('./stats/ngrams.js');
   require('./stats/tfidf.js');

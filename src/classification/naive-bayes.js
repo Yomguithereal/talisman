@@ -6,7 +6,9 @@
  *
  * [Reference]: https://en.wikipedia.org/wiki/Naive_Bayes_classifier
  */
-import {mean, sampleStdev} from '../stats';
+import {vec} from '../helpers/vectors';
+import {mat} from '../helpers/matrices';
+import {mean, variance} from '../stats/descriptive';
 
 /**
  * The classifier's class.
@@ -22,6 +24,12 @@ export default class NaiveBayes {
    */
   reset() {
 
+    // Properties
+    this.classes = new Set();
+    this.classCounts = null;
+    this.classPriors = null;
+    this.theta = null;
+    this.sigma = null;
   }
 
   /**
@@ -38,6 +46,31 @@ export default class NaiveBayes {
     if (X.length !== y.length)
       throw Error('talisman/classification/naive-bayes: given arrays have different lengths.');
 
+    // Resetting internal state
+    this.reset();
+
+    // Espilon
+    const XVariances = X.map(variance),
+          maxVariance = Math.max(...XVariances);
+
+    const epsilon = 1e-9 * maxVariance;
+
+    // Finding unique classes
+    for (let i = 0, l = y.length; i < l; i++)
+      this.classes.add(y[0]);
+
+    // Computing some indicators
+    const nbFeatures = X[0].length,
+          nbClasses = this.classes.size;
+
+    this.theta = mat(nbClasses, nbFeatures);
+    this.sigma = mat(nbClasses, nbFeatures);
+    this.classCounts = vec(nbClasses);
+    this.classPriors = vec(nbClasses);
+
+    this.classes.forEach(cls => {
+
+    });
   }
 
   /**

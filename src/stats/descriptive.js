@@ -1,8 +1,8 @@
 /**
- * Talisman stats
- * ===============
+ * Talisman stats/descriptive
+ * ===========================
  *
- * The library's stats helpers.
+ * The library's descriptive stats helpers.
  */
 
 /**

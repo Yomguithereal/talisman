@@ -2,7 +2,7 @@
 
 ## 0.3.0
 
-* Adding some helpers to the `stats` namespace.
+* Adding some helpers to the `stats/descriptive` namespace.
 
 ## 0.2.0
 
