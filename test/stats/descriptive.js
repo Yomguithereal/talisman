@@ -5,6 +5,7 @@
  */
 import assert from 'assert';
 import {
+  sum,
   mean,
   addToMean,
   substractFromMean,
@@ -18,6 +19,12 @@ import {
 
 describe('descriptive', function() {
   const data = [13, 14, 15, 8, 20];
+
+  describe('#.sum', function() {
+    it('should correctly compute the sum.', function() {
+      assert.strictEqual(sum(data), 70);
+    });
+  });
 
   describe('#.mean', function() {
 

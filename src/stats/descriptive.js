@@ -6,6 +6,21 @@
  */
 
 /**
+ * Function computing the sum of the given sequence.
+ *
+ * @param  {array}  sequence - The sequence to process.
+ * @return {number}          - The sum.
+ */
+export function sum(sequence) {
+  let s = 0;
+
+  for (let i = 0, l = sequence.length; i < l; i++)
+    s += sequence[i];
+
+  return s;
+}
+
+/**
  * Function computing the mean of the given sequence.
  *
  * @param  {array}  sequence - The sequence to process.
@@ -19,12 +34,7 @@ export function mean(sequence) {
   if (!length)
     throw Error('talisman/stats#mean: the given list is empty.');
 
-  let sum = 0;
-
-  for (let i = 0; i < length; i++)
-    sum += sequence[i];
-
-  return sum / length;
+  return sum(sequence) / length;
 }
 
 /**
@@ -83,12 +93,12 @@ function genericVariance(correction, sequence, precomputedMean = null) {
   if (precomputedMean === null)
     precomputedMean = mean(sequence);
 
-  let sum = 0;
+  let s = 0;
 
   for (let i = 0; i < length; i++)
-    sum += Math.pow(sequence[i] - precomputedMean, 2);
+    s += Math.pow(sequence[i] - precomputedMean, 2);
 
-  return sum / (length - correction);
+  return s / (length - correction);
 }
 
 /**

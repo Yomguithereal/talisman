@@ -6,7 +6,6 @@
  *
  * [Reference]: https://en.wikipedia.org/wiki/Naive_Bayes_classifier
  */
-import {vec} from '../helpers/vectors';
 import {mat} from '../helpers/matrices';
 import {mean, variance} from '../stats/descriptive';
 
@@ -25,11 +24,8 @@ export default class NaiveBayes {
   reset() {
 
     // Properties
-    this.classes = new Set();
-    this.classCounts = null;
-    this.classPriors = null;
-    this.theta = null;
-    this.sigma = null;
+    this.classes = {};
+    this.dimensions = null;
   }
 
   /**
@@ -43,7 +39,9 @@ export default class NaiveBayes {
    * @throws {Error} - Will throw if X and y are not of same length.
    */
   fit(X, y) {
-    if (X.length !== y.length)
+    const nbVectors = X.length;
+
+    if (nbVectors !== y.length)
       throw Error('talisman/classification/naive-bayes: given arrays have different lengths.');
 
     // Resetting internal state
@@ -56,21 +54,31 @@ export default class NaiveBayes {
     const epsilon = 1e-9 * maxVariance;
 
     // Finding unique classes
-    for (let i = 0, l = y.length; i < l; i++)
-      this.classes.add(y[0]);
+    for (let i = 0, l = y.length; i < l; i++) {
+      const label = y[i];
 
-    // Computing some indicators
-    const nbFeatures = X[0].length,
-          nbClasses = this.classes.size;
+      this.classes[label] = this.classes[label] || {count: 0};
+      this.classes[label].count++;
+    }
 
-    this.theta = mat(nbClasses, nbFeatures);
-    this.sigma = mat(nbClasses, nbFeatures);
-    this.classCounts = vec(nbClasses);
-    this.classPriors = vec(nbClasses);
+    // Lengths
+    this.dimensions = X[0].length;
+    const nbClasses = Object.keys(this.classes).length;
 
-    this.classes.forEach(cls => {
+    // Building summaries
+    for (const k in this.classes) {
+      const c = this.classes[k];
+      c.matrix = mat(c.count, this.dimensions);
+    }
 
-    });
+    for (let i = 0; i < nbVectors; i++) {
+      const label = y[i],
+            c = this.classes[label];
+
+      for (let j = 0; j < this.dimensions; j++) {
+        c.matrix[j][i] = X[i][j];
+      }
+    }
   }
 
   /**
