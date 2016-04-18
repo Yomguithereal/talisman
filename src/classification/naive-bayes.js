@@ -23,9 +23,6 @@ export default class NaiveBayes {
    */
   reset() {
 
-    // Properties
-    this.classes = {};
-    this.dimensions = null;
   }
 
   /**
@@ -53,27 +50,30 @@ export default class NaiveBayes {
 
     const epsilon = 1e-9 * maxVariance;
 
+    // Classes
+    const classes = {};
+
     // Finding unique classes
     for (let i = 0, l = y.length; i < l; i++) {
       const label = y[i];
 
-      this.classes[label] = this.classes[label] || {count: 0};
-      this.classes[label].count++;
+      classes[label] = classes[label] || {count: 0};
+      classes[label].count++;
     }
 
     // Lengths
-    this.dimensions = X[0].length;
-    const nbClasses = Object.keys(this.classes).length;
+    const dimensions = X[0].length,
+          nbClasses = Object.keys(classes).length;
 
     // Building summaries
-    for (const k in this.classes) {
-      const c = this.classes[k];
-      c.matrix = mat(c.count, this.dimensions);
+    for (const k in classes) {
+      const c = classes[k];
+      c.matrix = mat(this.dimensions, c.count);
     }
 
     for (let i = 0; i < nbVectors; i++) {
       const label = y[i],
-            c = this.classes[label];
+            c = classes[label];
 
       for (let j = 0; j < this.dimensions; j++) {
         c.matrix[j][i] = X[i][j];
