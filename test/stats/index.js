@@ -8,6 +8,7 @@ import {
   mean,
   addToMean,
   substractFromMean,
+  combineMeans,
   variance,
   stdev,
   sampleVariance,
@@ -49,6 +50,18 @@ describe('index', function() {
       const afterMean = mean(after);
 
       assert.strictEqual(substractFromMean(afterMean, after.length, 54), mean(before));
+    });
+  });
+
+  describe('#.combineMeans', function() {
+    it('should correctly combine two means.', function() {
+      const before = [13, 14, 15, 8, 20],
+            after = [13, 14, 15, 8, 20, 54];
+
+      assert.strictEqual(
+        combineMeans(mean(before), before.length, mean(after), after.length),
+        mean(before.concat(after))
+      );
     });
   });
 

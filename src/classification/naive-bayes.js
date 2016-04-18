@@ -14,47 +14,30 @@ import {mean, sampleStdev} from '../stats';
  * @constructor
  */
 export default class NaiveBayes {
-  constructor() {
 
-    // Properties
-    this.summaries = {};
+  /**
+   * Method used to reset the internal state of the classifier.
+   *
+   * @return {NaiveBayes} - Returns itself for chaining.
+   */
+  reset() {
+
   }
 
   /**
    * Method used to train the classifier and taking the dataset's vectors &
    * labels.
    *
-   * @param  {array} vectors  - The dataset's vectors.
-   * @param  {array} labels   - The dataset's labels.
-   * @return {NaiveBayes}     - Returns itself for chaining.
+   * @param  {array} X    - Training vectors.
+   * @param  {array} y    - Target values.
+   * @return {NaiveBayes} - Returns itself for chaining.
    *
-   * @throws {Error} - Will throw if both given arrays are not of same length.
+   * @throws {Error} - Will throw if X and y are not of same length.
    */
-  fit(vectors, labels) {
-    if (vectors.length !== labels.length)
+  fit(X, y) {
+    if (X.length !== y.length)
       throw Error('talisman/classification/naive-bayes: given arrays have different lengths.');
 
-    // First we need to group the vector by labels
-    const byLabel = {};
-
-    for (let i = 0, l = labels.length; i < l; i++) {
-      const label = labels[i],
-            vector = vectors[i];
-
-      byLabel[label] = byLabel[label] || [];
-      byLabel[label].push(vector);
-    }
-
-    // Then we can compute the summaries per label
-    // TODO: clean this up
-    for (const label in byLabel) {
-      const summary = {};
-
-      summary.mean = mean(byLabel[label]);
-      summary.stdev = sampleStdev(byLabel[label], summary.mean);
-
-      this.summaries[label] = summary;
-    }
   }
 
   /**

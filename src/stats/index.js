@@ -52,6 +52,19 @@ export function substractFromMean(previousMean, nbValues, value) {
 }
 
 /**
+ * Function combining two means into one.
+ *
+ * @param  {number}  a  - The first mean.
+ * @param  {number}  na - Number of values for a.
+ * @param  {number}  b  - The second mean.
+ * @param  {number}  nb - Number of values for b.
+ * @return {number}     - The new mean.
+ */
+export function combineMeans(a, na, b, nb) {
+  return (a * na + b * nb) / (na + nb);
+}
+
+/**
  * Function computing the variance of the given sequence.
  *
  * @param  {boolean} correction        - Whether to use Bessel's correction.
