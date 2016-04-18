@@ -6,11 +6,13 @@
 import assert from 'assert';
 import {
   mean,
+  addToMean,
+  substractFromMean,
   variance,
   stdev,
   sampleVariance,
   sampleStdev
-  } from '../../src/stats';
+} from '../../src/stats';
 
 describe('index', function() {
   const data = [13, 14, 15, 8, 20];
@@ -25,6 +27,28 @@ describe('index', function() {
 
     it('should correctly compute the mean.', function() {
       assert.strictEqual(mean(data), 14);
+    });
+  });
+
+  describe('#.addToMean', function() {
+    it('should correctly add the new value.', function() {
+      const before = [13, 14, 15, 8, 20],
+            after = [13, 14, 15, 8, 20, 54];
+
+      const beforeMean = mean(before);
+
+      assert.strictEqual(addToMean(beforeMean, before.length, 54), mean(after));
+    });
+  });
+
+  describe('#.substractFromMean', function() {
+    it('should correctly substract the value.', function() {
+      const before = [13, 14, 15, 8, 20],
+            after = [13, 14, 15, 8, 20, 54];
+
+      const afterMean = mean(after);
+
+      assert.strictEqual(substractFromMean(afterMean, after.length, 54), mean(before));
     });
   });
 

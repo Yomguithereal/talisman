@@ -28,6 +28,30 @@ export function mean(sequence) {
 }
 
 /**
+ * Function adding a value to the given mean.
+ *
+ * @param  {number}  previousMean - The mean to adjust.
+ * @param  {number}  nbValues     - The number of values in the given mean.
+ * @param  {number}  value        - The value to add.
+ * @return {number}               - The mean.
+ */
+export function addToMean(previousMean, nbValues, value) {
+  return previousMean + ((value - previousMean) / (nbValues + 1));
+}
+
+/**
+ * Function substracting a value from the given mean.
+ *
+ * @param  {number}  previousMean - The mean to adjust.
+ * @param  {number}  nbValues     - The number of values in the given mean.
+ * @param  {number}  value        - The value to substract.
+ * @return {number}               - The mean.
+ */
+export function substractFromMean(previousMean, nbValues, value) {
+  return ((previousMean * nbValues) - value) / (nbValues - 1);
+}
+
+/**
  * Function computing the variance of the given sequence.
  *
  * @param  {boolean} correction        - Whether to use Bessel's correction.
