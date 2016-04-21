@@ -60,7 +60,7 @@ export default function kMeans(dataset, k = 8, options = {}) {
   let centroids = new Array(k);
 
   for (let i = 0; i < k; i++)
-    centroids[i] = sample(dataset).slice();
+    centroids[i] = sample(dataset);
 
   let iterations = 0,
       oldCentroids,
