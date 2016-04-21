@@ -13,11 +13,13 @@ import {mean, variance} from '../stats/descriptive';
 /**
  * The classifier's class.
  *
- * Note: add a way to import/export the computed model (#.toJSON also).
- *
  * @constructor
  */
 export default class NaiveBayes {
+  constructor(model = null) {
+    if (model)
+      this.import(model);
+  }
 
   /**
    * Method used to reset the internal state of the classifier.
@@ -35,8 +37,6 @@ export default class NaiveBayes {
   /**
    * Method used to train the classifier and taking the dataset's vectors &
    * labels.
-   *
-   * Note: Decide whether to add espilon to sigma in near future.
    *
    * @param  {array}      features    - Training vectors.
    * @param  {array}      labels      - Target values.
@@ -181,6 +181,45 @@ export default class NaiveBayes {
     }
 
     return bestClass;
+  }
+
+  /**
+   * Method used to export the classifier's model to a JSON representation.
+   *
+   * @return {object} - The JSON model.
+   */
+  export() {
+    return {
+      classes: this.classes,
+      priors: this.priors,
+      dimensions: this.dimensions,
+      theta: this.theta,
+      sigma: this.sigma
+    };
+  }
+
+  /**
+   * Method used to import a JSON model into the classifier.
+   *
+   * @param  {object}     model - The JSON model.
+   * @return {NaiveBayes}       - Returns itself for chaining.
+   */
+  import(model) {
+    this.reset();
+
+    this.classes = model.classes;
+    this.priors = model.priors;
+    this.dimensions = model.dimensions;
+    this.theta = model.theta;
+    this.sigma = model.sigma;
+  }
+
+  /**
+   * Method used to force JSON.stringify to format the classifier using the
+   * #.export method.
+   */
+  toJSON() {
+    return this.export();
   }
 }
 

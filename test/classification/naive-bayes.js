@@ -68,5 +68,28 @@ describe('naive-bayes', function() {
         classifier.predict([1, 2, 3]);
       }, /dimension/);
     });
+
+    it('should be possible to export the model.', function() {
+      const classifier = new NaiveBayes();
+      classifier.fit(features, labels);
+
+      const json = classifier.export();
+
+      assert.sameMembers(Object.keys(json), ['classes', 'priors', 'dimensions', 'theta', 'sigma']);
+      assert.deepEqual(JSON.parse(JSON.stringify(classifier)), classifier.export());
+    });
+
+    it('should be possible to import a model.', function() {
+      const classifier = new NaiveBayes();
+      classifier.fit(features, labels);
+
+      const otherClassifier = new NaiveBayes();
+      otherClassifier.import(classifier.export());
+
+      assert.strictEqual(otherClassifier.predict([-2, -1]), '1');
+      assert.strictEqual(otherClassifier.predict([1, 2]), '2');
+      assert.strictEqual(otherClassifier.predict([-45, -50]), '1');
+      assert.strictEqual(otherClassifier.predict([45, 76]), '2');
+    });
   });
 });
