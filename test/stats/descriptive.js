@@ -12,8 +12,6 @@ import {
   combineMeans,
   variance,
   stdev,
-  sampleVariance,
-  sampleStdev,
   combineVariances
 } from '../../src/stats/descriptive';
 
@@ -88,10 +86,6 @@ describe('descriptive', function() {
     it('should be possible to pass the pre-computed mean.', function() {
       assert.strictEqual(variance(data, mean(data)), 14.8);
     });
-
-    it('should be possible to use Bessel\'s correction.', function() {
-      assert.strictEqual(sampleVariance(data), 18.5);
-    });
   });
 
   describe('#.stdev', function() {
@@ -108,10 +102,6 @@ describe('descriptive', function() {
 
     it('should be possible to pass the pre-computed mean.', function() {
       assert.strictEqual(stdev(data, mean(data)), Math.sqrt(14.8));
-    });
-
-    it('should be possible to use Bessel\'s correction.', function() {
-      assert.strictEqual(sampleStdev(data), Math.sqrt(18.5));
     });
   });
 

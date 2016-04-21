@@ -77,14 +77,13 @@ export function combineMeans(ma, na, mb, nb) {
 /**
  * Function computing the variance of the given sequence.
  *
- * @param  {boolean} correction        - Whether to use Bessel's correction.
  * @param  {array}   sequence          - The sequence to process.
  * @param  {number}  [precomputedMean] - The pre-computed mean of the sequence.
  * @return {number}                    - The variance.
  *
  * @throws {Error} - The function expects a non-empty list.
  */
-function genericVariance(correction, sequence, precomputedMean = null) {
+export function variance(sequence, precomputedMean = null) {
   const length = sequence.length;
 
   if (!length)
@@ -98,39 +97,23 @@ function genericVariance(correction, sequence, precomputedMean = null) {
   for (let i = 0; i < length; i++)
     s += Math.pow(sequence[i] - precomputedMean, 2);
 
-  return s / (length - correction);
+  return s / length;
 }
 
 /**
  * Function computing the standard deviation of the given sequence.
  *
- * @param  {boolean} correction        - Whether to use Bessel's correction.
  * @param  {array}   sequence          - The sequence to process.
  * @param  {number}  [precomputedMean] - The pre-computed mean of the sequence.
  * @return {number}                    - The standard deviation.
  *
  * @throws {Error} - The function expects a non-empty list.
  */
-function genericStdev(correction, sequence, precomputedMean = null) {
-  const v = genericVariance(correction, sequence, precomputedMean);
+export function stdev(sequence, precomputedMean = null) {
+  const v = variance(sequence, precomputedMean);
 
   return Math.sqrt(v);
 }
-
-/**
- * Exporting variance & standard-deviation related functions.
- */
-const variance = genericVariance.bind(null, false),
-      stdev = genericStdev.bind(null, false),
-      sampleVariance = genericVariance.bind(null, true),
-      sampleStdev = genericStdev.bind(null, true);
-
-export {
-  variance,
-  stdev,
-  sampleVariance,
-  sampleStdev
-};
 
 /**
  * Function combining two variances into one in constant time.
