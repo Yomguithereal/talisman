@@ -52,6 +52,7 @@ const distance = (x, y) => 1 - dice(x, y);
 export default dice;
 export {
   dice as index,
+  dice as coefficient,
   dice as similarity,
   distance
 };

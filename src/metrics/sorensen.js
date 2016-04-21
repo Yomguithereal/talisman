@@ -14,14 +14,15 @@
  * analyses of the vegetation on Danish commons".
  * Kongelige Danske Videnskabernes Selskab 5 (4): 1–34.
  */
-import dice, {index, similarity, distance} from './dice';
+import dice, {distance} from './dice';
 
 /**
  * The Sorensen index is the same as the Dice one.
  */
 export default dice;
 export {
-  index,
-  similarity,
+  dice as index,
+  dice as coefficient,
+  dice as similarity,
   distance
 };
