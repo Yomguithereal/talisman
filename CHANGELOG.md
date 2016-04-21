@@ -2,6 +2,7 @@
 
 ## 0.3.0
 
+* Adding the `classification/naive-bayes` namespace.
 * Adding the `stats/descriptive` namespace.
 * Improving `metrics/levenshtein` performance.
 

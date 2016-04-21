@@ -5,7 +5,12 @@
  */
 describe('helpers', function() {
   require('./helpers');
+  require('./helpers/matrices.js');
   require('./helpers/vectors.js');
+});
+
+describe('classification', function() {
+  require('./classification/naive-bayes.js');
 });
 
 describe('clustering', function() {

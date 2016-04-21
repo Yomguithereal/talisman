@@ -20,3 +20,25 @@ export function mat(m, n) {
 
   return matrix;
 }
+
+/**
+ * Function transposing the given matrix.
+ *
+ * @param  {array} target - The target matrix.
+ * @return {array}        - The transposed matrix.
+ */
+export function transpose(target) {
+  const m = target.length,
+        n = target[0].length;
+
+  const transposed = new Array(n);
+
+  for (let j = 0; j < n; j++) {
+    transposed[j] = new Array(m);
+
+    for (let i = 0; i < m; i++)
+      transposed[j][i] = target[i][j];
+  }
+
+  return transposed;
+}
