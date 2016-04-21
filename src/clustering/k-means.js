@@ -14,9 +14,6 @@ import sample from 'lodash/sample';
  * Helpers.
  */
 function compareCentroids(a, b) {
-  if (!b)
-    return false;
-
   for (let i = 0, l = a.length; i < l; i++) {
     for (let j = 0, m = a[i].length; j < m; j++) {
       if (a[i][j] !== b[i][j])
@@ -72,7 +69,7 @@ export default function kMeans(dataset, k = 8, options = {}) {
   // While we don't converge, or haven't performed the allowed iterations
   while (
     iterations < maxIterations &&
-    !compareCentroids(centroids, oldCentroids)
+    (!oldCentroids || !compareCentroids(centroids, oldCentroids))
   ) {
 
     // Initializing the clusters
