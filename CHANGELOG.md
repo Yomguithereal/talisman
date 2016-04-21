@@ -2,7 +2,8 @@
 
 ## 0.3.0
 
-* Adding some helpers to the `stats/descriptive` namespace.
+* Adding the `stats/descriptive` namespace.
+* Improving `metrics/levenshtein` performance.
 
 ## 0.2.0
 

@@ -29,33 +29,43 @@ export default function levenshtein(a, b) {
   if (!b.length)
     return a.length;
 
-  const matrix = [];
+  const previousRow = new Array(b.length + 1);
 
-  // Incrementing the cells horizontally
-  for (let i = 0, l = b.length; i <= l; i++)
-    matrix[i] = [i];
+  for (let i = 0, l = previousRow.length; i < l; i++)
+    previousRow[i] = i;
 
-  // Incrementing the cells vertically
-  for (let i = 0, l = a.length; i <= l; i++)
-    matrix[0][i] = i;
+  let nextColumn,
+      currentColumn,
+      buffer,
+      j;
 
-  // Filling the matrix
-  for (let i = 1, l = b.length; i <= l; i++) {
-    for (let j = 1, m = a.length; j <= m; j++) {
-      if (b[i - 1] === a[j - 1]) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      }
-      else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j] + 1
-        );
-      }
+  for (let i = 0, l = a.length; i < l; i++) {
+    nextColumn = i + 1;
+
+    const m = b.length;
+    for (j = 0; j < m; j++) {
+      currentColumn = nextColumn;
+
+      // Substitution
+      nextColumn = previousRow[j] + (a[i] === b[j] ? 0 : 1);
+
+      // Insertion
+      buffer = currentColumn + 1;
+      if (nextColumn > buffer)
+        nextColumn = buffer;
+
+      // Deletion
+      buffer = previousRow[j + 1] + 1;
+      if (nextColumn > buffer)
+        nextColumn = buffer;
+
+      previousRow[j] = currentColumn;
     }
+
+    previousRow[j] = nextColumn;
   }
 
-  return matrix[b.length][a.length];
+  return nextColumn;
 }
 
 /**
