@@ -1,21 +1,21 @@
 /**
- * Talisman classification/naive-bayes
- * ====================================
+ * Talisman classification/naive-bayes/gaussian
+ * =============================================
  *
- * Implementation of the Naive-Bayes classifier.
+ * Implementation of the Gaussian Naive-Bayes classifier.
  *
  * [Reference]: https://en.wikipedia.org/wiki/Naive_Bayes_classifier
  */
-import {vec} from '../helpers/vectors';
-import {mat} from '../helpers/matrices';
-import {mean, variance} from '../stats/descriptive';
+import {vec} from '../../helpers/vectors';
+import {mat} from '../../helpers/matrices';
+import {mean, variance} from '../../stats/descriptive';
 
 /**
- * The classifier's class.
+ * The Gaussian Naive Bayes classifier.
  *
  * @constructor
  */
-export default class NaiveBayes {
+export default class GaussianNaiveBayes {
   constructor(model = null) {
     if (model)
       this.import(model);
@@ -222,8 +222,3 @@ export default class NaiveBayes {
     return this.export();
   }
 }
-
-/**
- * Exporting alias.
- */
-export {NaiveBayes as GaussianNaiveBayes};
