@@ -25,6 +25,23 @@ export function vec(n, fill) {
 }
 
 /**
+ * Function adding two vectors.
+ *
+ * @param  {array} a - The first vector.
+ * @param  {array} b - The second vector.
+ * @return {array}   - The resulting vector.
+ */
+export function add(a, b) {
+  const dimensions = a.length,
+        vector = vec(dimensions);
+
+  for (let i = 0; i < dimensions; i++)
+    vector[i] = a[i] + b[i];
+
+  return vector;
+}
+
+/**
  * Function returning the mean of a list of vectors.
  *
  * @param  {array} vectors - The list of vectors to process.

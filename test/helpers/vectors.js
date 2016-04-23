@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import {dot, mean, vec} from '../../src/helpers/vectors';
+import {add, dot, mean, vec} from '../../src/helpers/vectors';
 
 describe('vectors', function() {
 
@@ -12,6 +12,29 @@ describe('vectors', function() {
     it('should create vectors of n dimensions.', function() {
       assert.deepEqual(vec(2, 0), [0, 0]);
       assert.deepEqual(vec(5, null), [null, null, null, null, null]);
+    });
+  });
+
+  describe('#.add', function() {
+    it('should correctly add two vectors.', function() {
+      const tests = [
+        {
+          vectors: [[1], [2]],
+          result: [3]
+        },
+        {
+          vectors: [[1, 2], [2, 3]],
+          result: [3, 5]
+        },
+        {
+          vectors: [[1, 3, 2], [4, 5, 7]],
+          result: [5, 8, 9]
+        }
+      ];
+
+      tests.forEach(function({vectors, result}) {
+        assert.deepEqual(add(...vectors), result);
+      });
     });
   });
 
