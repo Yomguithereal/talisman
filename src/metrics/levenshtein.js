@@ -21,6 +21,9 @@ import {seq} from '../helpers';
  * @return {number}       - The Levenshtein distance between a & b.
  */
 export default function levenshtein(a, b) {
+  if (a === b)
+    return 0;
+
   a = seq(a);
   b = seq(b);
 
