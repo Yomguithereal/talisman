@@ -32,7 +32,7 @@ export function mean(sequence) {
   const length = sequence.length;
 
   if (!length)
-    throw Error('talisman/stats#mean: the given list is empty.');
+    throw Error('talisman/stats/descriptive#mean: the given list is empty.');
 
   return sum(sequence) / length;
 }
@@ -77,25 +77,23 @@ export function combineMeans(ma, na, mb, nb) {
 /**
  * Function computing the variance of the given sequence.
  *
- * @param  {array}   sequence          - The sequence to process.
- * @param  {number}  [precomputedMean] - The pre-computed mean of the sequence.
- * @return {number}                    - The variance.
+ * @param  {array}  sequence - The sequence to process.
+ * @return {number}          - The variance.
  *
  * @throws {Error} - The function expects a non-empty list.
  */
-export function variance(sequence, precomputedMean = null) {
+export function variance(sequence) {
   const length = sequence.length;
 
   if (!length)
-    throw Error('talisman/stats#variance: the given list is empty.');
+    throw Error('talisman/stats/descriptive#variance: the given list is empty.');
 
-  if (precomputedMean === null)
-    precomputedMean = mean(sequence);
+  const m = mean(sequence);
 
   let s = 0;
 
   for (let i = 0; i < length; i++)
-    s += Math.pow(sequence[i] - precomputedMean, 2);
+    s += Math.pow(sequence[i] - m, 2);
 
   return s / length;
 }
@@ -103,14 +101,13 @@ export function variance(sequence, precomputedMean = null) {
 /**
  * Function computing the standard deviation of the given sequence.
  *
- * @param  {array}   sequence          - The sequence to process.
- * @param  {number}  [precomputedMean] - The pre-computed mean of the sequence.
- * @return {number}                    - The standard deviation.
+ * @param  {array}  sequence - The sequence to process.
+ * @return {number}          - The standard deviation.
  *
  * @throws {Error} - The function expects a non-empty list.
  */
-export function stdev(sequence, precomputedMean = null) {
-  const v = variance(sequence, precomputedMean);
+export function stdev(sequence) {
+  const v = variance(sequence);
 
   return Math.sqrt(v);
 }
@@ -118,17 +115,16 @@ export function stdev(sequence, precomputedMean = null) {
 /**
  * Function combining two variances into one in constant time.
  *
- * @param  {number} ma             - The first mean.
- * @param  {number} va             - The first variance.
- * @param  {number} na             - Number of values for a.
- * @param  {number} mb             - The second mean.
- * @param  {number} vb             - The second variance.
- * @param  {number} nb             - Number of values for b.
- * @param  {number} [combinedMean] - Precomputed combined mean.
- * @return {number}                - The new mean.
+ * @param  {number} ma - The first mean.
+ * @param  {number} va - The first variance.
+ * @param  {number} na - Number of values for a.
+ * @param  {number} mb - The second mean.
+ * @param  {number} vb - The second variance.
+ * @param  {number} nb - Number of values for b.
+ * @return {number}    - The new mean.
  */
-export function combineVariances(ma, va, na, mb, vb, nb, combinedMean = null) {
-  combinedMean = combinedMean || combineMeans(ma, na, mb, nb);
+export function combineVariances(ma, va, na, mb, vb, nb) {
+  const combinedMean = combineMeans(ma, na, mb, nb);
 
   return (
     na * (va + Math.pow(ma - combinedMean, 2)) +

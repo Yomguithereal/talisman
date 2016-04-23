@@ -92,7 +92,7 @@ export default class NaiveBayes {
     }
 
     // Epsilon
-    const maxVariance = Math.max(...featureSets.map(f => variance(f))),
+    const maxVariance = Math.max(...featureSets.map(variance)),
           espilon = 1e-9 * maxVariance;
 
     // Computing means & variances
@@ -105,7 +105,7 @@ export default class NaiveBayes {
 
       for (let i = 0; i < dimensions; i++) {
         theta[k][i] = mean(matrices[k][i]);
-        sigma[k][i] = variance(matrices[k][i], theta[k][i]) + espilon;
+        sigma[k][i] = variance(matrices[k][i]) + espilon;
       }
     }
 

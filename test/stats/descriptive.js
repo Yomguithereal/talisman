@@ -1,6 +1,6 @@
 /**
- * Talisman stats tests
- * =====================
+ * Talisman stats/descriptive tests
+ * =================================
  *
  */
 import assert from 'assert';
@@ -82,10 +82,6 @@ describe('descriptive', function() {
     it('should correctly compute the variance.', function() {
       assert.strictEqual(variance(data), 14.8);
     });
-
-    it('should be possible to pass the pre-computed mean.', function() {
-      assert.strictEqual(variance(data, mean(data)), 14.8);
-    });
   });
 
   describe('#.stdev', function() {
@@ -98,10 +94,6 @@ describe('descriptive', function() {
 
     it('should correctly compute the standard deviation.', function() {
       assert.strictEqual(stdev(data), Math.sqrt(14.8));
-    });
-
-    it('should be possible to pass the pre-computed mean.', function() {
-      assert.strictEqual(stdev(data, mean(data)), Math.sqrt(14.8));
     });
   });
 
