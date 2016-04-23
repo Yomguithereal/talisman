@@ -98,7 +98,7 @@ describe('naive-bayes', function() {
     });
   });
 
-  // describe.skip('multinomial', function() {
+  // describe.only('multinomial', function() {
   //   let features = [
   //     'Love is in the air.',
   //     'The air is brimming with romance.',
@@ -110,7 +110,6 @@ describe('naive-bayes', function() {
 
   //   // Transforming features
   //   features = features
-  //     .map(s => s.toLowerCase())
   //     .map(words)
   //     .map(ws => ws.map(porter));
 
