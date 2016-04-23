@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import {add, dot, mean, vec} from '../../src/helpers/vectors';
+import {add, dot, mean, scale, vec} from '../../src/helpers/vectors';
 
 describe('vectors', function() {
 
@@ -34,6 +34,29 @@ describe('vectors', function() {
 
       tests.forEach(function({vectors, result}) {
         assert.deepEqual(add(...vectors), result);
+      });
+    });
+  });
+
+  describe('#.scale', function() {
+    it('should correctly scale vectors.', function() {
+      const tests = [
+        {
+          args: [[4], 2],
+          result: [8]
+        },
+        {
+          args: [[1, 2], 2],
+          result: [2, 4]
+        },
+        {
+          args: [[1, 3, 2], 3],
+          result: [3, 9, 6]
+        }
+      ];
+
+      tests.forEach(function({args, result}) {
+        assert.deepEqual(scale(...args), result);
       });
     });
   });

@@ -42,6 +42,23 @@ export function add(a, b) {
 }
 
 /**
+ * Function multiplying a vector & a scalar.
+ *
+ * @param  {array} v - The first vector.
+ * @param  {array} s - The scalar.
+ * @return {array}   - The resulting vector.
+ */
+export function scale(v, s) {
+  const dimensions = v.length,
+        vector = vec(dimensions);
+
+  for (let i = 0; i < dimensions; i++)
+    vector[i] = v[i] * s;
+
+  return vector;
+}
+
+/**
  * Function returning the mean of a list of vectors.
  *
  * @param  {array} vectors - The list of vectors to process.
