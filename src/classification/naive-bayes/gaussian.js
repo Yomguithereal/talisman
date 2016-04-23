@@ -16,10 +16,6 @@ import {mean, variance} from '../../stats/descriptive';
  * @constructor
  */
 export default class GaussianNaiveBayes {
-  constructor(model = null) {
-    if (model)
-      this.import(model);
-  }
 
   /**
    * Method used to reset the internal state of the classifier.
@@ -32,6 +28,8 @@ export default class GaussianNaiveBayes {
     this.dimensions = 0;
     this.theta = null;
     this.sigma = null;
+
+    return this;
   }
 
   /**
@@ -48,7 +46,7 @@ export default class GaussianNaiveBayes {
     const nbVectors = features.length;
 
     if (nbVectors !== labels.length)
-      throw Error('talisman/classification/naive-bayes: given arrays have different lengths.');
+      throw Error('talisman/classification/naive-bayes/gaussian.fit: given arrays have different lengths.');
 
     // Resetting internal state
     this.reset();
@@ -129,10 +127,10 @@ export default class GaussianNaiveBayes {
    */
   jointLogLikelihood(vector) {
     if (!this.theta)
-      throw Error('talisman/classification/naive-bayes.probabilities: the classifier is not yet fitted');
+      throw Error('talisman/classification/naive-bayes/gaussian.probabilities: the classifier is not yet fitted');
 
     if (vector.length !== this.dimensions)
-      throw Error(`talisman/classification/naive-bayes.probabilities: the given vector is not of correct dimension (${vector.length} instead of ${this.dimensions}).`);
+      throw Error(`talisman/classification/naive-bayes/gaussian.probabilities: the given vector is not of correct dimension (${vector.length} instead of ${this.dimensions}).`);
 
     const probabilities = {};
 

@@ -9,6 +9,7 @@ import porter from '../../src/stemmers/porter';
 describe('porter', function() {
   it('should correctly stem the given words.', function() {
     const tests = [
+      ['you', 'you'],
       ['catastrophe', 'catastroph'],
       ['anathema', 'anathema'],
       ['mathematics', 'mathemat'],

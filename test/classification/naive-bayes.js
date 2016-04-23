@@ -4,7 +4,12 @@
  *
  */
 import {assert} from 'chai';
-import NaiveBayes from '../../src/classification/naive-bayes';
+import NaiveBayes, {
+  GaussianNaiveBayes,
+  MultinomialNaiveBayes
+} from '../../src/classification/naive-bayes';
+import porter from '../../src/stemmers/porter';
+import {default as words} from '../../src/tokenizers/words/naive';
 
 describe('naive-bayes', function() {
 
@@ -80,10 +85,10 @@ describe('naive-bayes', function() {
     });
 
     it('should be possible to import a model.', function() {
-      const classifier = new NaiveBayes();
+      const classifier = new GaussianNaiveBayes();
       classifier.fit(features, labels);
 
-      const otherClassifier = new NaiveBayes();
+      const otherClassifier = new GaussianNaiveBayes();
       otherClassifier.import(classifier.export());
 
       assert.strictEqual(otherClassifier.predict([-2, -1]), '1');
@@ -92,4 +97,34 @@ describe('naive-bayes', function() {
       assert.strictEqual(otherClassifier.predict([45, 76]), '2');
     });
   });
+
+  // describe.skip('multinomial', function() {
+  //   let features = [
+  //     'Love is in the air.',
+  //     'The air is brimming with romance.',
+  //     'Oh Romeo, do you love me?',
+  //     'I am the best accountant.',
+  //     'Accounting and consulting are what I do.',
+  //     'Consulting you is so much fun.'
+  //   ];
+
+  //   // Transforming features
+  //   features = features
+  //     .map(s => s.toLowerCase())
+  //     .map(words)
+  //     .map(ws => ws.map(porter));
+
+  //   const labels = [
+  //     'lover',
+  //     'lover',
+  //     'lover',
+  //     'accountant',
+  //     'accountant',
+  //     'accountant'
+  //   ];
+
+  //   const classifier = new MultinomialNaiveBayes();
+  //   classifier.fit(features, labels);
+  //   console.log(classifier);
+  // });
 });

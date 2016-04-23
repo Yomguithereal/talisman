@@ -7,6 +7,7 @@
 * Adding the `stats/descriptive` namespace.
 * Adding the `stats/inferential` namespace.
 * Improving `metrics/levenshtein` performance.
+* Fixing a bug with `stemmers/porter`.
 
 ## 0.2.0
 

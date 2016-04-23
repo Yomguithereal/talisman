@@ -173,7 +173,7 @@ export default function porter(word) {
 
   // If the first letter is a Y, we uppercase it so it's not treated as vowel
   if (word[0] === 'y')
-    word[0] = 'Y';
+    word = 'Y' + word.slice(1);
 
   //-- Step 1a
   word = word.replace(STEP1a1, '$1$2');
