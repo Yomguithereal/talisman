@@ -9,6 +9,7 @@ import levenshtein from '../../src/metrics/levenshtein';
 describe('levenshtein', function() {
   it('should correctly compute the Levenshtein distance.', function() {
     const tests = [
+      [['b', 'o', 'o', 'k'], ['b', 'a', 'c', 'k'], 2],
       ['book', 'back', 2],
       ['hello', 'helo', 1],
       ['good sir', 'baal', 8],

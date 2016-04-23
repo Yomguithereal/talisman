@@ -11,21 +11,17 @@
  * correcting deletions, insertions, and reversals".
  * Soviet Physics Doklady 10 (8): 707–710.
  */
-import {seq} from '../helpers';
 
 /**
  * Function returning the Levenshtein distance between two sequences.
  *
- * @param  {mixed}  a     - The first sequence to process.
- * @param  {mixed}  b     - The second sequence to process.
- * @return {number}       - The Levenshtein distance between a & b.
+ * @param  {mixed}  a - The first sequence to process.
+ * @param  {mixed}  b - The second sequence to process.
+ * @return {number}   - The Levenshtein distance between a & b.
  */
 export default function levenshtein(a, b) {
   if (a === b)
     return 0;
-
-  a = seq(a);
-  b = seq(b);
 
   if (!a.length)
     return b.length;
