@@ -4,7 +4,11 @@
  *
  * Functions computing the Damerau-Levenshtein distance.
  *
- * [Reference]: https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
+ *
+ * [Original Code]:
+ * http://blog.softwx.net/2015/01/optimizing-damerau-levenshtein_15.html
  */
 
 /**
@@ -117,17 +121,3 @@ export default function damerauLevenshtein(a, b) {
 
   return current;
 }
-
-/**
- * Function returning the restricted Damerau-Levenshtein distance between two
- * sequences, meaning that the function will stop if the distance is greater
- * than the imposed limit and return -1 instead.
- *
- * @param  {number} limit - The maximum distance.
- * @param  {mixed}  a     - The first sequence to process.
- * @param  {mixed}  b     - The second sequence to process.
- * @return {number}       - The Damerau-Levenshtein distance between a & b.
- */
-// export function restricted(limit, a, b) {
-
-// }
