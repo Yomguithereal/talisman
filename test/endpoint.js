@@ -11,6 +11,7 @@ describe('helpers', function() {
 
 describe('classification', function() {
   require('./classification/naive-bayes.js');
+  require('./classification/perceptron.js');
 });
 
 describe('clustering', function() {

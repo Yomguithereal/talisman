@@ -3,6 +3,7 @@
 ## 0.3.0
 
 * Adding the `classification/naive-bayes` namespace.
+* Adding the `classification/perceptron` namespace.
 * Adding the `metrics/damerau-levenshtein` namespace.
 * Adding the `stats/descriptive` namespace.
 * Adding the `stats/inferential` namespace.
