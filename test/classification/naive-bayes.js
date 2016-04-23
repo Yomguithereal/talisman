@@ -4,10 +4,7 @@
  *
  */
 import {assert} from 'chai';
-import NaiveBayes, {
-  GaussianNaiveBayes,
-  MultinomialNaiveBayes
-} from '../../src/classification/naive-bayes';
+import GaussianNaiveBayes from '../../src/classification/naive-bayes/gaussian';
 import porter from '../../src/stemmers/porter';
 import {default as words} from '../../src/tokenizers/words/naive';
 
@@ -19,13 +16,13 @@ describe('naive-bayes', function() {
 
     it('should throw if features & labels don\'t have the same length.', function() {
       assert.throws(function() {
-        const classifier = new NaiveBayes();
+        const classifier = new GaussianNaiveBayes();
         classifier.fit([[1, 2], [2, 1]], [1]);
       }, /length/);
     });
 
     it('should correctly compute joint log likelihood.', function() {
-      const classifier = new NaiveBayes();
+      const classifier = new GaussianNaiveBayes();
       classifier.fit(features, labels);
 
       const probabilities = classifier.jointLogLikelihood([-2, -1]);
@@ -35,7 +32,7 @@ describe('naive-bayes', function() {
     });
 
     it('should correctly predict.', function() {
-      const classifier = new NaiveBayes();
+      const classifier = new GaussianNaiveBayes();
       classifier.fit(features, labels);
 
       assert.strictEqual(classifier.predict([-2, -1]), '1');
@@ -45,7 +42,7 @@ describe('naive-bayes', function() {
     });
 
     it('should also work when hitting extreme numerical cases.', function() {
-      const classifier = new NaiveBayes();
+      const classifier = new GaussianNaiveBayes();
       classifier.fit(
         [[-1, -2, -5], [45, 6, 97]],
         [1, 2]
@@ -61,21 +58,21 @@ describe('naive-bayes', function() {
 
     it('should throw if you try to predict before fitting.', function() {
       assert.throws(function() {
-        const classifier = new NaiveBayes();
+        const classifier = new GaussianNaiveBayes();
         classifier.predict([1, 2]);
       }, /fitted/);
     });
 
     it('should throw if you try to predict a vector of different dimension.', function() {
       assert.throws(function() {
-        const classifier = new NaiveBayes();
+        const classifier = new GaussianNaiveBayes();
         classifier.fit(features, labels);
         classifier.predict([1, 2, 3]);
       }, /dimension/);
     });
 
     it('should be possible to export the model.', function() {
-      const classifier = new NaiveBayes();
+      const classifier = new GaussianNaiveBayes();
       classifier.fit(features, labels);
 
       const json = classifier.export();
