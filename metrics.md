@@ -16,6 +16,7 @@ Modules under the `talisman/metrics` namespace:
 * [canberra](#canberra)
 * [chebyshev](#chebyshev)
 * [cosine](#cosine)
+* [damerau-levenshtein](#damerau-levenshtein)
 * [dice](#dice)
 * [euclidean](#euclidean)
 * [hamming](#hamming)
@@ -116,6 +117,23 @@ distance(a, b) === 1 - similarity(a, b);
 ```
 
 <div id="cosine-mount"></div>
+
+<h2 id="damerau-levenshtein">damerau-levenshtein</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance">https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance</a>
+</span>
+
+The Damerau-Levenshtein is an improvement over the classical [Levenshtein](#levenshtein) distance. I.e., as well as additions, deletions & substitions, this variant handle transpositions.
+
+```js
+import damerauLevenshtein from 'talisman/metrics/damerau-levenshtein';
+
+damerauLevenshtein('this', 'tihs');
+>>> 1
+```
+
+<div id="damerau-levenshtein-mount"></div>
 
 <h2 id="dice">dice</h2>
 

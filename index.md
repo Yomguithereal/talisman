@@ -36,6 +36,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#canberra">canberra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#chebyshev">chebyshev</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#damerau-levenshtein">damerau-levenshtein</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#dice">dice</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#euclidean">euclidean</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#hamming">hamming</a></em></li>
