@@ -124,7 +124,9 @@ distance(a, b) === 1 - similarity(a, b);
   Reference: <a href="https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance">https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance</a>
 </span>
 
-The Damerau-Levenshtein is an improvement over the classical [Levenshtein](#levenshtein) distance. I.e., as well as additions, deletions & substitions, this variant handle transpositions.
+The Damerau-Levenshtein is an improvement over the classical [Levenshtein](#levenshtein) distance.
+
+That is to say this variant will handle transpositions as well as the usual additions, deletions & substitions.
 
 ```js
 import damerauLevenshtein from 'talisman/metrics/damerau-levenshtein';

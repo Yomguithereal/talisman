@@ -22,6 +22,33 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 ## List of available modules
 
+*Top level*
+
+<div class="modules-list">
+  <ul>
+    <li>
+      <a href="{{ site.baseurl }}/clustering">clustering</a>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/metrics">metrics</a>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/phonetics">phonetics</a>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/stats">stats</a>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/stemmers">stemmers</a>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
+    </li>
+  </ul>
+</div>
+
+*Full list*
+
 <div class="modules-list">
   <ul>
     <li>
