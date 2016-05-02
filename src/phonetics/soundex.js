@@ -10,25 +10,21 @@
  * Robert C. Russel
  * Margaret King Odell
  */
-import {squeeze} from '../helpers';
+import {translation, squeeze} from '../helpers';
 import deburr from 'lodash/deburr';
 
 /**
  * Translations.
  */
-const LETTERS = 'AEIOUYWHBPFVCSKGJQXZDTLMNR'.split(''),
-      CODES = '000000DD111122222222334556'.split('');
+const TRANSLATIONS = translation(
+  'AEIOUYWHBPFVCSKGJQXZDTLMNR',
+  '000000DD111122222222334556'
+);
 
-const TRANSLATIONS = {};
-
-LETTERS.forEach((letter, i) => TRANSLATIONS[letter] = CODES[i]);
-
-const REFINED_LETTERS = 'AEIOUYWHBPFVCKSGJQXZDTLMNR'.split(''),
-      REFINED_CODES = '000000DD112233344555667889'.split('');
-
-const REFINED_TRANSLATIONS = {};
-
-REFINED_LETTERS.forEach((letter, i) => REFINED_TRANSLATIONS[letter] = REFINED_CODES[i]);
+const REFINED_TRANSLATIONS = translation(
+  'AEIOUYWHBPFVCKSGJQXZDTLMNR',
+  '000000DD112233344555667889'
+);
 
 /**
  * Helpers.

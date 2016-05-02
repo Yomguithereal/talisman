@@ -7,6 +7,7 @@ import assert from 'assert';
 import {
   seq,
   squeeze,
+  translation,
   weightedRandomIndex
 } from '../../src/helpers';
 
@@ -31,6 +32,18 @@ describe('index', function() {
     it('should work with arbitrary sequences.', function() {
       assert.deepEqual(squeeze([1, 2, 3]), [1, 2, 3]);
       assert.deepEqual(squeeze([1, 1, 2, 3, 3]), [1, 2, 3]);
+    });
+  });
+
+  describe('#.translation', function() {
+    it('should throw if given strings don\'t have the same length.', function() {
+      assert.throws(function() {
+        translation('123', '1234');
+      }, /length/);
+    });
+
+    it('should produce indexes.', function() {
+      assert.deepEqual(translation('abc', '123'), {a: 1, b: 2, c: 3});
     });
   });
 

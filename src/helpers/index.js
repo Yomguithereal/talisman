@@ -40,6 +40,28 @@ export function squeeze(target) {
 }
 
 /**
+ * Function creating an index of mapped letters.
+ *
+ * @param  {string} first  - First letters.
+ * @param  {string} second - Second letters.
+ * @return {object}        - The resulting index.
+ */
+export function translation(first, second) {
+  const index = {};
+
+  first = first.split('');
+  second = second.split('');
+
+  if (first.length !== second.length)
+    throw Error('talisman/helpers#translation: given strings don\'t have the same length.');
+
+  for (let i = 0, l = first.length; i < l; i++)
+    index[first[i]] = second[i];
+
+  return index;
+}
+
+/**
  * Function taking a length and a list of weights and aiming at
  * returning a random weighted index.
  *

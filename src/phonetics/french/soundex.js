@@ -7,19 +7,15 @@
  * [Author]: Mark Pilgrim
  */
 import deburr from 'lodash/deburr';
-import {squeeze} from '../../helpers';
+import {translation, squeeze} from '../../helpers';
 
 /**
  * Translations.
  */
-
-// TODO: get the correct encoding
-const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-      CODES = '0123012022455012623010202'.split('');
-
-const TRANSLATIONS = {};
-
-LETTERS.forEach((letter, i) => TRANSLATIONS[letter] = CODES[i]);
+const TRANSLATIONS = translation(
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  '0123012022455012623010202'
+);
 
 /**
  * Helpers.

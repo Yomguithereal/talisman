@@ -4,7 +4,7 @@
  *
  */
 describe('helpers', function() {
-  require('./helpers');
+  require('./helpers/index.js');
   require('./helpers/matrices.js');
   require('./helpers/vectors.js');
 });
@@ -45,6 +45,7 @@ describe('phonetics', function() {
   require('./phonetics/soundex.js');
 
   describe('french', function() {
+    require('./phonetics/french/phonex.js');
     require('./phonetics/french/soundex2.js');
   });
 
