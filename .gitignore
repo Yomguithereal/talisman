@@ -3,6 +3,7 @@ node_modules
 build
 *.log
 .DS_Store
+TODO.md
 
 # Transpiled modules
 /classification
