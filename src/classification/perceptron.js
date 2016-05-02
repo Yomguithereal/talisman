@@ -108,10 +108,10 @@ export default class Perceptron {
   predict(vector) {
 
     if (!this.weights)
-      throw Error('talisman/classification/naive-bayes/gaussian.probabilities: the classifier is not yet fitted');
+      throw Error('talisman/classification/perceptron.probabilities: the classifier is not yet fitted');
 
     if (vector.length !== this.dimensions)
-      throw Error(`talisman/classification/naive-bayes/gaussian.probabilities: the given vector is not of correct dimension (${vector.length} instead of ${this.dimensions}).`);
+      throw Error(`talisman/classification/perceptron.probabilities: the given vector is not of correct dimension (${vector.length} instead of ${this.dimensions}).`);
 
     return step(dot(vector, this.weights));
   }
