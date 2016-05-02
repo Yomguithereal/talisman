@@ -1,6 +1,6 @@
 /**
- * Talisman phonetics/cologne
- * ===========================
+ * Talisman phonetics/german/cologne
+ * ==================================
  *
  * The cologne algorithm.
  *
