@@ -1,6 +1,6 @@
 /**
- * Talisman phonetics/cologne tests
- * =================================
+ * Talisman phonetics/german/cologne tests
+ * ========================================
  *
  */
 import assert from 'assert';

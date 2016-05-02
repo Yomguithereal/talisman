@@ -43,7 +43,14 @@ describe('phonetics', function() {
   require('./phonetics/mra.js');
   require('./phonetics/nysiis.js');
   require('./phonetics/soundex.js');
-  require('./phonetics/german/cologne.js');
+
+  describe('french', function() {
+    require('./phonetics/french/soundex2.js');
+  });
+
+  describe('german', function() {
+    require('./phonetics/german/cologne.js');
+  });
 });
 
 describe('stats', function() {
@@ -58,7 +65,10 @@ describe('stemmers', function() {
   require('./stemmers/lancaster.js');
   require('./stemmers/lovins.js');
   require('./stemmers/porter.js');
-  require('./stemmers/latin/schinke.js');
+
+  describe('latin', function() {
+    require('./stemmers/latin/schinke.js');
+  });
 });
 
 describe('tokenizers', function() {
