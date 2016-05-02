@@ -5,8 +5,8 @@
  */
 import {assert} from 'chai';
 import GaussianNaiveBayes from '../../src/classification/naive-bayes/gaussian';
-import porter from '../../src/stemmers/porter';
-import {default as words} from '../../src/tokenizers/words/naive';
+// import porter from '../../src/stemmers/porter';
+// import {default as words} from '../../src/tokenizers/words/naive';
 
 describe('naive-bayes', function() {
 
