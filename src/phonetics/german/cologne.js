@@ -12,7 +12,7 @@
  * von Personennamen auf der Grundlage der Gestaltanalyse.
  * in: IBM-Nachrichten, 19. Jahrgang, 1969, S. 925-931.
  */
-import {squeeze} from '../helpers';
+import {squeeze} from '../../helpers';
 import deburr from 'lodash/deburr';
 
 /**

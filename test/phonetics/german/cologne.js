@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import cologne from '../../src/phonetics/cologne';
+import cologne from '../../../src/phonetics/german/cologne';
 
 describe('cologne', function() {
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+* Moving the Cologne phonetic algorithm to the `phonetics/german/cologne` namespace.
+
 ## 0.3.0
 
 * Adding the `classification/naive-bayes` namespace.
