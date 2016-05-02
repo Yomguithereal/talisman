@@ -79,7 +79,7 @@ function germanicSubstitutions(name) {
  */
 export default function cologne(name) {
   if (typeof name !== 'string')
-    throw Error('talisman/phonetics/cologne: the given name is not a string.');
+    throw Error('talisman/phonetics/german/cologne: the given name is not a string.');
 
   // Preparing the name
   name = deburr(germanicSubstitutions(name.toUpperCase()))
