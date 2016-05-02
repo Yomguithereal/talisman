@@ -59,10 +59,31 @@ const STEP2B_SUFFIXES = [
   'ez', 'ât', 'ai', 'as', 'é', 'a'
 ];
 
+const STEP2B_SET1 = new Set([
+  'eraIent', 'erions', 'èrent',
+  'erais', 'erait', 'eriez',
+  'erons', 'eront', 'erai', 'eras',
+  'erez', 'ées', 'era', 'iez',
+  'ée', 'és', 'er', 'ez',
+  'é'
+]);
+
+const STEP2B_SET2 = new Set([
+  'assions', 'assent', 'assiez',
+  'aIent', 'antes', 'asses',
+  'âmes', 'âtes', 'ante',
+  'ants', 'asse', 'ais', 'ait',
+  'ant', 'ât', 'ai', 'as',
+  'a'
+]);
+
 const STEP4_SUFFIXES = [
   'ière', 'Ière', 'ion', 'ier', 'Ier',
   'e', 'ë'
 ];
+
+const STEP4_SET1 = new Set('aiouès'),
+      STEP4_SET2 = new Set(['ier', 'ière', 'Ier', 'Ière']);
 
 /**
  * Helpers.
@@ -109,7 +130,7 @@ function findRV(word) {
   return rv;
 }
 
-function suffixStem(stem, oldSuffix, newSuffix) {
+function suffixStem(stem, oldSuffix, newSuffix = '') {
   const length = typeof oldSuffix === 'number' ?
     oldSuffix :
     oldSuffix.length;
@@ -163,11 +184,12 @@ export default function(word) {
     }
   }
 
-  let [r1, r2] = findR1R2(word),
-      rv = findRV(word),
+  const [r1, r2] = findR1R2(word);
+
+  let rv = findRV(word),
       stem = word;
 
-  //-- Step n°1
+  //-- Step 1
   for (let i = 0, l = STEP1_SUFFIXES.length; i < l; i++) {
     const suffix = STEP1_SUFFIXES[i],
           suffixInR2 = r2.includes(suffix);
@@ -329,4 +351,117 @@ export default function(word) {
       break;
     }
   }
+
+  //-- Step 2a
+  if (!step1Success || rvEndingFound) {
+    for (let i = 0, l = STEP2A_SUFFIXES.length; i < l; i++) {
+      const suffix = STEP2A_SUFFIXES[i];
+
+      if (stem.endsWith(suffix)) {
+        if (rv.includes(suffix) &&
+            rv.length > suffix.length &&
+            !VOWELS.has(rv[rv.indexOf(suffix) - 1])) {
+          stem = stem.slice(0, -suffix.length);
+          step2aSuccess = true;
+        }
+
+        break;
+      }
+    }
+  }
+
+  //-- Step 2b
+  if (!step2aSuccess) {
+    for (let i = 0, l = STEP2B_SUFFIXES.length; i < l; i++) {
+      const suffix = STEP2B_SUFFIXES[i];
+
+      if (rv.endsWith(suffix)) {
+
+        if (suffix === 'ions' && r2.includes('ions')) {
+          stem = stem.slice(0, -4);
+          step2bSuccess = true;
+        }
+
+        else if (STEP2B_SET1.has(suffix)) {
+          stem = stem.slice(0, -suffix.length);
+          step2bSuccess = true;
+        }
+
+        else if (STEP2B_SET2.has(suffix)) {
+          stem = stem.slice(0, -suffix.length);
+          rv = rv.slice(0, -suffix.length);
+          step2bSuccess = true;
+
+          if (rv.endsWith('e'))
+            stem = stem.slice(0, -1);
+        }
+
+        break;
+      }
+    }
+  }
+
+  const lastLetter = stem[stem.length - 1];
+
+  //-- Step 3
+  if (step1Success || step2aSuccess || step2bSuccess) {
+
+    if (lastLetter === 'Y')
+      stem = suffixStem(stem, 1, 'i');
+    else if (lastLetter === 'ç')
+      stem = suffixStem(stem, 1, 'c');
+  }
+
+  //-- Step 4
+  else {
+    if (stem.length >= 2 &&
+        lastLetter === 's' &&
+        !STEP4_SET1.has(stem[stem.length - 2])) {
+      stem = stem.slice(0, -1);
+    }
+
+    for (let i = 0, l = STEP4_SUFFIXES.length; i < l; i++) {
+      const suffix = STEP4_SUFFIXES[i];
+
+      if (stem.endsWith(suffix) && rv.includes(suffix)) {
+        if (suffix === 'ion' &&
+            r2.includes(suffix) &&
+            'st'.includes(rv[rv.length - 4])) {
+          stem = stem.slice(0, -3);
+        }
+
+        else if (STEP4_SET2.has(suffix)) {
+          stem = suffixStem(stem, suffix, 'i');
+        }
+
+        else if (suffix === 'e')
+          stem = stem.slice(0, -1);
+
+        else if (suffix === 'ë' && stem.slice(-3, -1) === 'gu')
+          stem = stem.slice(0, -1);
+
+        break;
+      }
+    }
+  }
+
+  //-- Step 5
+  if (/(?:enn|onn|ett|ell|eill)$/.test(stem))
+    stem = stem.slice(0, -1);
+
+  //-- Step 6
+  for (let i = 1, l = stem.length; i < l; i++) {
+    const letter = stem.slice(-i)[0];
+
+    if (!VOWELS.has(letter)) {
+      i++;
+    }
+    else {
+      if (i !== 1 && (letter === 'é' || letter === 'è')) {
+        stem = stem.slice(0, -i) + 'e' + word.slice(-i + 1);
+      }
+    }
+  }
+
+  return stem.toLowerCase();
 }
