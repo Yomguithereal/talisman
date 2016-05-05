@@ -13,15 +13,15 @@ describe('phonex', function() {
     }, /string/);
   });
 
-  // console.log(phonex('Traités'), phonex('Traité'), phonex('Traîtrise'), phonex('Pascal'), phonex('Piscine'))
+  it('should compute the Phonex code correctly.', function() {
+    const tests = [
+      ['PHYLAURHEIMSMET', 'FILOR4SNY']
+    ];
 
-  // it('should compute the Phonex code correctly.', function() {
-  //   const tests = [
+// tests.forEach(function([word]) {console.log(phonex(word))});
 
-  //   ];
-
-  //   tests.forEach(function([code, word]) {
-  //     assert.strictEqual(cologne(word), code, `${word} => ${code}`);
-  //   });
-  // });
+    tests.forEach(function([word, code]) {
+      assert.strictEqual(phonex(word), code, `${word} => ${code}`);
+    });
+  });
 });

@@ -41,11 +41,13 @@ const RULES = [
   [/O[IY]/g, '2'],
   [/OU/g, '3'],
   [/(?:SCH|CH|SH)/g, '5'],
-  [/SS/g, 'S'],
-  [/SC?([EIY])/g, 'S$1'], // Note: this part was tweaked,
+  [/S[CS]/g, 'S'],
+  [/C([EI])/, 'S$1'],
   [/(?:GU|QU|Q|C)/g, 'K'],
-  [/G([AOY])/g, 'K$1'],
+  [/G([AOY])/g, 'K$1']
 ];
+
+// [/SC?([EIY])/g, 'S$1'] unified rule
 
 /**
  * Function taking a single word and computing its Phonex code.

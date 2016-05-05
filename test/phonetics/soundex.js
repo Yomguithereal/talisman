@@ -26,7 +26,20 @@ describe('soundex', function() {
       ['A536', 'Andrew'],
       ['W252', 'Wozniak'],
       ['C423', 'Callister'],
-      ['H400', 'Hello']
+      ['H400', 'Hello'],
+      ['M635', 'Martin'],
+      ['B656', 'Bernard'],
+      ['F600', 'Faure'],
+      ['P620', 'Perez'],
+      ['G620', 'Gros'],
+      ['C120', 'Chapuis'],
+      ['B600', 'Boyer'],
+      ['G360', 'Gauthier'],
+      ['R000', 'Rey'],
+      ['B634', 'Barthélémy'],
+      ['H560', 'Henry'],
+      ['M450', 'Moulin'],
+      ['R200', 'Rousseau']
     ];
 
     tests.forEach(function([code, word]) {
