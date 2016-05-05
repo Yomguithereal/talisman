@@ -27,7 +27,20 @@ describe('soundex2', function() {
       ['Essayer', 'ESYR'],
       ['Crayon', 'CRYN'],
       ['Plyne', 'PLN'],
-      ['Barad', 'BR']
+      ['Barad', 'BR'],
+      ['Martin', 'MRTN'],
+      ['Bernard', 'BRNR'],
+      ['Faure', 'FR'],
+      ['Perez', 'PRZ'],
+      ['Gros', 'GR'],
+      ['Chapuis', 'CHP'],
+      ['Boyer', 'BYR'],
+      ['Gauthier', 'KTR'],
+      ['Rey', 'RY'],
+      ['Barthélémy', 'BRTL'],
+      ['Henry', 'HNR'],
+      ['Moulin', 'MLN'],
+      ['Rousseau', 'RS']
     ];
 
     tests.forEach(function([word, code]) {
