@@ -22,6 +22,9 @@ const GROUPS = [
 ];
 
 const PREFIXES = [
+
+  // Note: the way the algorithm is described, it is highly probable that
+  // the 'MAC' rule cannot work because of precendent modifications
   ['MAC', 'MCC'],
   ['SCH', 'SSS'],
   ['ASA', 'AZA'],
@@ -34,11 +37,15 @@ const PREFIXES = [
  * Helpers.
  */
 function pad(code) {
-  return (code + '    ').slice(0, 4);
+  return code.slice(0, 4);
 }
 
 /**
  * Function taking a single name and computing its Soundex2 code.
+ *
+ * Note: the description of the algorithm says to pad the code using spaces, but
+ * as I cannot see why one would do that (plus it is quite error-prone when
+ * debugging), I decided to drop it.
  *
  * @param  {string}  name - The name to process.
  * @return {string}       - The Soundex2 code.
@@ -49,7 +56,7 @@ export default function soundex2(name) {
   if (typeof name !== 'string')
     throw Error('talisman/phonetics/french/soundex2: the given name is not a string.');
 
-  let code = deburr(name)
+  let code = deburr(name.trim())
     .toUpperCase()
     .replace(/[^A-Z]/, '');
 

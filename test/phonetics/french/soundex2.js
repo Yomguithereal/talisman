@@ -13,13 +13,25 @@ describe('soundex2', function() {
     }, /string/);
   });
 
-  // it('should compute the Soundex2 code correctly.', function() {
-  //   const tests = [
+  it('should compute the Soundex2 code correctly.', function() {
+    const tests = [
+      ['Asamian', 'AZMN'],
+      ['Knight', 'NG'],
+      ['MacKenzie', 'MKNZ'],
+      ['Pfeifer', 'FR'],
+      ['Philippe', 'FLP'],
+      ['Schindler', 'SNDL'],
+      ['Chateau', 'CHT'],
+      ['Habitat', 'HBT'],
+      ['Téhéran', 'TRN'],
+      ['Essayer', 'ESYR'],
+      ['Crayon', 'CRYN'],
+      ['Plyne', 'PLN'],
+      ['Barad', 'BR']
+    ];
 
-  //   ];
-
-  //   tests.forEach(function([code, word]) {
-  //     assert.strictEqual(cologne(word), code, `${word} => ${code}`);
-  //   });
-  // });
+    tests.forEach(function([word, code]) {
+      assert.strictEqual(soundex2(word), code, `${word} => ${code}`);
+    });
+  });
 });
