@@ -130,6 +130,10 @@ function findRV(word) {
   return rv;
 }
 
+function replaceLetter(stem, index, replacement) {
+  return stem.substring(0, index) + replacement + stem.slice(index + 1);
+}
+
 function suffixStem(stem, oldSuffix, newSuffix = '') {
   const length = typeof oldSuffix === 'number' ?
     oldSuffix :
@@ -159,28 +163,22 @@ export default function(word) {
 
   // Every "u" or "i" between vowels is put into upper case
   // Every "y" followed or preceded by a vowel is put into upper case
-  const previousWord = word;
-  word = '';
-  for (let i = 0, l = previousWord.length; i < l; i++) {
-    const letter = previousWord[i],
-          previousLetter = previousWord[i - 1],
-          nextLetter = previousWord[i + 1];
+  for (let i = 1, l = word.length - 1; i < l; i++) {
+    const letter = word[i],
+          previousLetter = word[i - 1],
+          nextLetter = word[i + 1];
 
     if ((letter === 'u' ||
          letter === 'i') &&
         VOWELS.has(previousLetter) &&
         VOWELS.has(nextLetter)) {
-      word += letter.toUpperCase();
+      word = replaceLetter(word, i, letter.toUpperCase());
     }
 
     else if (letter === 'y' &&
              (VOWELS.has(previousLetter) ||
               VOWELS.has(nextLetter))) {
-      word += 'Y';
-    }
-
-    else {
-      word += letter;
+      word = replaceLetter(word, i, 'Y');
     }
   }
 
@@ -258,7 +256,7 @@ export default function(word) {
       else if ((suffix === 'ment' || suffix === 'ments') &&
                rv.includes(suffix) &&
                !rv.startsWith(suffix) &&
-               VOWELS.has(rv.indexOf(suffix) - 1)) {
+               VOWELS.has(rv[rv.lastIndexOf(suffix) - 1])) {
         stem = stem.slice(0, -suffix.length);
         rv = rv.slice(0, -suffix.length);
         rvEndingFound = true;
@@ -271,8 +269,8 @@ export default function(word) {
 
       else if ((suffix === 'issement' || suffix === 'issements') &&
                r1.includes(suffix) &&
-               !VOWELS.has(stem[-suffix.length - 1])) {
-        stem = stem.slice(0, suffix.length);
+               !VOWELS.has(stem.slice(-suffix.length - 1)[0])) {
+        stem = stem.slice(0, -suffix.length);
         step1Success = true;
       }
 
@@ -286,7 +284,7 @@ export default function(word) {
         step1Success = true;
 
         if (stem.slice(-2) === 'ic') {
-          if (r2.includes(r2))
+          if (r2.includes('ic'))
             stem = stem.slice(0, -2);
           else
             stem = suffixStem(stem, 2, 'iqU');
@@ -360,7 +358,7 @@ export default function(word) {
       if (stem.endsWith(suffix)) {
         if (rv.includes(suffix) &&
             rv.length > suffix.length &&
-            !VOWELS.has(rv[rv.indexOf(suffix) - 1])) {
+            !VOWELS.has(rv[rv.lastIndexOf(suffix) - 1])) {
           stem = stem.slice(0, -suffix.length);
           step2aSuccess = true;
         }
@@ -368,35 +366,35 @@ export default function(word) {
         break;
       }
     }
-  }
 
-  //-- Step 2b
-  if (!step2aSuccess) {
-    for (let i = 0, l = STEP2B_SUFFIXES.length; i < l; i++) {
-      const suffix = STEP2B_SUFFIXES[i];
+    //-- Step 2b
+    if (!step2aSuccess) {
+      for (let i = 0, l = STEP2B_SUFFIXES.length; i < l; i++) {
+        const suffix = STEP2B_SUFFIXES[i];
 
-      if (rv.endsWith(suffix)) {
+        if (rv.endsWith(suffix)) {
 
-        if (suffix === 'ions' && r2.includes('ions')) {
-          stem = stem.slice(0, -4);
-          step2bSuccess = true;
+          if (suffix === 'ions' && r2.includes('ions')) {
+            stem = stem.slice(0, -4);
+            step2bSuccess = true;
+          }
+
+          else if (STEP2B_SET1.has(suffix)) {
+            stem = stem.slice(0, -suffix.length);
+            step2bSuccess = true;
+          }
+
+          else if (STEP2B_SET2.has(suffix)) {
+            stem = stem.slice(0, -suffix.length);
+            rv = rv.slice(0, -suffix.length);
+            step2bSuccess = true;
+
+            if (rv.endsWith('e'))
+              stem = stem.slice(0, -1);
+          }
+
+          break;
         }
-
-        else if (STEP2B_SET1.has(suffix)) {
-          stem = stem.slice(0, -suffix.length);
-          step2bSuccess = true;
-        }
-
-        else if (STEP2B_SET2.has(suffix)) {
-          stem = stem.slice(0, -suffix.length);
-          rv = rv.slice(0, -suffix.length);
-          step2bSuccess = true;
-
-          if (rv.endsWith('e'))
-            stem = stem.slice(0, -1);
-        }
-
-        break;
       }
     }
   }
@@ -450,18 +448,7 @@ export default function(word) {
     stem = stem.slice(0, -1);
 
   //-- Step 6
-  for (let i = 1, l = stem.length; i < l; i++) {
-    const letter = stem.slice(-i)[0];
-
-    if (!VOWELS.has(letter)) {
-      i++;
-    }
-    else {
-      if (i !== 1 && (letter === 'é' || letter === 'è')) {
-        stem = stem.slice(0, -i) + 'e' + word.slice(-i + 1);
-      }
-    }
-  }
+  stem = stem.replace(/[éè]([^aeiouyâàëéêèïîôûù]+)$/, 'e$1');
 
   return stem.toLowerCase();
 }
