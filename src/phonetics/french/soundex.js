@@ -4,7 +4,8 @@
  *
  * A version of the Soundex algorithm targeting the French language.
  *
- * [Author]: Mark Pilgrim
+ * [Reference]:
+ * http://www-info.univ-lemans.fr/~carlier/recherche/soundex.html
  */
 import deburr from 'lodash/deburr';
 import {translation, squeeze} from '../../helpers';
@@ -13,8 +14,8 @@ import {translation, squeeze} from '../../helpers';
  * Translations.
  */
 const TRANSLATIONS = translation(
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  '0123012022455012623010202'
+  'AEIOUYWHBPCKQDTLMNRGJSXZFV',
+  '000000DD112223345567788899'
 );
 
 /**
@@ -36,18 +37,23 @@ export default function soundex(name) {
   if (typeof name !== 'string')
     throw Error('talisman/phonetics/french/soundex: the given name is not a string.');
 
+  // Converting ç & œ
+  name = name.toUpperCase()
+    .replace(/Ç/g, 'S')
+    .replace(/Œ/g, 'E');
+
   // Preparing the string
-  name = deburr(name)
-    .toUpperCase()
-    .replace(/[^A-Z]/g, '');
+  name = deburr(name).replace(/[^A-Z]/g, '');
 
   const firstLetter = name.charAt(0);
 
   // Process the code for the name's tail
   let tail = '';
 
-  for (let i = 1, l = name.length; i < l; i++)
-    tail += TRANSLATIONS[name[i]];
+  for (let i = 1, l = name.length; i < l; i++) {
+    if (TRANSLATIONS[name[i]] !== 'D')
+      tail += TRANSLATIONS[name[i]];
+  }
 
   // Dropping first code's letter if duplicate
   if (tail.charAt(0) === TRANSLATIONS[firstLetter])

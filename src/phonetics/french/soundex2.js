@@ -4,7 +4,8 @@
  *
  * French phonetic algorithm loosely based upon the classifcal Soundex.
  *
- * [Author]: Mark Pilgrim
+ * [Reference]:
+ * http://www-info.univ-lemans.fr/~carlier/recherche/soundex.html
  */
 import deburr from 'lodash/deburr';
 import {squeeze} from '../../helpers';

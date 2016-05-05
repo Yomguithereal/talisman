@@ -5,6 +5,9 @@
  * Implementation of the French phonetic algorithm "phonex".
  *
  * [Author]: Frédéric Brouard
+ *
+ * [Reference]:
+ * http://www-info.univ-lemans.fr/~carlier/recherche/soundex.html
  */
 import {translation, squeeze} from '../../helpers';
 

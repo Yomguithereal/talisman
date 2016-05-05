@@ -2,7 +2,10 @@
  * Talisman stemmers/french/porter
  * ================================
  *
- * The Porter stemmer for the French language
+ * The Porter stemmer for the French language.
+ *
+ * [Reference]:
+ * http://snowball.tartarus.org/algorithms/french/stemmer.html
  */
 
 /**
