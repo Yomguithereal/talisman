@@ -6,6 +6,7 @@
  *
  * [Reference]:
  * http://www-info.univ-lemans.fr/~carlier/recherche/soundex.html
+ * http://sqlpro.developpez.com/cours/soundex/
  */
 import deburr from 'lodash/deburr';
 import {translation, squeeze} from '../../helpers';

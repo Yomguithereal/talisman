@@ -15,10 +15,21 @@ describe('phonex', function() {
 
   it('should compute the Phonex code correctly.', function() {
     const tests = [
-      ['PHYLAURHEIMSMET', 'FILOR4SNY']
+      ['PHYLAURHEIMSMET', 'FILOR4SNY'],
+      ['Martin', 'NORTIN'],
+      ['Bernard', 'FYRNOR'],
+      ['Faure', 'FORE'],
+      ['Perez', 'TYRYZ'],
+      ['Gros', 'GROS'],
+      ['Chapuis', '5OTUIS'],
+      ['Boyer', 'F2YR'],
+      ['Gauthier', 'KOTIYR'],
+      ['Rey', 'RY'],
+      ['Barthélémy', 'FORTILINI'],
+      ['Henry', 'H1RI'],
+      ['Moulin', 'N3LIN'],
+      ['Rousseau', 'R3SO']
     ];
-
-// tests.forEach(function([word]) {console.log(phonex(word))});
 
     tests.forEach(function([word, code]) {
       assert.strictEqual(phonex(word), code, `${word} => ${code}`);

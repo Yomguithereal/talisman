@@ -46,5 +46,7 @@ describe('soundex2', function() {
     tests.forEach(function([word, code]) {
       assert.strictEqual(soundex2(word), code, `${word} => ${code}`);
     });
+
+    assert.strictEqual(soundex2('Faure'), soundex2('Phaure'));
   });
 });

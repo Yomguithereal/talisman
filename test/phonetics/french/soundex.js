@@ -29,5 +29,12 @@ describe('soundex', function() {
     tests.forEach(function([word, code]) {
       assert.strictEqual(soundex(word), code, `${word} => ${code}`);
     });
+
+    const faure = soundex('Faure');
+    assert.strictEqual(soundex('Ferey'), faure);
+    assert.strictEqual(soundex('Fery'), faure);
+    assert.strictEqual(soundex('Frey'), faure);
+    assert.strictEqual(soundex('Fueri'), faure);
+    assert(soundex('Fort') !== faure);
   });
 });
