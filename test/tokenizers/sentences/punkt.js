@@ -6,19 +6,20 @@
 import assert from 'assert';
 import {
   PunktLanguageVariables,
-  PunktToken
+  PunktToken,
+  PunktBaseClass
 } from '../../../src/tokenizers/sentences/punkt';
 
 describe('punkt', function() {
+  const text = 'Hello John. What is that you\'re doing?';
 
   describe('language variables', function() {
 
     it('should properly tokenize word.', function() {
       const vars = new PunktLanguageVariables();
 
-      const tokens = vars.tokenizeWords('Hello John. What is that you\'re doing?');
       assert.deepEqual(
-        tokens,
+        vars.tokenizeWords(text),
         ['Hello', 'John.', 'What', 'is', 'that', 'you', '\'re', 'doing', '?']
       );
     });
@@ -27,10 +28,25 @@ describe('punkt', function() {
   describe('token', function() {
     it('should correctly process the type of the token.', function() {
       const normalToken = new PunktToken('Hello'),
-            numericToken = new PunktToken('45');
+            numericToken = new PunktToken('45'),
+            periodToken = new PunktToken('John.');
 
       assert.strictEqual(normalToken.type, 'hello');
       assert.strictEqual(numericToken.type, '##number##');
+      assert(!normalToken.periodFinal);
+      assert(periodToken.periodFinal);
+    });
+  });
+
+  describe('base', function() {
+    it('should tokenize text properly.', function() {
+      const base = new PunktBaseClass();
+
+      const tokens = base.tokenize(text);
+
+      assert(tokens.length === 9);
+      assert(tokens[0].lineStart);
+      assert(!tokens[1].lineStart);
     });
   });
 });

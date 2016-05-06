@@ -7,6 +7,9 @@
  * too much to change the code architecture and sticked quite directly to
  * the original implementation's classes etc.
  *
+ * TODO: the architecture can be changed a bit to fit JS more and allow for
+ * easier customization.
+ *
  * [Reference]:
  * http://www.nltk.org/_modules/nltk/tokenize/punkt.html
  *
@@ -173,7 +176,7 @@ export class PunktToken {
     this.type = string.toLowerCase().replace(RE_NUMERIC, '##number##');
 
     this.paragraphStart = null;
-    this.linestart = null;
+    this.lineStart = null;
     this.sentenceBreak = null;
     this.abbreviation = null;
     this.ellipsis = null;
@@ -200,15 +203,61 @@ const ABBREV = 0.3,
  *
  * @constructor
  */
-export class PunktBaseClass {}
+export class PunktBaseClass {
+  constructor(options) {
+    const {
+      vars = new PunktLanguageVariables(),
+      params = new PunktParameters()
+    } = options || {};
+
+    this.params = params;
+    this.vars = vars;
+  }
+
+  /**
+   * Method used to tokenize the given text into tokens, using the Punkt word
+   * segmentation regular expression, and generate the resulting list of
+   * tokens.
+   *
+   * @param  {string} text - The raw text to tokenize.
+   * @return {array}       - The resulting tokens.
+   */
+  tokenize(text) {
+    let paragraphStart = false;
+
+    const lines = text.split(/\r?\n/g),
+          tokens = [];
+
+    for (let i = 0, l = lines.length; i < l; i++) {
+      const line = lines[i].trim();
+
+      if (line) {
+        const words = this.vars.tokenizeWords(line);
+
+        tokens.push(new PunktToken(words[0], {lineStart: true}))
+
+        paragraphStart = false;
+
+        for (let j = 1, m = words.length; j < m; j++)
+          tokens.push(new PunktToken(words[j]));
+      }
+      else {
+        paragraphStart = true;
+      }
+    }
+
+    return tokens;
+  }
+}
 
 /**
- * The Punkt Trainer.
+ * Class representing the Punkt trainer.
  *
  * @constructor
  */
-export class PunktTrainer {
-  constructor() {
+export class PunktTrainer extends PunktBaseClass {
+  constructor(options) {
+    super(options);
 
     // A frequency distribution giving the frequenct of each case-normalized
     // token type in the training data.
@@ -242,3 +291,10 @@ export class PunktTrainer {
     // First we need to tokenize the words
   }
 }
+
+/**
+ * Class representing the Punkt sentence tokenizer.
+ *
+ * @constructor
+ */
+export class PunktSentenceTokenizer extends PunktBaseClass {}
