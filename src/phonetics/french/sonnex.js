@@ -53,35 +53,7 @@ const EXCEPTIONS = {
 // TODO: check null simplification
 const RULES = {
   a: [
-    [/^ais(\w|$)/, letter => {
-      if (letter === 'z')
-        return 'Ez';
-      return 'Es';
-    }],
-    [/^(aient|ais)/, 'E'],
-    [/^ain(.)/, letter => isVowel(letter) ? 'E' : '1'],
-    [/^aill?/, 'ai'],
-    [/^ai/, 'E'],
-    [/^amm/, 'am'],
-    [/^am(.|$)/, letter => letter === 'm' || isVowel(letter) ? 'am' : 2],
-    [/^an(.|$)/, letter => {
-      if (letter === 'n')
-        return 'an';
-      if (letter === 't')
-        return '2t';
-      if (isVowel(letter))
-        return 'an';
-      return '2';
-    }],
-    [/^assent/, 'as'],
-    [/^as(.|$)/, letter => {
-      if (isConsonant(letter))
-        return 'as';
-      return 'az';
-    }],
-    [/^au/, 'o'],
-    [/^ays?$/, 'E'],
-    [null, 'a']
+
   ]
 };
 
