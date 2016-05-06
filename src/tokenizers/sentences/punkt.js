@@ -2,7 +2,10 @@
  * Talisman tokenizers/sentences/punkt
  * ====================================
  *
- * The Punkt unsupervised sentence tokenizer.
+ * The Punkt unsupervised sentence tokenizer. Note that this is a port of the
+ * nltk version of the trainer written in python. This means I did not try
+ * too much to change the code architecture and sticked quite directly to
+ * the original implementation's classes etc.
  *
  * [Reference]:
  * http://www.nltk.org/_modules/nltk/tokenize/punkt.html
