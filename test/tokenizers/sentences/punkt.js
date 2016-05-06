@@ -5,8 +5,8 @@
  */
 import assert from 'assert';
 import {
-  LanguageVariables,
-  Token
+  PunktLanguageVariables,
+  PunktToken
 } from '../../../src/tokenizers/sentences/punkt';
 
 describe('punkt', function() {
@@ -14,7 +14,7 @@ describe('punkt', function() {
   describe('language variables', function() {
 
     it('should properly tokenize word.', function() {
-      const vars = new LanguageVariables();
+      const vars = new PunktLanguageVariables();
 
       const tokens = vars.tokenizeWords('Hello John. What is that you\'re doing?');
       assert.deepEqual(
@@ -26,8 +26,8 @@ describe('punkt', function() {
 
   describe('token', function() {
     it('should correctly process the type of the token.', function() {
-      const normalToken = new Token('Hello'),
-            numericToken = new Token('45');
+      const normalToken = new PunktToken('Hello'),
+            numericToken = new PunktToken('45');
 
       assert.strictEqual(normalToken.type, 'hello');
       assert.strictEqual(numericToken.type, '##number##');

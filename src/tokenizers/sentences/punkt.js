@@ -37,7 +37,7 @@ const ORTHO_UC = ORTHO_BEG_UC + ORTHO_MID_UC + ORTHO_UNK_UC,
  *
  * @constructor
  */
-export class LanguageVariables {
+export class PunktLanguageVariables {
   constructor() {
 
     // Characters which are candidates for sentence boundaries
@@ -115,7 +115,7 @@ const RE_ELLIPSIS = /\.\.+$/,
  *
  * @constructor
  */
-export class Token {
+export class PunktToken {
   constructor(string) {
 
     // Properties
@@ -142,7 +142,7 @@ const ABBREV = 0.3,
  *
  * @constructor
  */
-export class Trainer {
+export class PunktTrainer {
   constructor() {
 
     // A frequency distribution giving the frequenct of each case-normalized
