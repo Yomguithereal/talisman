@@ -4,7 +4,10 @@
  *
  */
 import assert from 'assert';
-import {LanguageVariables} from '../../../src/tokenizers/sentences/punkt';
+import {
+  LanguageVariables,
+  Token
+} from '../../../src/tokenizers/sentences/punkt';
 
 describe('punkt', function() {
 
@@ -18,6 +21,16 @@ describe('punkt', function() {
         tokens,
         ['Hello', 'John.', 'What', 'is', 'that', 'you', '\'re', 'doing', '?']
       );
+    });
+  });
+
+  describe('token', function() {
+    it('should correctly process the type of the token.', function() {
+      const normalToken = new Token('Hello'),
+            numericToken = new Token('45');
+
+      assert.strictEqual(normalToken.type, 'hello');
+      assert.strictEqual(numericToken.type, '##number##');
     });
   });
 });

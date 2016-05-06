@@ -102,7 +102,31 @@ export class LanguageVariables {
 }
 
 /**
- * Customization variables
+ * Regular expressions used by the tokens.
+ */
+const RE_ELLIPSIS = /\.\.+$/,
+      RE_NUMERIC = /^-?[\.,]?\d[\d,\.-]*\.?$/,
+      RE_INITIAL = /[^\W\d]\.$/,
+      RE_ALPHA = /[^\W\d]+$/;
+
+/**
+ * Class representing a token of text with annotations produced during
+ * sentence boundary detection.
+ *
+ * @constructor
+ */
+export class Token {
+  constructor(string) {
+
+    // Properties
+    this.string = string;
+    this.periodFinal = string[string.length - 1] === '.';
+    this.type = string.toLowerCase().replace(RE_NUMERIC, '##number##');
+  }
+}
+
+/**
+ * Customization variables.
  */
 const ABBREV = 0.3,
       IGNORE_ABBREV_PENALTY = false,
