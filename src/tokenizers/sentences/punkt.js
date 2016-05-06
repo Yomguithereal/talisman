@@ -13,6 +13,11 @@
  */
 
 /**
+ * Hash separator.
+ */
+const SEP = '‡';
+
+/**
  * Orthographic context constants.
  *
  * BEG = beginning
@@ -102,6 +107,45 @@ export class PunktLanguageVariables {
 }
 
 /**
+ * Class storing the data used to perform sentence boundary detection with the
+ * Punkt algorithm.
+ *
+ * @constructor
+ */
+class PunktParameters {
+  constructor() {
+
+    // A set of word types for known abbreviations.
+    this.abbreviationTypes = new Set();
+
+    // A set of word type tuples for known common collocations where the first
+    // word ends in a period ('S. Bach', for instance is a common collocation
+    // in a text discussing 'Johann S. Bach').
+    this.collocations = new Set();
+
+    // A set of word types for words that often appear at the beginning of
+    // sentences.
+    this.sentenceStarters = new Set();
+
+    // A dictionary mapping word types to the the set of orthographic contexts
+    // that word type appears in.
+    this.orthographicContext = {};
+  }
+
+  /**
+   * Method used to add a context to the given word type.
+   *
+   * @param  {string}         type - The word type.
+   * @param  {number}         flag - The context's flag.
+   * @return {PunktParameter}      - Returns itself for chaining purposes.
+   */
+  addOrthographicContext(type, flag) {
+    this.orthographicContext[type] |= flag;
+    return this;
+  }
+}
+
+/**
  * Regular expressions used by the tokens.
  */
 const RE_ELLIPSIS = /\.\.+$/,
@@ -114,14 +158,25 @@ const RE_ELLIPSIS = /\.\.+$/,
  * sentence boundary detection.
  *
  * @constructor
+ * @param {string} string - The token's string.
+ * @param {params} object - Custom flags.
  */
 export class PunktToken {
-  constructor(string) {
+  constructor(string, params = {}) {
 
     // Properties
     this.string = string;
     this.periodFinal = string[string.length - 1] === '.';
     this.type = string.toLowerCase().replace(RE_NUMERIC, '##number##');
+
+    this.paragraphStart = null;
+    this.linestart = null;
+    this.sentenceBreak = null;
+    this.abbreviation = null;
+    this.ellipsis = null;
+
+    for (const k in params)
+      this[k] = params[k];
   }
 }
 
@@ -138,7 +193,14 @@ const ABBREV = 0.3,
       MIN_COLLOCATION_FREQUENCY = 1;
 
 /**
- * The Punkt Trainer
+ * Punkt abstract class used by both the Trainer & the Tokenizer classes.
+ *
+ * @constructor
+ */
+export class PunktBaseClass {}
+
+/**
+ * The Punkt Trainer.
  *
  * @constructor
  */
@@ -174,5 +236,6 @@ export class PunktTrainer {
    */
   train(text) {
 
+    // First we need to tokenize the words
   }
 }
