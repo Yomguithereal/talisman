@@ -37,7 +37,7 @@ const ORTHO_UC = ORTHO_BEG_UC + ORTHO_MID_UC + ORTHO_UNK_UC,
  *
  * @constructor
  */
-class LanguageVariables {
+export class LanguageVariables {
   constructor() {
 
     // Characters which are candidates for sentence boundaries
@@ -58,6 +58,47 @@ class LanguageVariables {
     // Hyphen & ellipsis are multi-character punctuation
     this.reMultiCharacterPunctuation = /(?:\-{2,}|\.{2,}|(?:\.\s){2,}\.)/;
   }
+
+  /**
+   * Method creating and returning a word tokenizer regular expression.
+   *
+   * TODO: does this have to be dynamic?
+   *
+   * @return {RegExp} - The regular expression.
+   */
+  getWordTokenizerRegExp() {
+    const nonWord = this.reNonWordCharacters.source,
+          multiChar = this.reMultiCharacterPunctuation.source,
+          wordStart = this.reWordStart.source;
+
+    const pattern = [
+      '(',
+        multiChar,
+        '|',
+        `(?=${wordStart})\\S+?`,
+        '(?=',
+          '\\s|',
+          '$|',
+          `${nonWord}|${multiChar}|`,
+          `,(?=$|\\s|${nonWord}|${multiChar})`,
+        ')',
+        '|',
+        '\\S',
+      ')'
+    ].join('');
+
+    return new RegExp(pattern, 'g');
+  }
+
+  /**
+   * Method used to tokenize the words in the given string.
+   *
+   * @param  {string} string - String to tokenize.
+   * @return {array}         - An array of matches.
+   */
+  tokenizeWords(string) {
+    return string.match(this.getWordTokenizerRegExp());
+  }
 }
 
 /**
@@ -77,7 +118,7 @@ const ABBREV = 0.3,
  *
  * @constructor
  */
-class Trainer {
+export class Trainer {
   constructor() {
 
     // A frequency distribution giving the frequenct of each case-normalized

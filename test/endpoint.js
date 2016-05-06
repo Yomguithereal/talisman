@@ -80,6 +80,7 @@ describe('stemmers', function() {
 describe('tokenizers', function() {
   describe('sentences', function() {
     require('./tokenizers/sentences/naive.js');
+    require('./tokenizers/sentences/punkt.js');
   });
 
   describe('words', function() {
