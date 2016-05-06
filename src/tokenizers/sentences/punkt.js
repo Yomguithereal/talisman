@@ -61,12 +61,53 @@ class LanguageVariables {
 }
 
 /**
+ * Customization variables
+ */
+const ABBREV = 0.3,
+      IGNORE_ABBREV_PENALTY = false,
+      ABBREV_BACKOFF = 5,
+      COLLOCATION = 7.88,
+      SENTENCE_STARTER = 30,
+      INCLUDE_ALL_COLLOCATIONS = false,
+      INCLUDE_ABBREV_COLLOCATIONS = false,
+      MIN_COLLOCATION_FREQUENCY = 1;
+
+/**
  * The Punkt Trainer
  *
  * @constructor
  */
 class Trainer {
   constructor() {
+
+    // A frequency distribution giving the frequenct of each case-normalized
+    // token type in the training data.
+    this.typeFdist = null;
+
+    // Number of words ending in period in the training data.
+    this.periodTokenCount = 0;
+
+    // A frequency distribution givin the frequency of all bigrams in the
+    // training data where the first word ends in a period.
+    this.sentenceStarterFdist = null;
+
+    // The total number of sentence breaks identified in training, used for
+    // calculating the frequent sentence starter heuristic.
+    this.sentenceBreakCount = 0;
+
+    // A flag controlling whether the training has been finalized by finding
+    // collocations and sentence starters, or whether training still needs to be
+    // finalized
+    this.finalized = true;
+  }
+
+  /**
+   * Method used to train a model based on the given text.
+   *
+   * @param  {string} text - The training text.
+   * @return {Trainer}     - Returns itself for chaining purposes.
+   */
+  train(text) {
 
   }
 }
