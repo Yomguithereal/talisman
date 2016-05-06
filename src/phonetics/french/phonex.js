@@ -2,7 +2,7 @@
  * Talisman phonetics/french/phonex
  * =================================
  *
- * Implementation of the French phonetic algorithm "phonex".
+ * Implementation of the French phonetic algorithm "Phonex".
  *
  * [Author]: Frédéric Brouard
  *
