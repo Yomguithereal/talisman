@@ -20,6 +20,8 @@
 
 /**
  * Hash separator.
+ *
+ * TODO: is this necessary?
  */
 const SEP = '‡';
 
@@ -42,6 +44,49 @@ const ORTHO_BEG_UC = 1 << 1,
 
 const ORTHO_UC = ORTHO_BEG_UC + ORTHO_MID_UC + ORTHO_UNK_UC,
       ORTHO_LC = ORTHO_BEG_LC + ORTHO_MID_LC + ORTHO_UNK_LC;
+
+/**
+ * Class representing a basic frequency distribution.
+ *
+ * @constructor
+ */
+class FrequencyDistribution {
+  constructor() {
+    this.counts = {};
+    this.N = 0;
+  }
+
+  /**
+   * Method used to add a single value to the distribution.
+   *
+   * @param  {string} value          - The value to add.
+   * @return {FrequencyDistribution} - Itself for chaining purposes.
+   */
+  add(value) {
+    this.counts[value] = this.counts[value] || 0;
+    this.counts[value]++;
+    this.N++;
+  }
+
+  /**
+   * Method used to get the frequency for a single value.
+   *
+   * @param  {string} value - The targeted value.
+   * @return {number}       - The frequency for the given value.
+   */
+  get(value) {
+    return this.counts[value] || 0;
+  }
+
+  /**
+   * Method used to get the unique values stored by the distribution.
+   *
+   * @return {array} - An array of the unique values.
+   */
+  values() {
+    return Object.keys(this.counts);
+  }
+}
 
 /**
  * Class representing language dependent variables.
@@ -175,6 +220,9 @@ export class PunktToken {
     this.periodFinal = string[string.length - 1] === '.';
     this.type = string.toLowerCase().replace(RE_NUMERIC, '##number##');
 
+    // TODO: this is fishy, since it collides with ellipsis. Maybe refine
+    this.isEllipsis = RE_ELLIPSIS.test(string);
+
     for (const k in params)
       this[k] = params[k];
   }
@@ -200,6 +248,11 @@ const ABBREV = 0.3,
       INCLUDE_ALL_COLLOCATIONS = false,
       INCLUDE_ABBREV_COLLOCATIONS = false,
       MIN_COLLOCATION_FREQUENCY = 1;
+
+/**
+ * Regular expression matching token types that are not merely punctuation.
+ */
+const RE_NON_PUNCT = /[^\W\d]/;
 
 /**
  * Punkt abstract class used by both the Trainer & the Tokenizer classes.
@@ -237,7 +290,7 @@ export class PunktBaseClass {
       if (line) {
         const words = this.vars.tokenizeWords(line);
 
-        tokens.push(new PunktToken(words[0], {lineStart: true}))
+        tokens.push(new PunktToken(words[0], {lineStart: true, paragraphStart: paragraphStart}));
 
         paragraphStart = false;
 
@@ -251,6 +304,70 @@ export class PunktBaseClass {
 
     return tokens;
   }
+
+  /**
+   * Method used to perform the first pass of token annotation, which makes
+   * decisions based purely based of the word type of each word:
+   *   - "?", "!", and "." are marked as sentence breaks.
+   *   - sequences of two or more periods are marked as ellipsis.
+   *   - any word ending in "." that is a known abbreviation is marked as such.
+   *   - any othe word ending in "." is marked as a sentence break.
+   *
+   * @param  {array} tokens   - The tokens to annotate.
+   * @return {PunktBaseClass} - Returns itself for chaining purposes.
+   */
+  annotateFirstPass(tokens) {
+    for (let i = 0, l = tokens.length; i < l; i++) {
+      const token = tokens[i],
+            string = token.string;
+
+      if (this.vars.sentenceEndCharacters.has(string)) {
+        token.sentenceBreak = true;
+      }
+      else if (token.isEllipsis) {
+        token.ellipsis = true;
+      }
+      else if (token.periodFinal && !string.endsWith('..')) {
+        const t = string.slice(0, -1).toLowerCase();
+
+        if (this.params.abbreviationTypes.has(t) ||
+            this.params.abbreviationTypes.has(t.split('-').slice(-1)[0])) {
+          token.abbreviation = true;
+        }
+        else {
+          token.sentenceBreak = true;
+        }
+      }
+    }
+
+    return this;
+  }
+}
+
+/**
+ * Miscellaneous helpers.
+ */
+
+/**
+ * Computing the Dunning log-likelihood ratio scores for abbreviation
+ * candidates.
+ *
+ * @param {number} a  - Count of <a>.
+ * @param {number} b  - Count of <b>.
+ * @param {number} ab - Count of <ab>.
+ * @param {number} N  - Number of elements in the distribution.
+ * @return {number}   - The log-likelihood
+ */
+function dunningLogLikelihood(a, b, ab, N) {
+  const p1 = b / N,
+        p2 = 0.99;
+
+  const nullHypothesis = ab * Math.log(p1) + (a - ab) * Math.log(1 - p1),
+        alternativeHyphothesis = ab * Math.log(p2) + (a - ab) * Math.log(1 - p2);
+
+  const likelihood = nullHypothesis - alternativeHyphothesis;
+
+  return (-2 * likelihood);
 }
 
 /**
@@ -260,18 +377,25 @@ export class PunktBaseClass {
  */
 export class PunktTrainer extends PunktBaseClass {
   constructor(options) {
+    const {
+      verbose = false
+    } = options || {};
+
     super(options);
+
+    // Should the trainer log information?
+    this.verbose = verbose;
 
     // A frequency distribution giving the frequenct of each case-normalized
     // token type in the training data.
-    this.typeFdist = null;
+    this.typeFdist = new FrequencyDistribution();
 
     // Number of words ending in period in the training data.
     this.periodTokenCount = 0;
 
     // A frequency distribution givin the frequency of all bigrams in the
     // training data where the first word ends in a period.
-    this.sentenceStarterFdist = null;
+    this.sentenceStarterFdist = new FrequencyDistribution();
 
     // The total number of sentence breaks identified in training, used for
     // calculating the frequent sentence starter heuristic.
@@ -284,6 +408,73 @@ export class PunktTrainer extends PunktBaseClass {
   }
 
   /**
+   * Method used to reclassify the given token's type if:
+   *   - it is period-final and not a know abbreviation
+   *   - it is not period-final and is otherwise a known abbreviation by
+   *     checking whether its previous classification still holds according to
+   *     the heuristics of section 3.
+   *
+   * @param  {string} type - A token type.
+   * @return {array|null}  - Returns a triple containing the following:
+   *         {string}        [0]: the abbreviation.
+   *         {number}        [1]: log-likelihood with penalties applied.
+   *         {boolean}       [2]: whether the present type is a candidate for
+   *                              inclusion or exclusion as an abbreviation.
+   */
+  _reclassifyAbbreviationType(type) {
+    let isAdd;
+
+    // Check some basic conditions, to rule out words that are clearly not
+    // abbreviation types.
+    if (type === '##number##"' || !RE_NON_PUNCT.test(type))
+      return null;
+
+    if (type.endsWith('.')) {
+      if (this.params.abbreviationTypes.has(type))
+        return null;
+      type = type.slice(0, -1);
+      isAdd = true;
+    }
+    else {
+      if (!this.params.abbreviationTypes.has(type))
+        return null;
+      isAdd = false;
+    }
+
+    // Count how many periods & nonperiods are in the candidate type.
+    const periodsCount = (type.match(/\./g) || []).length + 1,
+          nonPeriodsCount = type.length - periodsCount + 1;
+
+    // Let <a> be the candidate without the period, and <b> be the period.
+    // Find a log likelihood ratio that indicates whether <ab> occurs as a
+    // single unit (high value of ll), or as two independent units <a> and <b>
+    // (low value of ll)
+    const withPeriodCount = this.typeFdist.get(type + '.'),
+          withoutPeriodCount = this.typeFdist.get(type);
+
+    const ll = dunningLogLikelihood(
+      withPeriodCount + withoutPeriodCount,
+      this.periodTokenCount,
+      withPeriodCount,
+      this.typeFdist.N
+    );
+
+    // Apply three scaling factors to "tweak" the basic log-likelihood ratio:
+    //   * fLength: long word => less likely to be an abbreviation
+    //   * fPeriods: more periods => more likely to be an abbreviation
+    //   * fPenalty: penalize occurences without a period
+    const fLength = Math.exp(-nonPeriodsCount),
+          fPeriods = periodsCount,
+          fPenalty = !IGNORE_ABBREV_PENALTY ?
+            Math.pow(nonPeriodsCount, -withoutPeriodCount) :
+            IGNORE_ABBREV_PENALTY;
+
+    const score = ll * fLength * fPeriods * fPenalty;
+
+    return [type, score, isAdd];
+  }
+
+  /**
    * Method used to train a model based on the given text.
    *
    * @param  {string} text - The training text.
@@ -292,6 +483,58 @@ export class PunktTrainer extends PunktBaseClass {
   train(text) {
 
     // First we need to tokenize the words
+    const tokens = this.tokenize(text);
+
+    this.finalized = false;
+
+    // Find the frequency of each case-normalized type.
+    // Also record the number of tokens ending in periods.
+    for (let i = 0, l = tokens.length; i < l; i++) {
+      const token = tokens[i],
+            type = token.type;
+
+      this.typeFdist.add(type);
+
+      if (token.periodFinal)
+        this.periodTokenCount++;
+    }
+
+    // Look for new abbreviations, and for types that no longer are
+    const uniqueTypes = this.typeFdist.values();
+
+    for (let i = 0, l = uniqueTypes.length; i < l; i++) {
+      const result = this._reclassifyAbbreviationType(uniqueTypes[i]);
+
+      if (!result)
+        continue;
+
+      const [
+        abbreviation,
+        score,
+        isAdd
+      ] = result;
+
+      if (score >= ABBREV) {
+        if (isAdd) {
+          this.params.abbreviationTypes.add(abbreviation);
+
+          if (this.verbose)
+            console.log(`  Added abbreviation: [${score}] ${abbreviation}`);
+        }
+      }
+      else {
+        if (!isAdd) {
+          this.params.abbreviationTypes.delete(abbreviation);
+
+          if (this.verbose)
+            console.log(`  Remove abbreviation [${score}] ${abbreviation}`);
+        }
+      }
+    }
+
+    // Make a preliminary pass through the document, marking likely sentence
+    // breaks, abbreviations, and ellipsis tokens.
+    this.annotateFirstPass(tokens);
   }
 }
 

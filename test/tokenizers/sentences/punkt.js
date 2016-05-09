@@ -7,10 +7,11 @@ import assert from 'assert';
 import {
   PunktLanguageVariables,
   PunktToken,
-  PunktBaseClass
+  PunktBaseClass,
+  PunktTrainer
 } from '../../../src/tokenizers/sentences/punkt';
 
-describe('punkt', function() {
+describe.only('punkt', function() {
   const text = 'Hello John. What is that you\'re doing?';
 
   describe('language variables', function() {
@@ -29,10 +30,13 @@ describe('punkt', function() {
     it('should correctly process the type of the token.', function() {
       const normalToken = new PunktToken('Hello'),
             numericToken = new PunktToken('45'),
-            periodToken = new PunktToken('John.');
+            periodToken = new PunktToken('John.'),
+            ellipsisToken = new PunktToken('...');
 
       assert.strictEqual(normalToken.type, 'hello');
       assert.strictEqual(numericToken.type, '##number##');
+      assert(!normalToken.isEllipsis);
+      assert(ellipsisToken.isEllipsis);
       assert(!normalToken.periodFinal);
       assert(periodToken.periodFinal);
     });
@@ -47,6 +51,14 @@ describe('punkt', function() {
       assert(tokens.length === 9);
       assert(tokens[0].lineStart);
       assert(!tokens[1].lineStart);
+    });
+  });
+
+  describe('trainer', function() {
+
+    it('should correctly train.', function() {
+      const trainer = new PunktTrainer({verbose: true});
+      trainer.train('Hello John. What is that you\'re doing? Mr. Lozano was not around today.');
     });
   });
 });
