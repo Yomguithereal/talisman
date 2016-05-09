@@ -175,14 +175,17 @@ export class PunktToken {
     this.periodFinal = string[string.length - 1] === '.';
     this.type = string.toLowerCase().replace(RE_NUMERIC, '##number##');
 
-    this.paragraphStart = null;
-    this.lineStart = null;
-    this.sentenceBreak = null;
-    this.abbreviation = null;
-    this.ellipsis = null;
-
     for (const k in params)
       this[k] = params[k];
+  }
+
+  /**
+   * Method used for string coercion.
+   *
+   * @return {string} - The token's string representation.
+   */
+  toString() {
+    return this.string;
   }
 }
 
