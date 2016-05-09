@@ -45,6 +45,15 @@ const ORTHO_BEG_UC = 1 << 1,
 const ORTHO_UC = ORTHO_BEG_UC + ORTHO_MID_UC + ORTHO_UNK_UC,
       ORTHO_LC = ORTHO_BEG_LC + ORTHO_MID_LC + ORTHO_UNK_LC;
 
+const ORTHO_MAP = {
+  'initial§upper': ORTHO_BEG_UC,
+  'internal§upper': ORTHO_MID_UC,
+  'unknown§upper': ORTHO_UNK_UC,
+  'initial§lower': ORTHO_BEG_LC,
+  'internal§lower': ORTHO_MID_LC,
+  'unknown§lower': ORTHO_UNK_LC
+};
+
 /**
  * Class representing a basic frequency distribution.
  *
@@ -191,6 +200,7 @@ class PunktParameters {
    * @return {PunktParameter}      - Returns itself for chaining purposes.
    */
   addOrthographicContext(type, flag) {
+    this.orthographicContext[type] = this.orthographicContext[type] || 0;
     this.orthographicContext[type] |= flag;
     return this;
   }
@@ -222,9 +232,68 @@ export class PunktToken {
 
     // TODO: this is fishy, since it collides with ellipsis. Maybe refine
     this.isEllipsis = RE_ELLIPSIS.test(string);
+    this.isNumber = this.type === '##number##';
+    this.isInitial = RE_INITIAL.test(string);
+    this.isAlpha = RE_ALPHA.test(string);
+    this.isInitialAlpha = /^[^\W\d]/.test(string);
 
     for (const k in params)
       this[k] = params[k];
+  }
+
+  /**
+   * Method used to retrieve the token's type with its final period removed if
+   * it has one.
+   *
+   * @return {string}
+   */
+  typeNoPeriod() {
+    if (this.type.length > 1 && this.type.slice(-1) === '.')
+      return this.type.slice(0, -1);
+    return this.type;
+  }
+
+  /**
+   * Method used to retrieve the token's type with its final period removed if
+   * it is marked as a sentence break.
+   *
+   * @return {string}
+   */
+  typeNoSentencePeriod() {
+    if (this.sentenceBreak)
+      return this.typeNoPeriod();
+    return this.type;
+  }
+
+  /**
+   * Method used to return whether the token's first character is uppercase.
+   *
+   * @return {boolean}
+   */
+  firstUpper() {
+    return this.isInitialAlpha && this.string[0] === this.string[0].toUpperCase();
+  }
+
+  /**
+   * Method used to return whether the token's first character is lowercase.
+   *
+   * @return {boolean}
+   */
+  firstLower() {
+    return this.isInitialAlpha && this.string[0] === this.string[0].toLowerCase();
+  }
+
+  /**
+   * Method used to return the token's first character's case.
+   *
+   * @return {string} - "lower" or "upper".
+   */
+  firstCase() {
+    if (this.firstLower())
+      return 'lower';
+    if (this.firstUpper())
+      return 'upper';
+    return 'none';
   }
 
   /**
@@ -475,6 +544,57 @@ export class PunktTrainer extends PunktBaseClass {
   }
 
   /**
+   * Method used to collect information about whether each token type occurs
+   * with different case patterns (i) overall, (ii) at sentence-initial
+   * positions, and (iii) at sentence-internal positions.
+   *
+   * @param  {array}   tokens - Training tokens.
+   * @return {Trainer}        - Returns itself for chaining purposes.
+   */
+  getOrthographyData(tokens) {
+    let context = 'internal';
+
+    for (let i = 0, l = tokens.length; i < l; i++) {
+      const token = tokens[i];
+
+      // If we encounter a paragraph break, then it's a good sign that it's
+      // a sentence break. But err on the side of caution (by not positing
+      // a sentence break) if we just saw an abbreviation.
+      if (token.paragraphStart && context !== 'unknown')
+        context = 'initial';
+
+      // If we are at the beginning of a line, then we can't decide between
+      // "internal" and "initial"
+      if (token.lineStart && context === 'internal')
+        context = 'unknown';
+
+      // Find the case-normalized type of the token. If it's a sentence-final
+      // token, strip off the period.
+      const type = token.typeNoSentencePeriod();
+
+      // Update the orthographic context table.
+      const flag = ORTHO_MAP[`${context}§${token.firstCase()}`] || 0;
+
+      if (flag)
+        this.params.addOrthographicContext(type, flag);
+
+      // Decide whether the newt word is at a sentence boundary
+      if (token.sentenceBreak) {
+        if (!(token.isNumber || token.isInitial))
+          context = 'initial';
+        else
+          context = 'unknown';
+      }
+      else if (token.ellipsis || token.abbreviation) {
+        context = 'unknown';
+      }
+      else {
+        context = 'internal';
+      }
+    }
+  }
+
+  /**
    * Method used to train a model based on the given text.
    *
    * @param  {string} text - The training text.
@@ -535,6 +655,10 @@ export class PunktTrainer extends PunktBaseClass {
     // Make a preliminary pass through the document, marking likely sentence
     // breaks, abbreviations, and ellipsis tokens.
     this.annotateFirstPass(tokens);
+
+    // Check what context each word type can appear in, given the case of its
+    // first letter.
+    this.getOrthographyData(tokens);
   }
 }
 

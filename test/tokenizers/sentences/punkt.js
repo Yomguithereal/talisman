@@ -40,6 +40,23 @@ describe.only('punkt', function() {
       assert(!normalToken.periodFinal);
       assert(periodToken.periodFinal);
     });
+
+    it('the token method should work correctly.', function() {
+      const periodToken = new PunktToken('John.'),
+            lowercaseToken = new PunktToken('john'),
+            strangeToken = new PunktToken('@');
+
+      assert.strictEqual(periodToken.typeNoPeriod(), 'john');
+      assert.strictEqual(periodToken.typeNoSentencePeriod(), 'john.');
+      periodToken.sentenceBreak = true;
+      assert.strictEqual(periodToken.typeNoSentencePeriod(), 'john');
+      assert(!lowercaseToken.firstUpper());
+      assert(lowercaseToken.firstLower());
+      assert.strictEqual(lowercaseToken.firstCase(), 'lower');
+      assert(!strangeToken.firstUpper());
+      assert(!strangeToken.firstLower());
+      assert.strictEqual(strangeToken.firstCase(), 'none');
+    });
   });
 
   describe('base', function() {
@@ -59,6 +76,7 @@ describe.only('punkt', function() {
     it('should correctly train.', function() {
       const trainer = new PunktTrainer({verbose: true});
       trainer.train('Hello John. What is that you\'re doing? Mr. Lozano was not around today.');
+      console.log(trainer);
     });
   });
 });
