@@ -212,7 +212,8 @@ class PunktParameters {
 const RE_ELLIPSIS = /\.\.+$/,
       RE_NUMERIC = /^-?[\.,]?\d[\d,\.-]*\.?$/,
       RE_INITIAL = /[^\W\d]\.$/,
-      RE_ALPHA = /[^\W\d]+$/;
+      RE_ALPHA = /[^\W\d]+$/,
+      RE_NON_PUNCT = /[^\W\d]/;
 
 /**
  * Class representing a token of text with annotations produced during
@@ -235,6 +236,7 @@ export class PunktToken {
     this.isNumber = this.type === '##number##';
     this.isInitial = RE_INITIAL.test(string);
     this.isAlpha = RE_ALPHA.test(string);
+    this.isNonPunctuation = RE_NON_PUNCT.test(string);
     this.isInitialAlpha = /^[^\W\d]/.test(string);
 
     for (const k in params)
@@ -313,15 +315,10 @@ const ABBREV = 0.3,
       IGNORE_ABBREV_PENALTY = false,
       ABBREV_BACKOFF = 5,
       COLLOCATION = 7.88,
-      SENTENCE_STARTER = 30,
-      INCLUDE_ALL_COLLOCATIONS = false,
-      INCLUDE_ABBREV_COLLOCATIONS = false,
-      MIN_COLLOCATION_FREQUENCY = 1;
-
-/**
- * Regular expression matching token types that are not merely punctuation.
- */
-const RE_NON_PUNCT = /[^\W\d]/;
+      SENT_STARTER = 30,
+      INCLUDE_ALL_COLLOCS = false,
+      INCLUDE_ABBREV_COLLOCS= false,
+      MIN_COLLOC_FREQ = 1;
 
 /**
  * Punkt abstract class used by both the Trainer & the Tokenizer classes.
@@ -385,7 +382,7 @@ export class PunktBaseClass {
    * @param  {array} tokens   - The tokens to annotate.
    * @return {PunktBaseClass} - Returns itself for chaining purposes.
    */
-  annotateFirstPass(tokens) {
+  _annotateFirstPass(tokens) {
     for (let i = 0, l = tokens.length; i < l; i++) {
       const token = tokens[i],
             string = token.string;
@@ -461,6 +458,10 @@ export class PunktTrainer extends PunktBaseClass {
 
     // Number of words ending in period in the training data.
     this.periodTokenCount = 0;
+
+    // A frequency distribution giving the frequency of all bigrams in the
+    // training data where the first word ends in a period.
+    this.collocationFdist = new FrequencyDistribution();
 
     // A frequency distribution givin the frequency of all bigrams in the
     // training data where the first word ends in a period.
@@ -551,7 +552,7 @@ export class PunktTrainer extends PunktBaseClass {
    * @param  {array}   tokens - Training tokens.
    * @return {Trainer}        - Returns itself for chaining purposes.
    */
-  getOrthographyData(tokens) {
+  _getOrthographyData(tokens) {
     let context = 'internal';
 
     for (let i = 0, l = tokens.length; i < l; i++) {
@@ -592,6 +593,92 @@ export class PunktTrainer extends PunktBaseClass {
         context = 'internal';
       }
     }
+  }
+
+  /**
+   * Method determining whether we stand before a rare abbreviation. A word
+   * type is counted as a rare abbreviation if:
+   *   - it's not already marked as an abbreviation
+   *   - it occurs fewer than ABBREV_BACKOFF times
+   *   - either it is followed by a sentence-internal punctuation mark, OR its
+   *     is followed by a lower-case word that sometimes appears with upper-case
+   *     but never occurs with lower case at the beginning of sentences.
+   *
+   * @param  {PunktToken} currentToken - The token.
+   * @param  {PunktToken} nextToken    - The next token.
+   * @return {boolean}
+   */
+  _isRareAbbreviationType(currentToken, nextToken) {
+    if (currentToken.abbreviation || !currentToken.sentenceBreak)
+      return false;
+
+    // Find the case-normalized type of the token. If it's a sentence-final
+    // token, strip off the period.
+    const type = currentToken.typeNoSentencePeriod();
+
+    // Proceed only if the type hasn't been categorized as an abbreviation
+    // already, and is sufficiently rare.
+    const count = this.typeFdist.get(type) + this.typeFdist.get(type.slice(0, -1));
+
+    if (this.params.abbreviationTypes.has(type) || count >= ABBREV_BACKOFF)
+      return false;
+
+    // Record this type as an abbreviation if the next token is a
+    // sentence-internal punctuation mark.
+    if (this.vars.internalPunctuation.has(nextToken.string[0]))
+      return true;
+
+    // Record this type as an abbreviation if the next token:
+    //   (i) starts with a lower case letter,
+    //   (ii) sometimes occurs with an uppercase letter,
+    //   (iii) nevers occurs with an uppercase letter sentence-internally
+    else if (nextToken.firstLower()) {
+      const nextType = nextToken.typeNoSentencePeriod(),
+            context = this.params.orthographicContext[nextType];
+
+      if ((context & ORTHO_BEG_UC) && !(context & ORTHO_MID_UC))
+        return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Method returning whether, given a token and the token that precedes it if
+   * it seems clear that the token is beginning a sentence.
+   *
+   * @param  {PunktToken} token         - The token.
+   * @param  {PunktToken} previousToken - The previous token.
+   * @return {boolean}
+   */
+  _isPotentialSentenceStarter(token, previousToken) {
+
+    // If a token (i) is preceded by a sentence break that is not a potential
+    // ordinal number or initial, and (ii) is alphabetic, then it is a
+    // sentence starter.
+    return (
+      previousToken.sentenceBreak &&
+      !(previousToken.isNumber || previousToken.isInitial) &&
+      token.isAlpha
+    );
+  }
+
+  /**
+   * Method used to determine whether the pair of tokens may form
+   * a collocation given log-likelihood statistics.
+   *
+   * @param  {PunktToken} firstToken  - first The token.
+   * @param  {PunktToken} secondToken - The second token.
+   * @return {boolean}
+   */
+  _isPotentialCollocation(firstToken, secondToken) {
+    return (
+      (INCLUDE_ALL_COLLOCS ||
+       (INCLUDE_ABBREV_COLLOCS && firstToken.abbreviation) ||
+       (firstToken.sentenceBreak && (firstToken.isNumber || firstToken.isInitial))) &&
+      firstToken.isNonPunctuation &&
+      secondToken.isNonPunctuation
+    );
   }
 
   /**
@@ -654,11 +741,49 @@ export class PunktTrainer extends PunktBaseClass {
 
     // Make a preliminary pass through the document, marking likely sentence
     // breaks, abbreviations, and ellipsis tokens.
-    this.annotateFirstPass(tokens);
+    this._annotateFirstPass(tokens);
 
     // Check what context each word type can appear in, given the case of its
     // first letter.
-    this.getOrthographyData(tokens);
+    this._getOrthographyData(tokens);
+
+    // We need total number of sentence breaks to find sentence starters
+    for (let i = 0, l = tokens.length; i < l; i++) {
+      if (tokens[i].sentenceBreak)
+        this.sentenceBreakCount++;
+    }
+
+    // The remaining heuristics relate to pairs of tokens where the first ends
+    // in a period.
+    for (let i = 0, l = tokens.length; i < l; i++) {
+      const currentToken = tokens[i],
+            nextToken = tokens[i + 1];
+
+      if (!currentToken.periodFinal || !nextToken)
+        continue;
+
+      // If the first token a rare abbreviation?
+      if (this._isRareAbbreviationType(currentToken, nextToken)) {
+        this.params.abbreviationTypes.add(currentToken.typeNoPeriod());
+
+        if (this.verbose)
+          console.log('  Rare abbreviation: ' + currentToken.type);
+      }
+
+      // Does the second token have a high likelihood of starting a sentence?
+      if (this._isPotentialSentenceStarter(nextToken, currentToken))
+        this.sentenceStarterFdist.add(nextToken.type);
+
+      // Is this bigram a potential collocation?
+      if (this._isPotentialCollocation(currentToken, nextToken)) {
+        const hashedBigram = [
+          currentToken.typeNoPeriod(),
+          nextToken.typeNoSentencePeriod()
+        ].join(SEP);
+
+        this.collocationFdist.add(hashedBigram);
+      }
+    }
   }
 }
 
