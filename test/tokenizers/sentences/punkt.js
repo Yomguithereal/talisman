@@ -11,7 +11,7 @@ import {
   PunktTrainer
 } from '../../../src/tokenizers/sentences/punkt';
 
-describe.only('punkt', function() {
+describe.skip('punkt', function() {
   const text = 'Hello John. What is that you\'re doing?';
 
   describe('language variables', function() {

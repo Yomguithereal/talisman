@@ -21,7 +21,10 @@
 /**
  * Hash separator.
  *
- * TODO: is this necessary?
+ * Note: this is necessary because of JavaScript's lack of tuples and the
+ * derived possibility to use tuples as object keys. (ES6 Map won't resolve
+ * the issue either since the key comparison is done through reference
+ * comparison & not by hashing).
  */
 const SEP = '‡';
 
@@ -422,7 +425,7 @@ export class PunktBaseClass {
  * @param {number} b  - Count of <b>.
  * @param {number} ab - Count of <ab>.
  * @param {number} N  - Number of elements in the distribution.
- * @return {number}   - The log-likelihood
+ * @return {number}   - The log-likelihood.
  */
 function dunningLogLikelihood(a, b, ab, N) {
   const p1 = b / N,
@@ -432,6 +435,39 @@ function dunningLogLikelihood(a, b, ab, N) {
         alternativeHyphothesis = ab * Math.log(p2) + (a - ab) * Math.log(1 - p2);
 
   const likelihood = nullHypothesis - alternativeHyphothesis;
+
+  return (-2 * likelihood);
+}
+
+/**
+ * A function that wil just compute log-likelihood estimate, in the original
+ * paper, it's described in algorithm 6 and 7.
+ *
+ * Note: this SHOULD be the original Dunning log-likelihood values.
+ *
+ * @param {number} a  - Count of <a>.
+ * @param {number} b  - Count of <b>.
+ * @param {number} ab - Count of <ab>.
+ * @param {number} N  - Number of elements in the distribution.
+ * @return {number}   - The log-likelihood.
+ */
+function colLogLikelihood(a, b, ab, N) {
+  const p = b / N,
+        p1 = ab / a,
+        p2 = (b - ab) / (N - a);
+
+  const summand1 = ab * Math.log(p) + (a - ab) * Math.log(1 - p),
+        summand2 = (b - ab) * Math.log(p) + (N - a - b + ab) * Math.log(1 - p);
+
+  let summand3 = 0;
+  if (a !== ab)
+    summand3 = ab * Math.log(p1) + (a - ab) * Math.log(1 - p1);
+
+  let summand4 = 0;
+  if (b !== ab)
+    summand4 = (b - ab) * Math.log(p2) + (N - a - b + ab) * Math.log(1 - p2);
+
+  const likelihood = summand1 + summand2 - summand3 - summand4;
 
   return (-2 * likelihood);
 }
@@ -476,6 +512,72 @@ export class PunktTrainer extends PunktBaseClass {
     // finalized
     this.finalized = true;
   }
+
+  /**---------------------------------------------------------------------------
+   * Overhead reduction.
+   **---------------------------------------------------------------------------
+   */
+
+  /**---------------------------------------------------------------------------
+   * Orthographic data.
+   **---------------------------------------------------------------------------
+   */
+
+  /**
+   * Method used to collect information about whether each token type occurs
+   * with different case patterns (i) overall, (ii) at sentence-initial
+   * positions, and (iii) at sentence-internal positions.
+   *
+   * @param  {array}   tokens - Training tokens.
+   * @return {PunktTrainer}        - Returns itself for chaining purposes.
+   */
+  _getOrthographyData(tokens) {
+    let context = 'internal';
+
+    for (let i = 0, l = tokens.length; i < l; i++) {
+      const token = tokens[i];
+
+      // If we encounter a paragraph break, then it's a good sign that it's
+      // a sentence break. But err on the side of caution (by not positing
+      // a sentence break) if we just saw an abbreviation.
+      if (token.paragraphStart && context !== 'unknown')
+        context = 'initial';
+
+      // If we are at the beginning of a line, then we can't decide between
+      // "internal" and "initial"
+      if (token.lineStart && context === 'internal')
+        context = 'unknown';
+
+      // Find the case-normalized type of the token. If it's a sentence-final
+      // token, strip off the period.
+      const type = token.typeNoSentencePeriod();
+
+      // Update the orthographic context table.
+      const flag = ORTHO_MAP[`${context}§${token.firstCase()}`] || 0;
+
+      if (flag)
+        this.params.addOrthographicContext(type, flag);
+
+      // Decide whether the newt word is at a sentence boundary
+      if (token.sentenceBreak) {
+        if (!(token.isNumber || token.isInitial))
+          context = 'initial';
+        else
+          context = 'unknown';
+      }
+      else if (token.ellipsis || token.abbreviation) {
+        context = 'unknown';
+      }
+      else {
+        context = 'internal';
+      }
+    }
+  }
+
+  /**---------------------------------------------------------------------------
+   * Abbreviation.
+   **---------------------------------------------------------------------------
+   */
 
   /**
    * Method used to reclassify the given token's type if:
@@ -545,57 +647,6 @@ export class PunktTrainer extends PunktBaseClass {
   }
 
   /**
-   * Method used to collect information about whether each token type occurs
-   * with different case patterns (i) overall, (ii) at sentence-initial
-   * positions, and (iii) at sentence-internal positions.
-   *
-   * @param  {array}   tokens - Training tokens.
-   * @return {Trainer}        - Returns itself for chaining purposes.
-   */
-  _getOrthographyData(tokens) {
-    let context = 'internal';
-
-    for (let i = 0, l = tokens.length; i < l; i++) {
-      const token = tokens[i];
-
-      // If we encounter a paragraph break, then it's a good sign that it's
-      // a sentence break. But err on the side of caution (by not positing
-      // a sentence break) if we just saw an abbreviation.
-      if (token.paragraphStart && context !== 'unknown')
-        context = 'initial';
-
-      // If we are at the beginning of a line, then we can't decide between
-      // "internal" and "initial"
-      if (token.lineStart && context === 'internal')
-        context = 'unknown';
-
-      // Find the case-normalized type of the token. If it's a sentence-final
-      // token, strip off the period.
-      const type = token.typeNoSentencePeriod();
-
-      // Update the orthographic context table.
-      const flag = ORTHO_MAP[`${context}§${token.firstCase()}`] || 0;
-
-      if (flag)
-        this.params.addOrthographicContext(type, flag);
-
-      // Decide whether the newt word is at a sentence boundary
-      if (token.sentenceBreak) {
-        if (!(token.isNumber || token.isInitial))
-          context = 'initial';
-        else
-          context = 'unknown';
-      }
-      else if (token.ellipsis || token.abbreviation) {
-        context = 'unknown';
-      }
-      else {
-        context = 'internal';
-      }
-    }
-  }
-
-  /**
    * Method determining whether we stand before a rare abbreviation. A word
    * type is counted as a rare abbreviation if:
    *   - it's not already marked as an abbreviation
@@ -643,6 +694,79 @@ export class PunktTrainer extends PunktBaseClass {
     return false;
   }
 
+  /**---------------------------------------------------------------------------
+   * Collocation finder.
+   **---------------------------------------------------------------------------
+   */
+
+  /**
+   * Method used to determine whether the pair of tokens may form
+   * a collocation given log-likelihood statistics.
+   *
+   * @param  {PunktToken} firstToken  - first The token.
+   * @param  {PunktToken} secondToken - The second token.
+   * @return {boolean}
+   */
+  _isPotentialCollocation(firstToken, secondToken) {
+    return (
+      (INCLUDE_ALL_COLLOCS ||
+       (INCLUDE_ABBREV_COLLOCS && firstToken.abbreviation) ||
+       (firstToken.sentenceBreak && (firstToken.isNumber || firstToken.isInitial))) &&
+      firstToken.isNonPunctuation &&
+      secondToken.isNonPunctuation
+    );
+  }
+
+
+  /**
+   * Method used to generate likely collocations and their log-likelihood.
+   *
+   * @return {array} - An array of results.
+   */
+  _findCollocations() {
+    const types = this.collocationFdist.values(),
+          results = [];
+
+    for (let i = 0, l = types.length; i < l; i++) {
+      const hash = types[i];
+
+      // NOTE: beware memory reduction here!
+      // TODO: check that it works properly
+      const [type1, type2] = hash.split(SEP);
+
+      if (this.params.sentenceStarters.has(type2))
+        continue;
+
+      const colCount = this.collocationFdist.get(hash),
+            type1Count = this.typeFdist.get(type1) + this.typeFdist.get(type1 + '.'),
+            type2Count = this.typeFdist.get(type2) + this.typeFdist.get(type2 + '.');
+
+      if (type1Count > 1 &&
+          type2Count > 1 &&
+          MIN_COLLOC_FREQ < colCount &&
+          colCount <= Math.min(type1Count, type2Count)) {
+
+        const ll = colLogLikelihood(
+          type1Count,
+          type2Count,
+          colCount,
+          this.typeFdist.N
+        );
+
+        if (ll >= COLLOCATION &&
+            (this.typeFdist.N / type1Count > type2Count / colCount))
+          results.push([hash, ll]);
+      }
+    }
+
+    return results;
+  }
+
+  /**---------------------------------------------------------------------------
+   * Sentence starter finder.
+   **---------------------------------------------------------------------------
+   */
+
   /**
    * Method returning whether, given a token and the token that precedes it if
    * it seems clear that the token is beginning a sentence.
@@ -664,30 +788,57 @@ export class PunktTrainer extends PunktBaseClass {
   }
 
   /**
-   * Method used to determine whether the pair of tokens may form
-   * a collocation given log-likelihood statistics.
+   * Method using collocation heuristics for each candidate token to determine
+   * if it frequently starts sentences.
    *
-   * @param  {PunktToken} firstToken  - first The token.
-   * @param  {PunktToken} secondToken - The second token.
-   * @return {boolean}
+   * @return {array} - An array of results.
    */
-  _isPotentialCollocation(firstToken, secondToken) {
-    return (
-      (INCLUDE_ALL_COLLOCS ||
-       (INCLUDE_ABBREV_COLLOCS && firstToken.abbreviation) ||
-       (firstToken.sentenceBreak && (firstToken.isNumber || firstToken.isInitial))) &&
-      firstToken.isNonPunctuation &&
-      secondToken.isNonPunctuation
-    );
+  _findSentenceStarters() {
+    const types = this.sentenceStarterFdist.values(),
+          results = [];
+
+    for (let i = 0, l = types.length; i < l; i++) {
+      const type = types[i];
+
+      if (!type)
+        continue;
+
+      const typeAtBreakCount = this.sentenceStarterFdist.get(type),
+            typeCount = this.typeFdist.get(type);
+
+      // This is needed after memory reduction methods
+      if (typeCount < typeAtBreakCount)
+        continue;
+
+      const ll = colLogLikelihood(
+        this.sentenceBreakCount,
+        typeCount,
+        typeAtBreakCount,
+        this.typeFdist.N
+      );
+
+      if (ll >= SENT_STARTER &&
+          this.typeFdist.N / this.sentenceBreakCount > typeCount / typeAtBreakCount) {
+        results.push([type, ll]);
+      }
+    }
+
+    return results;
   }
+
+  /**---------------------------------------------------------------------------
+   * Training methods.
+   **---------------------------------------------------------------------------
+   */
 
   /**
    * Method used to train a model based on the given text.
    *
-   * @param  {string} text - The training text.
-   * @return {Trainer}     - Returns itself for chaining purposes.
+   * @param  {string}  text     - The training text.
+   * @param  {boolean} finalize - Whether to finalize the training or not.
+   * @return {PunktTrainer}     - Returns itself for chaining purposes.
    */
-  train(text) {
+  train(text, finalize = true) {
 
     // First we need to tokenize the words
     const tokens = this.tokenize(text);
@@ -726,7 +877,7 @@ export class PunktTrainer extends PunktBaseClass {
           this.params.abbreviationTypes.add(abbreviation);
 
           if (this.verbose)
-            console.log(`  Added abbreviation: [${score}] ${abbreviation}`);
+            console.log(`Added abbreviation: [${score}] ${abbreviation}`);
         }
       }
       else {
@@ -734,7 +885,7 @@ export class PunktTrainer extends PunktBaseClass {
           this.params.abbreviationTypes.delete(abbreviation);
 
           if (this.verbose)
-            console.log(`  Remove abbreviation [${score}] ${abbreviation}`);
+            console.log(`Remove abbreviation [${score}] ${abbreviation}`);
         }
       }
     }
@@ -767,7 +918,7 @@ export class PunktTrainer extends PunktBaseClass {
         this.params.abbreviationTypes.add(currentToken.typeNoPeriod());
 
         if (this.verbose)
-          console.log('  Rare abbreviation: ' + currentToken.type);
+          console.log('Rare abbreviation: ' + currentToken.type);
       }
 
       // Does the second token have a high likelihood of starting a sentence?
@@ -784,6 +935,46 @@ export class PunktTrainer extends PunktBaseClass {
         this.collocationFdist.add(hashedBigram);
       }
     }
+
+    // Should we finalize?
+    if (finalize)
+      this.finalize();
+
+    return this;
+  }
+
+  /**
+   * Method using the data that has been gathered in training to determine
+   * likely collocations and sentence starters.
+   *
+   * @return {PunktTrainer} - Returns itself for chaining purposes.
+   */
+  finalize() {
+    this.params.sentenceStarters.clear();
+    const sentenceStarters = this._findSentenceStarters();
+
+    for (let i = 0, l = sentenceStarters.length; i < l; i++) {
+      const [type, ll] = sentenceStarters[i];
+      this.params.sentenceStarters.add(type);
+
+      if (this.verbose)
+        console.log(`Sentence starter: [${ll}] ${type}`);
+    }
+
+    this.params.collocations.clear();
+    const collocations = this._findCollocations();
+
+    for (let i = 0, l = collocations.length; i < l; i++) {
+      const [hash, ll] = collocations[i];
+
+      this.params.collocations.add(hash);
+
+      if (this.verbose)
+        console.log(`Collocation: [${ll}] (${hash.split(SEP).join(', ')})`);
+    }
+
+    this.finalized = true;
+    return this;
   }
 }
 

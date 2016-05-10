@@ -46,6 +46,7 @@
     "nysiis",
     "perceptron",
     "porter",
+    "punkt",
     "schinke",
     "sorensen",
     "soundex",
