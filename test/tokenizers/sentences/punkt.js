@@ -11,10 +11,10 @@ import {
   PunktTrainer
 } from '../../../src/tokenizers/sentences/punkt';
 
-describe.skip('punkt', function() {
-  const text = 'Hello John. What is that you\'re doing?';
+describe('punkt', function() {
 
   describe('language variables', function() {
+    const text = 'Hello John. What is that you\'re doing?';
 
     it('should properly tokenize word.', function() {
       const vars = new PunktLanguageVariables();
@@ -60,6 +60,8 @@ describe.skip('punkt', function() {
   });
 
   describe('base', function() {
+    const text = 'Hello John. What is that you\'re doing?';
+
     it('should tokenize text properly.', function() {
       const base = new PunktBaseClass();
 
@@ -72,11 +74,75 @@ describe.skip('punkt', function() {
   });
 
   describe('trainer', function() {
+    const text = 'Hello John. What is that you\'re doing? Mr. Lozano was not around today. Say hello to you mom for me!',
+          shorterText = 'Hello John. What is that you\'re doing? Mr. Lozano was not around today.';
 
-    it('should correctly train.', function() {
-      const trainer = new PunktTrainer({verbose: true});
-      trainer.train('Hello John. What is that you\'re doing? Mr. Lozano was not around today.');
-      console.log(trainer);
+    it('should not break when training.', function() {
+      const trainer = new PunktTrainer();
+      trainer.train(shorterText);
+      assert(trainer.finalized);
+    });
+
+    it('should properly compute parameters.', function() {
+      const trainer = new PunktTrainer();
+      trainer.train(text);
+
+      const params = trainer.params;
+
+      assert.deepEqual(trainer.typeFdist.counts, {
+        'hello': 2,
+        'john.': 1,
+        'what': 1,
+        'is': 1,
+        'that': 1,
+        'you': 2,
+        '\'re': 1,
+        'doing': 1,
+        '?': 1,
+        'mr.': 1,
+        'lozano': 1,
+        'was': 1,
+        'not': 1,
+        'around': 1,
+        'today.': 1,
+        'say': 1,
+        'to': 1,
+        'mom': 1,
+        'for': 1,
+        'me': 1,
+        '!': 1
+      });
+
+      assert.deepEqual(params.orthographicContext, {
+        'me': 32,
+        'what': 2,
+        'around': 32,
+        'for': 32,
+        'that': 32,
+        'doing': 32,
+        'is': 32,
+        'say': 2,
+        'to': 32,
+        'mr.': 2,
+        'lozano': 8,
+        'mom': 32,
+        'not': 32,
+        'you': 32,
+        'john': 4,
+        'was': 32,
+        'hello': 40,
+        'today': 32
+      });
+
+      assert.deepEqual(trainer.collocationFdist.counts, {});
+      assert.deepEqual(trainer.sentenceStarterFdist.counts, {
+        what: 1,
+        say: 1
+      });
+
+      assert.strictEqual(trainer.periodTokenCount, 3);
+      assert.strictEqual(trainer.sentenceBreakCount, 4);
+      assert.deepEqual(trainer.params.abbreviationTypes, new Set(['mr']));
     });
   });
 });

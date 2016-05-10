@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 /**
  * Talisman tokenizers/sentences/punkt
  * ====================================
@@ -95,7 +96,7 @@ class FrequencyDistribution {
    *
    * @return {array} - An array of the unique values.
    */
-  values() {
+  values() {
     return Object.keys(this.counts);
   }
 }
@@ -203,7 +204,7 @@ class PunktParameters {
    * @return {PunktParameter}      - Returns itself for chaining purposes.
    */
   addOrthographicContext(type, flag) {
-    this.orthographicContext[type] = this.orthographicContext[type] || 0;
+    this.orthographicContext[type] = this.orthographicContext[type] || 0;
     this.orthographicContext[type] |= flag;
     return this;
   }
@@ -212,10 +213,10 @@ class PunktParameters {
 /**
  * Regular expressions used by the tokens.
  */
-const RE_ELLIPSIS = /\.\.+$/,
+const RE_ELLIPSIS = /^\.\.+$/,
       RE_NUMERIC = /^-?[\.,]?\d[\d,\.-]*\.?$/,
-      RE_INITIAL = /[^\W\d]\.$/,
-      RE_ALPHA = /[^\W\d]+$/,
+      RE_INITIAL = /^[^\W\d]\.$/,
+      RE_ALPHA = /^[^\W\d]+$/,
       RE_NON_PUNCT = /[^\W\d]/;
 
 /**
@@ -320,7 +321,7 @@ const ABBREV = 0.3,
       COLLOCATION = 7.88,
       SENT_STARTER = 30,
       INCLUDE_ALL_COLLOCS = false,
-      INCLUDE_ABBREV_COLLOCS= false,
+      INCLUDE_ABBREV_COLLOCS = false,
       MIN_COLLOC_FREQ = 1;
 
 /**
@@ -333,7 +334,7 @@ export class PunktBaseClass {
     const {
       vars = new PunktLanguageVariables(),
       params = new PunktParameters()
-    } = options || {};
+    } = options || {};
 
     this.params = params;
     this.vars = vars;
@@ -359,7 +360,7 @@ export class PunktBaseClass {
       if (line) {
         const words = this.vars.tokenizeWords(line);
 
-        tokens.push(new PunktToken(words[0], {lineStart: true, paragraphStart: paragraphStart}));
+        tokens.push(new PunktToken(words[0], {lineStart: true, paragraphStart}));
 
         paragraphStart = false;
 
@@ -553,7 +554,7 @@ export class PunktTrainer extends PunktBaseClass {
       const type = token.typeNoSentencePeriod();
 
       // Update the orthographic context table.
-      const flag = ORTHO_MAP[`${context}§${token.firstCase()}`] || 0;
+      const flag = ORTHO_MAP[`${context}§${token.firstCase()}`] || 0;
 
       if (flag)
         this.params.addOrthographicContext(type, flag);
@@ -899,7 +900,7 @@ export class PunktTrainer extends PunktBaseClass {
     this._getOrthographyData(tokens);
 
     // We need total number of sentence breaks to find sentence starters
-    for (let i = 0, l = tokens.length; i < l; i++) {
+    for (let i = 0, l = tokens.length; i < l; i++) {
       if (tokens[i].sentenceBreak)
         this.sentenceBreakCount++;
     }
