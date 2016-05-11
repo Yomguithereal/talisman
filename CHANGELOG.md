@@ -2,10 +2,11 @@
 
 ## 0.4.0
 
-* Adding the `stemmers/french/porter` namespace.
 * Adding the `phonetics/french/soundex` namespace.
 * Adding the `phonetics/french/soundex2` namespace.
 * Adding the `phonetics/french/phonex` namespace.
+* Adding the `stemmers/french/porter` namespace.
+* Adding the `tokenizers/sentences/punkt` namespace.
 * Moving the Cologne phonetic algorithm to the `phonetics/german/cologne` namespace.
 
 ## 0.3.0
