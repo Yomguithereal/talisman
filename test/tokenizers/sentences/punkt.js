@@ -149,7 +149,7 @@ describe('punkt', function() {
 
   // TODO: test realignment
   describe('tokenizer', function() {
-    const text = 'What a day... Hello John. What is that you\'re doing? Mr. Lozano was not around today. Say hello to you mom for me!',
+    const text = 'What a day... Hello John. What is that you\'re doing? Mr. Lozano was not around today. Say hello to your mom for me!',
           textToRealign = '(Hello.) Goodbye Mr. Jones. What are you doing?',
           trainer = new PunktTrainer();
 
@@ -166,7 +166,7 @@ describe('punkt', function() {
         [14, 25],
         [26, 52],
         [53, 85],
-        [86, 114]
+        [86, 115]
       ]);
     });
 
@@ -186,6 +186,30 @@ describe('punkt', function() {
         [0, 8],
         [9, 27],
         [28, 47]
+      ]);
+    });
+
+    it('should properly tokenize sentences.', function() {
+      const tokenizer = new PunktSentenceTokenizer(params);
+
+      assert.deepEqual(tokenizer.tokenize(text), [
+        'What a day...',
+        'Hello John.',
+        'What is that you\'re doing?',
+        'Mr. Lozano was not around today.',
+        'Say hello to your mom for me!'
+      ]);
+
+      assert.deepEqual(tokenizer.tokenize(textToRealign), [
+        '(Hello.)',
+        'Goodbye Mr. Jones.',
+        'What are you doing?'
+      ]);
+
+      assert.deepEqual(tokenizer.tokenize(textToRealign, false), [
+        '(Hello.',
+        ') Goodbye Mr. Jones.',
+        'What are you doing?'
       ]);
     });
   });

@@ -1266,7 +1266,7 @@ export class PunktSentenceTokenizer extends PunktBaseClass {
         continue;
       }
 
-      const match = text.substring(...slice2).match(this.vars.reBoundaryRealignment)
+      const match = text.substring(...slice2).match(this.vars.reBoundaryRealignment);
 
       if (match) {
         realigned.push([realignedSlice[0], slice2[0] + match[0].replace(/\s*$/g, '').length]);
@@ -1283,14 +1283,37 @@ export class PunktSentenceTokenizer extends PunktBaseClass {
   }
 
   /**
+   * Method returning a list of the spans of sentences in the text.
+   *
+   * @param  {string}  text               - Text to tokenize into sentences.
+   * @param  {boolean} realignBoundaries  - Should the tokenizer realign
+   *                                        boundaries?
+   * @return {array}                      - The array of sentences.
+   */
+  spanTokenize(text, realignBoundaries = true) {
+    let slices = this._slicesFromText(text);
+
+    if (realignBoundaries)
+      slices = this._realignBoundaries(text, slices);
+
+    return slices;
+  }
+
+  /**
    * Method used to tokenize the given text.
    *
-   * @param  {string} text               - Text to tokenize into sentences.
-   * @param  {boolean} realignBoundaries - Should the tokenizer realign
-   *                                       boundaries?
-   * @return {array}                     - The array of sentences.
+   * @param  {string}  text               - Text to tokenize into sentences.
+   * @param  {boolean} realignBoundaries  - Should the tokenizer realign
+   *                                        boundaries?
+   * @return {array}                      - The array of sentences.
    */
   tokenize(text, realignBoundaries = true) {
+    const spans = this.spanTokenize(text, realignBoundaries),
+          sentences = [];
 
+      for (let i = 0, l = spans.length; i < l; i++)
+        sentences.push(text.substring(...spans[i]));
+
+    return sentences;
   }
 }
