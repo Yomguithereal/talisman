@@ -147,18 +147,19 @@ describe('punkt', function() {
     });
   });
 
+  // TODO: test realignment
   describe('tokenizer', function() {
     const text = 'What a day... Hello John. What is that you\'re doing? Mr. Lozano was not around today. Say hello to you mom for me!',
+          textToRealign = '(Hello.) Goodbye Mr. Jones. What are you doing?',
           trainer = new PunktTrainer();
 
     trainer.train(text);
 
     const params = trainer.getParams();
 
-    it('should properly tokenize text.', function() {
-      const tokenizer = new PunktSentenceTokenizer(params);
-
-      const slices = tokenizer._slicesFromText(text);
+    it('should properly slice text.', function() {
+      const tokenizer = new PunktSentenceTokenizer(params),
+            slices = tokenizer._slicesFromText(text);
 
       assert.deepEqual(slices, [
         [0, 13],
@@ -166,6 +167,25 @@ describe('punkt', function() {
         [26, 52],
         [53, 85],
         [86, 114]
+      ]);
+    });
+
+    it('should properly realign slices.', function() {
+      const tokenizer = new PunktSentenceTokenizer(params),
+            slices = tokenizer._slicesFromText(textToRealign);
+
+      assert.deepEqual(slices, [
+        [0, 7],
+        [7, 27],
+        [28, 47]
+      ]);
+
+      const realigned = tokenizer._realignBoundaries(textToRealign, slices);
+
+      assert.deepEqual(realigned, [
+        [0, 8],
+        [9, 27],
+        [28, 47]
       ]);
     });
   });

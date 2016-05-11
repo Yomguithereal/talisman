@@ -1227,7 +1227,7 @@ export class PunktSentenceTokenizer extends PunktBaseClass {
         else {
 
           // Next sentence starts at the following punctuation
-          lastBreak = match.index + match[0].length + afterToken.length + 1;
+          lastBreak = match.index + match[0].length;
         }
       }
     }
@@ -1236,6 +1236,50 @@ export class PunktSentenceTokenizer extends PunktBaseClass {
     slices.push([lastBreak, text.length]);
 
     return slices;
+  }
+
+  /**
+   * Method used to attempt to realign punctuation that falls after the period
+   * but should otherwise be included in the same sentence.
+   *
+   * Example: "(Sent1.) Sent2." will otherwise be split as:
+   * ["(Sent1.", ") Sent2."] instead of ["(Sent1.)", "Sent2."].
+   *
+   * @param  {string} text   - Text to realign.
+   * @param  {array}  slices - Slices of text.
+   * @return {array}         - Realigned pieces.
+   */
+  _realignBoundaries(text, slices) {
+    const realigned = [];
+
+    let realign = 0;
+
+    for (let i = 0, l = slices.length; i < l; i++) {
+      const slice1 = slices[i],
+            slice2 = slices[i + 1];
+
+      const realignedSlice = [slice1[0] + realign, slice1[1]];
+
+      if (!slice2) {
+        if (text.substring(...realignedSlice))
+          realigned.push(realignedSlice);
+        continue;
+      }
+
+      const match = text.substring(...slice2).match(this.vars.reBoundaryRealignment)
+
+      if (match) {
+        realigned.push([realignedSlice[0], slice2[0] + match[0].replace(/\s*$/g, '').length]);
+        realign = match.index + match[0].length;
+      }
+      else {
+        realign = 0;
+        if (text.substring(...realignedSlice))
+          realigned.push(realignedSlice);
+      }
+    }
+
+    return realigned;
   }
 
   /**
