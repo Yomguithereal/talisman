@@ -8,7 +8,8 @@ import {
   PunktLanguageVariables,
   PunktToken,
   PunktBaseClass,
-  PunktTrainer
+  PunktTrainer,
+  PunktSentenceTokenizer
 } from '../../../src/tokenizers/sentences/punkt';
 
 describe('punkt', function() {
@@ -65,7 +66,7 @@ describe('punkt', function() {
     it('should tokenize text properly.', function() {
       const base = new PunktBaseClass();
 
-      const tokens = base.tokenize(text);
+      const tokens = base.tokenizeWords(text);
 
       assert(tokens.length === 9);
       assert(tokens[0].lineStart);
@@ -143,6 +144,29 @@ describe('punkt', function() {
       assert.strictEqual(trainer.periodTokenCount, 3);
       assert.strictEqual(trainer.sentenceBreakCount, 4);
       assert.deepEqual(trainer.params.abbreviationTypes, new Set(['mr']));
+    });
+  });
+
+  describe('tokenizer', function() {
+    const text = 'What a day... Hello John. What is that you\'re doing? Mr. Lozano was not around today. Say hello to you mom for me!',
+          trainer = new PunktTrainer();
+
+    trainer.train(text);
+
+    const params = trainer.getParams();
+
+    it('should properly tokenize text.', function() {
+      const tokenizer = new PunktSentenceTokenizer(params);
+
+      const slices = tokenizer._slicesFromText(text);
+
+      assert.deepEqual(slices, [
+        [0, 13],
+        [14, 25],
+        [26, 52],
+        [53, 85],
+        [86, 114]
+      ]);
     });
   });
 });

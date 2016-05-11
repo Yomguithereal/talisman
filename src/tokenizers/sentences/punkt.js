@@ -18,6 +18,7 @@
  * Kiss, Tibor and Strunk, Jan (2006): Unsupervised Multilingual Sentence
  * Boundary Detection.  Computational Linguistics 32: 485-525.
  */
+import {findall} from '../../helpers';
 
 /**
  * Hash separator.
@@ -126,21 +127,13 @@ export class PunktLanguageVariables {
 
     // Hyphen & ellipsis are multi-character punctuation
     this.reMultiCharacterPunctuation = /(?:\-{2,}|\.{2,}|(?:\.\s){2,}\.)/;
-  }
 
-  /**
-   * Method creating and returning a word tokenizer regular expression.
-   *
-   * TODO: does this have to be dynamic?
-   *
-   * @return {RegExp} - The regular expression.
-   */
-  getWordTokenizerRegExp() {
     const nonWord = this.reNonWordCharacters.source,
           multiChar = this.reMultiCharacterPunctuation.source,
-          wordStart = this.reWordStart.source;
+          wordStart = this.reWordStart.source,
+          sentEndChars = [...this.sentenceEndCharacters].join('');
 
-    const pattern = [
+    const wordTokenizerPattern = [
       '(',
         multiChar,
         '|',
@@ -156,7 +149,20 @@ export class PunktLanguageVariables {
       ')'
     ].join('');
 
-    return new RegExp(pattern, 'g');
+    this.reWordTokenizer = new RegExp(wordTokenizerPattern, 'g');
+
+    // After token is $1 and next token is $2
+    const periodContextPattern = [
+      '\\S*',
+      '[' + sentEndChars + ']',
+      '(?=(',
+        nonWord,
+        '|',
+        '\\s+(\\S+)',
+      '))'
+    ].join('');
+
+    this.rePeriodContext = new RegExp(periodContextPattern, 'g');
   }
 
   /**
@@ -166,7 +172,7 @@ export class PunktLanguageVariables {
    * @return {array}         - An array of matches.
    */
   tokenizeWords(string) {
-    return string.match(this.getWordTokenizerRegExp());
+    return string.match(this.reWordTokenizer);
   }
 }
 
@@ -322,12 +328,16 @@ const ABBREV = 0.3,
       SENT_STARTER = 30,
       INCLUDE_ALL_COLLOCS = false,
       INCLUDE_ABBREV_COLLOCS = false,
-      MIN_COLLOC_FREQ = 1;
+      MIN_COLLOC_FREQ = 1,
+      PUNCTUATION = new Set(';:,.!?');
 
 /**
  * Punkt abstract class used by both the Trainer & the Tokenizer classes.
  *
  * @constructor
+ * @param {object}                 [options]        - Instantiation options.
+ * @param {PunktLanguageVariables} [options.vars]   - Language variables.
+ * @param {PunktParameters}        [options.params] - Parameters
  */
 export class PunktBaseClass {
   constructor(options) {
@@ -348,7 +358,7 @@ export class PunktBaseClass {
    * @param  {string} text - The raw text to tokenize.
    * @return {array}       - The resulting tokens.
    */
-  tokenize(text) {
+  tokenizeWords(text) {
     let paragraphStart = false;
 
     const lines = text.split(/\r?\n/g),
@@ -477,6 +487,8 @@ function colLogLikelihood(a, b, ab, N) {
  * Class representing the Punkt trainer.
  *
  * @constructor
+ * @param {object}  [options]         - Instantiation options.
+ * @param {boolean} [options.verbose] - Should the trainer log information?
  */
 export class PunktTrainer extends PunktBaseClass {
   constructor(options) {
@@ -518,6 +530,8 @@ export class PunktTrainer extends PunktBaseClass {
    * Overhead reduction.
    **---------------------------------------------------------------------------
    */
+
+  // TODO: figure out this part
 
   /**---------------------------------------------------------------------------
    * Orthographic data.
@@ -842,7 +856,7 @@ export class PunktTrainer extends PunktBaseClass {
   train(text, finalize = true) {
 
     // First we need to tokenize the words
-    const tokens = this.tokenize(text);
+    const tokens = this.tokenizeWords(text);
 
     this.finalized = false;
 
@@ -977,11 +991,262 @@ export class PunktTrainer extends PunktBaseClass {
     this.finalized = true;
     return this;
   }
+
+  /**
+   * Method returning the parameters found by the trainer.
+   *
+   * @return {PunktParameters} - The parameters.
+   */
+  getParams() {
+    if (!this.finalized)
+      this.finalize();
+    return this.params;
+  }
 }
 
 /**
  * Class representing the Punkt sentence tokenizer.
  *
  * @constructor
+ * @param {PunktParameters} params - Parameters to use to perform tokenization.
  */
-export class PunktSentenceTokenizer extends PunktBaseClass {}
+export class PunktSentenceTokenizer extends PunktBaseClass {
+  constructor(params) {
+    super();
+
+    this.params = params;
+  }
+
+  /**---------------------------------------------------------------------------
+   * Annotation methods.
+   **---------------------------------------------------------------------------
+   */
+
+  /**
+   * Method used to decide whether the given token is the first token in a
+   * sentence.
+   *
+   * @param  {PunktToken}     token - The considered token.
+   * @return {boolean|string}       - The decision
+   */
+  _orthographicHeuristic(token) {
+
+    // Sentences don't start with punctuation marks
+    if (PUNCTUATION.has(token.string))
+      return false;
+
+    const context = this.params.orthographicContext[token.typeNoSentencePeriod()];
+
+    // If the word is capitalized, occurs at least once with a lower-case first
+    // letter, and never occurs with an upper-case first letter sentence
+    // internally, then it's a sentence starter.
+    if (token.firstUpper() &&
+        ((context & ORTHO_LC) && !(context & ORTHO_MID_UC))) {
+      return true;
+    }
+
+    // If the word is lower-case, and either (a) we have seen it used with
+    // upper-case, or (b) we have never seen it used sentence-initially with
+    // lower-case, then it's not a sentence starter.
+    if (token.firstLower() &&
+        ((context & ORTHO_UC) || !(context & ORTHO_BEG_LC))) {
+      return false;
+    }
+
+    // Otherwise, we are not really sure
+    return 'unknown';
+  }
+
+  /**
+   * Method used to perform the second pass of annotation by performing
+   * a token-based classification (section 4) over the given tokens, making
+   * use of the orthographic heuristic (4.1.1), collocation heuristic (4.1.2)
+   * and frequent sentence starter heuristic (4.1.3).
+   *
+   * @param  {array}                  tokens - Tokens to annotate.
+   * @return {PunktSentenceTokenizer}        - Returns itself for chaining.
+   */
+  _annotateSecondPass(tokens) {
+
+    for (let i = 0, l = tokens.length; i < l; i++) {
+      const currentToken = tokens[i],
+            nextToken = tokens[i + 1];
+
+      // Is it the last token? We can't do anything then.
+      if (!nextToken)
+        return;
+
+      // We only care about words ending in periods.
+      if (!currentToken.periodFinal)
+        continue;
+
+      const currentType = currentToken.typeNoPeriod(),
+            nextType = nextToken.typeNoSentencePeriod(),
+            tokenIsInitial = currentToken.isInitial;
+
+      // [4.1.2. Collocation Heuristic]: If there is a collocation between
+      // the word before and after the period, then label the token as an
+      // abbreviation and NOT a sentence break. Note that collocations with
+      // frequent sentence starters as their second word are excluded in
+      // training.
+      const hash = [currentType, nextType].join(SEP);
+      if (this.params.collocations.has(hash)) {
+        currentToken.sentenceBreak = false;
+        currentToken.abbreviation = true;
+        continue;
+      }
+
+      // [4.2. Token-Based Reclassification of Abbreviation]: If the token
+      // is an abbreviation or an ellipsis, then decide whether we should
+      // also classify it as a sentence break.
+      if ((currentToken.abbreviation || currentToken.ellipsis) &&
+          !tokenIsInitial) {
+
+        // [4.1.1. Orthographic Heuristic]: Check if there is orthographic
+        // evidence about whether the next word starts a sentence or not.
+        const isSentenceStarter = this._orthographicHeuristic(nextToken);
+
+        if (isSentenceStarter === true) {
+          currentToken.sentenceBreak = true;
+          continue;
+        }
+
+        // [4.1.3. Frequent Sentence Starter Heuristic]: If the next word
+        // is capitalized, and is a member of the frequent-sentence-starters
+        // list, then label token a sentence break.
+        if (nextToken.firstUpper() &&
+            this.params.sentenceStarters.has(nextType)) {
+          currentToken.sentenceBreak = true;
+          continue;
+        }
+      }
+
+      // [4.3. Token-Based Detection of Initials and Ordinals]: Check if any
+      // initials or ordinals tokens are marked as sentence breaks should be
+      // reclassified as abbreviations.
+      if (tokenIsInitial || currentType === '##number##') {
+
+        // [4.1.1. Orthographic Heuristic]: Check if there is orthographic
+        // evidence about whether the next word starts a sentence or not.
+        const isSentenceStarter = this._orthographicHeuristic(nextToken);
+
+        if (isSentenceStarter === false) {
+          currentToken.sentenceBreak = false;
+          currentToken.abbreviation = true;
+          continue;
+        }
+
+        // Special heuristic for initials: if orthographic heuristic is
+        // unknown, and next word is always capitalized, then mark as
+        // abbreviation ("J. Bach", for instance).
+        if (isSentenceStarter === 'unknown' &&
+            tokenIsInitial &&
+            nextToken.firstUpper() &&
+            !(this.params.orthographicContext[nextType] & ORTHO_LC)) {
+          currentToken.sentenceBreak = false;
+          currentToken.abbreviation = true;
+        }
+      }
+    }
+  }
+
+  /**
+   * Given a set of tokens augmented with markers for line-start and
+   * paragraph-start, returns those tokens with full annotation including
+   * predicted sentence breaks.
+   *
+   * @param  {array}                  tokens - Tokens to annotate.
+   * @return {PunktSentenceTokenizer}        - Returns itself for chaining.
+   */
+  _annotateTokens(tokens) {
+
+    // Make a preliminary pass through the document, marking likely sentence
+    // breaks, abbreviations, and ellipsis tokens.
+    this._annotateFirstPass(tokens);
+
+    // Make a second pass through the document, using token context info
+    // to change our preliminary decisions about where sentence breaks,
+    // abbreviations, and ellipsis occurs.
+    this._annotateSecondPass(tokens);
+
+    return this;
+  }
+
+  /**---------------------------------------------------------------------------
+   * Tokenization methods.
+   **---------------------------------------------------------------------------
+   */
+
+  /**
+   * Method returning whether the given text includes a sentence break.
+   *
+   * @param  {string}  text - Text to analyze.
+   * @return {boolean}
+   */
+  _textContainsSentenceBreak(text) {
+    const tokens = this.tokenizeWords(text);
+
+    // Let's annotate the tokens
+    this._annotateTokens(tokens);
+
+    // Ignoring last token (l - 1)
+    for (let i = 0, l = tokens.length - 1; i < l; i++) {
+      if (tokens[i].sentenceBreak)
+        return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Method used to slice the given text according to the language variables.
+   *
+   * @param  {string} text - Text to slice.
+   * @return {array}       - The slices.
+   */
+  _slicesFromText(text) {
+    const slices = [],
+          matches = findall(this.vars.rePeriodContext, text);
+
+    let lastBreak = 0;
+
+    for (let i = 0, l = matches.length; i < l; i++) {
+      const match = matches[i],
+            afterToken = match[1],
+            nextToken = match[2],
+            context = match[0] + afterToken;
+
+      if (this._textContainsSentenceBreak(context)) {
+        slices.push([lastBreak, match.index + match[0].length]);
+
+        if (nextToken) {
+
+          // Next sentence starts after whitespace
+          lastBreak = match.index + match[0].length + 1;
+        }
+        else {
+
+          // Next sentence starts at the following punctuation
+          lastBreak = match.index + match[0].length + afterToken.length + 1;
+        }
+      }
+    }
+
+    // Last slice
+    slices.push([lastBreak, text.length]);
+
+    return slices;
+  }
+
+  /**
+   * Method used to tokenize the given text.
+   *
+   * @param  {string} text               - Text to tokenize into sentences.
+   * @param  {boolean} realignBoundaries - Should the tokenizer realign
+   *                                       boundaries?
+   * @return {array}                     - The array of sentences.
+   */
+  tokenize(text, realignBoundaries = true) {
+
+  }
+}
