@@ -12,7 +12,9 @@
  */
 import {SIMPLE_QUOTES} from '../../regex/classes';
 
-// TODO: test "empire", "eschatologie", "schizophrénie"
+// TODO: test "empire" (only s after p is silent), "eschatologie", "schizophrénie"
+// TODO: test la batterie restante d'homophones
+// TODO: fix censé
 
 /**
  * Helpers.
