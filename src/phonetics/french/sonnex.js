@@ -10,9 +10,9 @@
  * [Reference]:
  * https://github.com/Zigazou/Sonnex
  */
-import {SINGLE_QUOTES} from '../../regex/classes';
+import {SIMPLE_QUOTES} from '../../regex/classes';
 
-// TODO: test "empire", "eschatologie"
+// TODO: test "empire", "eschatologie", "schizophrénie"
 
 /**
  * Helpers.
@@ -20,7 +20,7 @@ import {SINGLE_QUOTES} from '../../regex/classes';
 const VOWELS = new Set('aâàäeéèêëiîïoôöuùûüyœ'),
       CONSONANTS = new Set('bcçdfghjklmnpqrstvwxyz');
 
-const DROP_SINGLE_QUOTES = new RegExp('[' + SINGLE_QUOTES + ']', 'g');
+const DROP_SIMPLE_QUOTES = new RegExp('[' + SIMPLE_QUOTES + ']', 'g');
 
 function isVowel(letter) {
   return VOWELS.has(letter);
@@ -56,6 +56,9 @@ const EXCEPTIONS = {
 //   [0]: The pattern to match (string if exact, regex if fuzzy)
 //   [1]: The encoding. If passed as a function, the function must return
 //        both the encoding and the continuation string.
+//
+// Note: it's possible to optimize the rules not to use regular expression
+//       at all.
 const RULES = {
   a: [
     ['a', 'a'],
@@ -89,8 +92,6 @@ const RULES = {
     [/^an(.)(.*)/, (c, cs) => {
       if (c === 'n')
         return ['an', cs];
-      if (c === 't')
-        return ['2t', cs];
       if (isVowel(c))
         return ['an', c + cs];
       return ['2', c + cs];
@@ -255,6 +256,174 @@ const RULES = {
         return ['Et', cs];
       return ['E', c + cs];
     }]
+  ],
+
+  f: [
+    [/^ff(.*)/, 'f']
+  ],
+
+  g: [
+    ['g', ''],
+    [/^g(e.*)/, 'j'],
+    [/^gé(.*)/, 'jE'],
+    [/^g(i.*)/, 'j'],
+    [/^gn(.*)/, 'n'],
+    [/^g(y.*)/, 'j'],
+    [/^guë(.*)/, 'gu'],
+    [/^gu(.*)/, 'g'],
+    [/^gg(.*)/, 'g']
+  ],
+
+  h: [
+    [/^h(.*)/, '']
+  ],
+
+  i: [
+    ['ic', 'ik'],
+    ['ics', 'ik'],
+    [/^ienn(.*)/, 'iEn'],
+    [/^ien(.*)/, 'i1'],
+    ['in', '1'],
+    [/^in(.)(.*)/, (c, cs) => {
+      if (c === 'n')
+        return ['in', cs];
+      if (isVowel(c))
+        return ['in', c + cs];
+      return ['1', c + cs];
+    }],
+    ['issent', 'is'],
+    [/^is(.)(.*)/, (c, cs) => {
+      if (c === 's')
+        return ['is', cs];
+      if (isConsonant(c))
+        return ['is', c + cs];
+      return ['iz', c + cs];
+    }],
+    [/^ix(i.*)/, 'iz'],
+    [/^ill(.*)/, 'i'],
+    [/^i(.*)/, 'i']
+  ],
+
+  ï: [
+    [/^ï(.*)/, 'i']
+  ],
+
+  l: [
+    [/^ll(.*)/, 'l']
+  ],
+
+  m: [
+    [/^mm(.*)/, 'm']
+  ],
+
+  n: [
+    [/^nn(.*)/, 'n']
+  ],
+
+  o: [
+    [/^occ(.*)/, 'ok'],
+    [/^oeu?(.*)/, 'e'],
+    ['oient', 'Ua'],
+    [/^oin(.*)/, 'U1'],
+    [/^oi(.*)/, 'Ua'],
+    [/^omm(.*)/, 'om'],
+    [/^om(.)(.*)/, (c, cs) => {
+      if (isVowel(c))
+        return ['om', c + cs];
+      return ['3', c + cs];
+    }],
+    [/^onn(.*)/, 'on'],
+    [/^on(.*)/, '3'],
+    ['ossent', 'os'],
+    [/^os(.)(.*)/, (c, cs) => {
+      if (c === 's')
+        return ['os', cs];
+      if (isConsonant(c))
+        return ['os', c + cs];
+      return ['oz', c + cs];
+    }],
+    [/^o[uùû](.*)/, 'U']
+  ],
+
+  ô: [
+    [/^ô(.*)/, 'o']
+  ],
+
+  ö: [
+    [/^ô(.*)/, 'o']
+  ],
+
+  p: [
+    ['p', ''],
+    [/^ph(.*)/, 'f'],
+    [/^pp(.*)/, 'p'],
+    [/^pays(.*)/, cs => {
+      return ['pE', 'is' + cs];
+    }]
+  ],
+
+  q: [
+    [/^qu(r.*)/, 'ku'],
+    [/^qu(.*)/, 'k'],
+    [/^q(.*)/, 'k']
+  ],
+
+  r: [
+    [/^rr(.*)/, 'r']
+  ],
+
+  s: [
+    ['s', ''],
+    [/^ss(.*)/, 's'],
+    [/^st(.*)/, 'st'],
+    [/^sc(i.*)/, 's']
+  ],
+
+  t: [
+    ['t', ''],
+    [/^t(ier.*)/, 't'],
+    [/^ti(.)(.*)/, (v, cs) => {
+      if (isVowel(v))
+        return ['s', 'i' + v + cs];
+      return ['t', 'i' + v + cs];
+    }],
+    [/^tt(.*)/, 't']
+  ],
+
+  u: [
+    ['un', '1'],
+    [/^û(.*)/, 'u'],
+    ['ussent', 'us'],
+    [/^us(.*)/, (c, cs) => {
+      if (c === 's')
+        return ['us', cs];
+      if (isConsonant(c))
+        return ['us', c + cs];
+      return ['uz', c + cs];
+    }]
+  ],
+
+  w: [
+    [/^w(.*)/, 'v']
+  ],
+
+  x: [
+    ['x', ''],
+    [/^x(.)(.*)/, (c, cs) => {
+      if (c === 'c')
+        return ['ks', cs];
+      if (isVowel(c))
+        return ['kz', c + cs];
+      return ['ks', c + cs];
+    }]
+  ],
+
+  y: [
+    [/^y(.*)/, 'i']
+  ],
+
+  z: [
+    [/^zz(.*)/, 'z']
   ]
 };
 
@@ -272,7 +441,7 @@ export default function sonnex(word) {
 
   word = word
     .toLowerCase()
-    .replace(DROP_SINGLE_QUOTES, '')
+    .replace(DROP_SIMPLE_QUOTES, '')
     .replace(/œ/g, 'oe');
 
   // Some exceptions
@@ -285,6 +454,13 @@ export default function sonnex(word) {
   let current = word,
       code = '';
 
+  // If the word starts with "tien", we skip encoding the "t"
+  if (/^tien/.test(current)) {
+    current = current.slice(1);
+    code = 't';
+  }
+
+  // Encoding each letter of the word
   while (current.length) {
     const firstLetter = current[0];
 
@@ -310,9 +486,11 @@ export default function sonnex(word) {
         if (current === pattern) {
           found = true;
           code += encoding;
-          current = current.slice(encoding.length);
+          current = '';
           break;
         }
+
+        continue;
       }
 
       // Regex pattern
@@ -322,7 +500,7 @@ export default function sonnex(word) {
         found = true;
 
         if (typeof encoding === 'string') {
-          current = match[1];
+          current = match[1] || '';
         }
 
         else {

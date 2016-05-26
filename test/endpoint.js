@@ -46,6 +46,7 @@ describe('phonetics', function() {
 
   describe('french', function() {
     require('./phonetics/french/phonex.js');
+    require('./phonetics/french/sonnex.js');
     require('./phonetics/french/soundex.js');
     require('./phonetics/french/soundex2.js');
   });
