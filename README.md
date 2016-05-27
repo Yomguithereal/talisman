@@ -8,7 +8,7 @@ Talisman is a JavaScript library collecting series of algorithms related to the 
 
 * [Statistics](https://en.wikipedia.org/wiki/Statistics)
 * [Fuzzy logic & fuzzy matching](https://en.wikipedia.org/wiki/Approximate_string_matching)
-* [Natural Language Processing (NLP)](https://en.wikipedia.org/wiki/Natural_language_processing)
+* [Natural Language Processing](https://en.wikipedia.org/wiki/Natural_language_processing)
 * [Machine learning](https://en.wikipedia.org/wiki/Machine_learning)
 
 ## Installation
