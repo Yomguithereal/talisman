@@ -12,7 +12,7 @@
 import {squeeze} from '../../helpers';
 import deburr from 'lodash/deburr';
 
-// NOTE: ajouter RECUL comme exception
+// NOTE: ajouter RECUL & CUL comme exception?
 // NOTE: lookahead
 
 /**
@@ -173,7 +173,134 @@ const RULES = [
   [/(.+)INUTI([^V])/g, '$1INUSI$2'],
   [/([^O])UTIEN/g, '$1USIEN'],
   [/([^DE])RATI[E]$/, '$1RASI$2'],
-  [/([^SNEU]|KU|KO|RU|LU|BU|TU|AU)T(IEN|ION)/g, '$1S$2']
+  [/([^SNEU]|KU|KO|RU|LU|BU|TU|AU)T(IEN|ION)/g, '$1S$2'],
+
+  // Silent H
+  [/([^CS])H/g, '$1'],
+  [/([EN])SH/g, '$1S'],
+  [/SH/g, 'CH'],
+
+  // Nasals
+  [/OMT/g, 'ONT'],
+  [/IM([BP])/g, 'IN$1'],
+  [/UMB/g, 'OND'],
+  [/([TRD])IENT/g, '$1IANT'],
+  [/IEN/g, 'IN'],
+  [/YM([UOAEIN])/g, 'IM$1'],
+  [/YM/g, 'IN'],
+  [/AHO/g, 'AO'],
+  [/([FDS])AIM/g, '$1IN'],
+  [/EIN/g, 'AIN'],
+  [/AINS/g, 'INS'],
+
+  // AIN -> IN
+  [/AIN$/, 'IN'],
+  [/AIN([BTDK])/g, 'IN$1'],
+
+  // UN -> IN
+  [/([^O])UND/g, '$1IND'],
+  [/([JTVLFMRPSBD])UN([^IAE])/g, '$1IN$2'],
+  [/([JTVLFMRPSBD])UN$/, '$1IN'],
+  [/RFUM$/, 'RFIN'],
+  [/LUMB/g, 'LINB'],
+
+  // EN -> AN
+  [/([^BCDFGHJKLMNPQRSTVWXZ])EN/g, '$1AN'],
+  [/([VTLJMRPDSBFKNG])EN(?=[BRCTDKZSVN])/g, '$1AN$2'],
+  [/^EN([BCDFGHJKLNPQRSTVXZ]|CH|IV|ORG|OB|UI|UA|UY)/, 'AN$1'],
+  [/(^[JRVTH])EN([DRTFGSVJMP])/, '$1AN$2'],
+  [/SEN([ST])/g, 'SAN$1'],
+  [/^DESENIV/g, 'DESANIV'],
+  [/([^M])EN(UI)/g, '$1AN$2'],
+  [/(.+[JTVLFMRPSBD])EN([JLFDSTG])/g, '$1AN$2'],
+
+  // EI -> AI
+  [/([VSBSTNRLPM])E[IY]([ACDFRJLGZ])/g, '$1AI$2'],
+
+  // Ô
+  [/EAU/g, 'O'],
+  [/EU/g, 'E'],
+  [/Y/g, 'I'],
+  [/EOI/g, 'OI'],
+  [/JEA/g, 'JA'],
+  [/OIEM/g, 'OIM'],
+  [/OUANJ/g, 'OUENJ'],
+  [/OUA/g, 'OI'],
+  [/OUENJ/g, 'OUANJ'],
+  [/AU([^E])/g, 'O$1'],
+
+  // Refining
+  [/^BENJ/, 'BINJ'],
+  [/RTIEL/g, 'RSIEL'],
+  [/PINK/g, 'PONK'],
+  [/KIND/g, 'KOND'],
+  [/KUM(N|P)/g, 'KON$1'],
+  [/LKOU/g, 'LKO'],
+  [/EDBE/g, 'EBE'],
+  [/ARCM/g, 'ARKM'],
+  [/SCH/g, 'CH'],
+  [/^OINI/, 'ONI'],
+  [/([^NDCGRHKO])APT/g, '$1AT'],
+  [/([L]|KON)PT/g, '$1T'],
+  [/OTB/g, 'OB'],
+  [/IXA/g, 'ISA'],
+  [/TG/g, 'G'],
+  [/^TZ/, 'TS'],
+  [/PTIE/g, 'TIE'],
+  [/GT/g, 'T'],
+  [/ANKIEM/g, 'ANKILEM'],
+  [/(LO|RE)KEMAN/g, '$1KAMAN'],
+  [/NT(B|M)/g, 'N$1'],
+  [/GSU/g, 'SU'],
+  [/ESD/g, 'ED'],
+  [/LESKEL/g, 'LEKEL'],
+  [/CK/g, 'K'],
+
+  // Endings
+  [/USIL$/, 'USI'],
+  [/X$|[TD]S$|[DS]$/, ''],
+  [/([^KL]+)T$/, '$1'],
+  [/^[H]/, '']
+];
+
+const FIRST_ENDINGS = [
+  [/USIL$/, 'USI'],
+  [/X$|[TD]S$|[DS]$/, ''],
+  [/([^KL]+)T$/, '$1'],
+
+  // Not really an ending
+  [/^[H]/, '']
+];
+
+const SECOND_ENDINGS = [
+  [/TIL$/, 'TI'],
+  [/LC$/, 'LK'],
+  [/L[E]?[S]?$/, 'L'],
+  [/(.+)N[E]?[S]?$/, '$1N'],
+  [/EZ$/, 'E'],
+  [/OIG$/, 'OI'],
+  [/OUP$/, 'OU'],
+  [/([^R])OM$/, '$1ON'],
+  [/LOP$/, 'LO'],
+  [/NTANP$/, 'NTAN'],
+  [/TUN$/, 'TIN'],
+  [/AU$/, 'O'],
+  [/EI$/, 'AI'],
+  [/R[DG]$/, 'R'],
+  [/ANC$/, 'AN'],
+  [/KROC$/, 'KRO'],
+  [/HOUC$/, 'HOU'],
+  [/OMAC$/, 'OMA'],
+  [/([J])O([NU])[CG]$/, '$1O$2'],
+  [/([^GTR])([AO])NG$/, '$1$2N'],
+  [/UC$/, 'UK'],
+  [/AING$/, 'IN'],
+  [/([EISOARN])C$/, '$1K'],
+  [/([ABD-MO-Z]+)[EH]+$/, '$1'],
+  [/EN$/, 'AN'],
+  [/(NJ)EN$/, '$1AN'],
+  [/^PAIEM/, 'PAIM'],
+  [/([^NTB])EF$/, '$1']
 ];
 
 /**
@@ -201,6 +328,10 @@ const EXCEPTIONS = {
   // Catching up exceptions placed elsewhere in the original algorithm
   ECHO: 'EKO'
 };
+
+const ABBREVIATION_REGEX = /[BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ]*/;
+
+const SIMPLE_WORDS_REGEX = /[RFMLVSPJDF][AEIOU]/;
 
 /**
  * Function taking a single word and computing its phonetic code.
@@ -245,5 +376,59 @@ export default function phonetic(word) {
     code = code.replace(pattern, replacement);
   }
 
-  return code;
+  // Applying rules
+  for (let i = 0, l = RULES.length; i < l; i++) {
+    const [pattern, replacement] = RULES[i];
+
+    code = code.replace(pattern, replacement);
+  }
+
+  // First endings
+  for (let i = 0, l = FIRST_ENDINGS.length; i < l; i++) {
+    const [pattern, replacement] = FIRST_ENDINGS[i];
+
+    code = code.replace(pattern, replacement);
+  }
+
+  // Saving the code for very short words
+  const backupCode = code;
+
+  // Second endings
+  for (let i = 0, l = SECOND_ENDINGS.length; i < l; i++) {
+    const [pattern, replacement] = SECOND_ENDINGS[i];
+
+    code = code.replace(pattern, replacement);
+  }
+
+  // Squeezing the code again
+  code = squeeze(code);
+
+  // Special cases
+  if (code === 'FUEL')
+    code = 'FIOUL';
+
+  // If the code is "O" we return it (only acceptable code with only 1 letter)
+  if (code === 'O')
+    return code;
+
+  // Attempting to save short codes
+  if (code.length < 2) {
+
+    // Abbreviations
+    if (ABBREVIATION_REGEX.test(word))
+      return word;
+
+    if (SIMPLE_WORDS_REGEX.test(word)) {
+      if (word.length === 3 || word.length === 4)
+        return word.slice(0, -1);
+    }
+
+    if (backupCode.length > 1)
+      return backupCode;
+  }
+
+  if (code.length > 1)
+    return code;
+
+  return '';
 }
