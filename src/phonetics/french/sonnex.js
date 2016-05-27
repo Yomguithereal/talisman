@@ -13,8 +13,6 @@
 import {SIMPLE_QUOTES} from '../../regex/classes';
 
 // TODO: test "empire" (only s after p is silent), "eschatologie", "schizophrénie"
-// TODO: test la batterie restante d'homophones
-// TODO: fix censé
 
 /**
  * Helpers.
@@ -134,7 +132,7 @@ const RULES = {
         return ['k', v + cs];
       return ['ks', cs];
     }],
-    [/^c(e.*)/, 'se'],
+    [/^c(e.*)/, 's'],
     [/^c'(.*)/, 's'],
     [/^ch(ao.*)/, 'k'],
     [/^chl(.*)/, 'kl'],
@@ -394,7 +392,6 @@ const RULES = {
 
   u: [
     ['un', '1'],
-    [/^û(.*)/, 'u'],
     ['ussent', 'us'],
     [/^us(.*)/, (c, cs) => {
       if (c === 's')
@@ -403,6 +400,10 @@ const RULES = {
         return ['us', c + cs];
       return ['uz', c + cs];
     }]
+  ],
+
+  û: [
+    [/^û(.*)/, 'u'],
   ],
 
   w: [
