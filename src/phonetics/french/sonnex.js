@@ -6,13 +6,16 @@
  * Implementation of the French phonetic algorithm "Sonnex".
  *
  * [Author]: Frédéric Bisson
+ * [Revision]: Guillaume Plique
  *
  * [Reference]:
  * https://github.com/Zigazou/Sonnex
+ *
+ * [Note]:
+ * The orignal algorithm has been slightly modified to better account for some
+ * more cases.
  */
 import {SIMPLE_QUOTES} from '../../regex/classes';
-
-// TODO: test "empire" (only s after p is silent), "eschatologie", "schizophrénie"
 
 /**
  * Helpers.
@@ -49,7 +52,10 @@ const EXCEPTIONS = {
   sept: 'sEt',
   septième: 'sEtiEm',
   ses: 'sE',
-  tes: 'tE'
+  tes: 'tE',
+
+  // NOTE: those exceptions have been added
+  eschatologie: 'Eskatoloji'
 };
 
 // Rules expressed in the following format:
@@ -134,6 +140,9 @@ const RULES = {
     }],
     [/^c(e.*)/, 's'],
     [/^c'(.*)/, 's'],
+
+    // NOTE: adding a rule to account for the Greek root "chiro"
+    [/^chiro([^u].*)/, 'kiro'],
     [/^ch(ao.*)/, 'k'],
     [/^chl(.*)/, 'kl'],
     [/^ch(oe.*)/, 'k'],
@@ -186,7 +195,15 @@ const RULES = {
       return ['e', 'l' + c + cs];
     }],
     [/^emm(.*)/, 'Em'],
-    [/^emp(.*)/, '2'],
+
+    // NOTE: this rule has been modified to better handle "emp"
+    [/^emp(.)(.*)/, (c, cs) => {
+      if (c === 'h')
+        return ['2', 'p' + c + cs];
+      if (!isVowel(c) && !cs)
+        return ['2', cs];
+      return ['2p', c + cs];
+    }],
     [/^enn(.*)/, 'En'],
     ['en', '2'],
     [/^en(.)(.*)/, (c, cs) => {

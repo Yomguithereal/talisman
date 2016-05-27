@@ -14,8 +14,18 @@ describe('sonnex', function() {
   });
 
   it('should compute the sonnex code correctly.', function() {
+
     const tests = [
-      ['empire', '2ir'],
+      ['eschatologie', 'Eskatoloji'],
+      ['chiropracteur', 'kiroprakter'],
+      ['chiroubles', 'CirUbl'],
+      ['empire', '2pir'],
+      ['temps', 't2'],
+      ['contretemps', 'k3tret2'],
+      ['temporisation', 't2porizasi3'],
+      ['amphétamine', '2fEtamin'],
+      ['emphase', '2faz'],
+      ['méphitique', 'mEfitik'],
       ['florentin', 'flor2t1'],
       ['ballon', 'bal3'],
       ['guillaume', 'giom'],
@@ -31,7 +41,11 @@ describe('sonnex', function() {
       ['siffler', 'siflE'],
       ['passionnant', 'pasion2'],
       ['passionnante', 'pasion2t'],
-      ['petit', 'peti']
+      ['petit', 'peti'],
+
+      // Those are hard to define and are not completely satisfactory but hey...
+      ['schizophrénie', 'sCizofrEni'],
+      ['psychiatre', 'psiCiatr']
     ];
 
     tests.forEach(function([word, code]) {
