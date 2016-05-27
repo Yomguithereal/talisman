@@ -14,6 +14,8 @@ import deburr from 'lodash/deburr';
 
 // NOTE: ajouter RECUL & CUL comme exception?
 // NOTE: lookahead
+// NOTE: prevent "er" stemming (synchroniser, digitaliser etc.)
+// NOTE: prevent "é" stemming
 
 /**
  * Rules.
@@ -68,8 +70,8 @@ const RULES = [
   [/^(SC|S)IEM([EA])/g, '$1IAM$2'],
 
   // MP/MB -> NP/NB
-  [/[OAI]MB/g, '$1NB'],
-  [/[OA]MP/g, '$1NP'],
+  [/([OAI])MB/g, '$1NB'],
+  [/([OA])MP/g, '$1NP'],
   [/GEMB/g, 'JANB'],
   [/EM([BP])/g, 'AN$1'],
   [/UMBL/g, 'INBL'],
@@ -150,7 +152,7 @@ const RULES = [
   [/CH(LO|R)/g, 'K$1'],
   [/PTIA/g, 'PSIA'],
   [/GU([^RLMBSTPZN])/g, 'G$1'],
-  [/GNO(?=[MLTNRKG])/g, 'NIO$1'],
+  [/GNO(?=[MLTNRKG])/g, 'NIO'],
 
   // TI -> SI
   [/BUTI([EA])/g, 'BUSI$1'],
@@ -206,7 +208,7 @@ const RULES = [
 
   // EN -> AN
   [/([^BCDFGHJKLMNPQRSTVWXZ])EN/g, '$1AN'],
-  [/([VTLJMRPDSBFKNG])EN(?=[BRCTDKZSVN])/g, '$1AN$2'],
+  [/([VTLJMRPDSBFKNG])EN(?=[BRCTDKZSVN])/g, '$1AN'],
   [/^EN([BCDFGHJKLNPQRSTVXZ]|CH|IV|ORG|OB|UI|UA|UY)/, 'AN$1'],
   [/(^[JRVTH])EN([DRTFGSVJMP])/, '$1AN$2'],
   [/SEN([ST])/g, 'SAN$1'],
@@ -254,13 +256,7 @@ const RULES = [
   [/GSU/g, 'SU'],
   [/ESD/g, 'ED'],
   [/LESKEL/g, 'LEKEL'],
-  [/CK/g, 'K'],
-
-  // Endings
-  [/USIL$/, 'USI'],
-  [/X$|[TD]S$|[DS]$/, ''],
-  [/([^KL]+)T$/, '$1'],
-  [/^[H]/, '']
+  [/CK/g, 'K']
 ];
 
 const FIRST_ENDINGS = [
@@ -342,6 +338,8 @@ const SIMPLE_WORDS_REGEX = /[RFMLVSPJDF][AEIOU]/;
  * @throws {Error} The function expects the word to be a string.
  */
 export default function phonetic(word) {
+  if (typeof word !== 'string')
+    throw Error('talisman/phonetics/french/phonetic: the given word is not a string.');
 
   // Preparing the word
   word = word
