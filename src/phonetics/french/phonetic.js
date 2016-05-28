@@ -9,13 +9,27 @@
  * [Reference]:
  * http://www.roudoudou.com/phonetic.php
  */
-import {squeeze} from '../../helpers';
 import deburr from 'lodash/deburr';
 
-// NOTE: ajouter RECUL & CUL comme exception?
-// NOTE: lookahead
+// NOTE: pass every unit tests
+// NOTE: schizophrénie
+// NOTE: tapecul, doigt, chiroubles, laïque
+// NOTE: ajouter RECUL & CUL comme exception? POESIE PHOENIX JOGGING
 // NOTE: prevent "er" stemming (synchroniser, digitaliser etc.)
 // NOTE: prevent "é" stemming
+// NOTE: dilemme
+// NOTE: le ä dans l'algo original
+// NOTE: ténuité
+// NOTE: move fuel upper
+
+/**
+ * Helpers.
+ */
+
+// NOTE: will only squeeze one letter, not more (e.g. AGREEE => AGREE)
+function squeeze(word) {
+  return word.replace(/(.)\1/g, '$1');
+}
 
 /**
  * Rules.
@@ -112,7 +126,7 @@ const RULES = [
   [/WHO/g, 'OU'],
 
   // GUEU, GNEU, JEU etc.
-  [/GNE([STR])/g, 'NI$1'],
+  [/GNE([STR])/g, 'NIE$1'],
   [/GNE/g, 'NE'],
   [/GI/g, 'JI'],
   [/GNI/g, 'NI'],
@@ -124,7 +138,7 @@ const RULES = [
   [/GEO(LO|M|P|G|S|R)/g, 'JEO$1'],
   [/([NU])GEOT/g, '$1JOT'],
   [/GEO([TDC])/g, 'JEO$1'],
-  [/GE[OA]/g, 'J$1'],
+  [/GE([OA])/g, 'J$1'],
   [/GE/g, 'JE'],
   [/QU?/g, 'K'],
   [/C[YI]/g, 'SI'],
@@ -168,13 +182,14 @@ const RULES = [
   [/CETIE/g, 'CESIE'],
   [/OFETIE/g, 'OFESIE'],
   [/IPETI/g, 'IPESI'],
-  [/L?BUTION/g, 'LBUSION'],
+  [/LBUTION/g, 'LBUSION'],
+  [/BLUTION/g, 'BLUSION'],
   [/L([EA])TION/g, 'L$1SION'],
   [/SATIET/g, 'SASIET'],
   [/(.+)ANTI(AL|O)/g, '$1ANSI$2'],
   [/(.+)INUTI([^V])/g, '$1INUSI$2'],
   [/([^O])UTIEN/g, '$1USIEN'],
-  [/([^DE])RATI[E]$/, '$1RASI$2'],
+  [/([^DE])RATI([E])$/, '$1RASI$2'],
   [/([^SNEU]|KU|KO|RU|LU|BU|TU|AU)T(IEN|ION)/g, '$1S$2'],
 
   // Silent H
@@ -185,7 +200,7 @@ const RULES = [
   // Nasals
   [/OMT/g, 'ONT'],
   [/IM([BP])/g, 'IN$1'],
-  [/UMB/g, 'OND'],
+  [/UMD/g, 'OND'],
   [/([TRD])IENT/g, '$1IANT'],
   [/IEN/g, 'IN'],
   [/YM([UOAEIN])/g, 'IM$1'],
@@ -213,7 +228,7 @@ const RULES = [
   [/(^[JRVTH])EN([DRTFGSVJMP])/, '$1AN$2'],
   [/SEN([ST])/g, 'SAN$1'],
   [/^DESENIV/g, 'DESANIV'],
-  [/([^M])EN(UI)/g, '$1AN$2'],
+  [/([^M])EN(U[IY])/g, '$1AN$2'],
   [/(.+[JTVLFMRPSBD])EN([JLFDSTG])/g, '$1AN$2'],
 
   // EI -> AI
@@ -345,6 +360,7 @@ export default function phonetic(word) {
   word = word
     .toUpperCase()
     .replace(/Œ/g, 'OEU')
+    .replace(/Æ/g, 'E')
     .replace(/Ç/g, 'S');
 
   word = deburr(word).replace(/[^A-Z]/g, '');
