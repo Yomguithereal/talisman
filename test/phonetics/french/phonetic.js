@@ -14,7 +14,7 @@ describe('phonetic', function() {
   });
 
   it('should compute the phonetic code correctly.', function() {
-    this.timeout(50 * 1000);
+
     const tests = [
       ['e', ''],
       ['Gendarme', 'JANDARM'],

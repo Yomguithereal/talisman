@@ -11,7 +11,6 @@
  */
 import deburr from 'lodash/deburr';
 
-// NOTE: pass every unit tests
 // NOTE: schizophrénie
 // NOTE: tapecul, doigt, chiroubles, laïque
 // NOTE: ajouter RECUL & CUL comme exception? POESIE PHOENIX JOGGING
