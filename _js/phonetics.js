@@ -3,7 +3,6 @@ import {render} from 'react-dom';
 import PhoneticTester from './components/PhoneticTester.jsx';
 
 import caverphone, {revisited} from 'talisman/phonetics/caverphone';
-import cologne from 'talisman/phonetics/cologne';
 import daitchMokotoff from 'talisman/phonetics/daitch-mokotoff';
 import doubleMetaphone from 'talisman/phonetics/double-metaphone';
 import metaphone from 'talisman/phonetics/metaphone';

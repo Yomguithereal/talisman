@@ -84,13 +84,28 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <a href="{{ site.baseurl }}/phonetics">phonetics</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#caverphone">caverphone</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#cologne">cologne</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#daitch-mokotoff">daitch-mokotoff</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#double-metaphone">double-metaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#mra">mra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#nysiis">nysiis</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></em></li>
+        <li>
+          <a href="{{ site.baseurl }}/phonetics/french">french</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#phonetic">phonetic</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#phonex">phonex</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#sonnex">sonnex</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#soundex">soundex</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#soundex2">soundex2</a></em></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ site.baseurl }}/phonetics/german">german</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/german#cologne">cologne</a></em></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>
@@ -107,6 +122,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lancaster">lancaster</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lovins">lovins</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#porter">porter</a></em></li>
+        <li>
+          <a href="{{ site.baseurl }}/stemmers/french">french</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/french#porter">porter</a></em></li>
+          </ul>
+        </li>
         <li>
           <a href="{{ site.baseurl }}/stemmers/latin">latin</a>
           <ul>

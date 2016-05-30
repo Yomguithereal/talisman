@@ -31,4 +31,4 @@ schinke('aquila');
 
 <div id="schinke-mount"></div>
 
-<script src="{{ site.baseurl }}/assets/dist/latin-stemmers.js"></script>
+<script src="{{ site.baseurl }}/assets/dist/stemmers-latin.js"></script>

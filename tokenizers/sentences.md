@@ -45,4 +45,4 @@ naive('Hello World! I am Lt. Harrington.', ['Lt.', 'Capt.']);
 
 <div id="naive-mount"></div>
 
-<script src="{{ site.baseurl }}/assets/dist/sentences-tokenizers.js"></script>
+<script src="{{ site.baseurl }}/assets/dist/tokenizers-sentences.js"></script>

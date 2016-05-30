@@ -11,18 +11,26 @@ The `phonetics` module aims at gathering various algorithms whose goal is to pro
 
 This phonetic representation is then really useful when performing fuzzy matching.
 
+The algorithms presented in this page generally work for the English language (even if they somewhat extend to a variety of european languages for some of them).
+
+This said, the library also offers phonetic algorithms targeting other [languages](#languages), such as [French]({{ site.baseurl }}/phonetics/french) for instance.
+
 ## Summary
 
 Modules under the `talisman/phonetics` namespace:
 
 * [caverphone](#caverphone)
-* [cologne](#cologne)
 * [daitch-mokotoff](#daitch-mokotoff)
 * [double-metaphone](#double-metaphone)
 * [metaphone](#metaphone)
 * [mra](#mra)
 * [nysiis](#nysiis)
 * [soundex](#soundex)
+
+<h2 id="languages">Phonetic algorithms for other languages</h2>
+
+* [french]({{ site.baseurl }}/phonetics/french)
+* [german]({{ site.baseurl }}/phonetics/german)
 
 ## Use case
 
@@ -101,27 +109,6 @@ revisited('Henrichsen')
 *Revisited version*
 
 <div id="caverphone-revisited-mount"></div>
-
-<h2 id="cologne">cologne</h2>
-
-<span class="marginnote">
-  Reference: <a href="https://en.wikipedia.org/wiki/Cologne_phonetics">https://en.wikipedia.org/wiki/Cologne_phonetics</a><br><br>
-</span>
-
-<span class="marginnote">
-  <em>Hans Joachim Postel: Die Kölner Phonetik. Ein Verfahren zur Identifizierung von Personennamen auf der Grundlage der Gestaltanalyse. in: IBM-Nachrichten, 19. Jahrgang, 1969, S. 925-931.</em>
-</span>
-
-The "cologne" phonetic algorithm, written by Hans Joachim Postel, was primarily designed to match german names.
-
-```js
-import cologne from 'talisman/phonetics/cologne';
-
-cologne('Müller-Lüdenscheidt');
->>> '65752682'
-```
-
-<div id="cologne-mount"></div>
 
 <h2 id="daitch-mokotoff">daitch-mokotoff</h2>
 

@@ -25,8 +25,9 @@ Modules under the `talisman/stemmers` namespace:
 * [lovins](#lovins)
 * [porter](#porter)
 
-<h2 id="languages">Stemmers in other languages</h2>
+<h2 id="languages">Stemmers for other languages</h2>
 
+* [french]({{ site.baseurl }}/stemmers/french)
 * [latin]({{ site.baseurl }}/stemmers/latin)
 
 ## Use case

@@ -52,4 +52,4 @@ treebank("It wasn't me!");
 
 <div id="treebank-mount"></div>
 
-<script src="{{ site.baseurl }}/assets/dist/words-tokenizers.js"></script>
+<script src="{{ site.baseurl }}/assets/dist/tokenizers-words.js"></script>

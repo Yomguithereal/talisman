@@ -32,7 +32,7 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "recompose": "^0.17.0",
-    "talisman": "^0.3.0"
+    "talisman": "^0.4.0"
   },
   "babel": {
     "presets": [
