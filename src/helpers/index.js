@@ -49,13 +49,11 @@ export function seq(target) {
 export function squeeze(target) {
   const isString = typeof target === 'string',
         sequence = seq(target),
-        squeezed = [];
+        squeezed = [sequence[0]];
 
-  for (let i = 0, l = sequence.length, memo = null; i < l; i++) {
-    if (sequence[i] !== memo) {
-      memo = sequence[i];
-      squeezed.push(memo);
-    }
+  for (let i = 1, l = sequence.length; i < l; i++) {
+    if (sequence[i] !== sequence[i - 1])
+      squeezed.push(sequence[i]);
   }
 
   return isString ? squeezed.join('') : squeezed;
