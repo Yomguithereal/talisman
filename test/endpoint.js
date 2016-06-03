@@ -54,7 +54,7 @@ describe('phonetics', function() {
 
   describe('german', function() {
     require('./phonetics/german/cologne.js');
-    require('./phonetics/german/phonem.js')
+    require('./phonetics/german/phonem.js');
   });
 });
 
