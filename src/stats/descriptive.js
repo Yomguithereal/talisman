@@ -75,6 +75,44 @@ export function combineMeans(ma, na, mb, nb) {
 }
 
 /**
+ * Function finding the mode of the given sequence.
+ *
+ * @param  {array}  sequence - The sequence to process.
+ * @return {number}          - The sequence's mode.
+ *
+ * @throws {Error} - The function expects a non-empty list.
+ */
+
+// TODO: what to do when two modes? Take the lower number? The higher?
+export function mode(sequence) {
+  if (!sequence.length)
+    throw Error('talisman/stats/descriptive#modeSorted: the given list is empty.');
+
+  // Shortcut
+  if (sequence.length === 1)
+    return sequence[0];
+
+  let currentMode = null,
+      max = 0;
+
+  const frequencies = {};
+
+  for (let i = 0, l = sequence.length; i < l; i++) {
+    const number = sequence[i];
+
+    frequencies[number] = frequencies[number] || 0;
+    const frequency = ++frequencies[number];
+
+    if (frequency > max) {
+      max = frequency;
+      currentMode = number;
+    }
+  }
+
+  return currentMode;
+}
+
+/**
  * Function computing the variance of the given sequence.
  *
  * @param  {array}  sequence - The sequence to process.

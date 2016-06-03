@@ -5,6 +5,7 @@
  */
 import assert from 'assert';
 import {
+  numericSort,
   seq,
   squeeze,
   translation,
@@ -12,6 +13,25 @@ import {
 } from '../../src/helpers';
 
 describe('index', function() {
+
+  describe('#.numericSort', function() {
+
+    it('should properly sort numbers.', function() {
+      assert.deepEqual(
+        numericSort([4, 1, 3, 2, 5]),
+        [1, 2, 3, 4, 5]
+      );
+    });
+
+    it('should not mutate the given array.', function() {
+      const array = [2, 1, 3],
+            sortedArray = numericSort(array);
+
+      assert(array !== sortedArray);
+      assert.deepEqual(array, [2, 1, 3]);
+      assert.deepEqual(sortedArray, [1, 2, 3]);
+    });
+  });
 
   describe('#.seq', function() {
 

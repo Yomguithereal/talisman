@@ -28,6 +28,17 @@ export function findall(pattern, string) {
 }
 
 /**
+ * Function sorting an array of numbers in a non-mutative fashion.
+ *
+ * @param  {array} numbers - The numbers to sort.
+ * @return {array}         - The sorted numbers.
+ */
+export function numericSort(numbers) {
+  return numbers.slice().sort((a, b) => a - b);
+}
+
+
+/**
  * Function normalizing the given variable into a proper array sequence.
  *
  * @param  {mixed} target - The variable to normalize as a sequence.
