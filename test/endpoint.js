@@ -75,6 +75,10 @@ describe('stemmers', function() {
     require('./stemmers/french/porter.js');
   });
 
+  describe('german', function() {
+    require('./stemmers/german/caumanns.js');
+  });
+
   describe('latin', function() {
     require('./stemmers/latin/schinke.js');
   });

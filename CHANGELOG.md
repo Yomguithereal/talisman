@@ -3,6 +3,7 @@
 ## 0.5.0
 
 * Adding the `phonetics/german/phonem` namespace.
+* Adding the `stemmers/german/caumanns` namespace.
 
 ## 0.4.0
 
