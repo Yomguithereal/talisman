@@ -10,6 +10,7 @@ import {
   addToMean,
   substractFromMean,
   combineMeans,
+  mode,
   variance,
   stdev,
   combineVariances
@@ -68,6 +69,26 @@ describe('descriptive', function() {
         combineMeans(mean(before), before.length, mean(after), after.length),
         mean(before.concat(after))
       );
+    });
+  });
+
+  describe('#.mode', function() {
+    it('should throw with an empty list.', function() {
+      assert.throws(function() {
+        mode([]);
+      }, /empty/);
+    });
+
+    it('should return the correct mode.', function() {
+      const numbers = [1, 2, 2, 2, 3, 3, 4, 5, 5];
+
+      assert.strictEqual(mode(numbers), 2);
+    });
+
+    it('should return the first mode seen if more than one.', function() {
+      const numbers = [1, 2, 2, 2, 3, 3, 4, 5, 5, 5];
+
+      assert.strictEqual(mode(numbers), 2);
     });
   });
 

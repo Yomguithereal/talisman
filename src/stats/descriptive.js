@@ -77,13 +77,13 @@ export function combineMeans(ma, na, mb, nb) {
 /**
  * Function finding the mode of the given sequence.
  *
+ * Note: If there are more than one mode, will return the first one seen.
+ *
  * @param  {array}  sequence - The sequence to process.
  * @return {number}          - The sequence's mode.
  *
  * @throws {Error} - The function expects a non-empty list.
  */
-
-// TODO: what to do when two modes? Take the lower number? The higher?
 export function mode(sequence) {
   if (!sequence.length)
     throw Error('talisman/stats/descriptive#modeSorted: the given list is empty.');
