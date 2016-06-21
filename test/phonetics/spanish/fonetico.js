@@ -48,7 +48,8 @@ describe('fonetico', function() {
       ['llamarte', 'YAMARTE'],
       ['qhapaqñan', 'KAPAKÑAN'],
       ['capacñan', 'KAPAKÑAN'],
-      ['churros', '§UROS']
+      ['churros', '§UROS'],
+      ['mueca', 'MWEKA']
     ];
 
     tests.forEach(function([word, code]) {
