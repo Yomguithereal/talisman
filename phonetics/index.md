@@ -31,6 +31,7 @@ Modules under the `talisman/phonetics` namespace:
 
 * [french]({{ site.baseurl }}/phonetics/french)
 * [german]({{ site.baseurl }}/phonetics/german)
+* [spanish]({{ site.baseurl }}/phonetics/spanish)
 
 ## Use case
 
