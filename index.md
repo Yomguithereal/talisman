@@ -59,6 +59,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       </ul>
     </li>
     <li>
+      <br>
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#canberra">canberra</a></em></li>
@@ -81,6 +82,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       </ul>
     </li>
     <li>
+      <br>
       <a href="{{ site.baseurl }}/phonetics">phonetics</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#caverphone">caverphone</a></em></li>
@@ -110,6 +112,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       </ul>
     </li>
     <li>
+      <br>
       <a href="{{ site.baseurl }}/stats">stats</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/stats#frequencies">frequencies</a></em></li>
@@ -118,6 +121,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       </ul>
     </li>
     <li>
+      <br>
       <a href="{{ site.baseurl }}/stemmers">stemmers</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lancaster">lancaster</a></em></li>
@@ -144,6 +148,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       </ul>
     </li>
     <li>
+      <br>
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
       <ul>
         <li>
