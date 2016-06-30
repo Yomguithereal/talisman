@@ -104,6 +104,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
           <a href="{{ site.baseurl }}/phonetics/german">german</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/german#cologne">cologne</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/german#phonem">phonem</a></em></li>
           </ul>
         </li>
       </ul>
