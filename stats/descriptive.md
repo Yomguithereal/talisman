@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Descriptive
+title: Descriptive Statistics
 ---
 
 The `stats/descriptive` module gather a handful of functions related to descriptive statistics such as central tendancy measures.

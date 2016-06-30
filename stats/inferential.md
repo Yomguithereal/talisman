@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Inferential
+title: Inferential Statistics
 ---
 
 The `stats/inferential` module gather a handful of functions related to inferential statistics.
