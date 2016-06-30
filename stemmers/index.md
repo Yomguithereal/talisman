@@ -28,6 +28,7 @@ Modules under the `talisman/stemmers` namespace:
 <h2 id="languages">Stemmers for other languages</h2>
 
 * [french]({{ site.baseurl }}/stemmers/french)
+* [german]({{ site.baseurl }}/stemmers/german)
 * [latin]({{ site.baseurl }}/stemmers/latin)
 
 ## Use case

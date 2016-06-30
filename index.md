@@ -130,6 +130,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
           </ul>
         </li>
         <li>
+          <a href="{{ site.baseurl }}/stemmers/german">german</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/german#caumanns">caumanns</a></em></li>
+          </ul>
+        </li>
+        <li>
           <a href="{{ site.baseurl }}/stemmers/latin">latin</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/latin#schinke">schinke</a></em></li>

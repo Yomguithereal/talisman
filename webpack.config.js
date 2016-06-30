@@ -9,6 +9,7 @@ module.exports = {
     'phonetics-german': './_js/phonetics-german.js',
     'stemmers': './_js/stemmers.js',
     'stemmers-french': './_js/stemmers-french.js',
+    'stemmers-german': './_js/stemmers-german.js',
     'stemmers-latin': './_js/stemmers-latin.js',
     'tokenizers-sentences': './_js/tokenizers-sentences.js',
     'tokenizers-words': './_js/tokenizers-words.js'
