@@ -5,7 +5,7 @@
  * The phonem algorithm.
  *
  * [Reference]:
- * http://phonetik.phil-fak.uni-koeln.de/fileadmin/home/ritters/Allgemeine_Dateien/Martin_Wilz.pdf
+ * http://web.archive.org/web/20070209153423/http://uni-koeln.de/phil-fak/phonetik/Lehre/MA-Arbeiten/magister_wilz.pdf
  *
  * [Article]:
  * Wilde, Georg and Carsten Meyer. 1999. "Doppelgaenger
