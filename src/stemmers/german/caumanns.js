@@ -6,6 +6,9 @@
  *
  * [Reference]:
  * http://edocs.fu-berlin.de/docs/servlets/MCRFileNodeServlet/FUDOCS_derivate_000000000350/tr-b-99-16.pdf
+ *
+ * [Article]:
+ * Jörg Caumanns (1999) A Fast and Simple Stemming Algorithm for German Words.
  */
 
 /**
