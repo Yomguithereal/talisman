@@ -8,9 +8,9 @@
  * http://web.archive.org/web/20070209153423/http://uni-koeln.de/phil-fak/phonetik/Lehre/MA-Arbeiten/magister_wilz.pdf
  *
  * [Article]:
- * Wilde, Georg and Carsten Meyer. 1999. "Doppelgaenger
- * gesucht - Ein Programm fuer kontextsensitive phonetische Textumwandlung."
- * ct Magazin fuer Computer & Technik 25/1999.
+ * Wilde, Georg ; Meyer, Carsten: Doppelgänger gesucht - Ein Programm fur
+ * kontext-sensitive phonetische Textumwandlung. In: ct Magazin fur
+ * Computer & Technik 25 (1988)
  */
 import {squeeze, translation} from '../../helpers';
 
