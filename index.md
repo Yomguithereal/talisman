@@ -115,9 +115,11 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <br>
       <a href="{{ site.baseurl }}/stats">stats</a>
       <ul>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats#frequencies">frequencies</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats#ngrams">ngrams</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats#tfidf">tfidf</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats/descriptive">descriptive</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats/frequencies">frequencies</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats/inferential">inferential</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats/ngrams">ngrams</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stats/tfidf">tfidf</a></em></li>
       </ul>
     </li>
     <li>
