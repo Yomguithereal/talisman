@@ -2,7 +2,7 @@
  * Talisman stemmers/french/unine
  * ===============================
  *
- * The UniNE stemmers for the French language.
+ * The UniNE (University of Neuchâtel) stemmers for the French language.
  *
  * [Reference]:
  * http://members.unine.ch/jacques.savoy/clef/
