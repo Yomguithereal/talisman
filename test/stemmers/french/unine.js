@@ -4,9 +4,13 @@
  *
  */
 import assert from 'assert';
-import unine from '../../../src/stemmers/french/unine';
+import unine, {minimal} from '../../../src/stemmers/french/unine';
 
-describe('lancaster', function() {
+describe('unine', function() {
+  it('default export should be the minimal stemmer.', function() {
+    assert(unine('hiboux'), minimal('hiboux'));
+  });
+
   it('should correctly stem the given words.', function() {
     const tests = [
       ['mot', 'mot'],
