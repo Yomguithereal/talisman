@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0
+
+* Adding the `stemmers/french/unine` namespace.
+
 ## 0.5.0
 
 * Adding the `phonetics/german/phonem` namespace.

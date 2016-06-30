@@ -76,6 +76,7 @@ describe('stemmers', function() {
   require('./stemmers/porter.js');
 
   describe('french', function() {
+    require('./stemmers/french/unine.js');
     require('./stemmers/french/porter.js');
   });
 
