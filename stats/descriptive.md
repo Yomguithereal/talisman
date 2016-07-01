@@ -50,7 +50,7 @@ mode([13, 14, 15, 8, 20]);
 
 <h2 id="stdev">stdev</h2>
 
-Computes the stdev of the given sequence.
+Computes the standard deviation of the given sequence.
 
 ```js
 import {stdev} from 'talisman/stats/descriptive';
