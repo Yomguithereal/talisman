@@ -9,6 +9,13 @@ describe('helpers', function() {
   require('./helpers/vectors.js');
 });
 
+describe('features', function() {
+
+  describe('extraction', function() {
+    require('./features/extraction/vectorizers');
+  });
+});
+
 describe('classification', function() {
   require('./classification/naive-bayes.js');
   require('./classification/perceptron.js');

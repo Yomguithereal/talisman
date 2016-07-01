@@ -8,6 +8,7 @@ TODO.md
 # Transpiled modules
 /classification
 /clustering
+/features
 /helpers
 /metrics
 /phonetics
