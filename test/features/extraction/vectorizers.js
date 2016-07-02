@@ -20,9 +20,9 @@ describe('vectorizers', function() {
         {name: 'John', age: 76}
       ];
 
-      const features = collectionVectorizer(null, collection);
+      const result = collectionVectorizer(null, collection);
 
-      assert.deepEqual(features, {
+      assert.deepEqual(result, {
         headers: ['name=John', 'name=Jack', 'age'],
         meta: {
           'name=John': {
@@ -45,7 +45,29 @@ describe('vectorizers', function() {
         ]
       });
     });
-  });
 
-  // Test both options
+    it('should be possible to change the header separator.', function() {
+      const collection = [
+        {name: 'John', age: 45},
+        {name: 'Jack', age: 24},
+        {name: 'John', age: 76}
+      ];
+
+      const result = collectionVectorizer({separator: '§'}, collection);
+
+      assert.deepEqual(result.headers, ['name§John', 'name§Jack', 'age']);
+    });
+
+    it('should be possible to output a different type of array.', function() {
+      const collection = [
+        {name: 'John', age: 45},
+        {name: 'Jack', age: 24},
+        {name: 'John', age: 76}
+      ];
+
+      const result = collectionVectorizer({type: Int16Array}, collection);
+
+      assert(result.features.every(row => row instanceof Int16Array));
+    });
+  });
 });
