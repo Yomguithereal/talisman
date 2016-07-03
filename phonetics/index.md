@@ -22,10 +22,13 @@ Modules under the `talisman/phonetics` namespace:
 * [caverphone](#caverphone)
 * [daitch-mokotoff](#daitch-mokotoff)
 * [double-metaphone](#double-metaphone)
+* [lein](#lein)
 * [metaphone](#metaphone)
 * [mra](#mra)
 * [nysiis](#nysiis)
+* [roger-root](#roger-root)
 * [soundex](#soundex)
+* [statcan](#statcan)
 
 <h2 id="languages">Phonetic algorithms for other languages</h2>
 
@@ -153,6 +156,23 @@ doubleMetaphone('Smith');
 
 <div id="double-metaphone-mount"></div>
 
+<h2 id="lein">lein</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://naldc.nal.usda.gov/download/27833/PDF">http://naldc.nal.usda.gov/download/27833/PDF</a>
+</span>
+
+The Lein name coding procedure is a [Soundex](#soundex)-like algorithm than will produce a 4-character code for the given name.
+
+```js
+import lein from 'talisman/phonetics/lein';
+
+lein('Michael');
+>>> 'M530'
+```
+
+<div id="lein-mount"></div>
+
 <h2 id="metaphone">metaphone</h2>
 
 <span class="marginnote">
@@ -232,6 +252,25 @@ nysiis('Philbert');
 
 <div id="nysiis-refined-mount"></div>
 
+<h2 id="roger-root">roger-root</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://naldc.nal.usda.gov/download/27833/PDF">http://naldc.nal.usda.gov/download/27833/PDF</a>
+</span>
+
+The Roger Root name coding procedure is a [Soundex](#soundex)-like algorithm than will produce a 5-character code (completely numerical) for the given name.
+
+Its specificity is to encode the beginning of the names differently than their rest.
+
+```js
+import rogerRoot from 'talisman/phonetics/roger-root';
+
+rogerRoot('Michael');
+>>> '03650'
+```
+
+<div id="roger-root-mount"></div>
+
 <h2 id="soundex">soundex</h2>
 
 <span class="marginnote">
@@ -263,5 +302,22 @@ refined('Michael');
 *Refined version*
 
 <div id="soundex-refined-mount"></div>
+
+<h2 id="statcan">statcan</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://naldc.nal.usda.gov/download/27833/PDF">http://naldc.nal.usda.gov/download/27833/PDF</a>
+</span>
+
+The census modified statistics Canada name coding procedure is a [Soundex](#soundex)-like algorithm than will produce a 4-character code (alphabetical) for the given name.
+
+```js
+import statcan from 'talisman/phonetics/statcan';
+
+statcan('Michael');
+>>> 'MCHL'
+```
+
+<div id="statcan-mount"></div>
 
 <script src="{{ site.baseurl }}/assets/dist/phonetics.js"></script>

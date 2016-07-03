@@ -2,3 +2,4 @@
 
 * Classifiers
 * Punkt Tokenization
+* Vectorizers
