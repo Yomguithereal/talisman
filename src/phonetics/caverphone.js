@@ -139,12 +139,13 @@ function pad(code) {
 /**
  * Function taking a single name and computing its caverphone code.
  *
- * @param  {string}  name - The name to process.
+ * @param  {array}  rules - The rules to use.
+ * @param  {string} name  - The name to process.
  * @return {string}       - The caverphone code.
  *
  * @throws {Error} The function expects the name to be a string.
  */
-function caverphone(type, name) {
+function caverphone(rules, name) {
 
   if (typeof name !== 'string')
     throw Error('talisman/phonetics/caverphone: the given name is not a string.');
@@ -155,8 +156,6 @@ function caverphone(type, name) {
     .replace(/[^a-z]/g, '');
 
   // Applying the rules
-  const rules = RULES[type];
-
   for (let i = 0, l = rules.length; i < l; i++) {
     const [match, replacement] = rules[i];
     name = name.replace(match, replacement);
@@ -169,8 +168,8 @@ function caverphone(type, name) {
 /**
  * Exporting functions.
  */
-const original = caverphone.bind(null, 'original'),
-      revisited = caverphone.bind(null, 'revisited');
+const original = caverphone.bind(null, RULES.original),
+      revisited = caverphone.bind(null, RULES.revisited);
 
 export default original;
 
