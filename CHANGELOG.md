@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+* Adding the `features/extraction/vectorizer` namespace.
+
 ## 0.6.0
 
 * Adding the `stemmers/french/unine` namespace.
