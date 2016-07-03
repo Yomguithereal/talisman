@@ -50,6 +50,7 @@ describe('phonetics', function() {
   require('./phonetics/metaphone.js');
   require('./phonetics/mra.js');
   require('./phonetics/nysiis.js');
+  require('./phonetics/roger-root.js');
   require('./phonetics/soundex.js');
   require('./phonetics/statcan.js');
 

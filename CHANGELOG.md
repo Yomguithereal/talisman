@@ -4,6 +4,7 @@
 
 * Adding the `features/extraction/vectorizer` namespace.
 * Adding the `phonetics/lein` namespace.
+* Adding the `phonetics/roger-root` namespace.
 * Adding the `phonetics/statcan` namespace.
 
 ## 0.6.0
