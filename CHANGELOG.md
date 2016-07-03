@@ -3,6 +3,8 @@
 ## 0.7.0
 
 * Adding the `features/extraction/vectorizer` namespace.
+* Adding the `phonetics/lein` namespace.
+* Adding the `phonetics/statcan` namespace.
 
 ## 0.6.0
 
