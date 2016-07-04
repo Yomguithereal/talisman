@@ -100,6 +100,10 @@ describe('stemmers', function() {
 });
 
 describe('tokenizers', function() {
+  describe('hyphenation', function() {
+    require('./tokenizers/hyphenation/liang.js');
+  });
+
   describe('lines', function() {
     require('./tokenizers/lines/naive.js');
   });
