@@ -2,6 +2,7 @@
 
 ## 0.8.0
 
+* Adding the `tokenizers/lines/naive` namespace.
 * Adding the `tokenizers/paragraphs/naive` namespace.
 
 ## 0.7.0
