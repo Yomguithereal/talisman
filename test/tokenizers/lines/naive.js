@@ -8,7 +8,7 @@ import lines from '../../../src/tokenizers/lines/naive';
 
 describe('naive', function() {
   it('should properly tokenize lines.', function() {
-    const text = 'First.\n   \nSecond.\r\nThird.\n';
+    const text = 'First.\n   \nSecond.\r\nThird.\rFourth.\n\rFifth.\n\nSixth.\n';
 
     const tokens = lines(text);
 
@@ -16,7 +16,12 @@ describe('naive', function() {
       'First.',
       '   ',
       'Second.',
-      'Third.'
+      'Third.',
+      'Fourth.',
+      'Fifth.',
+      '',
+      'Sixth.',
+      ''
     ]);
   });
 });

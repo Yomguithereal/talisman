@@ -10,7 +10,7 @@
 /**
  * Regex.
  */
-const PARAGRAPHS = /\r?\n[\t\s]*(?:\r?\n)+/;
+const PARAGRAPHS = /(?:\n\r|\r\n|\r|\n)[\t\s]*(?:\n\r|\r\n|\r|\n)+/;
 
 /**
  * Function tokenizing raw text into a sequence of paragraphs.

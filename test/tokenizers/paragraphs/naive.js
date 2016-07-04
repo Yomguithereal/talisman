@@ -11,7 +11,8 @@ describe('naive', function() {
     const text = [
       'Hello first paragraph.\n\nWhat do you do?\r\n\r\nHello Mom!\r\n\r\n',
       'Another paragraph. Multiple sentences.\nYou see?\n\n\n',
-      'Here.\n\t\nThere.\n    \nOver there!'
+      'Here.\n\t\nThere.\n    \nOver there!\n\n',
+      'One.\r\rTwo.\n\r  \n\rThree.'
     ].join('');
 
     const tokens = paragraphs(text);
@@ -23,7 +24,10 @@ describe('naive', function() {
       'Another paragraph. Multiple sentences.\nYou see?',
       'Here.',
       'There.',
-      'Over there!'
+      'Over there!',
+      'One.',
+      'Two.',
+      'Three.'
     ]);
   });
 });
