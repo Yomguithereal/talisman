@@ -9,7 +9,7 @@ import paragraphs from '../../../src/tokenizers/paragraphs/naive';
 describe('naive', function() {
   it('should properly tokenize paragraphs.', function() {
     const text = [
-      'Hello first paragraph.\n\nWhat do you do?\r\n\r\nHello Mom!\n\r\n\r',
+      'Hello first paragraph.\n\nWhat do you do?\r\n\r\nHello Mom!\r\n\r\n',
       'Another paragraph. Multiple sentences.\nYou see?\n\n\n',
       'Here.\n\t\nThere.\n    \nOver there!'
     ].join('');
