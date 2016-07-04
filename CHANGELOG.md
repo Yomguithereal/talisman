@@ -2,6 +2,7 @@
 
 ## 0.8.0
 
+* Adding the `stemmers/s-stemmer` namespace.
 * Adding the `tokenizers/hyphenation/liang` namespace.
 * Adding the `tokenizers/lines/naive` namespace.
 * Adding the `tokenizers/paragraphs/naive` namespace.

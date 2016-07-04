@@ -84,6 +84,7 @@ describe('stemmers', function() {
   require('./stemmers/lancaster.js');
   require('./stemmers/lovins.js');
   require('./stemmers/porter.js');
+  require('./stemmers/s-stemmer.js');
 
   describe('french', function() {
     require('./stemmers/french/unine.js');
