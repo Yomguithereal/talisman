@@ -1,6 +1,6 @@
 /**
  * Talisman tokenizers/paragraphs/naive tests
- * ==========================================
+ * ===========================================
  *
  */
 import assert from 'assert';

@@ -100,6 +100,10 @@ describe('stemmers', function() {
 });
 
 describe('tokenizers', function() {
+  describe('lines', function() {
+    require('./tokenizers/lines/naive.js');
+  });
+
   describe('paragraphs', function() {
     require('./tokenizers/paragraphs/naive.js');
   });
