@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+* Adding the `tokenizers/paragraphs/naive` namespace.
+
 ## 0.7.0
 
 * Adding the `features/extraction/vectorizer` namespace.
