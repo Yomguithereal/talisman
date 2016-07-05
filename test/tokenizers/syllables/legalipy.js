@@ -13,21 +13,30 @@ const frenchText = 'La présence du cheval dans la culture bretonne se manifeste
 const frenchWords = words(frenchText),
       englishWords = words(englishText);
 
-describe('legalipy', function() {
-  const englishTokenizer = new LegalipyTokenizer(),
-        frenchTokenizer = new LegalipyTokenizer();
-
-  englishTokenizer.train(englishWords);
-  frenchTokenizer.train(frenchWords);
-
-  englishTokenizer.finalize();
-  frenchTokenizer.finalize();
-
-  describe('training', function() {
-
-    it('should properly be trained.', function() {
-
-      assert.sameMembers(Array.from(englishTokenizer.onsets), [
+const frenchOnsets = [
+        'pr',
+        'c',
+        'p',
+        'tr',
+        'r',
+        'sp',
+        'm',
+        'n',
+        'd',
+        'v',
+        'b',
+        'ch',
+        'f',
+        'xx',
+        'fr',
+        's',
+        'l',
+        'h',
+        't',
+        'br',
+        'j'
+      ],
+      englishOnsets = [
         's',
         'st',
         'wr',
@@ -54,31 +63,24 @@ describe('legalipy', function() {
         'd',
         'wh',
         'c'
-      ]);
+      ];
 
-      assert.sameMembers(Array.from(frenchTokenizer.onsets), [
-        'pr',
-        'c',
-        'p',
-        'tr',
-        'r',
-        'sp',
-        'm',
-        'n',
-        'd',
-        'v',
-        'b',
-        'ch',
-        'f',
-        'xx',
-        'fr',
-        's',
-        'l',
-        'h',
-        't',
-        'br',
-        'j'
-      ]);
+describe('legalipy', function() {
+  const englishTokenizer = new LegalipyTokenizer(),
+        frenchTokenizer = new LegalipyTokenizer();
+
+  englishTokenizer.train(englishWords);
+  frenchTokenizer.train(frenchWords);
+
+  englishTokenizer.finalize();
+  frenchTokenizer.finalize();
+
+  describe('training', function() {
+
+    it('should properly be trained.', function() {
+
+      assert.sameMembers(Array.from(englishTokenizer.onsets), englishOnsets);
+      assert.sameMembers(Array.from(frenchTokenizer.onsets), frenchOnsets);
     });
   });
 
@@ -105,6 +107,22 @@ describe('legalipy', function() {
       frenchTests.forEach(function([word, syllables]) {
         assert.deepEqual(frenchTokenizer.tokenize(word), syllables, word);
       });
+    });
+  });
+
+  describe('import/export', function() {
+    it('should be possible to export the onsets.', function() {
+      const model = englishTokenizer.export();
+
+      assert.deepEqual(Object.keys(model), ['onsets']);
+      assert.sameMembers(model.onsets, englishOnsets);
+    });
+
+    it('should be possible to import an existing model.', function() {
+      const tokenizer = new LegalipyTokenizer();
+      tokenizer.import({onsets: englishOnsets});
+
+      assert.deepEqual(tokenizer.tokenize('reciprocity'), ['re', 'ci', 'pro', 'ci', 'ty']);
     });
   });
 });

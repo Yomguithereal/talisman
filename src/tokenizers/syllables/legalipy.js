@@ -45,6 +45,7 @@ function clean(word) {
  * providing text tokens in which we will search for relevant onsets.
  *
  * @constructor
+ * @param {object} options - Possible options.
  */
 export default class LegalipyTokenizer {
   constructor() {
@@ -107,9 +108,6 @@ export default class LegalipyTokenizer {
 
     // Computing relative frequencies of the onsets
     this.frequencies = relative(this.frequencies);
-
-    // Clearing recorded onsets from memory
-    this.occurrences = null;
 
     // Keeping onsets whose frequency is superior to threshold
     for (const k in this.frequencies) {
@@ -206,5 +204,36 @@ export default class LegalipyTokenizer {
     }
 
     return syllables;
+  }
+
+  /**
+   * Method used to export the tokenizer's onsets.
+   *
+   * @return {object} - An object containing the necessary metadata.
+   */
+  export() {
+    return {
+      onsets: Array.from(this.onsets)
+    };
+  }
+
+  /**
+   * Method used to force JSON.stringify to format the tokenizer using the
+   * #.export method.
+   */
+  toJSON() {
+    return this.export();
+  }
+
+  /**
+   * Method used to import an existing model instead of having to train the
+   * tokenizer.
+   *
+   * @param  {object}            model - The model to import.
+   * @return {LegalipyTokenizer}       - Returns itself for chaining.
+   */
+  import(model) {
+    this.finalize();
+    this.onsets = new Set(model.onsets);
   }
 }
