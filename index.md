@@ -138,6 +138,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lancaster">lancaster</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lovins">lovins</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#porter">porter</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#s-stemmer">s-stemmer</a></em></li>
         <li>
           <a href="{{ site.baseurl }}/stemmers/french">french</a>
           <ul>

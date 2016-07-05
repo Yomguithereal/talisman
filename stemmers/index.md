@@ -24,6 +24,7 @@ Modules under the `talisman/stemmers` namespace:
 * [lancaster](#lancaster)
 * [lovins](#lovins)
 * [porter](#porter)
+* [s-stemmer](#s-stemmer)
 
 <h2 id="languages">Stemmers for other languages</h2>
 
@@ -124,6 +125,27 @@ porter('building');
 ```
 
 <div id="porter-mount"></div>
+
+<h2 id="s-stemmer">s-stemmer</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.104.9828&rep=rep1&type=pdf">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.104.9828&rep=rep1&type=pdf</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Donna Harman (1991) How effective is suffixing? Journal of the American Society for Information Science (vol. 42 issue 1).</em>
+</span>
+
+Very minimal stemmer designed to handle a English words finishing by the letter "s" such as plural forms etc.
+
+```js
+import sStemmer from 'talisman/stemmers/s-stemmer';
+
+sStemmer('queries');
+>>> 'query'
+```
+
+<div id="s-stemmer-mount"></div>
 
 <script src="{{ site.baseurl }}/assets/dist/stemmers.js"></script>
 
