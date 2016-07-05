@@ -14,15 +14,20 @@ const frenchWords = words(frenchText),
       englishWords = words(englishText);
 
 describe('legalipy', function() {
+  const englishTokenizer = new LegalipyTokenizer(),
+        frenchTokenizer = new LegalipyTokenizer();
+
+  englishTokenizer.train(englishWords);
+  frenchTokenizer.train(frenchWords);
+
+  englishTokenizer.finalize();
+  frenchTokenizer.finalize();
+
   describe('training', function() {
 
     it('should properly be trained.', function() {
-      const tokenizer = new LegalipyTokenizer();
 
-      tokenizer.train(englishWords);
-      tokenizer.finalize();
-
-      assert.sameMembers(Array.from(tokenizer.onsets), [
+      assert.sameMembers(Array.from(englishTokenizer.onsets), [
         's',
         'st',
         'wr',
@@ -39,20 +44,17 @@ describe('legalipy', function() {
         'h',
         'f',
         'sch',
+        'ch',
         'm',
         'tr',
         'chr',
+        'hr',
         'kn',
         'pr',
         'd',
         'wh',
         'c'
       ]);
-
-      const frenchTokenizer = new LegalipyTokenizer();
-
-      frenchTokenizer.train(frenchWords);
-      frenchTokenizer.finalize();
 
       assert.sameMembers(Array.from(frenchTokenizer.onsets), [
         'pr',
@@ -77,6 +79,32 @@ describe('legalipy', function() {
         'br',
         'j'
       ]);
+    });
+  });
+
+  describe('tokenization', function() {
+
+    it('should properly tokenize.', function() {
+      const englishTests = [
+        ['reciprocity', ['re', 'ci', 'pro', 'ci', 'ty']],
+        ['history', ['hi', 'sto', 'ry']],
+        ['presentation', ['pre', 'sen', 'ta', 'tion']],
+        ['chronological', ['chro', 'no', 'log', 'i', 'cal']],
+        ['analysis', ['a', 'na', 'ly', 'sis']]
+      ];
+
+      const frenchTests = [
+        ['cheval', ['che', 'val']],
+        ['traditions', ['tra', 'di', 'tions']]
+      ];
+
+      englishTests.forEach(function([word, syllables]) {
+        assert.deepEqual(englishTokenizer.tokenize(word), syllables, word);
+      });
+
+      frenchTests.forEach(function([word, syllables]) {
+        assert.deepEqual(frenchTokenizer.tokenize(word), syllables, word);
+      });
     });
   });
 });

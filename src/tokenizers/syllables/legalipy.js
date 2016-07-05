@@ -17,7 +17,9 @@ import {updateFrequencies, relative} from '../../stats/frequencies';
 /**
  * Constants.
  */
-const VOWELS = new Set('aeiouyàáâäæãåāèéêëēėęîïíīįìôöòóœøōõûüùúūůÿ'),
+const VOWELS_STRING = 'aeiouyàáâäæãåāèéêëēėęîïíīįìôöòóœøōõûüùúūůÿ',
+      VOWELS_RE = new RegExp(`[${VOWELS_STRING}]`, 'g'),
+      VOWELS = new Set(VOWELS_STRING),
       PUNCTUATION_RE = /[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/g,
       THRESHOLD = 0.0002;
 
@@ -115,6 +117,94 @@ export default class LegalipyTokenizer {
         this.onsets.add(k);
     }
 
+    // Adding shorter subsets of onsets longer than 2 characters
+    this.onsets.forEach(onset => {
+      if (onset.length > 2)
+        this.onsets.add(onset.slice(-2));
+      if (onset.length > 3)
+        this.onsets.add(onset.slice(-3));
+    });
+
+    // Releasing frequencies from memory
+    this.frequencies = null;
+
     return this;
+  }
+
+  /**
+   * Method used to tokenize words into syllables once trained.
+   *
+   * @param  {string} word - Target word.
+   * @return {array}       - An array of syllables.
+   *
+   * @throws {Error} - Will throw if the tokenizer hasn't finalized its training.
+   */
+  tokenize(word) {
+    if (!this.finalized)
+      throw new Error('talisman/tokenizers/syllables/legalipy.train: you should finalize the tokenizer\'s training before being able to tokenize.');
+
+    const vowelCount = (word.match(VOWELS_RE) || []).length;
+
+    const syllables = [];
+
+    if (vowelCount <= 1) {
+      syllables.push(word);
+    }
+
+    else {
+      let syllable = '',
+          onsetBinary = false,
+          newSyllableBinary = true;
+
+      // Iterating on the letters in reverse
+      for (let i = word.length - 1; i >= 0; i--) {
+        const letter = word[i];
+
+        if (newSyllableBinary) {
+
+          syllable = letter + syllable;
+
+          if (VOWELS.has(letter)) {
+            newSyllableBinary = false;
+            continue;
+          }
+        }
+        else if (!newSyllableBinary) {
+
+          if (!syllable) {
+            syllable = letter + syllable;
+          }
+
+          else if (
+            (this.onsets.has(letter) && VOWELS.has(syllable[0])) ||
+            (this.onsets.has(letter + syllable[0]) && VOWELS.has(syllable[1])) ||
+            (this.onsets.has(letter + syllable.slice(0, 2)) && VOWELS.has(syllable[2])) ||
+            (this.onsets.has(letter + syllable.slice(0, 3)) && VOWELS.has(syllable[3]))
+          ) {
+            syllable = letter + syllable;
+            onsetBinary = true;
+          }
+
+          else if (VOWELS.has(letter) && !onsetBinary) {
+            syllable = letter + syllable;
+          }
+
+          else if (VOWELS.has(letter) && onsetBinary) {
+            syllables.unshift(syllable);
+            syllable = letter;
+          }
+
+          else {
+            syllables.unshift(syllable);
+            syllable = letter;
+            newSyllableBinary = true;
+          }
+        }
+      }
+
+      syllables.unshift(syllable);
+    }
+
+    return syllables;
   }
 }
