@@ -36,7 +36,9 @@ function frequencies(sequence) {
 /**
  * Relative version of the `frequencies` function.
  *
- * @param  {mixed}  sequence - The sequence to process.
+ * @param  {mixed}  sequence - The sequence to process. If an object is passed
+ *                             the function will assume it's representing
+ *                             absolute frequencies.
  * @return {object}          - A dict of the sequence's relative frequencies.
  *
  * @example
@@ -44,15 +46,47 @@ function frequencies(sequence) {
  *   // frequencies('test') => {t: 0.5, e: 0.25, s: 0.25}
  */
 function relativeFrequencies(sequence) {
-  const index = frequencies(sequence),
-        relativeIndex = {};
+  let index,
+      length;
 
-  const length = sequence.length;
+  // Handling the object polymorphism
+  if (typeof sequence === 'object' && !Array.isArray(sequence)) {
+    index = sequence;
+    length = 0;
+
+    for (const k in index)
+      length += index[k];
+  }
+  else {
+    length = sequence.length;
+    index = frequencies(sequence);
+  }
+
+  const relativeIndex = {};
 
   for (const k in index)
     relativeIndex[k] = index[k] / length;
 
   return relativeIndex;
+}
+
+/**
+ * Function taking frequencies and updating them with a new sequence.
+ *
+ * @param  {object} previousFrequencies  - The frequencies to update.
+ * @param  {mixed}  sequence             - The added sequence.
+ * @return {object}                      - The updated frequencies.
+ */
+export function updateFrequencies(previousFrequencies, sequence) {
+  sequence = seq(sequence);
+
+  const newFrequencies = frequencies(sequence);
+
+  // Merging frequencies
+  for (const k in previousFrequencies)
+    newFrequencies[k] = (newFrequencies[k] || 0) + previousFrequencies[k];
+
+  return newFrequencies;
 }
 
 /**

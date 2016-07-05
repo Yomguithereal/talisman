@@ -6,7 +6,10 @@
 * Adding the `tokenizers/hyphenation/liang` namespace.
 * Adding the `tokenizers/lines/naive` namespace.
 * Adding the `tokenizers/paragraphs/naive` namespace.
+* Adding the `tokenizers/syllables/legalipy` namespace.
 * Adding the `tokenizers/tweets/casual` namespace.
+* Adding the `stats/frequencies#.updateFrequencies` function.
+* Adding polymorphism to the `stats/frequencies#.relative` function.
 
 ## 0.7.0
 
