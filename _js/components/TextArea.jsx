@@ -5,7 +5,8 @@ export default function TextArea(props) {
     value = '',
     placeholder = null,
     status = 'default',
-    onChange = Function.prototype
+    onChange = Function.prototype,
+    faded = false
   } = props;
 
   let className = 'bar-textarea';
@@ -20,7 +21,7 @@ export default function TextArea(props) {
       <textarea placeholder={placeholder}
                 onChange={onChange}
                 value={value}
-                className={status} />
+                className={status + (faded ? ' faded' : '')} />
       <span className={className} />
     </div>
   );

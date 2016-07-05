@@ -171,6 +171,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
           </ul>
         </li>
         <li>
+          <a href="{{ site.baseurl }}/tokenizers/syllables">syllables</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/syllables#legalipy">legalipy</a></em></li>
+          </ul>
+        </li>
+        <li>
           <a href="{{ site.baseurl }}/tokenizers/words">words</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/words#naive">naive</a></em></li>

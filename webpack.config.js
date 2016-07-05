@@ -13,6 +13,7 @@ module.exports = {
     'stemmers-german': './_js/stemmers-german.js',
     'stemmers-latin': './_js/stemmers-latin.js',
     'tokenizers-sentences': './_js/tokenizers-sentences.js',
+    'tokenizers-syllables': './_js/tokenizers-syllables.js',
     'tokenizers-words': './_js/tokenizers-words.js'
   },
   output: {

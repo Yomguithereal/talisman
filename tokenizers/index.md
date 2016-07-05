@@ -14,4 +14,5 @@ Splitting a text into a list of sentences, or sentences into a list of words are
 Modules under the `talisman/tokenizers` namespace:
 
 * [sentences]({{ site.baseurl }}/tokenizers/sentences)
+* [syllables]({{ site.baseurl }}/tokenizers/syllables)
 * [words]({{ site.baseurl }}/tokenizers/words)
