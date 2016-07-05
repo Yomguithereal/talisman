@@ -99,6 +99,7 @@
     }
   },
   "dependencies": {
+    "html-entities": "^1.2.0",
     "lodash": "^4.6.1",
     "set-functions": "^0.2.0"
   }

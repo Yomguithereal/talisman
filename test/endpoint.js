@@ -118,6 +118,10 @@ describe('tokenizers', function() {
     require('./tokenizers/sentences/punkt.js');
   });
 
+  describe('tweets', function() {
+    require('./tokenizers/tweets/casual.js');
+  });
+
   describe('words', function() {
     require('./tokenizers/words/treebank.js');
   });

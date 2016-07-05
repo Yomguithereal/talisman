@@ -6,6 +6,7 @@
 * Adding the `tokenizers/hyphenation/liang` namespace.
 * Adding the `tokenizers/lines/naive` namespace.
 * Adding the `tokenizers/paragraphs/naive` namespace.
+* Adding the `tokenizers/tweets/casual` namespace.
 
 ## 0.7.0
 
