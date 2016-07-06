@@ -12,8 +12,12 @@ module.exports = {
     'stemmers-french': './_js/stemmers-french.js',
     'stemmers-german': './_js/stemmers-german.js',
     'stemmers-latin': './_js/stemmers-latin.js',
+    'tokenizers-hyphenation': './_js/tokenizers-hyphenation.js',
+    'tokenizers-lines': './_js/tokenizers-lines.js',
+    'tokenizers-paragraphs': './_js/tokenizers-paragraphs.js',
     'tokenizers-sentences': './_js/tokenizers-sentences.js',
     'tokenizers-syllables': './_js/tokenizers-syllables.js',
+    'tokenizers-tweets': './_js/tokenizers-tweets.js',
     'tokenizers-words': './_js/tokenizers-words.js'
   },
   output: {

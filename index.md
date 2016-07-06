@@ -165,6 +165,24 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
       <ul>
         <li>
+          <a href="{{ site.baseurl }}/tokenizers/hyphenation">hyphenation</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/hyphenation#liang">liang</a></em></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ site.baseurl }}/tokenizers/lines">lines</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/lines#naive">naive</a></em></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ site.baseurl }}/tokenizers/paragraphs">paragraphs</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/paragraphs#naive">naive</a></em></li>
+          </ul>
+        </li>
+        <li>
           <a href="{{ site.baseurl }}/tokenizers/sentences">sentences</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/sentences#naive">naive</a></em></li>
@@ -174,6 +192,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
           <a href="{{ site.baseurl }}/tokenizers/syllables">syllables</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/syllables#legalipy">legalipy</a></em></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ site.baseurl }}/tokenizers/tweets">tweets</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/tweets#casual">casual</a></em></li>
           </ul>
         </li>
         <li>

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Syllables tokenizers
+title: Syllables Tokenizers
 ---
 
 The `tokenizers/syllables` module gathers the library's various syllables tokenizers.
