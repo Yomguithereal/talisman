@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.0
+
+* Adding the `stemmers/uea-lite` namespace.
+
 ## 0.8.0
 
 * Adding the `stemmers/s-stemmer` namespace.
