@@ -2,6 +2,7 @@
 
 ## 0.9.0
 
+* Adding the `phonetics/alpha-sis` namespace.
 * Adding the `stemmers/uea-lite` namespace.
 
 ## 0.8.0

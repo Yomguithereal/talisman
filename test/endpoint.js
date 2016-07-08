@@ -43,6 +43,7 @@ describe('metrics', function() {
 });
 
 describe('phonetics', function() {
+  require('./phonetics/alpha-sis.js');
   require('./phonetics/caverphone.js');
   require('./phonetics/daitch-mokotoff.js');
   require('./phonetics/double-metaphone.js');
