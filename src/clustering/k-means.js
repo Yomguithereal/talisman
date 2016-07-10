@@ -6,7 +6,7 @@
  *
  * [Reference]: https://en.wikipedia.org/wiki/K-means_clustering
  */
-import euclidean from '../metrics/euclidean';
+import euclidean from '../metrics/distance/euclidean';
 import {mean} from '../helpers/vectors';
 import sample from 'lodash/sample';
 

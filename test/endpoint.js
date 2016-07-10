@@ -26,20 +26,23 @@ describe('clustering', function() {
 });
 
 describe('metrics', function() {
-  require('./metrics/canberra.js');
-  require('./metrics/chebyshev.js');
-  require('./metrics/cosine.js');
-  require('./metrics/damerau-levenshtein.js');
-  require('./metrics/dice.js');
-  require('./metrics/euclidean.js');
-  require('./metrics/hamming.js');
-  require('./metrics/jaccard.js');
-  require('./metrics/jaro-winkler.js');
-  require('./metrics/levenshtein.js');
-  require('./metrics/manhattan.js');
-  require('./metrics/minkowski.js');
-  require('./metrics/mra.js');
-  require('./metrics/overlap.js');
+
+  describe('distance', function() {
+    require('./metrics/distance/canberra.js');
+    require('./metrics/distance/chebyshev.js');
+    require('./metrics/distance/cosine.js');
+    require('./metrics/distance/damerau-levenshtein.js');
+    require('./metrics/distance/dice.js');
+    require('./metrics/distance/euclidean.js');
+    require('./metrics/distance/hamming.js');
+    require('./metrics/distance/jaccard.js');
+    require('./metrics/distance/jaro-winkler.js');
+    require('./metrics/distance/levenshtein.js');
+    require('./metrics/distance/manhattan.js');
+    require('./metrics/distance/minkowski.js');
+    require('./metrics/distance/mra.js');
+    require('./metrics/distance/overlap.js');
+  });
 });
 
 describe('phonetics', function() {
