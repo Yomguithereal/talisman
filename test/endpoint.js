@@ -47,6 +47,7 @@ describe('phonetics', function() {
   require('./phonetics/caverphone.js');
   require('./phonetics/daitch-mokotoff.js');
   require('./phonetics/double-metaphone.js');
+  require('./phonetics/fuzzy-soundex.js');
   require('./phonetics/lein.js');
   require('./phonetics/metaphone.js');
   require('./phonetics/mra.js');
