@@ -19,7 +19,7 @@ function genericVariance(ddof, sequence) {
   const length = sequence.length;
 
   if (!length)
-    throw Error('talisman/stats/descriptive#variance: the given list is empty.');
+    throw Error('talisman/stats/inferential#variance: the given list is empty.');
 
   // Returning 0 if the denominator would be <= 0
   const denominator = length - ddof;
