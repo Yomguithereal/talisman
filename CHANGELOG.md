@@ -6,6 +6,7 @@
 * Adding the `phonetics/fuzzy-soundex` namespace.
 * Adding the `phonetics/phonex` namespace.
 * Adding the `stemmers/uea-lite` namespace.
+* Adding the `stats/inferential#sampleCovariance` function.
 * Moving the `metrics` namespace to `metrics/distance`.
 
 ## 0.8.0
@@ -16,8 +17,8 @@
 * Adding the `tokenizers/paragraphs/naive` namespace.
 * Adding the `tokenizers/syllables/legalipy` namespace.
 * Adding the `tokenizers/tweets/casual` namespace.
-* Adding the `stats/frequencies#.updateFrequencies` function.
-* Adding polymorphism to the `stats/frequencies#.relative` function.
+* Adding the `stats/frequencies#updateFrequencies` function.
+* Adding polymorphism to the `stats/frequencies#relative` function.
 
 ## 0.7.0
 

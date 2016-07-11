@@ -58,6 +58,35 @@ function genericStdev(ddof, sequence) {
 const sampleVariance = genericVariance.bind(null, 1),
       sampleStdev = genericStdev.bind(null, 1);
 
+/**
+ * Function computing the sample covariance.
+ *
+ * @param  {array}  seq1 - First sequence.
+ * @param  {array}  seq2 - Second sequence.
+ * @return {number}      - The sample covariance.
+ *
+ * @throws {Error} - The function expects two equal-length lists.
+ * @throws {Error} - The function expects lists containing more than one item.
+ */
+export function sampleCovariance(x, y) {
+  if (x.length !== y.length)
+    throw Error('talisman/stats/inferential#sampleCovariance: this function expects two sequences of same size.');
+
+  if (x.length <= 1)
+    throw Error('talisman/stats/inferential#sampleCovariance: the given lists should contain more than one item.');
+
+  const xMean = mean(x),
+        yMean = mean(y),
+        n = x.length;
+
+  let sum = 0;
+
+  for (let i = 0; i < n; i++)
+    sum += (x[i] - xMean) * (y[i] - yMean);
+
+  return sum / (n - 1);
+}
+
 export {
   genericVariance as variance,
   genericStdev as stdev,

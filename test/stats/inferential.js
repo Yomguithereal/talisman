@@ -8,7 +8,8 @@ import {
   variance,
   stdev,
   sampleVariance,
-  sampleStdev
+  sampleStdev,
+  sampleCovariance
 } from '../../src/stats/inferential';
 
 describe('inferential', function() {
@@ -65,6 +66,26 @@ describe('inferential', function() {
 
     it('should return 0 if the length of the sequence is too small.', function() {
       assert.strictEqual(stdev(3, [1, 2]), 0);
+    });
+  });
+
+  describe('#.sampleCovariance', function() {
+    it('should throw when incorrect arguments are passed.', function() {
+
+      assert.throws(function() {
+        sampleCovariance([1, 2, 3], [1, 2]);
+      }, /size/);
+
+      assert.throws(function() {
+        sampleCovariance([1], [1]);
+      }, /item/);
+    });
+
+    it('should properly compute the covariance between the two given sample.', function() {
+      const sample1 = [4, 5, 6, 3, 5],
+            sample2 = [4, 5, 9, 10, 7];
+
+      assert.strictEqual(sampleCovariance(sample1, sample2), -0.25);
     });
   });
 });
