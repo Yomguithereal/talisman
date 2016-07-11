@@ -11,10 +11,40 @@ The `stats/inferential` module gather a handful of functions related to inferent
 
 ## Summary
 
+* [sampleCorrelation](#sample-correlation)
+* [sampleCovariance](#sample-covariance)
 * [sampleStdev](#sample-stdev)
 * [sampleVariance](#sample-variance)
 * [stdev](#stdev)
 * [variance](#variance)
+
+<h2 id="sample-correlation">sampleCorrelation</h2>
+
+Computes the sample correlation coefficient between the two given samples.
+
+```js
+import {sampleCorrelation} from 'talisman/stats/inferential';
+
+sampleCorrelation(
+  [4, 5, 6, 3, 5],
+  [4, 5, 9, 10, 7]
+);
+>>> ~-0.086
+```
+
+<h2 id="sample-covariance">sampleCovariance</h2>
+
+Computes the sample covariance of the two given samples.
+
+```js
+import {sampleCovariance} from 'talisman/stats/inferential';
+
+sampleCovariance(
+  [4, 5, 6, 3, 5],
+  [4, 5, 9, 10, 7]
+);
+>>> -0.25
+```
 
 <h2 id="sample-stdev">sampleStdev</h2>
 

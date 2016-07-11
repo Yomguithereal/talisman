@@ -19,13 +19,16 @@ This said, the library also offers phonetic algorithms targeting other [language
 
 Modules under the `talisman/phonetics` namespace:
 
+* [alpha-sis](#alpha-sis)
 * [caverphone](#caverphone)
 * [daitch-mokotoff](#daitch-mokotoff)
 * [double-metaphone](#double-metaphone)
+* [fuzzy-soundex](#fuzzy-soundex)
 * [lein](#lein)
 * [metaphone](#metaphone)
 * [mra](#mra)
 * [nysiis](#nysiis)
+* [phonex](#phonex)
 * [roger-root](#roger-root)
 * [soundex](#soundex)
 * [statcan](#statcan)
@@ -66,6 +69,29 @@ kathrynCode
 catherineCode === kathrynCode
 >>> true
 ```
+
+<h2 id="alpha-sis">alpha-sis</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://archive.org/stream/accessingindivid00moor#page/15/mode/1up">https://archive.org/stream/accessingindivid00moor#page/15/mode/1up</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Accessing individual records from personal data files using non-unique identifiers" / Gwendolyn B. Moore, et al.; prepared for the Institute for Computer Sciences and Technology, National Bureau of Standards, Washington, D.C (1977)</em>
+</span>
+
+This algorithm, from IBM's Alpha Search Inquiry System (Alpha SIS), produces 14 characters-long [Soundex](#soundex)-like codes.
+
+Note that it will return a list rather than a single code because it will try to encode some characters sequences, such as "DZ" for instance, using two or three possibilities (and all permutations are thusly returned).
+
+```js
+import alphaSis from 'talisman/phonetics/alpha-sis';
+
+alphaSis('Rogers');
+>>> ['04740000000000']
+```
+
+<div id="alpha-sis-mount"></div>
 
 <h2 id="caverphone">caverphone</h2>
 
@@ -155,6 +181,29 @@ doubleMetaphone('Smith');
 ```
 
 <div id="double-metaphone-mount"></div>
+
+<h2 id="fuzzy-soundex">fuzzy-soundex</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://wayback.archive.org/web/20100629121128/http://www.ir.iit.edu/publications/downloads/IEEESoundexV5.pdf">http://wayback.archive.org/web/20100629121128/http://www.ir.iit.edu/publications/downloads/IEEESoundexV5.pdf</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Holmes, David and M. Catherine McCabe. "Improving Precision and Recall for Soundex Retrieval."</em>
+</span>
+
+This algorithm is designed as an improvement over the classical [Soundex](#soundex).
+
+This improvement is achieved by performing some substitutions in the style of what the [NYSIIS](#nysiis) algorithm does, plus fuzzying some name beginnings & endings.
+
+```js
+import fuzzySoundex from 'talisman/phonetics/fuzzy-soundex';
+
+fuzzySoundex('Rogers');
+>>> 'R769'
+```
+
+<div id="fuzzy-soundex-mount"></div>
 
 <h2 id="lein">lein</h2>
 
@@ -251,6 +300,29 @@ nysiis('Philbert');
 *Refined version*
 
 <div id="nysiis-refined-mount"></div>
+
+<h2 id="phonex">phonex</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://homepages.cs.ncl.ac.uk/brian.randell/Genealogy/NameMatching.pdf">http://homepages.cs.ncl.ac.uk/brian.randell/Genealogy/NameMatching.pdf</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Lait, A. J. and B. Randell. "An Assessment of Name Matching Algorithms".</em>
+</span>
+
+This algorithm is an improved version of the [Soundex](#soundex) algorithm.
+
+Its main change is to better fuzz some very common cases missed by the Soundex algorithm in order to match more orthographic variations.
+
+```js
+import phonex from 'talisman/phonetics/phonex';
+
+phonex('Rogers');
+>>> 'R26'
+```
+
+<div id="phonex-mount"></div>
 
 <h2 id="roger-root">roger-root</h2>
 

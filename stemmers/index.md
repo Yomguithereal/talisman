@@ -25,6 +25,7 @@ Modules under the `talisman/stemmers` namespace:
 * [lovins](#lovins)
 * [porter](#porter)
 * [s-stemmer](#s-stemmer)
+* [uea-lite](#uea-lite)
 
 <h2 id="languages">Stemmers for other languages</h2>
 
@@ -146,6 +147,36 @@ sStemmer('queries');
 ```
 
 <div id="s-stemmer-mount"></div>
+
+<h2 id="uea-lite">uea-lite</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://www2.cmp.uea.ac.uk/~djs/projects/UEAlite/stemmer.html">http://www2.cmp.uea.ac.uk/~djs/projects/UEAlite/stemmer.html</a><br><br>
+</span>
+
+<span class="marginnote">
+  Authors:<br><u>Marie-CLaire Jenkins</u><br><u>Dan Smith</u><br><a href="http://github.com/ealdent">Jason M. Adams</a>
+</span>
+
+The University of East Anglia (UEA) stemmer, edited by Jason M. Adams in his [Ruby port](http://github.com/ealdent/uea-stemmer).
+
+Note that this stemmers comes with the possibility to return you the matched rule along with the resulting stem if needed.
+
+```js
+import ueaLite, {withRule} from 'talisman/stemmers/uea-lite';
+
+ueaLite('ordained');
+>>> 'ordain'
+
+// Or if you want to know the matched rule:
+withRule('ordained');
+>>> {
+  stem: 'ordain',
+  rule: 13.6
+}
+```
+
+<div id="uea-lite-mount"></div>
 
 <script src="{{ site.baseurl }}/assets/dist/stemmers.js"></script>
 

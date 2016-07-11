@@ -1,9 +1,9 @@
 ---
 layout: page
-title: Metrics
+title: Distance Metrics
 ---
 
-The `metrics` module typically gathers functions aiming at finding a theoretical "distance" between two sequences.
+The `metrics/distance` module typically gathers metrics aiming at finding a theoretical "distance" between two sequences.
 
 They range from computing the edit distance between two strings to retrieving the distance between two points in space.
 
@@ -11,7 +11,7 @@ They range from computing the edit distance between two strings to retrieving th
 
 ## Summary
 
-Modules under the `talisman/metrics` namespace:
+Modules under the `talisman/metrics/distance/distance` namespace:
 
 * [canberra](#canberra)
 * [chebyshev](#chebyshev)
@@ -49,7 +49,7 @@ In the example below, we used the [Dice](#dice) coefficient, rating the similari
 
 ```js
 // Let's use the Dice coefficient
-import dice from 'talisman/metrics/dice';
+import dice from 'talisman/metrics/distance/dice';
 
 // We'll say two strings are similar if their Dice coefficient >= 0.8
 function compare(a, b) {
@@ -72,7 +72,7 @@ compare('healed', 'sold');
 The Canberra distance is a weighted version of the [Manhattan](#manhattan) distance.
 
 ```js
-import canberra from 'talisman/metrics/canberra';
+import canberra from 'talisman/metrics/distance/canberra';
 
 canberra([1, 3], [4, 5]);
 >>> 0.85
@@ -89,7 +89,7 @@ canberra([1, 3], [4, 5]);
 The Chebyshev distance between two vectors is the greatest of their differences along any coordinate dimension.
 
 ```js
-import chebyshev from 'talisman/metrics/chebyshev';
+import chebyshev from 'talisman/metrics/distance/chebyshev';
 
 chebyshev([1, 3], [4, 5]);
 >>> 3
@@ -106,9 +106,9 @@ chebyshev([1, 3], [4, 5]);
 Computes the cosine similarity between two vectors of same dimension.
 
 ```js
-import cosine from 'talisman/metrics/cosine';
+import cosine from 'talisman/metrics/distance/cosine';
 // Alternatively
-import {similarity, distance} from 'talisman/metrics/cosine';
+import {similarity, distance} from 'talisman/metrics/distance/cosine';
 
 cosine([1, 3], [4, 5]);
 >>> 0.94
@@ -129,7 +129,7 @@ The Damerau-Levenshtein is an improvement over the classical [Levenshtein](#leve
 That is to say this variant will handle transpositions as well as the usual additions, deletions & substitions.
 
 ```js
-import damerauLevenshtein from 'talisman/metrics/damerau-levenshtein';
+import damerauLevenshtein from 'talisman/metrics/distance/damerau-levenshtein';
 
 damerauLevenshtein('this', 'tihs');
 >>> 1
@@ -152,14 +152,14 @@ Computes the Dice coefficient between two sequences, usually strings.
 Note that the Dice & Sorensen coefficients are the same thing and that you remain free to use the module you prefer.
 
 ```js
-import dice from 'talisman/metrics/dice';
+import dice from 'talisman/metrics/distance/dice';
 // Alternatively
 import {
   index,
   coefficient,
   similarity,
   distance
-} from 'talisman/metrics/dice';
+} from 'talisman/metrics/distance/dice';
 
 dice('healed', 'sealed');
 >>> 0.8
@@ -180,9 +180,9 @@ Computes the euclidean distance between two points in a N-dimensions space.
 This distance is equal to the length of the straight line drawn between both points.
 
 ```js
-import euclidean from 'talisman/metrics/euclidean';
+import euclidean from 'talisman/metrics/distance/euclidean';
 // Alternatively
-import {squared} from 'talisman/metrics/euclidean';
+import {squared} from 'talisman/metrics/distance/euclidean';
 
 euclidean([1, 3], [4, 5]);
 >>> ~3.61
@@ -213,7 +213,7 @@ squared([1, 3], [4, 5]);
 Computes the Hamming distance between two equal-length sequences.
 
 ```js
-import hamming from 'talisman/metrics/hamming';
+import hamming from 'talisman/metrics/distance/hamming';
 
 hamming('night', 'nacht');
 >>> 2
@@ -237,13 +237,13 @@ hamming([1, 0, 1, 1, 1, 0, 1], [1, 0, 0, 1, 0, 0, 1]);
 Computes the Jaccard index between two sequences, usually strings.
 
 ```js
-import jaccard from 'talisman/metrics/jaccard';
+import jaccard from 'talisman/metrics/distance/jaccard';
 // Alternatively
 import {
   index,
   similarity,
   distance
-} from 'talisman/metrics/jaccard';
+} from 'talisman/metrics/distance/jaccard';
 
 index === similarity === jaccard
 
@@ -274,12 +274,12 @@ Computes the Jaro distance between two sequences, usually strings.
 See also the [Jaro-Winkler](#jaro-winkler) distance.
 
 ```js
-import jaro from 'talisman/metrics/jaro';
+import jaro from 'talisman/metrics/distance/jaro';
 // Alternatively
 import {
   similarity,
   distance
-} from 'talisman/metrics/jaro';
+} from 'talisman/metrics/distance/jaro';
 
 similarity === jaro
 
@@ -304,12 +304,12 @@ Computes the Jaro-Winkler distance between two sequences, usually strings.
 </span>
 
 ```js
-import jaroWinkler from 'talisman/metrics/jaro-winkler';
+import jaroWinkler from 'talisman/metrics/distance/jaro-winkler';
 // Alternatively
 import {
   similarity,
   distance
-} from 'talisman/metrics/jaro-winkler';
+} from 'talisman/metrics/distance/jaro-winkler';
 
 similarity === jaroWinkler
 
@@ -324,7 +324,7 @@ distance(a, b) === 1 - similarity(a, b)
 *Using custom parameters*
 
 ```js
-import {custom} from 'talisman/metrics/jaro-winkler';
+import {custom} from 'talisman/metrics/distance/jaro-winkler';
 
 const parameters = {
   boostThreshold: 0.7,
@@ -355,7 +355,7 @@ The Levenshtein distance is probably the most known metric dealing with edit dis
 This function therefore computes the absolute edit distance between two sequences, usually strings.
 
 ```js
-import levenshtein from 'talisman/metrics/levenshtein';
+import levenshtein from 'talisman/metrics/distance/levenshtein';
 
 levenshtein('book', 'back');
 >>> 2
@@ -374,7 +374,7 @@ Computes the Manhattan distance between two points in a N-dimensions space.
 This distance if also often called the "city block" distance because it won't draw a straight line between both points but rather follow the other edges of the triangle.
 
 ```js
-import manhattan from 'talisman/metrics/manhattan';
+import manhattan from 'talisman/metrics/distance/manhattan';
 
 manhattan([1, 3], [4, 5]);
 >>> 5
@@ -391,7 +391,7 @@ manhattan([1, 3], [4, 5]);
 The Minkowski distance is a generalization of both the [euclidean](#euclidean) & the [Manhattan](#manhattan) distance.
 
 ```js
-import minkowski from 'talisman/metrics/minkowski';
+import minkowski from 'talisman/metrics/distance/minkowski';
 
 minkowski(1, [1, 3], [4, 5]);
 >>> 5
@@ -421,7 +421,7 @@ Assesses the similarity between two names by using the Match Rating Approach com
 Note that if the difference between the strings' codex' lengths is superior to 3, the comparison won't be done as the algorithm will deem the strings too different.
 
 ```js
-import mra from 'talisman/metrics/mra';
+import mra from 'talisman/metrics/distance/mra';
 
 mra('Catherine', 'Kathryn');
 >>> {
@@ -450,7 +450,7 @@ mra('Catherine', 'Kathryn');
 Computes the overlap coefficient between two sequences.
 
 ```js
-import overlap from 'talisman/metrics/overlap';
+import overlap from 'talisman/metrics/distance/overlap';
 
 overlap('abc', 'abcde');
 >>> 1
@@ -477,7 +477,7 @@ Computes the Tversky index between two strings.
 Note that the Tversky index can be seens as a generalization of both the [Jaccard](#jaccard) index and the [Dice](#dice) coefficient.
 
 ```js
-import tversky from 'talisman/metrics/tversky';
+import tversky from 'talisman/metrics/distance/tversky';
 
 const parameters = {
   symmetric: false,
@@ -500,5 +500,5 @@ jaccard('context', 'contact');
 
 <div id="tversky-mount"></div>
 
-<script src="{{ site.baseurl }}/assets/dist/metrics.js"></script>
+<script src="{{ site.baseurl }}/assets/dist/metrics-distance.js"></script>
 

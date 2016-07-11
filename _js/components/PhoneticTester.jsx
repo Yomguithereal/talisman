@@ -32,6 +32,7 @@ const PhoneticTester = state(
         className = 'default';
 
     if (codeOne && codeTwo) {
+      console.log(codeOne, codeTwo);
       if (comparator(codeOne, codeTwo)) {
         status = '=~';
         className = 'success';

@@ -62,36 +62,44 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <br>
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#canberra">canberra</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#chebyshev">chebyshev</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#damerau-levenshtein">damerau-levenshtein</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#dice">dice</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#euclidean">euclidean</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#hamming">hamming</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaccard">jaccard</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro">jaro</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro-winkler">jaro-winkler</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#levenshtein">levenshtein</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#manhattan">manhattan</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#minkowski">minkowski</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#mra">mra</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#overlap">overlap</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#sorensen">sorensen</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#tversky">tversky</a></em></li>
+        <li>
+          <a href="{{ site.baseurl }}/metrics/distance">distance</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#canberra">canberra</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#chebyshev">chebyshev</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#cosine">cosine</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#damerau-levenshtein">damerau-levenshtein</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#dice">dice</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#euclidean">euclidean</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#hamming">hamming</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaccard">jaccard</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaro">jaro</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaro-winkler">jaro-winkler</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#levenshtein">levenshtein</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#manhattan">manhattan</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#minkowski">minkowski</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#mra">mra</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#overlap">overlap</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#sorensen">sorensen</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#tversky">tversky</a></em></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>
       <br>
       <a href="{{ site.baseurl }}/phonetics">phonetics</a>
       <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#alpha-sis">alpha-sis</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#caverphone">caverphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#daitch-mokotoff">daitch-mokotoff</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#double-metaphone">double-metaphone</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#fuzzy-soundex">fuzzy-soundex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#lein">lein</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#mra">mra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#nysiis">nysiis</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#phonex">phonex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#roger-root">roger-root</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#statcan">statcan</a></em></li>
@@ -139,6 +147,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lovins">lovins</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#porter">porter</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#s-stemmer">s-stemmer</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#uea-lite">uea-lite</a></em></li>
         <li>
           <a href="{{ site.baseurl }}/stemmers/french">french</a>
           <ul>
