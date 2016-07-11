@@ -36,6 +36,27 @@ const CONTRACTIONS = [
   [/'m/, ' am']
 ];
 
+const complexSuffixing = word => {
+
+  // Dropping final "s"
+  if (word[word.length - 1] === 's')
+    word = word.slice(0, -1);
+
+  // Dropping "ing"
+  if (word.slice(-3) === 'ing')
+    word = word.slice(0, -3);
+
+  // Dropping "ed"
+  else if (word.slice(-2) === 'ed')
+    word = word.slice(0, -2);
+
+  // Dropping potential consecutive duplicate letters
+  if (word[word.length - 1] === word[word.length - 2])
+    word = word.slice(0, -1);
+
+  return word;
+};
+
 const RULES = [
   [/^\d+$/, null, '90.3'],
   [/^\w+-\w+$/, null, '90.2'],
@@ -189,7 +210,7 @@ const RULES = [
 
   [/thing$/, null, '58.1'],
   [/things$/, 1, '58.1'],
-  [/(.*\w{2})ings?$/, '$1', '58'],
+  [/\w{2}ings?$/, complexSuffixing, '58'],
   [/ies$/, 'y', '59'],
   [/lves$/, 'lf', '60.1'],
   [/ves$/, 1, '60'],
@@ -200,7 +221,7 @@ const RULES = [
   // NOTE: same rule as 22.1, but present uselessly in all reference
   // implementations
   // [/ated$/, 1, '61'],
-  [/(.*\w{2})eds?$/, '$1', '62'],
+  [/\w{2}eds?$/, complexSuffixing, '62'],
 
   //--< Jason M. Adams
   [/des$/, 1, '63.10'],
@@ -269,7 +290,10 @@ export function withRule(word) {
 
     // Attempting to match the pattern
     if (pattern.test(stem)) {
-      if (replacement)
+
+      if (typeof replacement === 'function')
+        stem = replacement(stem);
+      else if (replacement)
         stem = stem.slice(0, -replacement);
 
       return {rule, stem};

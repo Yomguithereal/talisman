@@ -45,7 +45,7 @@ describe('uea-lite', function() {
       ['flying', 'fly'],
       ['lying', 'lie'],
       ['harping', 'harp'],
-      // ['charring', 'char'],
+      ['charring', 'char'],
       ['changes', 'change'],
       ['deaths', 'death'],
       ['shadows', 'shadow'],
