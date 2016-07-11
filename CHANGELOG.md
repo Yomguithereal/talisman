@@ -4,6 +4,7 @@
 
 * Adding the `phonetics/alpha-sis` namespace.
 * Adding the `phonetics/fuzzy-soundex` namespace.
+* Adding the `phonetics/phonex` namespace.
 * Adding the `stemmers/uea-lite` namespace.
 * Moving the `metrics` namespace to `metrics/distance`.
 
