@@ -12,8 +12,6 @@
  * Marie-CLaire Jenkins
  * Dan Smith
  * Jason M. Adams (Ruby version additions)
- *
- * Note: there is still an issue with "charring" to fix.
  */
 
 /**
