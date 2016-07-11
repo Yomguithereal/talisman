@@ -7,6 +7,7 @@
 * Adding the `phonetics/phonex` namespace.
 * Adding the `stemmers/uea-lite` namespace.
 * Adding the `stats/inferential#sampleCovariance` function.
+* Adding the `stats/inferential#sampleCorrelation` function.
 * Moving the `metrics` namespace to `metrics/distance`.
 
 ## 0.8.0

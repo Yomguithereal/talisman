@@ -3,13 +3,14 @@
  * =================================
  *
  */
-import assert from 'assert';
+import {assert} from 'chai';
 import {
   variance,
   stdev,
   sampleVariance,
   sampleStdev,
-  sampleCovariance
+  sampleCovariance,
+  sampleCorrelation
 } from '../../src/stats/inferential';
 
 describe('inferential', function() {
@@ -81,11 +82,20 @@ describe('inferential', function() {
       }, /item/);
     });
 
-    it('should properly compute the covariance between the two given sample.', function() {
+    it('should properly compute the covariance between the two given samples.', function() {
       const sample1 = [4, 5, 6, 3, 5],
             sample2 = [4, 5, 9, 10, 7];
 
       assert.strictEqual(sampleCovariance(sample1, sample2), -0.25);
+    });
+  });
+
+  describe('#.sampleCorrelation', function() {
+    it('should properly compute the correlation between the two given samples.', function() {
+      const sample1 = [4, 5, 6, 3, 5],
+            sample2 = [4, 5, 9, 10, 7];
+
+      assert.approximately(sampleCorrelation(sample1, sample2), -0.086, 0.001);
     });
   });
 });

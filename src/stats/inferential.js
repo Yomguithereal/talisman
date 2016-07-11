@@ -61,9 +61,9 @@ const sampleVariance = genericVariance.bind(null, 1),
 /**
  * Function computing the sample covariance.
  *
- * @param  {array}  seq1 - First sequence.
- * @param  {array}  seq2 - Second sequence.
- * @return {number}      - The sample covariance.
+ * @param  {array}  x - First sequence.
+ * @param  {array}  y - Second sequence.
+ * @return {number}   - The sample covariance.
  *
  * @throws {Error} - The function expects two equal-length lists.
  * @throws {Error} - The function expects lists containing more than one item.
@@ -85,6 +85,19 @@ export function sampleCovariance(x, y) {
     sum += (x[i] - xMean) * (y[i] - yMean);
 
   return sum / (n - 1);
+}
+
+/**
+ * Function computing the sample correlation coefficient.
+ *
+ * @param  {array}  x - First sequence.
+ * @param  {array}  y - Second sequence.
+ * @return {number}   - The sample correlation coefficient.
+ */
+export function sampleCorrelation(x, y) {
+  const covariance = sampleCovariance(x, y);
+
+  return covariance / (sampleStdev(x) * sampleStdev(y));
 }
 
 export {
