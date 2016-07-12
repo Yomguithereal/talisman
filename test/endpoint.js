@@ -34,6 +34,7 @@ describe('metrics', function() {
     require('./metrics/distance/damerau-levenshtein.js');
     require('./metrics/distance/dice.js');
     require('./metrics/distance/euclidean.js');
+    require('./metrics/distance/eudex.js');
     require('./metrics/distance/hamming.js');
     require('./metrics/distance/jaccard.js');
     require('./metrics/distance/jaro-winkler.js');

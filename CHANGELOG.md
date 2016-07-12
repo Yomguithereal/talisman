@@ -2,6 +2,7 @@
 
 ## 0.10.0
 
+* Adding the `metrics/distance/eudex` namespace.
 * Adding the `phonetics/eudex` namespace.
 
 ## 0.9.0
