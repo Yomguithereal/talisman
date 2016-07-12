@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0
+
+* Adding the `phonetics/eudex` namespace.
+
 ## 0.9.0
 
 * Adding the `phonetics/alpha-sis` namespace.

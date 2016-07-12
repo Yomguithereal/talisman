@@ -54,7 +54,7 @@ export function singularToPlural(word) {
 
   // If the word ends with "x" or "z", singular & plural are the same
   const lastLetter = word[word.length - 1];
-  if (lastLetter === 'x' || lastLetter === 'z')
+  if (lastLetter === 'x' || lastLetter === 'z')
     return word;
 
   // Handling "irregular" plural of words finishing with "al"
@@ -70,6 +70,6 @@ export function singularToPlural(word) {
  * @param  {string} word - The word to inflect.
  * @return {string}      - The singularized form.
  */
-export function pluralToSingular(word) {
+// export function pluralToSingular(word) {
 
-}
+// }
