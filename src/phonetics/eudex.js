@@ -11,6 +11,7 @@
  * [Author]:
  * @ticki (https://github.com/ticki)
  */
+import Long from 'long';
 
 /**
  * Maps.
@@ -199,17 +200,19 @@ export default function eudex(word) {
   if (entry < LETTERS)
     firstByte = INJECTIVE_PHONES[entry];
   else if (entry >= 0xDF && entry < 0xFF)
-    firstByte = INJECTIVE_PHONES_C1[(entry - 0xDF)];
+    firstByte = INJECTIVE_PHONES_C1[entry - 0xDF];
 
-  let res = 0,
-      n = 1,
+  firstByte = new Long(firstByte);
+
+  let res = Long.UZERO,
+      n = 0,
       b = 1;
 
-  while (n !== 0 && b < array.length) {
+  while (n < 8 && b < array.length) {
     entry = ((array[b] | 32) - A) & 0xFF;
 
     if (entry <= Z) {
-      let x = 0;
+      let x;
 
       if (entry < LETTERS)
         x = PHONES[entry];
@@ -218,15 +221,15 @@ export default function eudex(word) {
       else
         continue;
 
-      if ((res & 0xFE) !== (x & 0xFE)) {
-        res <<= 8;
-        res |= x;
-        n <<= 1;
+      if (!res.and(0xFE).equals(x & 0xFE)) {
+        res = res.shiftLeft(8);
+        res = res.or(x);
+        n++;
       }
     }
 
     b++;
   }
 
-  return res | (firstByte << 56);
+  return res.or(firstByte.shiftLeft(56));
 }

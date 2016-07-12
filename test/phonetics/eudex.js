@@ -21,11 +21,11 @@ describe('eudex', function() {
       ['riiiindom', 'ryyyyyndom'],
       ['riyiyiiindom', 'ryyyyyndom'],
       ['triggered', 'TRIGGERED'],
-      ['repert', 'ropert'],
+      ['repert', 'ropert']
     ];
 
     identicalHashes.forEach(function([one, two]) {
-      assert.strictEqual(eudex(one), eudex(two));
+      assert(eudex(one).equals(eudex(two)), `${one} = ${two}`);
     });
 
     const differentHashes = [
@@ -38,11 +38,11 @@ describe('eudex', function() {
       ['rupirt', 'ropert'],
       ['ripert', 'ropyrt'],
       ['rrr', 'rraaaa'],
-      ['randomal', 'randomai'],
+      ['randomal', 'randomai']
     ];
 
     differentHashes.forEach(function([one, two]) {
-      assert(eudex(one) !== eudex(two));
+      assert(!eudex(one).equals(eudex(two)), `${one} != ${two}`);
     });
   });
 });
