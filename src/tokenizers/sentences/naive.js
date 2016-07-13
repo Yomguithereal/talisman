@@ -12,19 +12,19 @@ import {SIMPLE_QUOTES, DOUBLE_QUOTES} from '../../regex/classes';
  * Notable exceptions.
  */
 const EXCEPTIONS = [
+  'Dr',
+  'etc',
+  'Jr',
   'M',
+  'Mgr',
   'Mr',
   'Mrs',
   'Ms',
   'Mme',
   'Mlle',
-  'Jr',
-  'Dr',
   'Prof',
   'Sr',
-  'Mgr',
-  'St',
-  'etc'
+  'St'
 ];
 
 /**
