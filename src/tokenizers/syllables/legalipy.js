@@ -9,7 +9,7 @@
  * https://github.com/henchc/LegaliPy
  * http://syllabipy.com/index.php/legalipy-demo/
  *
- * [Authors]:
+ * [Author]:
  * Christopher Hench (UC Berkeley)
  */
 import {updateFrequencies, relative} from '../../stats/frequencies';

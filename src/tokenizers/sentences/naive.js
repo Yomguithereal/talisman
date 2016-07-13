@@ -55,7 +55,6 @@ const DOUBLE_QUOTES_REGEX = new RegExp('[' + DOUBLE_QUOTES + ']', 'g'),
 export function createTokenizer(options) {
   options = options || {};
 
-  //
   const exceptions = options.exceptions || [];
 
   // Building the exception regex once and for all
@@ -63,7 +62,12 @@ export function createTokenizer(options) {
     `(${exceptions.map(e => e + '\\.').join('|')})`
   );
 
-  // Returning the tokenizer
+  /**
+   * Created tokenizer function.
+   *
+   * @param  {string} text - The text to tokenize.
+   * @return {array}       - The sentences as tokens.
+   */
   return function(text) {
     const initialTokens = text.replace(REGEX, '$1$2\x1E').split('\x1E'),
           correctTokens = [];
