@@ -157,7 +157,6 @@ export default function createTokenizer(options) {
     const syllables = [];
 
     // If the word is monosyllabic, we can stop right there
-    // FIXME: check if we need to edit for last step?
     if (vowelCount <= 1)
       return [word];
 
