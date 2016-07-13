@@ -6,16 +6,24 @@
  */
 
 /**
- * Function computing the sum of the given sequence.
+ * Function computing the sum of the given sequence, while correcting floating
+ * point errors.
  *
  * @param  {array}  sequence - The sequence to process.
  * @return {number}          - The sum.
  */
 export function sum(sequence) {
-  let s = 0;
+  let compensation = 0,
+      s = 0;
 
-  for (let i = 0, l = sequence.length; i < l; i++)
-    s += sequence[i];
+  for (let i = 0, l = sequence.length; i < l; i++) {
+    const correctedValue = sequence[i] - compensation,
+          next = s + correctedValue;
+
+    compensation = next - s - correctedValue;
+
+    s = next;
+  }
 
   return s;
 }
