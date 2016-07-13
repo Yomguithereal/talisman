@@ -129,6 +129,7 @@ describe('tokenizers', function() {
 
   describe('syllables', function() {
     require('./tokenizers/syllables/legalipy.js');
+    require('./tokenizers/syllables/sonoripy.js');
   });
 
   describe('tweets', function() {
