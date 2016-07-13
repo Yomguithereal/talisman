@@ -7,6 +7,7 @@
 * Adding some import shortcuts for naives tokenizers.
 * Improving the `tokenizers/syllables/legalipy` API.
 * Improving the `tokenizers/sentences/naive` API.
+* Fixing `tokenizers/syllables/legalipy` to correctly handle capitalized words.
 
 ## 0.9.0
 
