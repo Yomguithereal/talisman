@@ -47,7 +47,7 @@ function clean(word) {
  * @constructor
  * @param {object} options - Possible options.
  */
-export default class LegalipyTokenizer {
+export class LegalipyTokenizer {
   constructor() {
 
     // Properties
@@ -59,7 +59,7 @@ export default class LegalipyTokenizer {
   /**
    * Method used to train the onsets.
    *
-   * @param  {array}           tokens - Text tokens.
+   * @param  {array}             tokens - Word tokens.
    * @return {LegalipyTokenizer}        - Returns itself for chaining.
    *
    * @throws {Error} - Will throw if the tokenizer has finalized its training.
@@ -150,17 +150,20 @@ export default class LegalipyTokenizer {
     }
 
     else {
-      let syllable = '',
+      let currentSyllable = '',
           onsetBinary = false,
           newSyllableBinary = true;
 
       // Iterating on the letters in reverse
       for (let i = word.length - 1; i >= 0; i--) {
-        const letter = word[i];
+        const originalLetter = word[i],
+              letter = originalLetter.toLowerCase();
+
+        const syllable = currentSyllable.toLowerCase();
 
         if (newSyllableBinary) {
 
-          syllable = letter + syllable;
+          currentSyllable = originalLetter + syllable;
 
           if (VOWELS.has(letter)) {
             newSyllableBinary = false;
@@ -170,7 +173,7 @@ export default class LegalipyTokenizer {
         else if (!newSyllableBinary) {
 
           if (!syllable) {
-            syllable = letter + syllable;
+            currentSyllable = originalLetter + syllable;
           }
 
           else if (
@@ -179,28 +182,28 @@ export default class LegalipyTokenizer {
             (this.onsets.has(letter + syllable.slice(0, 2)) && VOWELS.has(syllable[2])) ||
             (this.onsets.has(letter + syllable.slice(0, 3)) && VOWELS.has(syllable[3]))
           ) {
-            syllable = letter + syllable;
+            currentSyllable = originalLetter + syllable;
             onsetBinary = true;
           }
 
           else if (VOWELS.has(letter) && !onsetBinary) {
-            syllable = letter + syllable;
+            currentSyllable = originalLetter + syllable;
           }
 
           else if (VOWELS.has(letter) && onsetBinary) {
             syllables.unshift(syllable);
-            syllable = letter;
+            currentSyllable = originalLetter;
           }
 
           else {
             syllables.unshift(syllable);
-            syllable = letter;
+            currentSyllable = originalLetter;
             newSyllableBinary = true;
           }
         }
       }
 
-      syllables.unshift(syllable);
+      syllables.unshift(currentSyllable);
     }
 
     return syllables;
@@ -236,4 +239,23 @@ export default class LegalipyTokenizer {
     this.finalize();
     this.onsets = new Set(model.onsets);
   }
+}
+
+/**
+ * Function that can be used to tokenize a series of word tokens on the fly.
+ *
+ * @param  {array} tokens - Word tokens.
+ * @return {array}        - A list of word tokenized as syllables.
+ */
+export default function defaultTokenizer(tokens) {
+  const tokenizer = new LegalipyTokenizer();
+  tokenizer.train(tokens);
+  tokenizer.finalize();
+
+  const newTokens = new Array(tokens.length);
+
+  for (let i = 0, l = tokens.length; i < l; i++)
+    newTokens[i] = tokenizer.tokenize(tokens[i]);
+
+  return newTokens;
 }
