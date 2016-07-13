@@ -12,6 +12,7 @@ import {SIMPLE_QUOTES, DOUBLE_QUOTES} from '../../regex/classes';
  * Notable exceptions.
  */
 const EXCEPTIONS = [
+  'M',
   'Mr',
   'Mrs',
   'Ms',
@@ -45,44 +46,55 @@ const DOUBLE_QUOTES_REGEX = new RegExp('[' + DOUBLE_QUOTES + ']', 'g'),
       PITFALL_REGEX = /^[A-Za-z0-9]\s*\)/;
 
 /**
- * Function tokenizing raw text into sentences.
+ * Tokenizer function factory aiming at building the required function.
  *
- * @param  {string} text       - The text to tokenize.
- * @param  {array}  exceptions - An array of additional exceptions.
- * @return {array}             - The tokens.
+ * @param  {object}   options              - Possible options:
+ * @param  {object}   [options.exceptions] - List of exceptions to handle.
+ * @return {function}                      - The tokenizer function.
  */
-export default function tokenize(text, exceptions) {
-  const initialTokens = text.replace(REGEX, '$1$2\x1E').split('\x1E'),
-        correctTokens = [];
+export function createTokenizer(options) {
+  options = options || {};
 
-  // Building the exceptions regex
-  exceptions = EXCEPTIONS
-    .concat(exceptions || [])
-    .map(e => e + '\\.')
-    .join('|');
+  //
+  const exceptions = options.exceptions || [];
 
-  const exceptionsRegex = new RegExp(`(${exceptions})$`);
+  // Building the exception regex once and for all
+  const exceptionsRegex = new RegExp(
+    `(${exceptions.map(e => e + '\\.').join('|')})`
+  );
 
-  let memo = '',
-      c;
+  // Returning the tokenizer
+  return function(text) {
+    const initialTokens = text.replace(REGEX, '$1$2\x1E').split('\x1E'),
+          correctTokens = [];
 
-  for (let i = 0, l = initialTokens.length; i < l; i++) {
-    c = initialTokens[i];
+    let memo = '',
+        c;
 
-    // Searching for exceptions
-    if (i !== l - 1 &&
-        ((exceptionsRegex.test(c)) ||
-         (LIST_REGEX.test(c)) ||
-         (!PITFALL_REGEX.test(c)) &&
-         ((((memo + c).match(DOUBLE_QUOTES_REGEX) || []).length % 2 !== 0) ||
-          (((memo + c).match(PAREN_REGEX) || []).length % 2 !== 0)))) {
-      memo += (memo ? ' ' : '') + c;
-      continue;
+    for (let i = 0, l = initialTokens.length; i < l; i++) {
+      c = initialTokens[i];
+
+      // Searching for exceptions
+      if (i !== l - 1 &&
+          ((exceptionsRegex.test(c)) ||
+           (LIST_REGEX.test(c)) ||
+           (!PITFALL_REGEX.test(c)) &&
+           ((((memo + c).match(DOUBLE_QUOTES_REGEX) || []).length % 2 !== 0) ||
+            (((memo + c).match(PAREN_REGEX) || []).length % 2 !== 0)))) {
+        memo += (memo ? ' ' : '') + c;
+        continue;
+      }
+
+      correctTokens.push(memo + (c && memo ? ' ' : '') + c);
+      memo = '';
     }
 
-    correctTokens.push(memo + (c && memo ? ' ' : '') + c);
-    memo = '';
-  }
-
-  return correctTokens;
+    return correctTokens;
+  };
 }
+
+/**
+ * Exporting a default version of the tokenizer.
+ */
+const defaultTokenizer = createTokenizer({exceptions: EXCEPTIONS});
+export default defaultTokenizer;

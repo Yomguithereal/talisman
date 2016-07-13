@@ -4,6 +4,7 @@
 
 * Adding the `metrics/distance/eudex` namespace.
 * Adding the `phonetics/eudex` namespace.
+* Improving the `tokenizers/sentences/naive` API.
 
 ## 0.9.0
 

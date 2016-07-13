@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import sentences from '../../../src/tokenizers/sentences/naive';
+import sentences, {createTokenizer} from '../../../src/tokenizers/sentences/naive';
 
 describe('naive', function() {
   it('should be possible to tokenize simple sentences.', function() {
@@ -43,8 +43,10 @@ describe('naive', function() {
   });
 
   it('should be possible to pass your own exceptions.', function() {
+    const customTokenizer = createTokenizer({exceptions: ['Msgr']});
+
     assert.deepEqual(
-      sentences('How about Msgr. Casoli? I heard he\'s not that good.', ['Msgr']),
+      customTokenizer('How about Msgr. Casoli? I heard he\'s not that good.', ['Msgr']),
       ['How about Msgr. Casoli?', 'I heard he\'s not that good.']
     );
   });
