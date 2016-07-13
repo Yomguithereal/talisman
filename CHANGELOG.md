@@ -4,6 +4,7 @@
 
 * Adding the `metrics/distance/eudex` namespace.
 * Adding the `phonetics/eudex` namespace.
+* Adding some import shortcuts for naives tokenizers.
 * Improving the `tokenizers/syllables/legalipy` API.
 * Improving the `tokenizers/sentences/naive` API.
 
