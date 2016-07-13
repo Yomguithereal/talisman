@@ -474,7 +474,7 @@ The `sorensen` module is just an alias of the [dice](#dice) one.
 
 Computes the Tversky index between two strings.
 
-Note that the Tversky index can be seens as a generalization of both the [Jaccard](#jaccard) index and the [Dice](#dice) coefficient.
+The Tversky index can be seen as a generalization of both the [Jaccard](#jaccard) index and the [Dice](#dice) coefficient.
 
 ```js
 import tversky from 'talisman/metrics/distance/tversky';
