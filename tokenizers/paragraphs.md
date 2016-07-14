@@ -16,7 +16,7 @@ Naive function using a simple regular expression to split raw text into paragrap
 This function will consider we have a paragraph split when finding at least two consecutive line breaks while ignoring any line in between containing only spaces or tabulations.
 
 ```js
-import paragraphs from 'talisman/tokenizers/paragraphs/naive';
+import paragraphs from 'talisman/tokenizers/paragraphs';
 
 paragraphs('First paragraph.\n\nSecond Paragraph.');
 >>> [

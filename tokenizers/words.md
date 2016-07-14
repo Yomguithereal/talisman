@@ -23,9 +23,9 @@ This words tokenizer is actually lodash's [words](https://lodash.com/docs#words)
 It's quite robust and works in a lot of simple cases.
 
 ```js
-import naive from 'talisman/tokenizers/words/naive';
+import words from 'talisman/tokenizers/words';
 
-naive('Hello World!');
+words('Hello World!');
 >>> ['Hello', 'World']
 ```
 

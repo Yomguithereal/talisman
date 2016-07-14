@@ -14,7 +14,7 @@ The `tokenizers/lines` module gathers the library's various lines tokenizers aim
 Naive function using a simple regular expression to split raw text into lines.
 
 ```js
-import lines from 'talisman/tokenizers/lines/naive';
+import lines from 'talisman/tokenizers/lines';
 
 lines('First line.\nSecond line.');
 >>> [

@@ -39,7 +39,7 @@ const TokenizerTester = state(
                       value={training}
                       onChange={e => setTraining(e.target.value)}
                       faded={true} />}
-          <Component placeholder="Enter raw text here..."
+          <Component placeholder="Enter raw text here to test the tokenizer..."
                      value={input}
                      onChange={e => setInput(e.target.value)} />
           <p style={{width: '100%'}}>

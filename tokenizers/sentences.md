@@ -22,27 +22,36 @@ This tokenizer is called "naive" because it relies only on regular expressions a
 It should work approximately well in a majority of texts correctly written in Western European languages.
 
 ```js
-import naive from 'talisman/tokenizers/sentences/naive';
+import sentences from 'talisman/tokenizers/sentences';
 
-naive('Hello World! Goodbye everyone.');
+sentences('Hello World! Goodbye everyone.');
 >>> [
   'Hello World!',
   'Goodbye everyone.'
 ]
-
-// You can also add some exceptions to the regular ones such as Mr. etc.
-naive('Hello World! I am Lt. Harrington.', ['Lt.', 'Capt.']);
->>> [
-  'Hello World!',
-  'I am Lt. Harrington.'
-]
 ```
 
-*arguments*
-
-* **text** <code class="type">string</code> - raw text to tokenize.
-* **[exceptions]** <code class="type">array</code> - list of additional exceptions.
-
 <div id="naive-mount"></div>
+
+*Creating a tokenizer with custom exceptions*
+
+The default tokenizer provided by the library has a limited knowledge of the exceptions you might encounter and only targets the English and to some extent the French language.
+
+So, if what you need is to feed your own list of exceptions to the tokenizer, you can create a custom one very easily:
+
+```js
+import {createTokenizer} from 'talisman/tokenizers/sentences';
+
+// Pass your exceptions without the '.'
+const customExceptions = ['Sgt', 'M', 'Mr'];
+
+const customTokenizer = createTokenizer({exceptions: customExceptions});
+
+customTokenizer('Hello Sgt. Loyall. How are you?');
+>>> [
+  'Hello Sgt. Loyall',
+  'How are you?'
+]
+```
 
 <script src="{{ site.baseurl }}/assets/dist/tokenizers-sentences.js"></script>
