@@ -48,8 +48,12 @@ const MetricTester = state(
       result = metric(proxyOne, proxyTwo)
 
       // Beautifying the result
-      if (!integerResult && result && result !== 1)
-      result = result.toFixed(2);
+      if (!integerResult && typeof result === 'number' && result !== 1)
+        result = result.toFixed(2);
+
+      // If the result is boolean
+      if (typeof result === 'boolean')
+        result = '' + result;
     }
 
     return (

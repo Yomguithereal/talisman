@@ -71,6 +71,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
             <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#damerau-levenshtein">damerau-levenshtein</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#dice">dice</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#euclidean">euclidean</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#eudex">eudex</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#hamming">hamming</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaccard">jaccard</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaro">jaro</a></em></li>
@@ -94,6 +95,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#caverphone">caverphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#daitch-mokotoff">daitch-mokotoff</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#double-metaphone">double-metaphone</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#eudex">eudex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#fuzzy-soundex">fuzzy-soundex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#lein">lein</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></em></li>

@@ -23,6 +23,7 @@ Modules under the `talisman/phonetics` namespace:
 * [caverphone](#caverphone)
 * [daitch-mokotoff](#daitch-mokotoff)
 * [double-metaphone](#double-metaphone)
+* [eudex](#eudex)
 * [fuzzy-soundex](#fuzzy-soundex)
 * [lein](#lein)
 * [metaphone](#metaphone)
@@ -181,6 +182,31 @@ doubleMetaphone('Smith');
 ```
 
 <div id="double-metaphone-mount"></div>
+
+<h2 id="eudex">eudex</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://github.com/ticki/eudex">https://github.com/ticki/eudex</a><br><br>
+</span>
+
+<span class="marginnote">
+  Author: [ticki](https://github.com/ticki)
+</span>
+
+Eudex is a phonetic hashing algorithm that will produce a 64bits integer holding information about the given word.
+
+The produced hashed can be used afterwards by specific [distance metrics]({{ site.baseurl }}/metrics/distance#eudex) to determine whether two given words seem phonetically similar or not.
+
+**Important**: this function will return a 64bits integer wrapped in a `Long` object from the [long](https://www.npmjs.com/package/long) node library since JavaScript is natively unable to deal with such integers.
+
+```js
+import eudex from 'talisman/phonetics/eudex';
+
+eudex('Guillaume');
+>>> <Long>288230378836066816
+```
+
+<div id="eudex-mount"></div>
 
 <h2 id="fuzzy-soundex">fuzzy-soundex</h2>
 

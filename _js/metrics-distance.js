@@ -9,6 +9,7 @@ import cosine from 'talisman/metrics/distance/cosine';
 import damerauLevenshtein from 'talisman/metrics/distance/damerau-levenshtein';
 import dice from 'talisman/metrics/distance/dice';
 import euclidean, {squared} from 'talisman/metrics/distance/euclidean';
+import {distance as eudexDistance, isSimilar as eudexSimilarity} from 'talisman/metrics/distance/eudex';
 import hamming from 'talisman/metrics/distance/hamming';
 import jaccard from 'talisman/metrics/distance/jaccard';
 import jaro from 'talisman/metrics/distance/jaro';
@@ -26,6 +27,8 @@ render(<MetricTester metric={chebyshev} enforceNumbers={true} sameDimension={tru
 render(<MetricTester metric={damerauLevenshtein} integerResult={true} />, document.getElementById('damerau-levenshtein-mount'));
 render(<MetricTester metric={dice} />, document.getElementById('dice-mount'));
 render(<MetricTester metric={euclidean} enforceNumbers={true} sameDimension={true} />, document.getElementById('euclidean-mount'));
+render(<MetricTester metric={eudexDistance} integerResult={true} />, document.getElementById('eudex-distance-mount'));
+render(<MetricTester metric={eudexSimilarity} />, document.getElementById('eudex-similarity-mount'));
 render(<MetricTester metric={squared} enforceNumbers={true} sameDimension={true} />, document.getElementById('euclidean-squared-mount'));
 render(<MetricTester metric={hamming} integerResult={true} sameDimension={true} />, document.getElementById('hamming-mount'));
 render(<MetricTester metric={jaccard} />, document.getElementById('jaccard-mount'));
@@ -35,7 +38,3 @@ render(<MetricTester metric={levenshtein} integerResult={true} />, document.get
 render(<MetricTester metric={manhattan} enforceNumbers={true} sameDimension={true} />, document.getElementById('manhattan-mount'));
 render(<MRATester metric={mra} />, document.getElementById('mra-mount'));
 render(<MetricTester metric={overlap} />, document.getElementById('overlap-mount'));
-
-// TODO: custom Jaro-Winkler
-// TODO: Tversky
-// TODO: Minkowski

@@ -19,6 +19,7 @@ Modules under the `talisman/metrics/distance/distance` namespace:
 * [damerau-levenshtein](#damerau-levenshtein)
 * [dice](#dice)
 * [euclidean](#euclidean)
+* [eudex](#eudex)
 * [hamming](#hamming)
 * [jaccard](#jaccard)
 * [jaro](#jaro)
@@ -199,6 +200,39 @@ squared([1, 3], [4, 5]);
 *Squared euclidean distance*
 
 <div id="euclidean-squared-mount"></div>
+
+<h2 id="eudex">eudex</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://github.com/ticki/eudex">https://github.com/ticki/eudex</a><br><br>
+</span>
+
+<span class="marginnote">
+  Author: [ticki](https://github.com/ticki)
+</span>
+
+Functions tailored to compare two string using [Eudex hashes]({{ site.baseurl }}/phonetics#eudex) to assess whether they seem similar or not.
+
+```js
+import {distance, isSimilar} from 'talisman/metrics/distance/eudex';
+
+distance('jumbo', 'jumpo');
+>>> 2
+
+isSimilar('jumbo', 'jumpo');
+>>> true
+
+isSimilar('hello', 'world');
+>>> false
+```
+
+*Distance*
+
+<div id="eudex-distance-mount"></div>
+
+*Similarity*
+
+<div id="eudex-similarity-mount"></div>
 
 <h2 id="hamming">hamming</h2>
 

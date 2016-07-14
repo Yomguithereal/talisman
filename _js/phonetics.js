@@ -6,6 +6,7 @@ import alphaSis from 'talisman/phonetics/alpha-sis';
 import caverphone, {revisited} from 'talisman/phonetics/caverphone';
 import daitchMokotoff from 'talisman/phonetics/daitch-mokotoff';
 import doubleMetaphone from 'talisman/phonetics/double-metaphone';
+import eudex from 'talisman/phonetics/eudex';
 import fuzzySoundex from 'talisman/phonetics/fuzzy-soundex';
 import lein from 'talisman/phonetics/lein';
 import metaphone from 'talisman/phonetics/metaphone';
@@ -23,11 +24,15 @@ const multiRenderer = code => `[${code.join(', ')}]`,
         return a.some(code => bSet.has(code));
       };
 
+const eudexRenderer = hash => hash.toString(),
+      eudexComparator = (a, b) => a.equals(b);
+
 render(<PhoneticTester algorithm={alphaSis} codeRenderer={multiRenderer} comparator={multiComparator} />, document.getElementById('alpha-sis-mount'));
 render(<PhoneticTester algorithm={caverphone} />, document.getElementById('caverphone-original-mount'));
 render(<PhoneticTester algorithm={revisited} />, document.getElementById('caverphone-revisited-mount'));
 render(<PhoneticTester algorithm={daitchMokotoff} codeRenderer={multiRenderer} comparator={multiComparator} />, document.getElementById('daitch-mokotoff-mount'));
 render(<PhoneticTester algorithm={doubleMetaphone} codeRenderer={multiRenderer} comparator={multiComparator} />, document.getElementById('double-metaphone-mount'));
+render(<PhoneticTester algorithm={eudex} codeRenderer={eudexRenderer} comparator={eudexComparator} />, document.getElementById('eudex-mount'));
 render(<PhoneticTester algorithm={fuzzySoundex} />, document.getElementById('fuzzy-soundex-mount'));
 render(<PhoneticTester algorithm={lein} />, document.getElementById('lein-mount'));
 render(<PhoneticTester algorithm={metaphone} />, document.getElementById('metaphone-mount'));
