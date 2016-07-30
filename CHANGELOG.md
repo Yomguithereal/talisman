@@ -1,5 +1,10 @@
 # Changelog
 
+
+## 0.11.0
+
+* Improving `tokenizers/syllable/sonoripy` hierarchy definition.
+
 ## 0.10.0
 
 * Adding the `metrics/distance/eudex` namespace.

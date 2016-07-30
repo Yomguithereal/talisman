@@ -19,24 +19,11 @@
 /**
  * Constants.
  */
-const DEFAULT_HIERARCHY = {
-  vowels: 'aeiouy',
-  approximates: '',
-  nasals: 'lmnrw',
-  fricatives: 'zvsf',
-  affricates: '',
-  stops: 'bcdgtkpqxhj'
-};
-
-// Note: it's possible to optimize the value lookup by creating a proper
-// map in the factory but this would probably be premature optimization
-// considering we'd drop the number of operations from 5 per lookup to 1 only.
-const MAP = [
-  ['vowels', 5],
-  ['approximates', 4],
-  ['nasals', 3],
-  ['fricatives', 2],
-  ['affricates', 1]
+const DEFAULT_HIERARCHY = [
+  'aeiouy',     // Vowels      3pts
+  'lmnrw',      // Nasals      2pts
+  'zvsf',       // Fricatives  1pts
+  'bcdgtkpqxhj' // Stops       0pts
 ];
 
 /**
@@ -104,12 +91,18 @@ export default function createTokenizer(options) {
   if (!hierarchy)
     throw new Error('talisman/tokenizers/syllables/sonoripy: a hierachy must be provided.');
 
-  const sets = {},
-        vowels = hierarchy.vowels;
+  const vowels = hierarchy[0],
+        vowelsSet = new Set(vowels);
 
-  // Iterating on default hierarchy to ensure every key is set
-  for (const k in DEFAULT_HIERARCHY)
-    sets[k] = new Set(hierarchy[k] || '');
+  // Creating the map of values
+  const map = {};
+
+  hierarchy.forEach((level, i) => {
+    const letters = level.split(''),
+          value = hierarchy.length - i - 1;
+
+    letters.forEach(letter => map[letter] = value);
+  });
 
   // Creating a vowel regex
   const vowelsRegex = new RegExp(`[${vowels}]`);
@@ -133,24 +126,10 @@ export default function createTokenizer(options) {
       const letter = normalizedWord[i],
             lowerLetter = letter.toLowerCase();
 
-      let found = false;
-
-      if (sets.vowels.has(lowerLetter))
+      if (vowelsSet.has(lowerLetter))
         vowelCount++;
 
-      for (let j = 0, m = MAP.length; j < m; j++) {
-        const [type, value] = MAP[j];
-
-        if (sets[type].has(lowerLetter)) {
-          taggedLetters.push([letter, value]);
-          found = true;
-          break;
-        }
-      }
-
-      // Default
-      if (!found)
-        taggedLetters.push([letter, 0]);
+      taggedLetters.push([letter, map[letter] || 0]);
     }
 
     //-- 2) Dividing the syllables
