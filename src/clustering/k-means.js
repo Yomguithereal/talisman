@@ -48,7 +48,7 @@ function compareCentroids(a, b) {
  * @param {array|function} [options.initialCentroids]
  *   - Either an array of initial centroids or a function computing them.
  */
-class KMeans {
+export class KMeans {
   constructor(data, options = {}) {
 
     // Enforcing data validity

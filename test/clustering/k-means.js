@@ -4,7 +4,7 @@
  *
  */
 import {assert} from 'chai';
-import kMeans from '../../src/clustering/k-means';
+import kMeans, {KMeans} from '../../src/clustering/k-means';
 
 describe('k-means', function() {
 
@@ -24,6 +24,14 @@ describe('k-means', function() {
     assert.throws(function() {
       kMeans({maxIterations: -45}, [[1, 2]]);
     }, /max/);
+
+    assert.throws(function() {
+      kMeans({initialCentroids: 45}, [[1, 2]]);
+    }, /initialCentroids/);
+
+    assert.throws(function() {
+      kMeans({initialCentroids: [1]}, [[1, 2]]);
+    }, /dimension/);
   });
 
   it('should be possible to apply clustering to simple vectors.', function() {
@@ -34,5 +42,23 @@ describe('k-means', function() {
     const clusters = kMeans({k: 2}, data);
 
     assert.sameDeepMembers(clusters, [k1, k2]);
+  });
+
+  it('should be possible to pass initial centroids.', function() {
+    const clustering = new KMeans([[1, 2], [3, 4]], {k: 2, initialCentroids: [[1, 2], [3, 4]]});
+
+    assert.deepEqual(clustering.centroids, [[1, 2], [3, 4]]);
+  });
+
+  it('should be possible to compute initial centroids.', function() {
+    const initialCentroids = (data, options) => {
+      assert.deepEqual(data, [[1, 2], [3, 4]]);
+      assert.strictEqual(options.k, 2);
+      return [[1, 2], [3, 4]];
+    };
+
+    const clustering = new KMeans([[1, 2], [3, 4]], {k: 2, initialCentroids});
+
+    assert.deepEqual(clustering.centroids, [[1, 2], [3, 4]]);
   });
 });
