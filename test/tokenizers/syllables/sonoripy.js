@@ -59,7 +59,7 @@ describe('sonoripy', function() {
       ['ãbjãs', ['ã', 'bjãs']],
       // ['diazot', ['di', 'a', 'zot']],
       ['djazot', ['dja', 'zot']],
-      // ['ãtikõstitysjõ', ['ã', 'ti', 'kõs', 'ti', 'ty', 'sjõ']],
+      ['ãtikõstitysjõ', ['ã', 'ti', 'kõs', 'ti', 'ty', 'sjõ']],
       ['pubel', ['pu', 'bel']],
       ['tjar', ['tjar']],
       // ['frao', ['fra', 'o']],
