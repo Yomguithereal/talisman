@@ -8,7 +8,17 @@
  */
 import euclidean from '../metrics/distance/euclidean';
 import {mean} from '../helpers/vectors';
-import sample from 'lodash/sample';
+import sampleSize from 'lodash/sampleSize';
+
+/**
+ * Default options for k-means clustering.
+ */
+const DEFAULTS = {
+  k: 8,
+  distance: euclidean,
+  maxIterations: 300,
+  initialCentroids: null
+};
 
 /**
  * Helpers.
@@ -25,69 +35,104 @@ function compareCentroids(a, b) {
 }
 
 /**
- * Function performing a k-means clustering on the given dataset.
+ * KMeans class used to fine tune the clustering when needed & handling
+ * the internal state of the process.
  *
- * @param  {array}    dataset                 - An array of vectors of n
- *                                              dimensions.
- * @param  {number}   [k]                     - The number of clusters to
- *                                              produce.
- * @param  {object}   [options]               - Custom options.
- * @param  {function} [options.distance]      - The distance function to use.
- * @param  {number}   [options.maxIterations] - Max nb of iterations to perform.
- * @return {array}                            - An array of clusters.
- *
- * @throws {Error} Will throw if the given parameters are not valid.
+ * @constructor
+ * @param {array}          data                       - Array of vectors.
+ * @param {object}         options                    - Possible options:
+ * @param {number}         [options.k]                - Number of clusters.
+ * @param {function}       [options.distance]         - Distance function.
+ * @param {number}         [options.maxIterations]
+ *   - Maximum number of iterations.
+ * @param {array|function} [options.initialCentroids]
+ *   - Either an array of initial centroids or a function computing them.
  */
-export default function kMeans(dataset, k = 8, options = {}) {
-  const {
-    distance = euclidean,
-    maxIterations = 300
-  } = options;
+class KMeans {
+  constructor(data, options = {}) {
 
-  if (!Array.isArray(dataset))
-    throw Error('talisman/clustering/k-means: dataset should be an array of vectors.');
+    // Enforcing data validity
+    if (!Array.isArray(data))
+      throw Error('talisman/clustering/k-means: dataset should be an array of vectors.');
 
-  if (typeof k !== 'number' || k <= 0)
-    throw Error('talisman/clustering/k-means: k should be > 0.');
+    // Properties
+    this.data = data;
+    this.dimensions = this.data[0].length;
+    this.iterations = 0;
+    this.centroids = null;
+    this.previousCentroids = null;
+    this.clusters = null;
 
-  if (typeof distance !== 'function')
-    throw Error('talisman/clustering/k-means: the distance option should be a function.');
+    // Options
+    this.k = options.k || DEFAULTS.k;
+    this.distance = options.distance || DEFAULTS.distance;
+    this.maxIterations = options.maxIterations || DEFAULTS.maxIterations;
 
-  if (typeof maxIterations !== 'number' || maxIterations <= 0)
-    throw Error('talisman/clustering/k-means: the maxIterations option should be > 0.');
+    // Enforcing correct options
+    if (typeof this.k !== 'number' || this.k <= 0)
+      throw Error('talisman/clustering/k-means: `k` should be > 0.');
 
-  // First we need to find random centroids to start
-  let centroids = new Array(k);
+    if (typeof this.distance !== 'function')
+      throw Error('talisman/clustering/k-means: the `distance` option should be a function.');
 
-  for (let i = 0; i < k; i++)
-    centroids[i] = sample(dataset);
+    if (typeof this.maxIterations !== 'number' || this.maxIterations <= 0)
+      throw Error('talisman/clustering/k-means: the `maxIterations` option should be > 0.');
 
-  let iterations = 0,
-      oldCentroids,
-      clusters;
+    // Computing initial centroids
+    let initialCentroids = options.initialCentroids;
 
-  // While we don't converge, or haven't performed the allowed iterations
-  while (
-    iterations < maxIterations &&
-    (!oldCentroids || !compareCentroids(centroids, oldCentroids))
-  ) {
+    if (initialCentroids) {
+
+      // The user is giving the initial centroids:
+      if (typeof initialCentroids === 'function')
+        initialCentroids = initialCentroids(this.data, {
+          k: this.k,
+          distance: this.distance,
+          maxIterations: this.maxIterations
+        });
+
+      if (!Array.isArray(initialCentroids))
+        throw Error('talisman/clustering/k-means: `initialCentroids` should be an array or a function returning an array.');
+
+      if (initialCentroids.length !== this.dimensions)
+        throw Error('talisman/clustering/k-means: the initial centroids must be of same dimension than the input vectors.');
+    }
+    else {
+
+      // Else, we're gonna choose the initial centroids randomly
+      initialCentroids = sampleSize(this.data, this.dimensions);
+    }
+
+    this.centroids = initialCentroids;
+  }
+
+  /**
+   * Method used to perform one iteration of the clustering algorithm.
+   *
+   * @return {KMeans} - Returns itself for chaining.
+   */
+  iterate() {
+
+    // If the clustering has already converged, we break
+    if (this.converged)
+      return this;
 
     // Initializing the clusters
-    clusters = new Array(k);
+    this.clusters = new Array(this.k);
 
-    for (let i = 0, l = clusters.length; i < l; i++)
-      clusters[i] = [];
+    for (let i = 0; i < this.k; i++)
+      this.clusters[i] = [];
 
     // Iterating through the dataset's vectors
-    for (let i = 0, l = dataset.length; i < l; i++) {
-      const vector = dataset[i];
+    for (let i = 0, l = this.data.length; i < l; i++) {
+      const vector = this.data[i];
 
       // Finding the closest centroid
       let min = Infinity,
           minIndex = 0;
 
-      for (let j = 0, m = centroids.length; j < m; j++) {
-        const d = distance(vector, centroids[j]);
+      for (let j = 0, m = this.dimensions; j < m; j++) {
+        const d = this.distance(vector, this.centroids[j]);
 
         if (d < min) {
           min = d;
@@ -96,29 +141,57 @@ export default function kMeans(dataset, k = 8, options = {}) {
       }
 
       // Pushing the vector in the correct cluster
-      clusters[minIndex].push(vector);
+      this.clusters[minIndex].push(vector);
     }
 
-    // If any of the clusters is empty, we fill it with a random vector
-    for (let i = 0, l = clusters.length; i < l; i++) {
-      const cluster = clusters[i];
+    // If any of the clusters is empty, we fill it with a random vector.
+    // NOTE: check the relevance of this method
+    for (let i = 0, l = this.k; i < l; i++) {
+      const cluster = this.clusters[i];
 
-      if (cluster.length)
-        continue;
-
-      cluster.push(sample(dataset));
+      if (!cluster.length)
+        cluster.push(sampleSize(this.data, 1));
     }
 
     // We now find the new centroids
-    oldCentroids = centroids;
-    centroids = new Array(k);
+    this.previousCentroids = this.centroids;
+    this.centroids = new Array(this.k);
 
-    for (let i = 0, l = clusters.length; i < l; i++)
-      centroids[i] = mean(clusters[i]);
+    for (let i = 0, l = this.k; i < l; i++)
+      this.centroids[i] = mean(this.clusters[i]);
 
-    iterations++;
+    this.iterations++;
+
+    // Checking if the clustering has converged
+    this.converged = compareCentroids(this.previousCentroids, this.centroids);
+
+    return this;
   }
 
-  // Finally returning the clusters
-  return clusters;
+  /**
+   * Method used to start the clustering process.
+   *
+   * @return {array} - The resulting clusters.
+   */
+  run() {
+
+    // While we don't converge or haven't performed the allowed iterations:
+    while (!this.converged && this.iterations < this.maxIterations)
+      this.iterate();
+
+    return this.clusters;
+  }
+}
+
+/**
+ * Exporting a convenient function to perform simple k-means clustering.
+ *
+ * @param  {object} options - Clustering options.
+ * @param  {array}  data    - Target dataset.
+ * @param  {array}          - Resulting clusters.
+ */
+export default function kMeans(options, data) {
+  const clustering = new KMeans(data, options);
+
+  return clustering.run();
 }

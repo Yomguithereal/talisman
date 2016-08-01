@@ -3,6 +3,7 @@
 
 ## 0.11.0
 
+* Improving `clustering/k-means` API.
 * Improving `tokenizers/syllable/sonoripy` hierarchy definition.
 
 ## 0.10.0
