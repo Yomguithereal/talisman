@@ -99,14 +99,13 @@ If the basic sonority hierarchy provided by the library doesn't fit your case, h
 import {createTokenizer} from 'talisman/tokenizers/syllables/sonoripy';
 
 // Here is the shape of a sonority hierarchy object:
-const customHierarchy = {
-  vowels: 'aeiouy',
-  approximates: '',
-  nasals: 'lmnrw',
-  fricatives: 'zvsf',
-  affricates: '',
-  stops: 'bcdgtkpqxhj'
-};
+// Note that the following is only an example
+const customHierarchy = [
+  'aeiouy',     // vowels
+  'lmnrw',      // nasals
+  'zvsf',       // fricatives
+  'bcdgtkpqxhj' // stops
+];
 
 const customTokenizer = createTokenizer({hierarchy: customHierarchy});
 

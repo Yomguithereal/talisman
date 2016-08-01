@@ -32,13 +32,14 @@ Starting from random centroids, it will iteratively try to fit your dataset into
 ```js
 import kMeans from 'talisman/clustering/k-means';
 
-const clusters = kMeans(dataset, [k = 8, options = {}]);
+const clusters = kMeans(options, data);
 ```
 
 *arguments*
 
-* **dataset**: <code class="type">array</code> - your dataset should be an array of vectors.
-* **[k]**: <code class="type">number</code> (8) - the number of clusters to produce.
-* **[options]**: <code class="type">object</code> - possible options:
-  * **[distance]** <code class="type">function</code> - the distance function to use. Will default to [`talisman/metrics/euclidean`]({{ site.baseurl }}/metrics#euclidean).
+* **options**: <code class="type">object</code> - possible options:
+  * **[k]**: <code class="type">number</code> (8) - the number of clusters to produce.
+  * **[distance]** <code class="type">function</code> - the distance function to use. Will default to [`metrics/distance/euclidean`]({{ site.baseurl }}/metrics/distance#euclidean).
   * **[maxIterations]** <code class="type">number</code> (300) - maximum number of iterations to perform.
+  * **[initialCentroids]** <code class="type">array|function</code> - an array of initial centroids or a function taking the input data & options and returning the initial centroids.
+* **data**: <code class="type">array</code> - your dataset should be an array of vectors.
