@@ -80,10 +80,10 @@ export function merge(vowelsRegex, syllables) {
  * Tokenizer function factory aiming at building the required function.
  *
  * @param  {object}   options              - Possible options:
- * @param  {object}   [options.hierarchy]  - Target language's hierarchy.
+ * @param  {array}    [options.hierarchy]  - Target language's hierarchy.
  * @return {function}                      - The tokenizer function.
  */
-export default function createTokenizer(options) {
+export function createTokenizer(options) {
   options = options || {};
 
   const hierarchy = options.hierarchy;
