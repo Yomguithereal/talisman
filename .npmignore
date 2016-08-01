@@ -1,6 +1,7 @@
 node_modules
 .gitignore
 .npmignore
+*.yml
 build
 src
 test
