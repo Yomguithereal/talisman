@@ -30,7 +30,11 @@ describe('k-means', function() {
     }, /initialCentroids/);
 
     assert.throws(function() {
-      kMeans({initialCentroids: [1]}, [[1, 2]]);
+      kMeans({initialCentroids: [1], k: 2}, [[1, 2]]);
+    }, / k /);
+
+    assert.throws(function() {
+      kMeans({initialCentroids: [[1, 2], [4]], k: 2}, [[1, 2]]);
     }, /dimension/);
   });
 

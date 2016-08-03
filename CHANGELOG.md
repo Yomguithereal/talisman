@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.11.1
+
+* Fixing a bug with `clustering/k-means` `initialCentroids` options.
 
 ## 0.11.0
 

@@ -91,11 +91,15 @@ export class KMeans {
           maxIterations: this.maxIterations
         });
 
+      // Ensuring the provided centroids are correct
       if (!Array.isArray(initialCentroids))
         throw Error('talisman/clustering/k-means: `initialCentroids` should be an array or a function returning an array.');
 
-      if (initialCentroids.length !== this.dimensions)
-        throw Error('talisman/clustering/k-means: the initial centroids must be of same dimension than the input vectors.');
+      if (initialCentroids.length !== this.k)
+        throw Error(`talisman/clustering/k-means: you should provide k centroids (got ${initialCentroids.length} instead of ${this.k}).`);
+
+      if (!initialCentroids.every(centroid => Array.isArray(centroid) && centroid.length === this.dimensions))
+        throw Error('talisman/clustering/k-means: at least one of the provided centroids is not of the correct dimension.');
     }
     else {
 
