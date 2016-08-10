@@ -103,7 +103,7 @@ export class KMeans {
     else {
 
       // Else, we're gonna choose the initial centroids randomly
-      initialCentroids = this.sampler(this.data, this.dimensions);
+      initialCentroids = this.sampler(this.data, this.k);
     }
 
     // Ensuring the starting centroids are correct
@@ -166,8 +166,9 @@ export class KMeans {
       const cluster = this.clusters[i];
 
       if (!cluster.length) {
-        const vector = this.sampler(this.data, 1);
+        const vector = this.sampler(this.data, 1)[0];
         cluster.push(vector);
+        displacedVectors.push(vector);
       }
     }
 
