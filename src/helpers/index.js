@@ -17,6 +17,15 @@
 export function findall(pattern, string) {
   const matches = [];
 
+  if (!pattern.global) {
+    const result = pattern.exec(string);
+
+    if (result)
+      matches.push(result);
+
+    return matches;
+  }
+
   let match;
   while (match = pattern.exec(string))
     matches.push(match);

@@ -5,6 +5,7 @@
  */
 import assert from 'assert';
 import {
+  findall,
   numericSort,
   seq,
   squeeze,
@@ -13,6 +14,22 @@ import {
 } from '../../src/helpers';
 
 describe('index', function() {
+
+  describe('#.findall', function() {
+    it('will correctly return an array of matches.', function() {
+      assert.deepEqual(
+        findall(/t/g, 'test').map(m => ([m[0], m.index])),
+        [['t', 0], ['t', 3]]
+      );
+    });
+
+    it('won\'t trigger an infinite loop if the regex is not global.', function() {
+      assert.deepEqual(
+        findall(/t/, 'test').map(m => ([m[0], m.index])),
+        [['t', 0]]
+      );
+    });
+  });
 
   describe('#.numericSort', function() {
 
