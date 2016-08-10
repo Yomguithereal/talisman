@@ -17,7 +17,8 @@ const DEFAULTS = {
   k: 8,
   distance: euclidean,
   maxIterations: 300,
-  initialCentroids: null
+  initialCentroids: null,
+  sampler: sampleSize
 };
 
 /**
@@ -47,6 +48,7 @@ function compareCentroids(a, b) {
  *   - Maximum number of iterations.
  * @param {array|function} [options.initialCentroids]
  *   - Either an array of initial centroids or a function computing them.
+ * @param {function}       [options.sampler]          - Sampling function.
  */
 export class KMeans {
   constructor(data, options = {}) {
@@ -67,16 +69,23 @@ export class KMeans {
     this.k = options.k || DEFAULTS.k;
     this.distance = options.distance || DEFAULTS.distance;
     this.maxIterations = options.maxIterations || DEFAULTS.maxIterations;
+    this.sampler = options.sampler || DEFAULTS.sampler;
 
     // Enforcing correct options
     if (typeof this.k !== 'number' || this.k <= 0)
       throw Error('talisman/clustering/k-means: `k` should be > 0.');
+
+    if (this.data.length < this.k)
+      throw Error('talisman/clustering/k-means: k is greater than the number of provided vectors.');
 
     if (typeof this.distance !== 'function')
       throw Error('talisman/clustering/k-means: the `distance` option should be a function.');
 
     if (typeof this.maxIterations !== 'number' || this.maxIterations <= 0)
       throw Error('talisman/clustering/k-means: the `maxIterations` option should be > 0.');
+
+    if (typeof this.sampler !== 'function')
+      throw Error('talisman/clustering/k-means: the `sampler` option should be a function.');
 
     // Computing initial centroids
     let initialCentroids = options.initialCentroids;
@@ -90,22 +99,22 @@ export class KMeans {
           distance: this.distance,
           maxIterations: this.maxIterations
         });
-
-      // Ensuring the provided centroids are correct
-      if (!Array.isArray(initialCentroids))
-        throw Error('talisman/clustering/k-means: `initialCentroids` should be an array or a function returning an array.');
-
-      if (initialCentroids.length !== this.k)
-        throw Error(`talisman/clustering/k-means: you should provide k centroids (got ${initialCentroids.length} instead of ${this.k}).`);
-
-      if (!initialCentroids.every(centroid => Array.isArray(centroid) && centroid.length === this.dimensions))
-        throw Error('talisman/clustering/k-means: at least one of the provided centroids is not of the correct dimension.');
     }
     else {
 
       // Else, we're gonna choose the initial centroids randomly
-      initialCentroids = sampleSize(this.data, this.dimensions);
+      initialCentroids = this.sampler(this.data, this.dimensions);
     }
+
+    // Ensuring the starting centroids are correct
+    if (!Array.isArray(initialCentroids))
+      throw Error('talisman/clustering/k-means: `initialCentroids` are not an array or the function you provided to compute them returned invalid data (could be your `sampler`).');
+
+    if (initialCentroids.length !== this.k)
+      throw Error(`talisman/clustering/k-means: you should provide k centroids (got ${initialCentroids.length} instead of ${this.k}).`);
+
+    if (!initialCentroids.every(centroid => Array.isArray(centroid) && centroid.length === this.dimensions))
+      throw Error('talisman/clustering/k-means: at least one of the provided or computed centroids is not of the correct dimension.');
 
     this.centroids = initialCentroids;
   }
@@ -123,6 +132,7 @@ export class KMeans {
 
     // Initializing the clusters
     this.clusters = new Array(this.k);
+    const vectorMap = new Map();
 
     for (let i = 0; i < this.k; i++)
       this.clusters[i] = [];
@@ -146,15 +156,28 @@ export class KMeans {
 
       // Pushing the vector in the correct cluster
       this.clusters[minIndex].push(vector);
+      vectorMap.set(vector, minIndex);
     }
 
     // If any of the clusters is empty, we fill it with a random vector.
-    // NOTE: check the relevance of this method
+    const displacedVectors = [];
+
     for (let i = 0, l = this.k; i < l; i++) {
       const cluster = this.clusters[i];
 
-      if (!cluster.length)
-        cluster.push(sampleSize(this.data, 1));
+      if (!cluster.length) {
+        const vector = this.sampler(this.data, 1);
+        cluster.push(vector);
+      }
+    }
+
+    // Now we need to remove the potentially displaced vectors their origin
+    for (let i = 0, l = displacedVectors.length; i < l; i++) {
+      const vector = displacedVectors[i],
+            cluster = this.clusters[vectorMap.get(vector)],
+            index = cluster.indexOf(vector);
+
+      cluster.splice(index, 1);
     }
 
     // We now find the new centroids

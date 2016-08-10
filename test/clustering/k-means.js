@@ -18,24 +18,32 @@ describe('k-means', function() {
     }, /`k`/);
 
     assert.throws(function() {
-      kMeans({distance: 45}, [[1, 2]]);
+      kMeans({distance: 45, k: 1}, [[1, 2]]);
     }, /distance/);
 
     assert.throws(function() {
-      kMeans({maxIterations: -45}, [[1, 2]]);
+      kMeans({maxIterations: -45, k: 1}, [[1, 2]]);
     }, /max/);
 
     assert.throws(function() {
-      kMeans({initialCentroids: 45}, [[1, 2]]);
+      kMeans({initialCentroids: 45, k: 1}, [[1, 2]]);
     }, /initialCentroids/);
 
     assert.throws(function() {
-      kMeans({initialCentroids: [1], k: 2}, [[1, 2]]);
+      kMeans({initialCentroids: [1], k: 1}, [[1, 2]]);
+    }, /dimension/);
+
+    assert.throws(function() {
+      kMeans({initialCentroids: [[1, 2], [4]], k: 1}, [[1, 2]]);
     }, / k /);
 
     assert.throws(function() {
-      kMeans({initialCentroids: [[1, 2], [4]], k: 2}, [[1, 2]]);
-    }, /dimension/);
+      kMeans({sampler: 'test', k: 1}, [[1, 2]]);
+    }, /function/);
+
+    assert.throws(function() {
+      kMeans({k: 8}, [[1, 2], [2, 3]]);
+    }, /greater/);
   });
 
   it('should be possible to apply clustering to simple vectors.', function() {
