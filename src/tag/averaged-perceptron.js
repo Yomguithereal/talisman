@@ -61,9 +61,10 @@ export default class AveragedPerceptronTagger {
       const tagFrequencies = counts[word];
 
       // Finding max frequency
-      let max = -Infinity;
-      let maxTag = null;
-      let sum = 0;
+      let max = -Infinity,
+          maxTag = null,
+          sum = 0;
+
       for (const tag in tagFrequencies) {
         const count = tagFrequencies[tag];
 
