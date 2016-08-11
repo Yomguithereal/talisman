@@ -48,6 +48,7 @@ describe('metrics', function() {
 
 describe('parsers', function() {
   require('./parsers/brown.js');
+  require('./parsers/conll.js');
 });
 
 describe('phonetics', function() {

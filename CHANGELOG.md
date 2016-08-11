@@ -4,6 +4,7 @@
 
 * Adding the `tag/averaged-perceptron` namespace.
 * Adding the `parsers/brown` namespace.
+* Adding the `parsers/conll` namespace.
 * Adding the `sampler` options to `clustering/k-means`.
 * Fixing a bug with `clustering/k-means` where k would be superior to the number of vectors.
 * Fixing a bug with `clustering/k-means` `initialCentroids` options.
