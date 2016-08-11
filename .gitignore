@@ -12,6 +12,7 @@ TODO.md
 /helpers
 /inflectors
 /metrics
+/parsers
 /phonetics
 /regex
 /stats

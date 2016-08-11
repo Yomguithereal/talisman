@@ -46,6 +46,10 @@ describe('metrics', function() {
   });
 });
 
+describe('parsers', function() {
+  require('./parsers/brown.js');
+});
+
 describe('phonetics', function() {
   require('./phonetics/alpha-sis.js');
   require('./phonetics/caverphone.js');
