@@ -8,7 +8,7 @@
  */
 import euclidean from '../metrics/distance/euclidean';
 import {mean} from '../helpers/vectors';
-import sampleSize from 'lodash/sampleSize';
+import {sample} from '../helpers/random';
 
 /**
  * Default options for k-means clustering.
@@ -18,7 +18,7 @@ const DEFAULTS = {
   distance: euclidean,
   maxIterations: 300,
   initialCentroids: null,
-  sampler: sampleSize
+  sampler: sample
 };
 
 /**
@@ -103,7 +103,7 @@ export class KMeans {
     else {
 
       // Else, we're gonna choose the initial centroids randomly
-      initialCentroids = this.sampler(this.data, this.k);
+      initialCentroids = this.sampler(this.k, this.data);
     }
 
     // Ensuring the starting centroids are correct
@@ -166,7 +166,7 @@ export class KMeans {
       const cluster = this.clusters[i];
 
       if (!cluster.length) {
-        const vector = this.sampler(this.data, 1)[0];
+        const vector = this.sampler(1, this.data)[0];
         cluster.push(vector);
         displacedVectors.push(vector);
       }
