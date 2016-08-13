@@ -11,6 +11,19 @@
 // NOTE: only keep relevant state after training & have a flag
 
 /**
+ * Constants.
+ */
+const HASH_DELIMITER = '‡';
+const hasher = (a, b) => a + HASH_DELIMITER + b;
+
+const START = ['-START-', '-START2'],
+      END = ['-END-', '-END2'];
+
+const HYPHEN_REGEX = /-/,
+      YEAR_REGEX = /\d{4}/,
+      DIGIT_REGEX = /\d/;
+
+/**
  * Defaults.
  */
 const DEFAULTS = {
@@ -29,7 +42,7 @@ const DEFAULTS = {
  * @param  {array}  sentences - Array of sentences being arrays of (word, tag).
  * @return {object}           - Found classes & tags.
  */
-function analyzeSentences(sentences) {
+export function analyzeSentences(sentences) {
   const classes = new Set(),
         counts = {},
         tags = {};
@@ -81,21 +94,161 @@ function analyzeSentences(sentences) {
 }
 
 /**
+ * Function normalizing the given word before its pass through the perceptron.
+ *
+ * @param  {string} word - Target word.
+ * @return {string}      - Normalized word.
+ */
+export function normalize(word) {
+  if (HYPHEN_REGEX.test(word) && word[0] !== '-')
+    return '!HYPHEN';
+
+  if (YEAR_REGEX.test(word))
+    return '!YEAR';
+
+  if (DIGIT_REGEX.test(word[0]))
+    return '!DIGITS';
+
+  return word.toLowerCase();
+}
+
+/**
+ * Function extracting feature from the given word & its context.
+ *
+ * @param  {string} word    - Target word.
+ * @param  {number} index   - Index of the word in the sentence.
+ * @param  {array}  context - Word's context.
+ * @param  {array}  prev    - Previous.
+ * @param  {array}  prev2   - Previous 2.
+ * @return {array}          - Features.
+ */
+export function extractFeatures(index, word, context, previous, previous2) {
+  const features = {bias: 1};
+  index += 2;
+
+  features['i suffix ' + word.slice(-3)] = 1;
+  features['i pref1 ' + word[0]] = 1;
+  features['i-1 tag ' + previous] = 1;
+  features['i-2 tag ' + previous2] = 1;
+  features['i tag+i-2 tag ' + previous + ' ' + previous2] = 1;
+  features['i word ' + context[index]] = 1;
+  features['i-1 tag+i word ' + previous + ' ' + context[index]] = 1;
+  features['i-1 word ' + context[index - 1]] = 1;
+  features['i-1 suffix ' + context[index - 1].slice(-3)] = 1;
+  features['i-2 word ' + context[index - 2]] = 1;
+  features['i+1 word ' + context[index + 1]] = 1;
+  features['i+1 suffix ' + context[index + 1].slice(-3)] = 1;
+  features['i+2 word ' + context[index + 2]] = 1;
+
+  return features;
+}
+
+/**
+ * Given features, weights & classes, this function will return the best
+ * label by computing the dot product of the features & weights.
+ *
+ * @param  {object} features - Target features.
+ * @param  {object} weights  - Current weights.
+ * @param  {array}  classes  - Array of possible classes.
+ * @return {array}           - The best label.
+ */
+export function predict(features, weights, classes) {
+  const scores = {};
+
+  // Iterating over features
+  for (const feature in features) {
+    const value = features[feature];
+
+    if (!value || !(feature in weights))
+      continue;
+
+    const relevantWeights = weights[feature];
+
+    for (const label in relevantWeights) {
+      const weight = relevantWeights[label];
+      scores[label] = scores[label] || 0;
+      scores[label] += value * weight;
+    }
+  }
+
+  // Retrieving the best label
+  let bestLabel,
+      bestScore = -Infinity;
+
+  for (let i = 0, l = classes.length; i < l; i++) {
+    const label = classes[i];
+
+    if (scores[label] > bestScore) {
+      bestLabel = label;
+      bestScore = scores[label];
+    }
+  }
+
+  return bestLabel;
+}
+
+/**
  * The AveragedPerceptronTagger class.
  *
  * @constructor
  */
 export default class AveragedPerceptronTagger {
   constructor(options) {
-    options = options || {};
+    options = options || {};
 
     this.options = {
       iterations: options.iterations || DEFAULTS.iterations
     };
 
     // Properties
+    this.trained = false;
     this.tags = {};
-    this.classes = new Set();
+    this.classes = null;
+    this.weights = {};
+    this.seenInstances = 0;
+    this.totals = {};
+    this.timetstamps = {};
+  }
+
+  /**
+   * Method used to update the model's weights.
+   *
+   * @param  {string} truth    - The correct label.
+   * @param  {string} guess    - The predicted label.
+   * @param  {object} features - The features.
+   * @return {AveragedPerceptronTagger} - Returns itself for chaining.
+   */
+  update(truth, guess, features) {
+    this.seenInstances++;
+
+    // If the guess is correct, we don't have much to do
+    if (truth === guess)
+      return this;
+
+    for (const feature in features) {
+      if (!(feature in this.weights))
+        this.weights[feature] = {};
+
+      const weights = this.weights[feature];
+
+      // For truth
+      const truthKey = hasher(feature, truth),
+            truthWeight = weights[truth] || 0;
+
+      this.totals[truthKey] += (this.seenInstances - (this.timetstamps[truthKey] || 0)) * truthWeight;
+      this.timetstamps[truthKey] = this.seenInstances;
+      this.weights[feature][truth] = truthWeight + 1;
+
+      // For guess
+      const guessKey = hasher(feature, guess),
+            guessWeight = weights[guess] || 0;
+
+      this.totals[guessKey] += (this.seenInstances - (this.timetstamps[guessKey] || 0)) * guessWeight;
+      this.timetstamps[guessKey] = this.seenInstances;
+      this.weights[feature][guess] = guessWeight - 1;
+    }
+
+    return this;
   }
 
   /**
@@ -107,7 +260,73 @@ export default class AveragedPerceptronTagger {
   train(sentences) {
     const {classes, tags} = analyzeSentences(sentences);
 
-    this.classes = classes;
+    this.classes = Array.from(classes);
     this.tags = tags;
+
+    // Performing iterations
+    for (let i = 0; i < this.options.iterations; i++) {
+      this.iterate(sentences);
+
+      // TODO: shuffle here & repeat
+    }
+
+    // Get average weights
+
+    return this;
+  }
+
+  /**
+   * Method used to perform a single training operation.
+   *
+   * @return {AveragedPerceptronTagger} - Returns itself for chaining.
+   */
+  iterate(sentences) {
+    let c = 0,
+        n = 0;
+
+    // Iterating over sentences
+    for (let i = 0, l = sentences.length; i < l; i++) {
+      const sentence = sentences[i];
+
+      let previous = START[0],
+          previous2 = START[1];
+
+      // Building context
+      const context = new Array(sentence.length + 4);
+      context[0] = START[0];
+      context[1] = START[1];
+
+      for (let j = 0, m = sentence.length; j < m; j++)
+        context[j + 2] = normalize(sentence[i][0]);
+
+      context[context.length - 2] = END[0];
+      context[context.length - 1] = END[1];
+
+      for (let j = 0, m = sentence.length; j < m; j++) {
+        const [word, tag] = sentence[j];
+        let guess = this.tags[word];
+
+        if (!guess) {
+          const features = extractFeatures(
+            j,
+            word,
+            context,
+            previous,
+            previous2
+          );
+
+          guess = predict(features, this.weights, this.classes);
+
+          this.update(tag, guess, features);
+        }
+
+        previous2 = previous;
+        previous = guess;
+        c += (guess === tag);
+        n++;
+      }
+    }
+
+    return this;
   }
 }

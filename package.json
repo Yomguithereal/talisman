@@ -77,7 +77,8 @@
     "csv": "^1.1.0",
     "eslint": "^3.2.2",
     "mocha": "^3.0.2",
-    "rimraf": "^2.5.2"
+    "rimraf": "^2.5.2",
+    "seedrandom": "^2.4.2"
   },
   "babel": {
     "presets": [
