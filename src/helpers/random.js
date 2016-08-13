@@ -26,8 +26,8 @@ export const random = createRandom(Math.random);
 /**
  * Creating a function returning a sample of size n using the provided RNG.
  *
- * @param  {function}  rng - The RNG to use.
- * @return {function}      - The created function.
+ * @param  {function} rng - The RNG to use.
+ * @return {function}     - The created function.
  */
 export function createSample(rng) {
   const customRandom = createRandom(rng);
@@ -58,6 +58,25 @@ export function createSample(rng) {
  * Exporting default sample function.
  */
 export const sample = createSample(Math.random);
+
+/**
+ * Creating a function returning a shuffled array.
+ *
+ * @param  {function} rng - The RNG to use.
+ * @return {function}     - The created function.
+ */
+export function createShuffle(rng) {
+  const customSample = createSample(rng);
+
+  return function(sequence) {
+    return customSample(sequence.length, sequence);
+  };
+}
+
+/**
+ * Exporting default shuffle function.
+ */
+export const shuffle = createShuffle(Math.random);
 
 /**
  * Function taking a length and a list of weights and aiming at

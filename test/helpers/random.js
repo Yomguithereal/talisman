@@ -9,6 +9,7 @@ import {vec} from '../../src/helpers/vectors';
 import {
   createRandom,
   createSample,
+  createShuffle,
   weightedRandomIndex
 } from '../../src/helpers/random';
 
@@ -33,6 +34,15 @@ describe('random', function() {
 
       const tests = vec(5, 0).map(() => sample(2, data));
       assert.deepEqual(tests, [[8, 13], [20, 13], [8, 15], [20, 13], [13, 8]]);
+    });
+  });
+
+  describe('#.createShuffle', function() {
+    it('should be possible to create a shuffle function using the supplied rng.', function() {
+      const shuffle = createShuffle(rng);
+
+      const shuffled = shuffle([1, 2, 3, 4, 5]);
+      assert.deepEqual(shuffled, [4, 5, 1, 2, 3]);
     });
   });
 
