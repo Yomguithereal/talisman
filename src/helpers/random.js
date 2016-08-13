@@ -6,6 +6,24 @@
  */
 
 /**
+ * Creating a function returning a random integer such as a <= N <= b.
+ *
+ * @param  {function} rng - RNG function returning uniform random.
+ * @return {function}     - The created function.
+ */
+export function createRandom(rng) {
+
+  return function(a, b) {
+    return a + Math.floor(rng() * (b - a + 1));
+  };
+}
+
+/**
+ * Returning default random using `Math.random`.
+ */
+export const random = createRandom(Math.random);
+
+/**
  * Function taking a length and a list of weights and aiming at
  * returning a random weighted index.
  *
