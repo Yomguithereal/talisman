@@ -24,6 +24,42 @@ export function createRandom(rng) {
 export const random = createRandom(Math.random);
 
 /**
+ * Creating a function returning a sample of size n using the provided RNG.
+ *
+ * @param  {function}  rng - The RNG to use.
+ * @return {function}      - The created function.
+ */
+export function createSample(rng) {
+  const customRandom = createRandom(rng);
+
+  return function(n, sequence) {
+    const result = sequence.slice(),
+          length = result.length,
+          lastIndex = length - 1;
+
+    let index = -1;
+
+    while (++index < n) {
+      const randomIndex = customRandom(index, lastIndex),
+            value = result[randomIndex];
+
+      result[randomIndex] = result[index];
+      result[index] = value;
+    }
+
+    // Clamping the array
+    result.length = n;
+
+    return result;
+  };
+}
+
+/**
+ * Exporting default sample function.
+ */
+export const sample = createSample(Math.random);
+
+/**
  * Function taking a length and a list of weights and aiming at
  * returning a random weighted index.
  *
