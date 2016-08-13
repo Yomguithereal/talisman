@@ -6,6 +6,7 @@
 describe('helpers', function() {
   require('./helpers/index.js');
   require('./helpers/matrices.js');
+  require('./helpers/random.js');
   require('./helpers/vectors.js');
 });
 

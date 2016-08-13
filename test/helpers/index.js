@@ -9,8 +9,7 @@ import {
   numericSort,
   seq,
   squeeze,
-  translation,
-  weightedRandomIndex
+  translation
 } from '../../src/helpers';
 
 describe('index', function() {
@@ -81,13 +80,6 @@ describe('index', function() {
 
     it('should produce indexes.', function() {
       assert.deepEqual(translation('abc', '123'), {a: 1, b: 2, c: 3});
-    });
-  });
-
-  describe('#.weightedRandomIndex', function() {
-    it('should return a number superior to zero and within the range of the list.', function() {
-      const randomIndex = weightedRandomIndex([2 / 3, 1 / 6, 1 / 6]);
-      assert(randomIndex >= 0 && randomIndex < 3);
     });
   });
 });

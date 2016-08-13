@@ -2,6 +2,7 @@
 
 ## 0.12.0
 
+* Adding the `helpers/random` namespace.
 * Adding the `tag/averaged-perceptron` namespace.
 * Adding the `parsers/brown` namespace.
 * Adding the `parsers/conll` namespace.
