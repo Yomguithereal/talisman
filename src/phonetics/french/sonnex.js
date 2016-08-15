@@ -15,13 +15,13 @@
  * The orignal algorithm has been slightly modified to better account for some
  * more cases.
  */
-import {SIMPLE_QUOTES} from '../../regex/classes';
 
 /**
  * Helpers.
  */
 const VOWELS = new Set('aâàäeéèêëiîïoôöuùûüyœ'),
-      CONSONANTS = new Set('bcçdfghjklmnpqrstvwxyz');
+      CONSONANTS = new Set('bcçdfghjklmnpqrstvwxyz'),
+      SIMPLE_QUOTES = '’‘`‛\'';
 
 const DROP_SIMPLE_QUOTES = new RegExp('[' + SIMPLE_QUOTES + ']', 'g');
 

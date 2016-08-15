@@ -2,11 +2,16 @@
  * Talisman tokenizers/sentences/naive
  * ====================================
  *
- * Naive algorithmic sentence tokenizer.
+ * Naive rule-based sentence tokenizer.
  *
  * [Author]: Guillaume PLIQUE
  */
-import {SIMPLE_QUOTES, DOUBLE_QUOTES} from '../../regex/classes';
+
+/**
+ * Regex elements.
+ */
+const SIMPLE_QUOTES = '’‘`‛\'';
+const DOUBLE_QUOTES = '«»„‟“”"';
 
 /**
  * Notable exceptions.
