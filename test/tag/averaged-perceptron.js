@@ -3,6 +3,7 @@
  * =============================
  */
 import {assert} from 'chai';
+import seedrandom from 'seedrandom';
 import conll from '../../src/parsers/conll';
 import AveragedPercerptronTagger, {
   analyzeSentences,
@@ -11,6 +12,8 @@ import AveragedPercerptronTagger, {
   predict
 } from '../../src/tag/averaged-perceptron';
 import {loadResource} from '../helpers';
+
+const rng = seedrandom('shawarma');
 
 const excerpt = loadResource('conll2000/excerpt.txt'),
       sentences = conll(excerpt);
@@ -106,7 +109,7 @@ const FEATURES = {
   'i+2 word four': 1
 };
 
-describe('averaged-perceptron', function() {
+describe.only('averaged-perceptron', function() {
 
   describe('functions', function() {
 

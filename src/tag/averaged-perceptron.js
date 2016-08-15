@@ -7,6 +7,7 @@
  * [Author]: Matthew Honnibal
  * [Reference]: http://spacy.io/blog/part-of-speech-POS-tagger-in-python/
  */
+import {createShuffle} from '../helpers/random';
 
 // NOTE: only keep relevant state after training & have a flag
 
@@ -16,8 +17,10 @@
 const HASH_DELIMITER = '‡';
 const hasher = (a, b) => a + HASH_DELIMITER + b;
 
-const START = ['-START-', '-START2'],
-      END = ['-END-', '-END2'];
+const LOWEST_STRING = String.fromCharCode(0);
+
+const START = ['-START-', '-START2-'],
+      END = ['-END-', '-END2-'];
 
 const HYPHEN_REGEX = /-/,
       YEAR_REGEX = /\d{4}/,
@@ -172,15 +175,21 @@ export function predict(features, weights, classes) {
   }
 
   // Retrieving the best label
-  let bestLabel,
+  let bestLabel = LOWEST_STRING,
       bestScore = -Infinity;
 
   for (let i = 0, l = classes.length; i < l; i++) {
-    const label = classes[i];
+    const label = classes[i],
+          score = scores[label] || 0;
 
-    if (scores[label] > bestScore) {
+    if (score > bestScore) {
+      bestScore = score;
       bestLabel = label;
-      bestScore = scores[label];
+    }
+    else if (score === bestScore) {
+
+      if (label > bestLabel)
+        bestLabel = label;
     }
   }
 
@@ -191,6 +200,9 @@ export function predict(features, weights, classes) {
  * The AveragedPerceptronTagger class.
  *
  * @constructor
+ * @param {object}   [options]           - Customization options.
+ * @param {number}   [options.iteration] - Number of training operations.
+ * @param {function} [options.rng]       - RNG function.
  */
 export default class AveragedPerceptronTagger {
   constructor(options) {
@@ -200,6 +212,9 @@ export default class AveragedPerceptronTagger {
       iterations: options.iterations || DEFAULTS.iterations
     };
 
+    // Creating shuffler
+    this.shuffle = createShuffle(options.rng || Math.random);
+
     // Properties
     this.trained = false;
     this.tags = {};
@@ -207,7 +222,7 @@ export default class AveragedPerceptronTagger {
     this.weights = {};
     this.seenInstances = 0;
     this.totals = {};
-    this.timetstamps = {};
+    this.timestamps = {};
   }
 
   /**
@@ -235,17 +250,19 @@ export default class AveragedPerceptronTagger {
       const truthKey = hasher(feature, truth),
             truthWeight = weights[truth] || 0;
 
-      this.totals[truthKey] += (this.seenInstances - (this.timetstamps[truthKey] || 0)) * truthWeight;
-      this.timetstamps[truthKey] = this.seenInstances;
-      this.weights[feature][truth] = truthWeight + 1;
+      this.totals[truthKey] = this.totals[truthKey] || 0;
+      this.totals[truthKey] += (this.seenInstances - (this.timestamps[truthKey] || 0)) * truthWeight;
+      this.timestamps[truthKey] = this.seenInstances;
+      weights[truth] = truthWeight + 1;
 
       // For guess
       const guessKey = hasher(feature, guess),
             guessWeight = weights[guess] || 0;
 
-      this.totals[guessKey] += (this.seenInstances - (this.timetstamps[guessKey] || 0)) * guessWeight;
-      this.timetstamps[guessKey] = this.seenInstances;
-      this.weights[feature][guess] = guessWeight - 1;
+      this.totals[guessKey] = this.totals[guessKey] || 0;
+      this.totals[guessKey] += (this.seenInstances - (this.timestamps[guessKey] || 0)) * guessWeight;
+      this.timestamps[guessKey] = this.seenInstances;
+      weights[guess] = guessWeight - 1;
     }
 
     return this;
@@ -260,14 +277,17 @@ export default class AveragedPerceptronTagger {
   train(sentences) {
     const {classes, tags} = analyzeSentences(sentences);
 
+    // Setting properties
     this.classes = Array.from(classes);
     this.tags = tags;
 
     // Performing iterations
-    for (let i = 0; i < this.options.iterations; i++) {
+    for (let i = 0, l = this.options.iterations; i < l; i++) {
       this.iterate(sentences);
 
-      // TODO: shuffle here & repeat
+      // Shuffling the sentences for next iteration
+      if (i !== l - 1)
+        sentences = this.shuffle(sentences);
     }
 
     // Get average weights
@@ -281,8 +301,6 @@ export default class AveragedPerceptronTagger {
    * @return {AveragedPerceptronTagger} - Returns itself for chaining.
    */
   iterate(sentences) {
-    let c = 0,
-        n = 0;
 
     // Iterating over sentences
     for (let i = 0, l = sentences.length; i < l; i++) {
@@ -297,7 +315,7 @@ export default class AveragedPerceptronTagger {
       context[1] = START[1];
 
       for (let j = 0, m = sentence.length; j < m; j++)
-        context[j + 2] = normalize(sentence[i][0]);
+        context[j + 2] = normalize(sentence[j][0]);
 
       context[context.length - 2] = END[0];
       context[context.length - 1] = END[1];
@@ -322,8 +340,6 @@ export default class AveragedPerceptronTagger {
 
         previous2 = previous;
         previous = guess;
-        c += (guess === tag);
-        n++;
       }
     }
 
