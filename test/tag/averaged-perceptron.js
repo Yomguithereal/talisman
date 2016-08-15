@@ -109,7 +109,7 @@ const FEATURES = {
   'i+2 word four': 1
 };
 
-describe.only('averaged-perceptron', function() {
+describe('averaged-perceptron', function() {
 
   describe('functions', function() {
 

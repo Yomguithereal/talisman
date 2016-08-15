@@ -9,8 +9,6 @@
  */
 import {createShuffle} from '../helpers/random';
 
-// NOTE: only keep relevant state after training & have a flag
-
 /**
  * Constants.
  */
@@ -178,6 +176,7 @@ export function predict(features, weights, classes) {
   let bestLabel = LOWEST_STRING,
       bestScore = -Infinity;
 
+  // NOTE: this part is not strictly equal to its Python counterpart
   for (let i = 0, l = classes.length; i < l; i++) {
     const label = classes[i],
           score = scores[label] || 0;
@@ -269,12 +268,26 @@ export default class AveragedPerceptronTagger {
   }
 
   /**
+   * Method used to finalize training by computing average weights from
+   * all iterations.
+   *
+   * @return {AveragedPerceptronTagger} - Returns itself for chaining.
+   */
+  averageWeights() {
+
+  }
+
+  /**
    * Method used to train the tagger with the input sentences.
    *
    * @param  {array} sentences - Array of sentences being arrays of (word, tag).
    * @return {AveragedPerceptronTagger} - Returns itself for chaining.
    */
   train(sentences) {
+
+    if (this.trained)
+      throw Error('talisman/tag/averaged-perceptron.train: this tagger has already been trained.');
+
     const {classes, tags} = analyzeSentences(sentences);
 
     // Setting properties
@@ -291,6 +304,11 @@ export default class AveragedPerceptronTagger {
     }
 
     // Get average weights
+    this.averageWeights();
+
+    // Cleanup
+
+    this.trained = true;
 
     return this;
   }
@@ -344,5 +362,16 @@ export default class AveragedPerceptronTagger {
     }
 
     return this;
+  }
+
+  /**
+   * Method used to tag the provided tokenized sentence.
+   *
+   * @param  {array} sentence - Array of word tokens.
+   * @return {array}          - The tagged tokens.
+   */
+  tag(sentence) {
+    if (!this.trained)
+      throw Error('talisman/tag/averaged-perceptron.tag: this tagger hasn\'t been trained yet.');
   }
 }
