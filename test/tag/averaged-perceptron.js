@@ -8,8 +8,7 @@ import conll from '../../src/parsers/conll';
 import AveragedPercerptronTagger, {
   analyzeSentences,
   extractFeatures,
-  normalize,
-  predict
+  normalize
 } from '../../src/tag/averaged-perceptron';
 import {loadResource} from '../helpers';
 
@@ -130,6 +129,16 @@ describe('averaged-perceptron', function() {
 
   describe('training', function() {
 
+    it('should throw if the tagger is already trained.', function() {
+      const tagger = new AveragedPercerptronTagger({iterations: 1});
+
+      tagger.train([]);
+
+      assert.throws(function() {
+        tagger.train([]);
+      }, /already/);
+    });
+
     it('should initialize tags & classes correctly.', function() {
       const {classes, tags} = analyzeSentences(sentences);
 
@@ -149,6 +158,26 @@ describe('averaged-perceptron', function() {
       );
 
       assert.deepEqual(features, FEATURES);
+    });
+  });
+
+  describe('tagging', function() {
+
+    it('should throw if the tagger has not been trained yet.', function() {
+      const tagger = new AveragedPercerptronTagger();
+
+      assert.throws(function() {
+        tagger.tag(['Hello']);
+      }, /yet/);
+    });
+
+    it.skip('should properly tag.', function() {
+      this.timeout(1000 * 5);
+      const tagger = new AveragedPercerptronTagger({rng, iterations: 2});
+
+      tagger.train(sentences);
+
+      // console.log(tagger.tag(['Today', 'is', 'a', 'beautiful', 'day', '.']));
     });
   });
 });

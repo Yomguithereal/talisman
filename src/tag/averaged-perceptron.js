@@ -114,6 +114,26 @@ export function normalize(word) {
 }
 
 /**
+ * Function used to build a context from the given tokenized sentence.
+ *
+ * @param  {array} sentence - Target sentence.
+ * @return {array}          - Context.
+ */
+function createContext(sentence) {
+  const context = new Array(sentence.length + 4);
+        context[0] = START[0];
+        context[1] = START[1];
+
+  for (let j = 0, m = sentence.length; j < m; j++)
+    context[j + 2] = normalize(sentence[j][0]);
+
+  context[context.length - 2] = END[0];
+  context[context.length - 1] = END[1];
+
+  return context;
+}
+
+/**
  * Function extracting feature from the given word & its context.
  *
  * @param  {string} word    - Target word.
@@ -274,7 +294,26 @@ export default class AveragedPerceptronTagger {
    * @return {AveragedPerceptronTagger} - Returns itself for chaining.
    */
   averageWeights() {
+    for (const feature in this.weights) {
+      const updatedWeights = {};
 
+      for (const label in this.weights[feature]) {
+        const weight = this.weights[feature][label],
+              key = hasher(feature, label);
+
+        let total = this.totals[key];
+        total += (this.seenInstances - this.timestamps[key]) * weight;
+
+        const averaged = Math.round(total / this.seenInstances, 3);
+
+        if (averaged)
+          updatedWeights[label] = averaged;
+      }
+
+      this.weights[feature] = updatedWeights;
+    }
+
+    return this;
   }
 
   /**
@@ -307,7 +346,11 @@ export default class AveragedPerceptronTagger {
     this.averageWeights();
 
     // Cleanup
+    delete this.seenInstances;
+    delete this.totals;
+    delete this.timestamps;
 
+    // The tagger is now trained
     this.trained = true;
 
     return this;
@@ -328,15 +371,7 @@ export default class AveragedPerceptronTagger {
           previous2 = START[1];
 
       // Building context
-      const context = new Array(sentence.length + 4);
-      context[0] = START[0];
-      context[1] = START[1];
-
-      for (let j = 0, m = sentence.length; j < m; j++)
-        context[j + 2] = normalize(sentence[j][0]);
-
-      context[context.length - 2] = END[0];
-      context[context.length - 1] = END[1];
+      const context = createContext(sentence);
 
       for (let j = 0, m = sentence.length; j < m; j++) {
         const [word, tag] = sentence[j];
@@ -373,5 +408,28 @@ export default class AveragedPerceptronTagger {
   tag(sentence) {
     if (!this.trained)
       throw Error('talisman/tag/averaged-perceptron.tag: this tagger hasn\'t been trained yet.');
+
+    const output = new Array(sentence.length),
+          context = createContext(sentence);
+
+    let previous = START,
+        previous2 = START;
+
+    for (let i = 0, l = sentence.length; i < l; i++) {
+      const word = sentence[i];
+
+      let tag = this.tags[word];
+
+      if (!tag) {
+        const features = extractFeatures(i, word, context, previous, previous2);
+        tag = predict(features, this.weights, this.classes);
+      }
+
+      output[i] = [word, tag];
+      previous2 = previous;
+      previous = tag;
+    }
+
+    return output;
   }
 }
