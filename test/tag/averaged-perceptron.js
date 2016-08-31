@@ -1,6 +1,6 @@
 /**
- * Talisman parsers/brown tests
- * =============================
+ * Talisman tag/averaged-perceptron tests
+ * =======================================
  */
 import {assert} from 'chai';
 import seedrandom from 'seedrandom';

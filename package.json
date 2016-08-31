@@ -17,10 +17,11 @@
     "url": "git+https://github.com/yomguithereal/talisman.git"
   },
   "talisman": {
-    "folders": "classification clustering features helpers metrics parsers phonetics stats stemmers tag tokenizers"
+    "folders": "classification clustering features helpers metrics parsers phonetics stats stemmers structures tag tokenizers"
   },
   "keywords": [
     "bayes",
+    "bk tree",
     "canberra",
     "caverphone",
     "chebyshev",

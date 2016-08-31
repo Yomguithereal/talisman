@@ -3,6 +3,12 @@
  * =============================
  *
  */
+import util from 'util';
+
+// Infinite depth for logs
+if (util.inspect.defaultOptions)
+  util.inspect.defaultOptions.depth = null;
+
 describe('helpers', function() {
   require('./helpers/index.js');
   require('./helpers/matrices.js');
@@ -113,6 +119,10 @@ describe('stemmers', function() {
   describe('latin', function() {
     require('./stemmers/latin/schinke.js');
   });
+});
+
+describe('structures', function() {
+  require('./structures/bk-tree.js');
 });
 
 describe('tag', function() {
