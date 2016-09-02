@@ -111,7 +111,7 @@ Note that the produced code will only contain letter rather than a leading lette
 import soundex2 from 'talisman/phonetics/french/soundex2';
 
 soundex2('Florentin');
->>> 'FRLN'
+>>> 'FLRN'
 ```
 
 <div id="soundex2-mount"></div>
