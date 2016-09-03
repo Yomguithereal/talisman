@@ -5,7 +5,12 @@
  * Implementation of a Buckhard-Keller tree, allowing fast lookups of words
  * that lie within a specified distance of the query word.
  *
- * [Reference]: TODO
+ * [Reference]:
+ * https://en.wikipedia.org/wiki/BK-tree
+ *
+ * [Article]:
+ * W. Burkhard and R. Keller. Some approaches to best-match file searching,
+ * CACM, 1973
  */
 
 /**
