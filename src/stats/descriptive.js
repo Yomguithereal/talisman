@@ -121,6 +121,67 @@ export function mode(sequence) {
 }
 
 /**
+ * Function computing quantile.
+ *
+ * @param  {number|object} p        - Desired quantile or options.
+ * @param  {array}         sequence - The sequence to process.
+ * @return {number}
+ */
+const QUANTILE_DEFAULTS = {
+  interpolation: mean
+};
+
+export function quantile(options, sequence) {
+  let interpolation = QUANTILE_DEFAULTS.interpolation,
+      p;
+
+  if (typeof options === 'object') {
+    p = options.p;
+    interpolation = options.interpolation || interpolation;
+  }
+  else {
+    p = options;
+  }
+
+  // Validation
+  if (typeof interpolation !== 'function')
+    throw Error('talisman/stats/descriptive#quantile: expecting a function for the "interpolation" option.');
+
+  if (typeof p !== 'number' || p < 0 || p > 1)
+    throw Error('talisman/stats/descriptive#quantile: p should be a number between 0 and 1.');
+
+  // First we need to sort the sequence
+  const sorted = sequence.slice().sort((a, b) => a - b),
+        length = sorted.length;
+
+  // Simple cases
+  if (p === 0)
+    return sorted[0];
+  if (p === 1)
+    return sorted[length - 1];
+
+  // Computing the index
+  let index = (length * p) - 1;
+
+  // If the index is not an integer, we need to interpolate
+  if (index === (index | 0))
+    return interpolation([sorted[index], sorted[index + 1]]);
+
+  index = Math.ceil(index);
+  return sorted[index];
+}
+
+/**
+ * Function computing the median of the given sequence.
+ *
+ * @param  {array}  sequence - The sequence to process.
+ * @return {number}
+ */
+export function median(sequence) {
+  return quantile(0.5, sequence);
+}
+
+/**
  * Function computing the variance of the given sequence.
  *
  * @param  {array}  sequence - The sequence to process.

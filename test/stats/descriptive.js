@@ -13,7 +13,9 @@ import {
   mode,
   variance,
   stdev,
-  combineVariances
+  combineVariances,
+  quantile,
+  median
 } from '../../src/stats/descriptive';
 
 describe('descriptive', function() {
@@ -126,6 +128,60 @@ describe('descriptive', function() {
       assert.strictEqual(
         combineVariances(mean(before), variance(before), before.length, mean(after), variance(after), after.length),
         variance(before.concat(after))
+      );
+    });
+  });
+
+  describe('#.quantile', function() {
+    const even = [6, 4, 3, 3, 5, 7, 4, 7, 8, 1];
+
+    it('should throw when invalid arguments are provided.', function() {
+      assert.throws(function() {
+        quantile(2, [1, 2, 3]);
+      }, /number/);
+
+      assert.throws(function() {
+        quantile(-10, [1, 2, 3]);
+      }, /number/);
+
+      assert.throws(function() {
+        quantile('test', [1, 2, 3]);
+      }, /number/);
+
+      assert.throws(function() {
+        quantile({}, [1, 2, 3]);
+      }, /number/);
+
+      assert.throws(function() {
+        quantile({p: 0.5, interpolation: 'test'}, [1, 2, 3]);
+      }, /interpolation/);
+    });
+
+    it('should correctly compute the desired quantile.', function() {
+      assert.strictEqual(quantile(0.1, even), 2);
+    });
+
+    it('should interpolate if needed.', function() {
+      const interpolation = function([a]) {
+        return a;
+      };
+
+      assert.strictEqual(quantile(0.9, even), 7.5);
+      assert.strictEqual(quantile({p: 0.9, interpolation}, even), 7);
+    });
+  });
+
+  describe('#.median', function() {
+    const odd = [6, 4, 3, 3, 5, 7, 7, 8, 1];
+
+    it('should correctly compute the desired median.', function() {
+      assert.strictEqual(median(odd), 5);
+    });
+
+    it('median should be the same as 0.5 quantile.', function() {
+      assert.strictEqual(
+        median(odd),
+        quantile(0.5, odd)
       );
     });
   });

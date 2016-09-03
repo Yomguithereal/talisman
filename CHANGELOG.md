@@ -8,6 +8,8 @@
 * Adding the `parsers/conll` namespace.
 * Adding the `structures/bk-tree` namespace.
 * Adding the `sampler` options to `clustering/k-means`.
+* Adding the `stats/descriptive#.quantile` function.
+* Adding the `stats/descriptive#.median` function.
 * Fixing a bug with `clustering/k-means` where k would be superior to the number of vectors.
 * Fixing a bug with `clustering/k-means` `initialCentroids` options.
 * Fixing a bug with `clustering/k-means` where a vector could end up in several clusters.
