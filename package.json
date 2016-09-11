@@ -22,6 +22,7 @@
   "keywords": [
     "bayes",
     "bk tree",
+    "bloom filter",
     "canberra",
     "caverphone",
     "chebyshev",

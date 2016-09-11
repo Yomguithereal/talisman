@@ -123,6 +123,7 @@ describe('stemmers', function() {
 
 describe('structures', function() {
   require('./structures/bk-tree.js');
+  require('./structures/bloom-filter.js');
 });
 
 describe('tag', function() {
