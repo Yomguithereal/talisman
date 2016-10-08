@@ -84,6 +84,7 @@ function locations(k, m, r, string) {
 }
 
 // TODO: clean up defaults & add way to add initial values
+// TODO: clean up the size/capacity conundrum
 
 /**
  * Bloom filter class.

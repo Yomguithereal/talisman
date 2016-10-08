@@ -54,6 +54,7 @@
     "sorensen",
     "soundex",
     "stats",
+    "symspell",
     "tfidf",
     "tokenizer",
     "tversky",
