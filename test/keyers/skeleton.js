@@ -1,6 +1,6 @@
 /**
  * Talisman keyers/skeleton tests
- * ==================================
+ * ===============================
  */
 import assert from 'assert';
 import skeleton from '../../src/keyers/skeleton';

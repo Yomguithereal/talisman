@@ -4,6 +4,9 @@
  *
  * Keyer taking a string and normalizing it into a "skeleton key".
  *
+ * [Reference]:
+ * http://dl.acm.org/citation.cfm?id=358048
+ *
  * [Article]:
  * Pollock, Joseph J. and Antonio Zamora. 1984. "Automatic Spelling Correction
  * in Scientific and Scholarly Text." Communications of the ACM, 27(4).

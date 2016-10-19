@@ -35,6 +35,7 @@ describe('clustering', function() {
 describe('keyers', function() {
   require('./keyers/fingerprint.js');
   require('./keyers/ngram-fingerprint.js');
+  require('./keyers/omission.js');
   require('./keyers/skeleton.js');
 });
 
