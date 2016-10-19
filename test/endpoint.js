@@ -32,6 +32,10 @@ describe('clustering', function() {
   require('./clustering/k-means.js');
 });
 
+describe('keyers', function() {
+  require('./keyers/fingerprint.js');
+});
+
 describe('metrics', function() {
 
   describe('distance', function() {
