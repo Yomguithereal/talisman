@@ -11,7 +11,7 @@ import uniq from 'lodash/uniq';
  * Constants.
  */
 const WHITESPACE = /\s/,
-      PUNCTUATION_CONTROL = new RegExp('[,;\.!?\\x00-\\x08\\x0A-\\x1F\\x7F]', 'g'); // TODO: fix punctuation
+      PUNCTUATION_CONTROL = new RegExp('[,;.!?\\x00-\\x08\\x0A-\\x1F\\x7F]', 'g'); // TODO: fix punctuation
 
 /**
  * Fingerprint function.

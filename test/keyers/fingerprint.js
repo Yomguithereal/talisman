@@ -7,7 +7,7 @@ import fingerprint from '../../src/keyers/fingerprint';
 
 describe('fingerprint', function() {
 
-  it('should return a proper fingerprint.', function() {
+  it('should return proper fingerprints.', function() {
     const tests = [
       ['', ''],
       ['hello', 'hello'],

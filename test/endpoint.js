@@ -34,6 +34,7 @@ describe('clustering', function() {
 
 describe('keyers', function() {
   require('./keyers/fingerprint.js');
+  require('./keyers/ngram-fingerprint.js');
 });
 
 describe('metrics', function() {
