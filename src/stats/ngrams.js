@@ -9,26 +9,21 @@
 import {seq} from '../helpers';
 
 /**
- * Identity function used as placeholder.
- */
-const identity = x => x;
-
-/**
  * Function taking a sequence and computing its ngrams.
  *
  * @param  {number}   n         - Nb of elements in the subsequence.
  * @param  {mixed}    sequence  - The sequence to process.
- * @param  {function} [hasher]  - A function optionally used to hash the ngrams.
  * @return {array}              - The array of resulting ngrams.
  *
  * @throws {Error} The function expects a positive n > 0.
  */
-export default function ngrams(n, sequence, hasher) {
+export default function ngrams(n, sequence) {
   if (n < 1)
     throw Error('talisman/stats/ngrams: first argument should be a positive integer > 0.');
 
+  const isString = typeof sequence === 'string';
+
   sequence = seq(sequence);
-  hasher = typeof hasher === 'function' ? hasher : identity;
 
   const subsequences = [];
 
@@ -38,7 +33,7 @@ export default function ngrams(n, sequence, hasher) {
     for (let j = 0; j < n; j++)
       subsequence.push(sequence[i + j]);
 
-    subsequences.push(hasher(subsequence));
+    subsequences.push(isString ? subsequence.join('') : subsequence);
   }
 
   return subsequences;

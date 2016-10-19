@@ -29,7 +29,7 @@ export default function ngramFingerprint(n, string) {
   string = string.replace(UNDESIRABLES, '');
 
   //-- 3) Computing ngrams
-  let grams = ngrams(n, string, s => s.join(''));
+  let grams = ngrams(n, string);
 
   //-- 4) Keeping unique grams
   grams = uniq(grams);

@@ -27,7 +27,8 @@ describe('ngrams', function() {
     };
 
     Object.keys(solutions).forEach(n => {
-      assert.deepEqual(ngrams(n, 'hello'), solutions[n], `n = ${n}`);
+      assert.deepEqual(ngrams(n, 'hello'.split('')), solutions[n], `n = ${n}`);
+      assert.deepEqual(ngrams(n, 'hello'), solutions[n].map(s => s.join('')), `n = ${n}`);
     });
   });
 

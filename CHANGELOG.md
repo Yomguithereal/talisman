@@ -20,6 +20,7 @@
 * Fixing a bug with `clustering/k-means` `initialCentroids` options.
 * Fixing a bug with `clustering/k-means` where a vector could end up in several clusters.
 * Dropping the internal `regex/classes` namespace.
+* Dropping the `hasher` option of the `ngrams` functions.
 
 ## 0.11.0
 

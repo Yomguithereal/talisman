@@ -15,13 +15,6 @@ import tversky from './tversky';
 import {bigrams} from '../../stats/ngrams';
 
 /**
- * Hashing the bigrams to be able to compare them referentially.
- */
-const hasher = function(subsequence) {
-  return subsequence.join('');
-};
-
-/**
  * Dice coefficient is just Tversky index with alpha = beta = 1 over the
  * sequences' bigrams.
  */
@@ -35,8 +28,8 @@ const dice = function(x, y) {
     return 0;
 
   // Computing the sequences' bigrams
-  x = bigrams(x, hasher);
-  y = bigrams(y, hasher);
+  x = bigrams(x);
+  y = bigrams(y);
 
   return tversky({alpha: 0.5, beta: 0.5}, x, y);
 };
