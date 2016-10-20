@@ -14,8 +14,6 @@
  */
 import deburr from 'lodash/deburr';
 
-// TODO: check source
-
 /**
  * Constants.
  */

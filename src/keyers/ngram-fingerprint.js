@@ -1,3 +1,4 @@
+/* eslint no-control-regex: 0 */
 /**
  * Talisman keyers/ngram-fingerprint
  * ==================================
@@ -11,7 +12,7 @@ import ngrams from '../stats/ngrams';
 /**
  * Constants.
  */
-const UNDESIRABLES = new RegExp('[\\s,;.!?\\x00-\\x08\\x0A-\\x1F\\x7F]', 'g'); // TODO: fix punctuation
+const UNDESIRABLES = new RegExp('[\\s\\u2000-\\u206F\\u2E00-\\u2E7F\'!"#$%&()*+,\\-.\\/:;<=>?@\\[\\]^_`{|}~\\x00-\\x08\\x0A-\\x1F\\x7F]', 'g');
 
 /**
  * Fingerprint function.
