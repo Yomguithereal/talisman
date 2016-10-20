@@ -71,7 +71,6 @@ export default function fuzzySoundex(name) {
   // Deburring the string & dropping any non-alphabetical character
   name = deburr(name)
     .toUpperCase()
-    .replace(/ß/g, 'SS')
     .replace(/[^A-Z]/g, '');
 
   // Applying some substitutions for beginnings

@@ -130,7 +130,6 @@ export default function alphaSis(name) {
     throw Error('talisman/phonetics/alpha-sis: the given name is not a string.');
 
   name = deburr(name)
-    .replace(/ß/g, 'SS')
     .toUpperCase()
     .replace(/[^A-Z]/g, '');
 
