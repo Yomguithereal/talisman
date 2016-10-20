@@ -11,18 +11,31 @@
  * Tversky, Amos (1977). "Features of Similarity".
  * Psychological Reviews 84 (4): 327–352.
  */
-import {intersection, difference} from 'set-functions';
 import {seq} from '../../helpers';
 
 /**
  * Helpers
  */
 function I(X, Y) {
-  return intersection(X, Y).size;
+  const intersection = new Set();
+
+  X.forEach(item => {
+    if (Y.has(item))
+      intersection.add(item);
+  });
+
+  return intersection.size;
 }
 
 function R(X, Y) {
-  return difference(X, Y).size;
+  const difference = new Set();
+
+  X.forEach(item => {
+    if (!Y.has(item))
+      difference.add(item);
+  });
+
+  return difference.size;
 }
 
 

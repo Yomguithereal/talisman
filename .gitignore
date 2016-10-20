@@ -2,6 +2,7 @@
 node_modules
 build
 *.log
+*.lock
 .DS_Store
 TODO.md
 

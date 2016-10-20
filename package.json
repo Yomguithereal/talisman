@@ -105,7 +105,6 @@
   "dependencies": {
     "html-entities": "^1.2.0",
     "lodash": "^4.6.1",
-    "long": "^3.1.0",
-    "set-functions": "^0.2.0"
+    "long": "^3.1.0"
   }
 }

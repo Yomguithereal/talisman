@@ -6,7 +6,6 @@
  *
  * [Reference]: https://en.wikipedia.org/wiki/Overlap_coefficient
  */
-import {intersection} from 'set-functions';
 import {seq} from '../../helpers';
 
 /**
@@ -24,7 +23,13 @@ export default function overlap(a, b) {
   a = new Set(seq(a));
   b = new Set(seq(b));
 
-  const i = intersection(a, b);
+  // Computing intersection of both sets
+  const i = new Set();
+
+  a.forEach(item => {
+    if (b.has(item))
+      i.add(item);
+  });
 
   return i.size / Math.min(a.size, b.size);
 }
