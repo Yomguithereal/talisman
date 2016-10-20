@@ -10,6 +10,7 @@
 * Adding the `tag/averaged-perceptron` namespace.
 * Adding the `parsers/brown` namespace.
 * Adding the `parsers/conll` namespace.
+* Adding the `phonetics/onca` namespace.
 * Adding the `structures/bk-tree` namespace.
 * Adding the `structures/bloom-filter` namespace.
 * Adding the `structures/symspell` namespace.
