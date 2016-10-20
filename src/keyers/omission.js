@@ -6,6 +6,7 @@
  *
  * [Reference]:
  * http://dl.acm.org/citation.cfm?id=358048
+ * http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.12.385&rep=rep1&type=pdf
  *
  * [Article]:
  * Pollock, Joseph J. and Antonio Zamora. 1984. "Automatic Spelling Correction
