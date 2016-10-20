@@ -3,7 +3,7 @@
  * Talisman structure/vp-tree tests
  * =================================
  */
-import assert from 'assert';
+import {assert} from 'chai';
 import VPTree from '../../src/structures/vp-tree';
 import levenshtein from '../../src/metrics/distance/levenshtein';
 
@@ -60,5 +60,56 @@ describe('vp-tree', function() {
         }
       }
     );
+  });
+
+  it('should be possible to retrieve the nearest neighbors.', function() {
+    const tree = new VPTree(levenshtein, WORDS);
+
+    let neighbors = tree.nearestNeighbors(2, 'look');
+
+    assert.deepEqual(neighbors, [
+      {distance: 1, item: 'lock'},
+      {distance: 1, item: 'book'}
+    ]);
+
+    neighbors = tree.nearestNeighbors(4, 'look');
+
+    assert.deepEqual(neighbors, [
+      {distance: 1, item: 'lock'},
+      {distance: 1, item: 'book'},
+      {distance: 2, item: 'bock'},
+      {distance: 3, item: 'mack'}
+    ]);
+
+    neighbors = tree.nearestNeighbors(10, 'look');
+
+    assert.deepEqual(neighbors, [
+      {distance: 1, item: 'lock'},
+      {distance: 1, item: 'book'},
+      {distance: 2, item: 'bock'},
+      {distance: 3, item: 'mack'},
+      {distance: 3, item: 'back'},
+      {distance: 3, item: 'shock'},
+      {distance: 9, item: 'ephemeral'}
+    ]);
+  });
+
+  it('should be possible to retrieve every neighbors in range.', function() {
+    const tree = new VPTree(levenshtein, WORDS);
+
+    assert.sameDeepMembers(tree.neighborsInRange(2, 'look'), [
+      {distance: 1, item: 'lock'},
+      {distance: 1, item: 'book'},
+      {distance: 2, item: 'bock'}
+    ]);
+
+    assert.sameDeepMembers(tree.neighborsInRange(3, 'look'), [
+      {distance: 1, item: 'lock'},
+      {distance: 1, item: 'book'},
+      {distance: 2, item: 'bock'},
+      {distance: 3, item: 'mack'},
+      {distance: 3, item: 'back'},
+      {distance: 3, item: 'shock'}
+    ]);
   });
 });
