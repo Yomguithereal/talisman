@@ -131,8 +131,8 @@ describe('stemmers', function() {
 
 describe('structures', function() {
   require('./structures/bk-tree.js');
-  require('./structures/bloom-filter.js');
   require('./structures/symspell.js');
+  require('./structures/vp-tree.js');
 });
 
 describe('tag', function() {

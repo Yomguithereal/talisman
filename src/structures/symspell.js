@@ -382,10 +382,10 @@ export default class SymSpell {
 
     // Sanity checks
     if (typeof this.maxDistance !== 'number' || this.maxDistance <= 0)
-      throw Error('talisman/structure/symspell: invalid `maxDistance` option. Should be a integer greater than 0.');
+      throw Error('talisman/structure/symspell.constructor: invalid `maxDistance` option. Should be a integer greater than 0.');
 
     if (!VERBOSITY.has(this.verbosity))
-      throw Error('talisman/structure/symspell: invalid `verbosity` option. Should be either 0, 1 or 2.');
+      throw Error('talisman/structure/symspell.constructor: invalid `verbosity` option. Should be either 0, 1 or 2.');
   }
 
   /**
