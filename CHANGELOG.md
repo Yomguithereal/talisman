@@ -12,7 +12,6 @@
 * Adding the `parsers/conll` namespace.
 * Adding the `phonetics/onca` namespace.
 * Adding the `structures/bk-tree` namespace.
-* Adding the `structures/bloom-filter` namespace.
 * Adding the `structures/symspell` namespace.
 * Adding the `sampler` options to `clustering/k-means`.
 * Adding the `stats/descriptive#.quantile` function.
