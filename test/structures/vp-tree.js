@@ -17,10 +17,6 @@ const WORDS = [
   'ephemeral'
 ];
 
-// const tree = new VPTree(levenshtein, WORDS);
-
-// console.log(tree);
-
 describe('vp-tree', function() {
   it('should throw if distance is not a function.', function() {
     assert.throws(function() {
@@ -32,5 +28,37 @@ describe('vp-tree', function() {
     assert.throws(function() {
       const tree = new VPTree(levenshtein, 'test');
     }, /array/);
+  });
+
+  it('should properly build the tree.', function() {
+    const tree = new VPTree(levenshtein, WORDS);
+
+    assert.deepEqual(tree.root, {
+      vantage: 'ephemeral',
+      mu: 9,
+      left: {
+        vantage: 'shock',
+        mu: 3,
+        right: {
+          vantage: 'mack'
+        }
+      },
+      right:
+        {
+          vantage: 'lock',
+          mu: 2,
+          left: {
+            vantage: 'bock'
+          },
+          right: {
+            vantage: 'back',
+            mu: 2,
+            right: {
+              vantage: 'book'
+            }
+          }
+        }
+      }
+    );
   });
 });
