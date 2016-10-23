@@ -10,7 +10,7 @@
  * [Note]:
  * This implementation does not randomly select a point.
  */
-import {Heap} from 'buckets-js';
+import Heap from 'mnemonist/heap';
 import {median} from '../stats/descriptive';
 
 // TODO: implement random for choice? or better, a function to choose
@@ -101,8 +101,10 @@ export default class VPTree {
    * @param {array}        - Found neighbors.
    */
   nearestNeighbors(k, query) {
-    const neighbors = new Heap(SORTER),
+    const neighbors = new Heap(),
           queue = [this.root];
+
+    neighbors.comparator = SORTER;
 
     let tau = Infinity;
 
@@ -112,11 +114,11 @@ export default class VPTree {
       const d = this.distance(query, node.vantage);
 
       if (d < tau) {
-        neighbors.add({distance: d, item: node.vantage});
+        neighbors.push({distance: d, item: node.vantage});
 
         // Trimming
-        if (neighbors.size() > k)
-          neighbors.removeRoot();
+        if (neighbors.size > k)
+          neighbors.pop();
 
         // Adjusting tau
         tau = neighbors.peek().distance;
@@ -139,10 +141,10 @@ export default class VPTree {
       }
     }
 
-    const result = new Array(neighbors.size());
+    const result = new Array(neighbors.size);
 
-    for (let i = neighbors.size() - 1; i >= 0; i--)
-      result[i] = neighbors.removeRoot();
+    for (let i = neighbors.size - 1; i >= 0; i--)
+      result[i] = neighbors.pop();
 
     return result;
   }
