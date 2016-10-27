@@ -25,25 +25,25 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 *Top level*
 
-<div class="modules-list">
+<div>
   <ul>
     <li>
-      <a href="{{ site.baseurl }}/clustering">clustering</a>
+      <a href="#clustering">clustering</a>
     </li>
     <li>
-      <a href="{{ site.baseurl }}/metrics">metrics</a>
+      <a href="#metrics">metrics</a>
     </li>
     <li>
-      <a href="{{ site.baseurl }}/phonetics">phonetics</a>
+      <a href="#phonetics">phonetics</a>
     </li>
     <li>
-      <a href="{{ site.baseurl }}/stats">stats</a>
+      <a href="#stats">stats</a>
     </li>
     <li>
-      <a href="{{ site.baseurl }}/stemmers">stemmers</a>
+      <a href="#stemmers">stemmers</a>
     </li>
     <li>
-      <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
+      <a href="#tokenizers">tokenizers</a>
     </li>
   </ul>
 </div>
@@ -52,14 +52,13 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 <div class="modules-list">
   <ul>
-    <li>
+    <li id="clustering">
       <a href="{{ site.baseurl }}/clustering">clustering</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/clustering#k-means">k-means</a></em></li>
       </ul>
     </li>
-    <li>
-      <br>
+    <li id="metrics">
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
         <li>
@@ -87,8 +86,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         </li>
       </ul>
     </li>
-    <li>
-      <br>
+    <li id="phonetics">
       <a href="{{ site.baseurl }}/phonetics">phonetics</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#alpha-sis">alpha-sis</a></em></li>
@@ -130,8 +128,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         </li>
       </ul>
     </li>
-    <li>
-      <br>
+    <li id="stats">
       <a href="{{ site.baseurl }}/stats">stats</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/stats/descriptive">descriptive</a></em></li>
@@ -141,8 +138,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/stats/tfidf">tfidf</a></em></li>
       </ul>
     </li>
-    <li>
-      <br>
+    <li id="stemmers">
       <a href="{{ site.baseurl }}/stemmers">stemmers</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/stemmers#lancaster">lancaster</a></em></li>
@@ -169,10 +165,15 @@ The library's source code can be found on its Github [repository]({{ site.url }}
             <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/latin#schinke">schinke</a></em></li>
           </ul>
         </li>
+        <li>
+          <a href="{{ site.baseurl }}/stemmers/spanish">spanish</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/spanish#unine">unine</a></em></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li>
-      <br>
+    <li id="tokenizers">
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
       <ul>
         <li>

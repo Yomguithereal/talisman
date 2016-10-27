@@ -32,6 +32,7 @@ Modules under the `talisman/stemmers` namespace:
 * [french]({{ site.baseurl }}/stemmers/french)
 * [german]({{ site.baseurl }}/stemmers/german)
 * [latin]({{ site.baseurl }}/stemmers/latin)
+* [spanish]({{ site.baseurl }}/stemmers/spanish)
 
 ## Use case
 
