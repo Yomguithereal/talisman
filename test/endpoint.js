@@ -134,6 +134,10 @@ describe('stemmers', function() {
   describe('latin', function() {
     require('./stemmers/latin/schinke.js');
   });
+
+  describe('spanish', function() {
+    require('./stemmers/spanish/unine.js');
+  });
 });
 
 describe('structures', function() {

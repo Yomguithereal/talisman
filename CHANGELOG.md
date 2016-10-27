@@ -12,6 +12,7 @@
 * Adding the `parsers/brown` namespace.
 * Adding the `parsers/conll` namespace.
 * Adding the `phonetics/onca` namespace.
+* Adding the `stemmers/spanish/unine` namespace.
 * Adding the `structures/bk-tree` namespace.
 * Adding the `structures/symspell` namespace.
 * Adding the `structures/vp-tree` namespace.
