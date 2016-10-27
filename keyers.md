@@ -20,13 +20,11 @@ Let's say we stumbled upon those three lines in a table:
 * <em>"University of of North Carolina."</em>
 * <em>"Carolina, North university of"</em>
 
-One would easily agree that they are in fact duplicates.
+One would easily agree that they are in fact duplicates & this is exactly the goal of this module's functions to be able to match them.
 
-Duplicates that the functions of this module are able to match.
+Those methods are indeed producing normalized "fingerprints" for the given strings so their users may match lines that look the same but are not perfectly equal for a computer.
 
-Their goal is to produce a normalized "fingerprint" for the given string so one may match lines that look the same but are not perfectly equal for a computer.
-
-For instance, the basic [fingerprint](#fingerprint) method would produce the following key for the three examples above:
+For instance, the basic [fingerprint](#fingerprint) method would produce the following key for all three examples above:
 
 `carolina north of university`
 
