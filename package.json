@@ -8,7 +8,7 @@
     "clean": "rimraf $npm_package_talisman_folders",
     "dist": "npm run clean && babel src --out-dir ./",
     "lint": "eslint src test",
-    "prepublish": "npm run dist",
+    "prepublish": "npm run lint && npm test && npm run dist",
     "postpublish": "npm run clean",
     "test": "mocha --compilers js:babel-core/register -R spec ./test/endpoint.js"
   },
@@ -32,6 +32,7 @@
     "clustering",
     "daitch-mokotoff",
     "dice",
+    "fingerprint",
     "fuzzy",
     "hamming",
     "k-means",
