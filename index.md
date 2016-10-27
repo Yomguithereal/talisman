@@ -28,22 +28,25 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 <div>
   <ul>
     <li>
-      <a href="#clustering">clustering</a>
+      <a href="{{ site.baseurl }}/clustering">clustering</a>
     </li>
     <li>
-      <a href="#metrics">metrics</a>
+      <a href="{{ site.baseurl }}/keyers">keyers</a>
     </li>
     <li>
-      <a href="#phonetics">phonetics</a>
+      <a href="{{ site.baseurl }}/metrics">metrics</a>
     </li>
     <li>
-      <a href="#stats">stats</a>
+      <a href="{{ site.baseurl }}/phonetics">phonetics</a>
     </li>
     <li>
-      <a href="#stemmers">stemmers</a>
+      <a href="{{ site.baseurl }}/stats">stats</a>
     </li>
     <li>
-      <a href="#tokenizers">tokenizers</a>
+      <a href="{{ site.baseurl }}/stemmers">stemmers</a>
+    </li>
+    <li>
+      <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
     </li>
   </ul>
 </div>
@@ -56,6 +59,15 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <a href="{{ site.baseurl }}/clustering">clustering</a>
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/clustering#k-means">k-means</a></em></li>
+      </ul>
+    </li>
+    <li id="keyers">
+      <a href="{{ site.baseurl }}/keyers">keyers</a>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/keyers#fingerprint">fingerprint</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/keyers#ngram-fingerprint">ngram-fingerprint</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/keyers#omission">omission</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/keyers#skeleton">skeleton</a></em></li>
       </ul>
     </li>
     <li id="metrics">

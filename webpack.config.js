@@ -3,6 +3,7 @@ var webpack = require('webpack'),
 
 module.exports = {
   entry: {
+    'keyers': './_js/keyers.js',
     'metrics-distance': './_js/metrics-distance.js',
     'phonetics': './_js/phonetics.js',
     'phonetics-french': './_js/phonetics-french.js',

@@ -5,10 +5,6 @@
 * Vectorizers
 * Adding the `helpers/random` namespace.
 * Adding the `inflectors/spanish/noun` namespace.
-* Adding the `keyers/fingerprint` namespace.
-* Adding the `keyers/ngram-fingerprint` namespace.
-* Adding the `keyers/omission` namespace.
-* Adding the `keyers/skeleton` namespace.
 * Adding the `tag/averaged-perceptron` namespace.
 * Adding the `parsers/brown` namespace.
 * Adding the `parsers/conll` namespace.
