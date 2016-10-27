@@ -19,7 +19,14 @@ describe('helpers', function() {
 describe('features', function() {
 
   describe('extraction', function() {
-    require('./features/extraction/vectorizers');
+    require('./features/extraction/vectorizers.js');
+  });
+});
+
+describe('inflectors', function() {
+
+  describe('spanish', function() {
+    require('./inflectors/spanish/noun.js');
   });
 });
 

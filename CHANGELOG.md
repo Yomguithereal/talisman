@@ -3,6 +3,7 @@
 ## 0.12.0
 
 * Adding the `helpers/random` namespace.
+* Adding the `inflectors/spanish/noun` namespace.
 * Adding the `keyers/fingerprint` namespace.
 * Adding the `keyers/ngram-fingerprint` namespace.
 * Adding the `keyers/omission` namespace.

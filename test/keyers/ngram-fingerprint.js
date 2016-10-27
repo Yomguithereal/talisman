@@ -1,6 +1,6 @@
 /**
  * Talisman keyers/ngram-fingerprint tests
- * ==================================
+ * ========================================
  */
 import assert from 'assert';
 import ngramFingerprint from '../../src/keyers/ngram-fingerprint';
