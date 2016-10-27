@@ -241,3 +241,8 @@ pre code {
   line-height: 1.9em;
   font-size: 0.9em;
 }
+
+.marginnote {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

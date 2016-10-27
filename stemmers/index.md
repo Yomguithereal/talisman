@@ -156,7 +156,7 @@ sStemmer('queries');
 </span>
 
 <span class="marginnote">
-  Authors:<br><u>Marie-CLaire Jenkins</u><br><u>Dan Smith</u><br><a href="http://github.com/ealdent">Jason M. Adams</a>
+  Authors:<br><u>Marie-Claire Jenkins</u><br><u>Dan Smith</u><br><a href="http://github.com/ealdent">Jason M. Adams</a>
 </span>
 
 The University of East Anglia (UEA) stemmer, edited by Jason M. Adams in his [Ruby port](http://github.com/ealdent/uea-stemmer).
