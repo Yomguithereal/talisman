@@ -13,7 +13,9 @@ The `stats/descriptive` module gather a handful of functions related to descript
 
 *Basics*
 
+* [quantile](#quantile)
 * [mean](#mean)
+* [median](#median)
 * [mode](#mode)
 * [stdev](#stdev)
 * [sum](#sum)
@@ -26,6 +28,31 @@ The `stats/descriptive` module gather a handful of functions related to descript
 * [combineVariances](#combine-variances)
 * [substractFromMean](#substract-from-mean)
 
+<h2 id="quantile">quantile</h2>
+
+Finds the desired quantile of the given sequence.
+
+```js
+import {quantile} from 'talisman/stats/descriptive';
+
+quantile(.9, [6, 4, 3, 3, 5, 7, 4, 7, 8, 1]);
+>>> 7.5
+
+// Using custom interpolation
+const interpolation = (values) => {
+  return values[0];
+};
+
+quantile({p: 0.9, interpolation}, [6, 4, 3, 3, 5, 7, 4, 7, 8, 1]);
+>>> 7
+```
+
+*Arguments*
+
+* **options** <code class="type">number|object</code> - either the desired quantile or the following options:
+  * **p** <code class="type">number</code>: desired quantile.
+  * **interpolation** <code class="type">function</code>: custom interpolation function. Will default to [mean](#mean).
+
 <h2 id="mean">mean</h2>
 
 Computes the mean of the given sequence.
@@ -35,6 +62,17 @@ import {mean} from 'talisman/stats/descriptive';
 
 mean([13, 14, 15, 8, 20]);
 >>> 14
+```
+
+<h2 id="median">median</h2>
+
+Find the median of the given sequence.
+
+```js
+import {median} from 'talisman/stats/descriptive';
+
+median([6, 4, 3, 3, 5, 7, 7, 8, 1]);
+>>> 5
 ```
 
 <h2 id="mode">mode</h2>
