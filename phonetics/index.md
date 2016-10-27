@@ -29,6 +29,7 @@ Modules under the `talisman/phonetics` namespace:
 * [metaphone](#metaphone)
 * [mra](#mra)
 * [nysiis](#nysiis)
+* [onca](#onca)
 * [phonex](#phonex)
 * [roger-root](#roger-root)
 * [soundex](#soundex)
@@ -326,6 +327,21 @@ nysiis('Philbert');
 *Refined version*
 
 <div id="nysiis-refined-mount"></div>
+
+<h2 id="onca">onca</h2>
+
+The Oxford Name Compression Algorithm (ONCA).
+
+Basically a glorified combination of the [NYSIIS](#nysiis) algorithm & the [Soundex](#soundex) one.
+
+```js
+import onca from 'talisman/phonetics/onca';
+
+lein('Dionne');
+>>> 'D500'
+```
+
+<div id="onca-mount"></div>
 
 <h2 id="phonex">phonex</h2>
 

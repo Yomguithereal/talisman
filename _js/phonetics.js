@@ -11,6 +11,7 @@ import fuzzySoundex from 'talisman/phonetics/fuzzy-soundex';
 import lein from 'talisman/phonetics/lein';
 import metaphone from 'talisman/phonetics/metaphone';
 import mra from 'talisman/phonetics/mra';
+import onca from 'talisman/phonetics/onca';
 import nysiis, {refined} from 'talisman/phonetics/nysiis';
 import phonex from 'talisman/phonetics/phonex';
 import rogerRoot from 'talisman/phonetics/roger-root';
@@ -39,6 +40,7 @@ render(<PhoneticTester algorithm={metaphone} />, document.getElementById('metaph
 render(<PhoneticTester algorithm={mra} />, document.getElementById('mra-mount'));
 render(<PhoneticTester algorithm={nysiis} />, document.getElementById('nysiis-original-mount'));
 render(<PhoneticTester algorithm={refined} />, document.getElementById('nysiis-refined-mount'));
+render(<PhoneticTester algorithm={onca} />, document.getElementById('onca-mount'));
 render(<PhoneticTester algorithm={phonex} />, document.getElementById('phonex-mount'));
 render(<PhoneticTester algorithm={rogerRoot} />, document.getElementById('roger-root-mount'));
 render(<PhoneticTester algorithm={soundex} />, document.getElementById('soundex-mount'));

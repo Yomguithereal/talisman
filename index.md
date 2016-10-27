@@ -99,6 +99,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#metaphone">metaphone</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#mra">mra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#nysiis">nysiis</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#onca">onca</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#phonex">phonex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#roger-root">roger-root</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></em></li>
