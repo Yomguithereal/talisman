@@ -62,6 +62,7 @@ describe('metrics', function() {
     require('./metrics/distance/levenshtein.js');
     require('./metrics/distance/manhattan.js');
     require('./metrics/distance/minkowski.js');
+    require('./metrics/distance/monge-elkan.js');
     require('./metrics/distance/mra.js');
     require('./metrics/distance/overlap.js');
   });
