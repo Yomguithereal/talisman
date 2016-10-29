@@ -57,6 +57,7 @@ describe('metrics', function() {
     require('./metrics/distance/euclidean.js');
     require('./metrics/distance/eudex.js');
     require('./metrics/distance/hamming.js');
+    require('./metrics/distance/identity.js');
     require('./metrics/distance/jaccard.js');
     require('./metrics/distance/jaro-winkler.js');
     require('./metrics/distance/levenshtein.js');

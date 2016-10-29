@@ -2,6 +2,7 @@
 
 ## 0.13.0
 
+* Adding the `metrics/distance/identity` namespace.
 * Adding the `metrics/distance/monge-elkan` namespace.
 
 ## 0.12.0

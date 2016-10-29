@@ -5,10 +5,7 @@
  */
 import assert from 'assert';
 import mongeElkan, {symmetric} from '../../../src/metrics/distance/monge-elkan';
-
-const identity = (a, b) => {
-  return a === b ? 1 : 0;
-};
+import {similarity as identity} from '../../../src/metrics/distance/identity';
 
 describe('monge-elkan', function() {
 
