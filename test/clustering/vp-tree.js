@@ -28,7 +28,7 @@ const COMPLEX_DATA = [
   'marin'
 ];
 
-describe.only('vp-tree', function() {
+describe('vp-tree', function() {
 
   it('should cluster as expected.', function() {
     const clusters = vpTree({distance: identity, range: 0}, BASIC_DATA);

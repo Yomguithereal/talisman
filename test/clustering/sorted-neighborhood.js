@@ -1,10 +1,10 @@
 /**
- * Talisman clustering/naive tests
- * ================================
+ * Talisman clustering/sorted-neighborhood tests
+ * ==============================================
  *
  */
 import assert from 'assert';
-import naive from '../../src/clustering/naive';
+import sortedNeighborhood from '../../src/clustering/sorted-neighborhood';
 import levenshtein from '../../src/metrics/distance/levenshtein';
 
 const BASIC_DATA = [
@@ -16,7 +16,7 @@ const BASIC_DATA = [
   'a',
   'b',
   'b'
-];
+].sort();
 
 const COMPLEX_DATA = [
   'book',
@@ -25,14 +25,14 @@ const COMPLEX_DATA = [
   'red',
   'ted',
   'marin'
-];
+].sort();
 
-describe('naive', function() {
+describe.only('sorted-neighborhood', function() {
 
   it('should cluster as expected.', function() {
     const identity = (a, b) => a === b;
 
-    const clusters = naive({similarity: identity}, BASIC_DATA);
+    const clusters = sortedNeighborhood({similarity: identity, window: 2}, BASIC_DATA);
 
     assert.deepEqual(
       clusters,
@@ -47,14 +47,15 @@ describe('naive', function() {
       return levenshtein(a.word, b.word) <= 1;
     };
 
-    const clusters = naive({similarity}, data);
+    const clusters = sortedNeighborhood({similarity, window: 3}, data);
 
     assert.deepEqual(
       clusters,
       [
-        [{word: 'book'}, {word: 'yook'}, {word: 'bolk'}],
+        [{word: 'bolk'}, {word: 'book'}],
+        [{word: 'marin'}],
         [{word: 'red'}, {word: 'ted'}],
-        [{word: 'marin'}]
+        [{word: 'yook'}]
       ]
     );
   });

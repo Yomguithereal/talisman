@@ -1,35 +1,42 @@
 /**
- * Talisman clustering/naive
- * ==========================
+ * Talisman clustering/sorted-neighborhood
+ * ========================================
  *
- * Naive clustering working by performing the n(n-1)/2 distance calculations
- * between all relevant pairs & retrieving connected components. Time complexity
- * of such a clustering is therefore O(n^2), which is quite bad.
+ * Clustering method first sorting the dataset before applying pairwise
+ * comparisons only within the given window. Time complexity is quite
+ * better than the naive approach: O(n(w+log n)).
  */
 
+// TODO: sort function? provide multi-sampling?
+
 /**
- * Naive clustering function.
+ * Sorted Neighborhood Method (SNM) function.
  *
  * @param  {object}   options      - Options:
  * @param  {function}   similarity - Function returning whether two points are
  *                                   similar.
- * @param  {array}    data         - Data points.
+ * @param  {number}     window     - Size of the window.
+ * @param  {array}    data         - Sorted data points.
  * @return {array}                 - List of clusters.
  */
-export default function naive(options, data) {
-  const similarity = options.similarity;
+export default function sortedNeighborhood(options, data) {
+  const similarity = options.similarity,
+        w = options.window;
 
   if (typeof similarity !== 'function')
-    throw new Error('talisman/clustering/naive: `similarity` option should be a function.');
+    throw new Error('talisman/clustering/sorted-neighborhood: `similarity` option should be a function.');
+
+  if (typeof w !== 'number' || w < 2)
+    throw new Error('talisman/clustering/sorted-neighborhood: `window` option should be a number > 1.');
 
   const graph = new Array(data.length);
 
-  // Iterating over the needed pairs to compute similarity
+  // Iterating
   for (let i = 0, l = data.length; i < l; i++) {
     const a = data[i];
     graph[i] = {};
 
-    for (let j = 1 + i; j < l; j++) {
+    for (let j = 1 + i, m = Math.min(l, 1 + i + w); j < m; j++) {
       const b = data[j];
 
       if (similarity(a, b))
