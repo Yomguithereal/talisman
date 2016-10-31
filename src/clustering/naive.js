@@ -3,7 +3,8 @@
  * ==========================
  *
  * Naive clustering working by performing the n(n-1)/2 distance calculations
- * between all relevant pairs & retrieving connected components.
+ * between all relevant pairs & retrieving connected components. Time complexity
+ * of such a clustering is therefore O(n^2), which is quite bad.
  */
 
 /**

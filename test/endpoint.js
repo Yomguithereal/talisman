@@ -37,7 +37,9 @@ describe('classification', function() {
 
 describe('clustering', function() {
   require('./clustering/k-means.js');
+  require('./clustering/key-collision.js');
   require('./clustering/naive.js');
+  require('./clustering/vp-tree.js');
 });
 
 describe('keyers', function() {
