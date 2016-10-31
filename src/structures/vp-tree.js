@@ -18,7 +18,7 @@ import {median} from '../stats/descriptive';
 /**
  * Constants.
  */
-const SORTER = (a, b) => {
+const COMPARATOR = (a, b) => {
   if (a.distance < b.distance)
     return 1;
   if (a.distance > b.distance)
@@ -101,10 +101,8 @@ export default class VPTree {
    * @param {array}        - Found neighbors.
    */
   nearestNeighbors(k, query) {
-    const neighbors = new Heap(),
+    const neighbors = new Heap(COMPARATOR),
           queue = [this.root];
-
-    neighbors.comparator = SORTER;
 
     let tau = Infinity;
 
