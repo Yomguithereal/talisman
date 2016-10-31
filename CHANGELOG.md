@@ -2,6 +2,7 @@
 
 ## 0.13.0
 
+* Adding the `clustering/naive` namespace.
 * Adding the `metrics/distance/identity` namespace.
 * Adding the `metrics/distance/monge-elkan` namespace.
 

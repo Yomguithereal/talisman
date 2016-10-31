@@ -37,6 +37,7 @@ describe('classification', function() {
 
 describe('clustering', function() {
   require('./clustering/k-means.js');
+  require('./clustering/naive.js');
 });
 
 describe('keyers', function() {
