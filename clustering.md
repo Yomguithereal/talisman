@@ -42,4 +42,5 @@ const clusters = kMeans(options, data);
   * **[distance]** <code class="type">function</code> - the distance function to use. Will default to [`metrics/distance/euclidean`]({{ site.baseurl }}/metrics/distance#euclidean).
   * **[maxIterations]** <code class="type">number</code> (300) - maximum number of iterations to perform.
   * **[initialCentroids]** <code class="type">array|function</code> - an array of initial centroids or a function taking the input data & options and returning the initial centroids.
+  * **[sample]** <code class="type">function</code> - a custom sampling function.
 * **data**: <code class="type">array</code> - your dataset should be an array of vectors.
