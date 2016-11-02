@@ -54,7 +54,7 @@ const IRREGULAR_SINGULAR_TO_PLURAL = {
   menú: 'menús',
   no: 'noes',
   país: 'países',
-  referéndum: 'referendos-',
+  referéndum: 'referendos',
   régimen: 'regímenes',
   sándwich: 'sándwiches',
   si: 'sis',
