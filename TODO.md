@@ -3,6 +3,7 @@
 * Classifiers
 * Punkt Tokenization
 * Vectorizers
+* POS tagger
 * Adding the `helpers/random` namespace.
 * Adding the `inflectors/spanish/noun` namespace.
 * Adding the `tag/averaged-perceptron` namespace.

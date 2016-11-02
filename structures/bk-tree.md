@@ -37,7 +37,32 @@ const suggestions = tree.search(query, 2);
 
 ## Instantiation
 
+```js
+import BKTree from 'talisman/structures/bk-tree';
+import levenshtein from 'talisman/metrics/distance/levenshtein';
+
+const words = ['book', 'back', ...];
+
+const tree = new BKTree(distance, words);
+```
+
+*Arguments*
+
+* **distance** <code class="type">function</code>: distance function to use.
+* **words** <code class="type">array</code>: initial words to store.
+
 ## Methods
 
 * [#.add](#add)
 * [#.search](#search)
+
+<h3 id="add">#.add</h3>
+
+Adds a single word to the tree.
+
+```js
+tree.add('hello');
+```
+
+<h3 id="search">#.search</h3>
+
