@@ -27,7 +27,7 @@ const COMPLEX_DATA = [
   'marin'
 ].sort();
 
-describe.only('sorted-neighborhood', function() {
+describe('sorted-neighborhood', function() {
 
   it('should cluster as expected.', function() {
     const identity = (a, b) => a === b;

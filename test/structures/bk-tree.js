@@ -85,10 +85,10 @@ describe('bk-tree', function() {
       'shock'
     ];
 
-    assert.sameMembers(tree.search('bhock', 2), two);
-    assert.sameMembers(tree.search('bhock', 1), one);
+    assert.sameMembers(tree.search(2, 'bhock'), two);
+    assert.sameMembers(tree.search(1, 'bhock'), one);
 
-    assert(tree.search('bhock', 2).every(w => levenshtein('bhock', w) <= 2));
-    assert(tree.search('bhock', 1).every(w => levenshtein('bhock', w) <= 1));
+    assert(tree.search(2, 'bhock').every(w => levenshtein('bhock', w) <= 2));
+    assert(tree.search(1, 'bhock').every(w => levenshtein('bhock', w) <= 1));
   });
 });

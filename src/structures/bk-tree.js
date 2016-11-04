@@ -102,11 +102,11 @@ export default class BKTree {
    * Method used to search all words in the tree that are within the given
    * distance.
    *
+   * @param  {number} n     - Maximum distance between query & targets.
    * @param  {string} word  - Word to query.
-   * @param  {number} [n=2] - Maximum distance between query & targets.
    * @return {array}        - Returns an array of near words.
    */
-  search(word, n = 2) {
+  search(n, word) {
     const found = [];
 
     searchWord(this.distance, this.tree, word, n, found);
