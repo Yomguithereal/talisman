@@ -3,6 +3,10 @@ layout: page
 title: Buckhard-Keller Tree
 ---
 
+<span class="marginnote">
+  Reference: <a href="https://en.wikipedia.org/wiki/BK-tree">https://en.wikipedia.org/wiki/BK-tree</a>
+</span>
+
 Buckhard-Keller trees are data structures usually used to index strings that one can then query using distance metrics such as the [Levenshtein]({{ site.baseurl }}/metrics/distance#levenshtein) distance.
 
 ## Use case
