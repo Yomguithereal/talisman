@@ -194,6 +194,9 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/structures/bk-tree">bk-tree</a></em></li>
       </ul>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/structures/symspell">symspell</a></em></li>
+      </ul>
     </li>
     <li id="tokenizers">
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
