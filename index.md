@@ -46,6 +46,9 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <a href="{{ site.baseurl }}/stemmers">stemmers</a>
     </li>
     <li>
+      <a href="{{ site.baseurl }}/structures">structures</a>
+    </li>
+    <li>
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
     </li>
   </ul>
@@ -184,6 +187,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
             <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/spanish#unine">unine</a></em></li>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li id="structures">
+      <a href="{{ site.baseurl }}/structures">structures</a>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/structures/bk-tree">bk-tree</a></em></li>
       </ul>
     </li>
     <li id="tokenizers">

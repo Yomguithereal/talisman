@@ -3,7 +3,7 @@ layout: page
 title: Buckhard-Keller Tree
 ---
 
-Buckhard-Keller trees are data structures usually used to index strings and search strings using distance metrics such as the [Levenshtein]({{ site.baseurl }}/metrics/distance#levenshtein) distance.
+Buckhard-Keller trees are data structures usually used to index strings that one can then query using distance metrics such as the [Levenshtein]({{ site.baseurl }}/metrics/distance#levenshtein) distance.
 
 ## Use case
 
@@ -30,7 +30,7 @@ import levenshtein from 'talisman/metrics/distance/levenshtein';
 const tree = new BKTree(levenshtein, terms);
 
 // We can now query the tree easily:
-const suggestions = tree.search(query, 2);
+const suggestions = tree.search(2, query);
 ```
 
 **N.B.** you should probably also check the [SymSpell]({{ site.baseurl }}/structures/symspell) structure, which is able to perform the same kind of job but is even more efficient for this precise use case.
@@ -64,5 +64,24 @@ Adds a single word to the tree.
 tree.add('hello');
 ```
 
+*Arguments*
+
+* **word** <code class="type">string</code> - word to add to the tree.
+
 <h3 id="search">#.search</h3>
 
+Returns every word in the tree within the desired distance.
+
+```js
+tree.add('back');
+tree.add('bolk');
+tree.add('hello');
+
+tree.search(1, 'book');
+>>> ['back', 'bolk']
+```
+
+*Arguments*
+
+* **maxDistance** <code class="type">number</code> - maximum distance between query & a word in the tree.
+* **query** <code class="type">string</code> - Query.
