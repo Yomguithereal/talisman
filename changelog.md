@@ -3,6 +3,16 @@ layout: page
 title: Changelog
 ---
 
+## 0.13.0
+
+* Adding the `clustering/key-collision` namespace.
+* Adding the `clustering/naive` namespace.
+* Adding the `clustering/sorted-neighborhood` namespace.
+* Adding the `clustering/vp-tree` namespace.
+* Adding the `metrics/distance/identity` namespace.
+* Adding the `metrics/distance/monge-elkan` namespace.
+* Reversing `structures/bk-tree#search` arguments.
+
 ## 0.12.0
 
 * Adding the `helpers/random` namespace.
