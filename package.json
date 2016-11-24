@@ -1,6 +1,6 @@
 {
   "name": "talisman",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "A straightforward & modular NLP, machine learning & fuzzy matching library for JavaScript.",
   "main": "index.js",
   "scripts": {
