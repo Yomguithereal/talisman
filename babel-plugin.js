@@ -22,6 +22,9 @@ module.exports = function(context) {
               if (p.node.specifiers.length === 1 && p.node.specifiers[0].exported.name === 'default') {
                 hasExportDefault = true;
               }
+              else if (p.node.declaration && t.isFunctionDeclaration(p.node.declaration)) {
+                namedExports.add(p.node.declaration.id.name);
+              }
               else {
                 p.node.specifiers.forEach(function(specifier) {
                   namedExports.add(specifier.exported.name);
