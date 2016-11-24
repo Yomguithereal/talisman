@@ -3,6 +3,12 @@ layout: page
 title: Changelog
 ---
 
+## 0.14.0
+
+* Dropping the `phonetics/spanish/fonetico` namespace (should use [phonogram](https://github.com/Yomguithereal/phonogram) now).
+* Improving `VPTree` performance by building the tree iteratively.
+* Found a way to ease CommonJS by getting rid of pesky `.default`.
+
 ## 0.13.0
 
 * Adding the `clustering/key-collision` namespace.
