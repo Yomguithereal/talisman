@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.14.0
+
+* Found a way to ease CommonJS by getting rid of pesky `.default`.
+
 ## 0.13.0
 
 * Adding the `clustering/key-collision` namespace.
