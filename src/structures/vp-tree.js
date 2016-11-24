@@ -28,47 +28,55 @@ const COMPARATOR = (a, b) => {
 };
 
 /**
- * Functions use to recursively build the tree.
+ * Functions use to iteratively build the tree.
  *
  * @param  {function} distance - Distance function to use.
- * @param  {array}    items    - Items to store.
+ * @param  {array}    data     - Items to store.
  */
-function makeTree(distance, items) {
-  const tree = {
-    vantage: items.pop()
-  };
+function makeTree(distance, data) {
+  const root = {},
+        stack = [[root, data]];
 
-  if (!items.length)
-    return tree;
+  while (stack.length) {
+    const [branch, items] = stack.pop();
 
-  // Computing distances
-  const distances = new Array(items.length);
+    branch.vantage = items.pop();
 
-  for (let i = 0, l = items.length; i < l; i++) {
-    const item = items[i];
-    distances[i] = distance(tree.vantage, item);
+    if (!items.length)
+      continue;
+
+    const distances = new Array(items.length);
+
+    for (let i = 0, l = items.length; i < l; i++) {
+      const item = items[i];
+      distances[i] = distance(branch.vantage, item);
+    }
+
+    branch.mu = median(distances);
+
+    const left = [],
+          right = [];
+
+    for (let i = 0, l = items.length; i < l; i++) {
+      const d = distances[i];
+
+      if (d >= branch.mu)
+        right.push(items[i]);
+      else
+        left.push(items[i]);
+    }
+
+    if (left.length) {
+      branch.left = {};
+      stack.push([branch.left, left]);
+    }
+    if (right.length) {
+      branch.right = {};
+      stack.push([branch.right, right]);
+    }
   }
 
-  tree.mu = median(distances);
-
-  const left = [],
-        right = [];
-
-  for (let i = 0, l = items.length; i < l; i++) {
-    const d = distances[i];
-
-    if (d >= tree.mu)
-      right.push(items[i]);
-    else
-      left.push(items[i]);
-  }
-
-  if (left.length)
-    tree.left = makeTree(distance, left);
-  if (right.length)
-    tree.right = makeTree(distance, right);
-
-  return tree;
+  return root;
 }
 
 /**
@@ -157,12 +165,12 @@ export default class VPTree {
    */
   neighborsInRange(range, query) {
     const neighbors = [],
-          queue = [this.root];
+          stack = [this.root];
 
     const tau = range;
 
-    while (queue.length > 0) {
-      const node = queue.pop();
+    while (stack.length > 0) {
+      const node = stack.pop();
 
       const d = this.distance(query, node.vantage);
 
@@ -174,15 +182,15 @@ export default class VPTree {
 
       if (d < node.mu) {
         if (d < node.mu + tau && node.left)
-          queue.push(node.left);
+          stack.push(node.left);
         if (d >= node.mu - tau && node.right)
-          queue.push(node.right);
+          stack.push(node.right);
       }
       else {
         if (d >= node.mu - tau && node.right)
-          queue.push(node.right);
+          stack.push(node.right);
         if (d < node.mu + tau && node.left)
-          queue.push(node.left);
+          stack.push(node.left);
       }
     }
 
