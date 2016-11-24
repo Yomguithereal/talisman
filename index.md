@@ -136,12 +136,6 @@ The library's source code can be found on its Github [repository]({{ site.url }}
             <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/german#phonem">phonem</a></em></li>
           </ul>
         </li>
-        <li>
-          <a href="{{ site.baseurl }}/phonetics/spanish">spanish</a>
-          <ul>
-            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/spanish#fonetico">fonetico</a></em></li>
-          </ul>
-        </li>
       </ul>
     </li>
     <li id="stats">

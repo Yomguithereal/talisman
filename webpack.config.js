@@ -8,7 +8,6 @@ module.exports = {
     'phonetics': './_js/phonetics.js',
     'phonetics-french': './_js/phonetics-french.js',
     'phonetics-german': './_js/phonetics-german.js',
-    'phonetics-spanish': './_js/phonetics-spanish.js',
     'stemmers': './_js/stemmers.js',
     'stemmers-french': './_js/stemmers-french.js',
     'stemmers-german': './_js/stemmers-german.js',
