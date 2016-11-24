@@ -66,7 +66,6 @@ module.exports = function(context) {
             ]);
 
             if (namedExports.size) {
-              console.log(namedExports);
               namedExports.forEach(function(name) {
                 path.pushContainer('body', [
                   t.expressionStatement(t.assignmentExpression(
