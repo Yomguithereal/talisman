@@ -1,5 +1,6 @@
 # Common
 node_modules
+experiments
 build
 *.log
 *.lock
