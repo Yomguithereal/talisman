@@ -107,10 +107,6 @@ describe('phonetics', function() {
     require('./phonetics/german/cologne.js');
     require('./phonetics/german/phonem.js');
   });
-
-  describe('spanish', function() {
-    require('./phonetics/spanish/fonetico.js');
-  });
 });
 
 describe('stats', function() {
