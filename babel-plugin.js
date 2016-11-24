@@ -33,12 +33,21 @@ module.exports = function(context) {
             // NOTE: this is not ideal & kinda loops on Punkt
             if (p.isVariableDeclaration()) {
               p.container.forEach(function(node) {
+
                 if (
                   t.isExportNamedDeclaration(node) &&
                   node.declaration &&
                   node.declaration.declarations
                 ) {
                   namedExports.add(node.declaration.declarations[0].id.name);
+                }
+
+                if (
+                  t.isExportNamedDeclaration(node) &&
+                  node.declaration &&
+                  t.isFunctionDeclaration(node.declaration)
+                ) {
+                  namedExports.add(node.declaration.id.name)
                 }
               });
             }
@@ -54,6 +63,7 @@ module.exports = function(context) {
             ]);
 
             if (namedExports.size) {
+              console.log(namedExports);
               namedExports.forEach(function(name) {
                 path.pushContainer('body', [
                   t.expressionStatement(t.assignmentExpression(
