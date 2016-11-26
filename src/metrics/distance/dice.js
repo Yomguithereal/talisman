@@ -12,7 +12,7 @@
  * Between Species". Ecology 26 (3): 297–302.
  */
 import tversky from './tversky';
-import {bigrams} from '../../stats/ngrams';
+import {bigrams} from '../../tokenizers/ngrams';
 
 /**
  * Dice coefficient is just Tversky index with alpha = beta = 1 over the

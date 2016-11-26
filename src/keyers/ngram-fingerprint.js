@@ -7,7 +7,7 @@
  */
 import deburr from 'lodash/deburr';
 import uniq from 'lodash/uniq';
-import ngrams from '../stats/ngrams';
+import ngrams from '../tokenizers/ngrams';
 
 /**
  * Constants.

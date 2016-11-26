@@ -1,12 +1,12 @@
 /**
- * Talisman stats/ngrams
- * ======================
+ * Talisman tokenizers/ngrams
+ * ===========================
  *
  * Functions related to ngrams' computation.
  *
  * [Reference]: https://en.wikipedia.org/wiki/N-gram
  */
-import {seq} from '../helpers';
+import {seq} from '../../helpers';
 
 /**
  * Function taking a sequence and computing its ngrams.
@@ -19,7 +19,7 @@ import {seq} from '../helpers';
  */
 export default function ngrams(n, sequence) {
   if (n < 1)
-    throw Error('talisman/stats/ngrams: first argument should be a positive integer > 0.');
+    throw Error('talisman/tokenizers/ngrams: first argument should be a positive integer > 0.');
 
   const isString = typeof sequence === 'string';
 

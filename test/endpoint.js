@@ -113,7 +113,6 @@ describe('stats', function() {
   require('./stats/descriptive');
   require('./stats/frequencies.js');
   require('./stats/inferential.js');
-  require('./stats/ngrams.js');
 });
 
 describe('stemmers', function() {
@@ -159,6 +158,8 @@ describe('tokenizers', function() {
   describe('lines', function() {
     require('./tokenizers/lines/naive.js');
   });
+
+  require('./tokenizers/ngrams');
 
   describe('paragraphs', function() {
     require('./tokenizers/paragraphs/naive.js');

@@ -1,6 +1,6 @@
 /**
- * Talisman stats/frequencies tests
- * =================================
+ * Talisman tokenizers/ngram tests
+ * ================================
  *
  */
 import assert from 'assert';
@@ -8,7 +8,7 @@ import ngrams, {
   bigrams,
   trigrams,
   quadrigrams
-} from '../../src/stats/ngrams';
+} from '../../src/tokenizers/ngrams';
 
 describe('ngrams', function() {
 

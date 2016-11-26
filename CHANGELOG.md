@@ -2,6 +2,7 @@
 
 ## 0.15.0
 
+* Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Dropping the `stats/tfidf` namespace.
 
 ## 0.14.0
