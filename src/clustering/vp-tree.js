@@ -12,19 +12,19 @@ import VPTree from '../structures/vp-tree';
  *
  * @param  {object}   options    - Options:
  * @param  {function}   distance - Distance function.
- * @param  {number}     range    - Maximum range of each cluster.
+ * @param  {number}     radius   - Maximum radius of each cluster.
  * @param  {array}    data       - Data points.
  * @return {array}               - List of clusters.
  */
 export default function vpTree(options, data) {
   const distance = options.distance,
-        range = options.range;
+        radius = options.radius;
 
   if (typeof distance !== 'function')
     throw new Error('talisman/clustering/vp-tree: `distance` option should be a function.');
 
-  if (typeof range !== 'number' || range < 0)
-    throw new Error('talisman/clustering/vp-tree: `range` option should be a number >= 0.');
+  if (typeof radius !== 'number' || radius < 0)
+    throw new Error('talisman/clustering/vp-tree: `radius` option should be a number >= 0.');
 
   // Building the tree
   const tree = new VPTree(distance, data);
@@ -37,7 +37,7 @@ export default function vpTree(options, data) {
     const item = data[i];
 
     if (!visited.has(item)) {
-      const neighbors = tree.neighborsInRange(range, item);
+      const neighbors = tree.neighborsInRange(radius, item);
 
       const cluster = new Array(neighbors.length);
 

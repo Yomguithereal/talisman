@@ -31,7 +31,7 @@ const COMPLEX_DATA = [
 describe('vp-tree', function() {
 
   it('should cluster as expected.', function() {
-    const clusters = vpTree({distance: identity, range: 0}, BASIC_DATA);
+    const clusters = vpTree({distance: identity, radius: 0}, BASIC_DATA);
 
     assert.deepEqual(
       clusters,
@@ -46,7 +46,7 @@ describe('vp-tree', function() {
       return levenshtein(a.word, b.word);
     };
 
-    const clusters = vpTree({distance, range: 1}, data);
+    const clusters = vpTree({distance, radius: 1}, data);
 
     assert.deepEqual(
       clusters,

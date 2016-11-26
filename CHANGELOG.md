@@ -2,6 +2,7 @@
 
 ## 0.15.0
 
+* Adding `clustering/inverted-index` namespace.
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Dropping the `stats/tfidf` namespace.
 
