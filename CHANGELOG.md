@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.0
+
+* Dropping the `stats/tfidf` namespace.
+
 ## 0.14.0
 
 * Dropping the `phonetics/spanish/fonetico` namespace (should use [phonogram](https://github.com/Yomguithereal/phonogram) now).

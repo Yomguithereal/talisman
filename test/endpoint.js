@@ -114,7 +114,6 @@ describe('stats', function() {
   require('./stats/frequencies.js');
   require('./stats/inferential.js');
   require('./stats/ngrams.js');
-  require('./stats/tfidf.js');
 });
 
 describe('stemmers', function() {
