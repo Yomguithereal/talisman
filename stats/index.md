@@ -13,4 +13,3 @@ Modules under the `talisman/stats` namespace:
 * [frequencies]({{ site.baseurl }}/stats/frequencies)
 * [inferential]({{ site.baseurl }}/stats/inferential)
 * [ngrams]({{ site.baseurl }}/stats/ngrams)
-* [tfidf]({{ site.baseurl }}/stats/tfidf)
