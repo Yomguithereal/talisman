@@ -3,6 +3,7 @@
 ## 0.15.0
 
 * Adding the `clustering/blocking` namespace.
+* Adding the `distance/bag` namespace.
 * Adding the `regexp` namespace.
 * Adding the `tokenizers/fingerprint` namespace.
 * Adding the `asymmetric` option to `clustering/naive`.

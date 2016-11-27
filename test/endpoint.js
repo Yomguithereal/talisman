@@ -47,6 +47,7 @@ describe('clustering', function() {
 describe('metrics', function() {
 
   describe('distance', function() {
+    require('./metrics/distance/bag.js');
     require('./metrics/distance/canberra.js');
     require('./metrics/distance/chebyshev.js');
     require('./metrics/distance/cosine.js');
