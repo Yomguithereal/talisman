@@ -8,7 +8,6 @@
  *
  * [Tags]: metric.
  */
-import {seq} from '../../helpers';
 
 /**
  * Function returning the overlap coefficient between two sequences.
@@ -22,8 +21,8 @@ export default function overlap(a, b) {
   if (a === b)
     return 1;
 
-  a = new Set(seq(a));
-  b = new Set(seq(b));
+  a = new Set(a);
+  b = new Set(b);
 
   // Computing intersection of both sets
   const i = new Set();

@@ -13,7 +13,6 @@
  *
  * [Tags]: metric, asymmetric.
  */
-import {seq} from '../../helpers';
 
 /**
  * Helpers
@@ -99,8 +98,8 @@ export default function tversky(params, x, y) {
     throw Error('talisman/metrics/distance/tversky: alpha & beta parameters should be >= 0.');
 
   // Casting to sets
-  x = new Set(seq(x));
-  y = new Set(seq(y));
+  x = new Set(x);
+  y = new Set(y);
 
   return symmetric ?
     symmetricTversky(x, y, alpha, beta) :
