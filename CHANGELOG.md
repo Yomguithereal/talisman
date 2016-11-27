@@ -8,6 +8,7 @@
 * Adding the `asymmetric` option to `clustering/naive`.
 * Adding the `minClusterSize` option to clusterers.
 * Adding limited version of `metrics/distance/damerau-levenshtein`.
+* Adding limited version of `metrics/distance/levenshtein`.
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Moving `keyers/omission` to `phonetics/omission`.
 * Moving `keyers/skeleton` to `phonetics/skeleton`.
