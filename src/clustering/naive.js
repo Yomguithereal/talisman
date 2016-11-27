@@ -8,18 +8,27 @@
  */
 
 /**
+ * Defaults.
+ */
+const DEFAULTS = {
+  minClusterSize: 2
+};
+
+/**
  * Naive clustering function.
  *
- * @param  {object}   options      - Options:
- * @param  {function}   similarity - Function returning whether two points are
- *                                   similar.
- * @param  {boolean}    asymmetric - Whether similarity matrix is asymmetric.
- * @param  {array}    data         - Data points.
- * @return {array}                 - List of clusters.
+ * @param  {object}   options          - Options:
+ * @param  {function}   similarity     - Function returning whether two points
+ *                                       are similar.
+ * @param  {boolean}    asymmetric     - Using asymmetric distance.
+ * @param  {number}     minClusterSize - Min number of items per cluster.
+ * @param  {array}    data             - Data points.
+ * @return {array}                     - List of clusters.
  */
 export default function naive(options, data) {
   const similarity = options.similarity,
-        asymmetric = options.asymmetric === true;
+        asymmetric = options.asymmetric === true,
+        minClusterSize = options.minClusterSize || DEFAULTS.minClusterSize;
 
   if (typeof similarity !== 'function')
     throw new Error('talisman/clustering/naive: `similarity` option should be a function.');
@@ -46,13 +55,12 @@ export default function naive(options, data) {
   const clusters = [],
         visited = new Set();
 
-  let currentCluster = null;
+  let cluster = null;
 
   for (const i in graph) {
     if (!visited.has(i)) {
       visited.add(i);
-      currentCluster = [data[i]];
-      clusters.push(currentCluster);
+      cluster = [data[i]];
 
       const stack = Object.keys(graph[i]);
 
@@ -61,10 +69,13 @@ export default function naive(options, data) {
 
         if (!visited.has(j)) {
           visited.add(j);
-          currentCluster.push(data[j]);
+          cluster.push(data[j]);
           stack.push.apply(stack, Object.keys(graph[j]));
         }
       }
+
+      if (cluster.length >= minClusterSize)
+        clusters.push(cluster);
     }
   }
 

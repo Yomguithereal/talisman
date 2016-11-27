@@ -4,6 +4,7 @@
 
 * Adding `clustering/inverted-index` namespace.
 * Adding the `asymmetric` option to `clustering/naive`.
+* Adding the `minClusterSize` option to `clustering/naive`.
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Dropping the `stats/tfidf` namespace.
 

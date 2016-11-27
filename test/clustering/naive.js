@@ -54,8 +54,7 @@ describe('naive', function() {
       clusters,
       [
         [{word: 'book'}, {word: 'yook'}, {word: 'bolk'}],
-        [{word: 'red'}, {word: 'ted'}],
-        [{word: 'marin'}]
+        [{word: 'red'}, {word: 'ted'}]
       ]
     );
   });
@@ -72,5 +71,16 @@ describe('naive', function() {
     naive({similarity: identity, asymmetric: true}, BASIC_DATA);
 
     assert.strictEqual(identity.times, 56);
+  });
+
+  it('should be possible to change the minimum cluster size.', function() {
+    const identity = (a, b) => a === b;
+
+    const clusters = naive({similarity: identity, minClusterSize: 3}, BASIC_DATA);
+
+    assert.deepEqual(
+      clusters,
+      [['a', 'a', 'a'], ['b', 'b', 'b']]
+    );
   });
 });
