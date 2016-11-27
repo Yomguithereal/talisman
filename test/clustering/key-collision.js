@@ -5,7 +5,7 @@
  */
 import assert from 'assert';
 import keyCollision from '../../src/clustering/key-collision';
-import fingerprint from '../../src/keyers/fingerprint';
+import fingerprint from '../../src/tokenizers/fingerprint';
 
 const DATA = [
   'University of North Carolina',
@@ -18,7 +18,7 @@ const DATA = [
 describe('key-collision', function() {
 
   it('should cluster as expected.', function() {
-    const clusters = keyCollision({keyer: fingerprint}, DATA);
+    const clusters = keyCollision({keyer: item => fingerprint(item).join(' ')}, DATA);
 
     assert.deepEqual(clusters, [
       [

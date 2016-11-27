@@ -44,13 +44,6 @@ describe('clustering', function() {
   require('./clustering/vp-tree.js');
 });
 
-describe('keyers', function() {
-  require('./keyers/fingerprint.js');
-  require('./keyers/ngram-fingerprint.js');
-  require('./keyers/omission.js');
-  require('./keyers/skeleton.js');
-});
-
 describe('metrics', function() {
 
   describe('distance', function() {
@@ -90,9 +83,11 @@ describe('phonetics', function() {
   require('./phonetics/metaphone.js');
   require('./phonetics/mra.js');
   require('./phonetics/nysiis.js');
+  require('./phonetics/omission.js');
   require('./phonetics/onca.js');
   require('./phonetics/phonex.js');
   require('./phonetics/roger-root.js');
+  require('./phonetics/skeleton.js');
   require('./phonetics/soundex.js');
   require('./phonetics/statcan.js');
 
@@ -152,6 +147,9 @@ describe('tag', function() {
 });
 
 describe('tokenizers', function() {
+
+  require('./tokenizers/fingerprint.js');
+
   describe('hyphenation', function() {
     require('./tokenizers/hyphenation/liang.js');
   });

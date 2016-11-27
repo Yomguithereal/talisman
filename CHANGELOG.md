@@ -3,10 +3,14 @@
 ## 0.15.0
 
 * Adding `clustering/inverted-index` namespace.
+* Adding the `tokenizers/fingerprint` namespace.
 * Adding the `asymmetric` option to `clustering/naive`.
 * Adding the `minClusterSize` option to `clustering/naive`.
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
+* Moving `keyers/omission` to `phonetics/omission`.
+* Moving `keyers/skeleton` to `phonetics/skeleton`.
 * Dropping the `stats/tfidf` namespace.
+* Dropping the `keyers` namespace.
 
 ## 0.14.0
 
