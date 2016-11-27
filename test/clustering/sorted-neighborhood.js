@@ -53,10 +53,19 @@ describe('sorted-neighborhood', function() {
       clusters,
       [
         [{word: 'bolk'}, {word: 'book'}],
-        [{word: 'marin'}],
-        [{word: 'red'}, {word: 'ted'}],
-        [{word: 'yook'}]
+        [{word: 'red'}, {word: 'ted'}]
       ]
+    );
+  });
+
+  it('should be possible to set the minimum cluster size.', function() {
+    const identity = (a, b) => a === b;
+
+    const clusters = sortedNeighborhood({similarity: identity, window: 2, minClusterSize: 3}, BASIC_DATA);
+
+    assert.deepEqual(
+      clusters,
+      [['a', 'a', 'a'], ['b', 'b', 'b']]
     );
   });
 });

@@ -6,9 +6,7 @@
 * Adding the `regexp` namespace.
 * Adding the `tokenizers/fingerprint` namespace.
 * Adding the `asymmetric` option to `clustering/naive`.
-* Adding the `minClusterSize` option to `clustering/key-collision`.
-* Adding the `minClusterSize` option to `clustering/naive`.
-* Adding the `minClusterSize` option to `clustering/vp-tree`.
+* Adding the `minClusterSize` option to clusterers.
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Moving `keyers/omission` to `phonetics/omission`.
 * Moving `keyers/skeleton` to `phonetics/skeleton`.

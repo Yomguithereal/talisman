@@ -5,22 +5,34 @@
  * Clustering method first sorting the dataset before applying pairwise
  * comparisons only within the given window. Time complexity is quite
  * better than the naive approach: O(n(w+log n)).
+ *
+ * [Note]: this clusterer may create "chained" clusters where the diameter
+ * of the cluster is inintuively large.
  */
 
-// TODO: sort function? provide multi-sampling?
+// TODO: multi-sampling with transitivity.
+
+/**
+ * Defaults.
+ */
+const DEFAULTS = {
+  minClusterSize: 2
+};
 
 /**
  * Sorted Neighborhood Method (SNM) function.
  *
- * @param  {object}   options      - Options:
- * @param  {function}   similarity - Function returning whether two points are
- *                                   similar.
- * @param  {number}     window     - Size of the window.
- * @param  {array}    data         - Sorted data points.
- * @return {array}                 - List of clusters.
+ * @param  {object}   options          - Options:
+ * @param  {number}     minClusterSize - Minimum items in a cluster.
+ * @param  {function}   similarity     - Function returning whether two points are
+ *                                       similar.
+ * @param  {number}     window         - Size of the window.
+ * @param  {array}    data             - Sorted data points.
+ * @return {array}                     - List of clusters.
  */
 export default function sortedNeighborhood(options, data) {
   const similarity = options.similarity,
+        minClusterSize = options.minClusterSize || DEFAULTS.minClusterSize,
         w = options.window;
 
   if (typeof similarity !== 'function')
@@ -48,13 +60,12 @@ export default function sortedNeighborhood(options, data) {
   const clusters = [],
         visited = new Set();
 
-  let currentCluster = null;
+  let cluster = null;
 
   for (const i in graph) {
     if (!visited.has(i)) {
       visited.add(i);
-      currentCluster = [data[i]];
-      clusters.push(currentCluster);
+      cluster = [data[i]];
 
       const stack = Object.keys(graph[i]);
 
@@ -63,10 +74,13 @@ export default function sortedNeighborhood(options, data) {
 
         if (!visited.has(j)) {
           visited.add(j);
-          currentCluster.push(data[j]);
+          cluster.push(data[j]);
           stack.push.apply(stack, Object.keys(graph[j]));
         }
       }
+
+      if (cluster.length >= minClusterSize)
+        clusters.push(cluster);
     }
   }
 
