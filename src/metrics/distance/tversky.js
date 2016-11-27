@@ -10,6 +10,8 @@
  * [Article]:
  * Tversky, Amos (1977). "Features of Similarity".
  * Psychological Reviews 84 (4): 327–352.
+ *
+ * [Tags]: metric, asymmetric.
  */
 import {seq} from '../../helpers';
 

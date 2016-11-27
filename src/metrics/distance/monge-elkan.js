@@ -9,6 +9,8 @@
  * [Article]:
  * Monge, Alvaro E. and Charles P. Elkan. 1996. "The field matching problem:
  * Algorithms and applications." KDD-9 Proceedings.
+ *
+ * [Tags]: metric, asymmetric.
  */
 
 /**

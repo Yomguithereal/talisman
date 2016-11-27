@@ -3,6 +3,8 @@
  * ===================================
  *
  * Identity distance/similarity.
+ *
+ * [Tags]: metric.
  */
 
 /**

@@ -5,6 +5,8 @@
  * Function computing the euclidean distance.
  *
  * [Reference]: https://en.wikipedia.org/wiki/Euclidean_distance
+ *
+ * [Tags]: metric, vector space.
  */
 
 /**

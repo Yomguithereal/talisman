@@ -25,6 +25,7 @@ describe.skip('inverted-index', function() {
   it('should cluster as expected.', function() {
     const clusters = invertedIndex({distance: identity, radius: 0}, DATA);
 
+    // FAIRE LES TEST D'EQUIVALENCE DANS REFINE
     console.log(clusters);
 
     // assert.deepEqual(

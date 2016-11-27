@@ -5,6 +5,8 @@
  * Function computing the Canberra distance.
  *
  * [Reference]: https://en.wikipedia.org/wiki/Canberra_distance
+ *
+ * [Tags]: metric, vector space.
  */
 
 /**

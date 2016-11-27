@@ -12,6 +12,8 @@
  * in the Fellegi-Sunter Model of Record Linkage".
  * Proceedings of the Section on Survey Research Methods
  * (American Statistical Association): 354–359.
+ *
+ * [Tags]: semimetric.
  */
 import jaro from './jaro';
 import {seq} from '../../helpers';

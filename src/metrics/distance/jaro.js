@@ -14,6 +14,8 @@
  *
  * Jaro, M. A. (1995). "Probabilistic linkage of large public health data file".
  * Statistics in Medicine 14 (5–7): 491–8.
+ *
+ * [Tags]: semimetric.
  */
 import {seq} from '../../helpers';
 import {vec} from '../../helpers/vectors';

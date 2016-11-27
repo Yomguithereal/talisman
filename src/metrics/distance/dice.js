@@ -10,6 +10,8 @@
  * [Article]:
  * Dice, Lee R. (1945). "Measures of the Amount of Ecologic Association
  * Between Species". Ecology 26 (3): 297–302.
+ *
+ * [Tags]: semimetric.
  */
 import tversky from './tversky';
 import {bigrams} from '../../tokenizers/ngrams';

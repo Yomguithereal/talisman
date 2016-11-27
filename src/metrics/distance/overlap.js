@@ -5,6 +5,8 @@
  * Function computing the overlap coefficient.
  *
  * [Reference]: https://en.wikipedia.org/wiki/Overlap_coefficient
+ *
+ * [Tags]: metric.
  */
 import {seq} from '../../helpers';
 

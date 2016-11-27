@@ -10,6 +10,8 @@
  * [Article]:
  * Jaccard, Paul (1912), "The distribution of the flora in the alpine zone",
  * New Phytologist 11: 37–50
+ *
+ * [Tags]: metric.
  */
 import tversky from './tversky';
 

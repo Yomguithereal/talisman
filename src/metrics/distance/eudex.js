@@ -10,6 +10,8 @@
  *
  * [Author]:
  * @ticki (https://github.com/ticki)
+ *
+ * [Tags]: metric.
  */
 import eudex from '../../phonetics/eudex';
 import Long from 'long';

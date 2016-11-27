@@ -5,6 +5,8 @@
  * Function computing the Chebyshev distance.
  *
  * [Reference]: https://en.wikipedia.org/wiki/Chebyshev_distance
+ *
+ * [Tags]: metric, vector space.
  */
 
 /**

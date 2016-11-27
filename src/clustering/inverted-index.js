@@ -36,6 +36,7 @@ export default function invertedIndex(options, data) {
       let set;
 
       if (!blocks.has(token)) {
+        // FIX: not need for sets here!
         set = new Set();
         blocks.set(token, set);
       }
@@ -61,6 +62,7 @@ export default function invertedIndex(options, data) {
       for (let j = 1 + i; j < l; j++) {
         const b = docs[j];
 
+        // TODO: figure out if this makes links outward or not and if it's the same as the naive clusterer
         if (clusterMap.has(a) && clusterMap.get(a).has(b))
           continue;
         if (clusterMap.has(b) && clusterMap.get(b).has(a))
@@ -95,5 +97,13 @@ export default function invertedIndex(options, data) {
   // TODO: returned clusters are fuzzy (overlaps are possible)
   // Should probably refine the method by just creating edges and
   // finding connected components as usual...
+  // NOTE: option to access the key or tokens
+  // NOTE: could use the sub clusterer of your choice (naive, for instance)
+  // NOTE: inverted index should not be the same as blocking (1 - n vs. n - n) because clusters are fuzzy and cannot be merged
   return clusters;
 }
+
+// NOTE: with blocking, do we achieve transitivity?
+// NOTE: tag all the distance (triangular inequality, symmetry, vector space)
+
+// NOTE: on transitivity

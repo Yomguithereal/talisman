@@ -5,6 +5,8 @@
  * Function computing the Minkowski distance.
  *
  * [Reference]: https://en.wikipedia.org/wiki/Minkowski_distance
+ *
+ * [Tags]: metric, vector space.
  */
 
 /**
