@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import damerauLevenshtein from '../../../src/metrics/distance/damerau-levenshtein';
+import damerauLevenshtein, {limited} from '../../../src/metrics/distance/damerau-levenshtein';
 
 describe('damerau-levenshtein', function() {
   const tests = [
@@ -32,6 +32,12 @@ describe('damerau-levenshtein', function() {
   it('should correctly compute the Damerau-Levenshtein distance.', function() {
     tests.forEach(function([a, b, distance]) {
       assert.strictEqual(damerauLevenshtein(a, b), distance, `${a} <=> ${b}`);
+    });
+  });
+
+  it('should be possible to use the limited version.', function() {
+    tests.forEach(function([a, b, distance]) {
+      assert.strictEqual(limited(2, a, b), distance > 2 ? -1 : distance, `${a} <=> ${b}`);
     });
   });
 });
