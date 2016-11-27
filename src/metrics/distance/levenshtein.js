@@ -106,8 +106,3 @@ export default function levenshtein(a, b) {
 
   return current;
 }
-
-/**
- * Alternative export.
- */
-export {levenshtein as distance};
