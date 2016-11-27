@@ -59,7 +59,7 @@ export default function damerauLevenshtein(a, b) {
     if (!la)
       return lb;
 
-    b = b.substr(start, lb);
+    b = b.slice(start, start + lb);
   }
 
   const v0 = new Array(lb),
@@ -173,7 +173,7 @@ export function limited(max, a, b) {
     if (!la)
       return lb > max ? -1 : lb;
 
-    b = b.substr(start, lb);
+    b = b.slice(start, start + lb);
   }
 
   const diff = lb - la;

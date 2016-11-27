@@ -25,48 +25,86 @@ export default function levenshtein(a, b) {
   if (a === b)
     return 0;
 
-  if (!a.length)
-    return b.length;
-  if (!b.length)
-    return a.length;
+  let la = a.length,
+      lb = b.length;
 
-  const previousRow = new Array(b.length + 1);
+  if (!la)
+    return lb;
+  if (!lb)
+    return la;
 
-  for (let i = 0, l = previousRow.length; i < l; i++)
-    previousRow[i] = i;
-
-  let nextColumn,
-      currentColumn,
-      buffer,
-      j;
-
-  for (let i = 0, l = a.length; i < l; i++) {
-    nextColumn = i + 1;
-
-    const m = b.length;
-    for (j = 0; j < m; j++) {
-      currentColumn = nextColumn;
-
-      // Substitution
-      nextColumn = previousRow[j] + (a[i] === b[j] ? 0 : 1);
-
-      // Insertion
-      buffer = currentColumn + 1;
-      if (nextColumn > buffer)
-        nextColumn = buffer;
-
-      // Deletion
-      buffer = previousRow[j + 1] + 1;
-      if (nextColumn > buffer)
-        nextColumn = buffer;
-
-      previousRow[j] = currentColumn;
-    }
-
-    previousRow[j] = nextColumn;
+  // Swapping the strings so that the shorter string is the first one.
+  if (la > lb) {
+    [a, b] = [b, a];
+    [la, lb] = [lb, la];
   }
 
-  return nextColumn;
+  // Ignoring common suffix
+  while (la > 0 && (a[la - 1] === b[lb - 1])) {
+    la--;
+    lb--;
+  }
+
+  let start = 0;
+
+  // If a common prefix exists of if a is a full b suffix
+  if (a[0] === b[0] || !la) {
+
+    // Common prefix can also be ignored
+    while (start < la && a[start] === b[start])
+      start++;
+
+    la -= start;
+    lb -= start;
+
+    if (!la)
+      return lb;
+
+    b = b.slice(start, start + lb);
+  }
+
+  const v0 = new Array(lb),
+        v2 = new Array(lb);
+
+  for (let i = 0; i < lb; i++)
+    v0[i] = i + 1;
+
+  let charA = a[0],
+      current = 0;
+
+  // Starting the nested loops
+  for (let i = 0; i < la; i++) {
+    let charB = b[0],
+        left = i;
+
+    current = i + 1;
+    charA = a[start + i];
+
+    for (let j = 0; j < lb; j++) {
+      const above = current;
+
+      charB = b[j];
+      v2[j] = current = left;
+      left = v0[j];
+
+      if (charA !== charB) {
+
+        // Insertion
+        if (left < current)
+          current = left;
+
+        // Deletion
+        if (above < current)
+          current = above;
+
+        current++;
+      }
+
+      v0[j] = current;
+    }
+  }
+
+  return current;
 }
 
 /**

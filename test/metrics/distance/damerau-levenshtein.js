@@ -9,6 +9,7 @@ import damerauLevenshtein, {limited} from '../../../src/metrics/distance/damerau
 describe('damerau-levenshtein', function() {
   const tests = [
     [['a', 'b', 'c'], ['a', 'b', 'c'], 0],
+    [['b', 'o', 'o', 'k'], ['b', 'a', 'c', 'k'], 2],
     ['abc', 'cba', 2],
     ['one', 'once upon', 6],
     ['ahk', 'ahk', 0],
