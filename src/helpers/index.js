@@ -7,6 +7,18 @@
  */
 
 /**
+ * Function escaping a string for insertion in a regular expression.
+ *
+ * @param  {string} string  - The string to escape.
+ * @return {string}         - The escaped string.
+ */
+const RE = /([|\\{}()[\]^$+*?.\-])/g;
+
+export function escapeRegexp(string) {
+  return string.replace(RE, '\\$1');
+}
+
+/**
  * Function returning all the matches of a regular expression over the given
  * string.
  *

@@ -43,4 +43,40 @@ describe('fingerprint', function() {
       assert.strictEqual(keyers[n](string).join(''), key, `(${n}) ${string} => ${key}`);
     });
   });
+
+  it('should be possible to filter stopwords.', function() {
+    const tokenizer = createTokenizer({stopwords: ['de']});
+
+    assert.deepEqual(
+      tokenizer('Université de Paris'),
+      ['paris', 'universite']
+    );
+  });
+
+  it('should be possible to filter digits.', function() {
+    const tokenizer = createTokenizer({digits: false});
+
+    assert.deepEqual(
+      tokenizer('24 grammes de maïs'),
+      ['de', 'grammes', 'mais']
+    );
+  });
+
+  it('should be possible to filter small tokens.', function() {
+    const tokenizer = createTokenizer({minTokenSize: 2});
+
+    assert.deepEqual(
+      tokenizer('a very good cat'),
+      ['cat', 'good', 'very']
+    );
+  });
+
+  it('should be possible to split the tokens on some characters.', function() {
+    const tokenizer = createTokenizer({minTokenSize: 2, split: [',', '-']});
+
+    assert.deepEqual(
+      tokenizer('l\'université de Bade-Wurt'),
+      tokenizer('Bade-Wurt, université')
+    );
+  });
 });
