@@ -8,6 +8,13 @@
  */
 
 /**
+ * Defaults.
+ */
+const DEFAULTS = {
+  minClusterSize: 2
+};
+
+/**
  * Key collision clustering function.
  *
  * @param  {object}   options - Options:
@@ -16,7 +23,8 @@
  * @return {array}            - List of clusters.
  */
 export default function keyCollision(options, data) {
-  const keyer = options.keyer;
+  const keyer = options.keyer,
+        minClusterSize = options.minClusterSize || DEFAULTS.minClusterSize;
 
   if (typeof keyer !== 'function')
     throw new Error('talisman/clustering/key-collision: `keyer` option should be a function.');
@@ -34,8 +42,10 @@ export default function keyCollision(options, data) {
 
   const clusters = [];
 
-  for (const k in map)
-    clusters.push(map[k]);
+  for (const k in map) {
+    if (map[k].length >= minClusterSize)
+      clusters.push(map[k]);
+  }
 
   return clusters;
 }

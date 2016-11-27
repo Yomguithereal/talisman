@@ -5,6 +5,7 @@
 * Adding `clustering/inverted-index` namespace.
 * Adding the `tokenizers/fingerprint` namespace.
 * Adding the `asymmetric` option to `clustering/naive`.
+* Adding the `minClusterSize` option to `clustering/key-collision`.
 * Adding the `minClusterSize` option to `clustering/naive`.
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Moving `keyers/omission` to `phonetics/omission`.

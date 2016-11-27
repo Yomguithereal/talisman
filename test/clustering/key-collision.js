@@ -15,10 +15,12 @@ const DATA = [
   'Smith. John'
 ];
 
+const keyer = item => fingerprint(item).join(' ');
+
 describe('key-collision', function() {
 
   it('should cluster as expected.', function() {
-    const clusters = keyCollision({keyer: item => fingerprint(item).join(' ')}, DATA);
+    const clusters = keyCollision({keyer}, DATA);
 
     assert.deepEqual(clusters, [
       [
@@ -29,6 +31,18 @@ describe('key-collision', function() {
       [
         'John Smith',
         'Smith. John'
+      ]
+    ]);
+  });
+
+  it('should be possible to set a minimum cluster size.', function() {
+    const clusters = keyCollision({keyer, minClusterSize: 3}, DATA);
+
+    assert.deepEqual(clusters, [
+      [
+        'University of North Carolina',
+        'North carolinA, university of',
+        'university of north Carolina.'
       ]
     ]);
   });
