@@ -5,6 +5,7 @@
  * The Averaged Perceptron POS tagging method.
  *
  * [Author]: Matthew Honnibal
+ *
  * [Reference]: http://spacy.io/blog/part-of-speech-POS-tagger-in-python/
  */
 import {createShuffle} from '../helpers/random';

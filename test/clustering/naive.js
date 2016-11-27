@@ -6,6 +6,7 @@
 import assert from 'assert';
 import naive from '../../src/clustering/naive';
 import levenshtein from '../../src/metrics/distance/levenshtein';
+import {spy} from '../helpers';
 
 const BASIC_DATA = [
   'a',
@@ -57,5 +58,19 @@ describe('naive', function() {
         [{word: 'marin'}]
       ]
     );
+  });
+
+  it('should be possible to perform asymmetric clustering.', function() {
+    let identity = spy((a, b) => a === b);
+
+    naive({similarity: identity}, BASIC_DATA);
+
+    assert.strictEqual(identity.times, 28);
+
+    identity = spy((a, b) => a === b);
+
+    naive({similarity: identity, asymmetric: true}, BASIC_DATA);
+
+    assert.strictEqual(identity.times, 56);
   });
 });

@@ -20,3 +20,25 @@ export function loadResource(location) {
 export function loadCSV(location) {
   return parseCsv(loadResource(location));
 }
+
+/**
+ * Function spying on the execution of the provided function to ease some
+ * tests, notably related to event handling.
+ *
+ * @param {function} target - Target function.
+ * @param {function}        - The spy.
+ */
+export function spy(target) {
+  const fn = function() {
+    fn.called = true;
+    fn.times++;
+
+    if (typeof target === 'function')
+      return target.apply(null, arguments);
+  };
+
+  fn.called = false;
+  fn.times = 0;
+
+  return fn;
+}

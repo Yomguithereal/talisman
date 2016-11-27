@@ -13,11 +13,13 @@
  * @param  {object}   options      - Options:
  * @param  {function}   similarity - Function returning whether two points are
  *                                   similar.
+ * @param  {boolean}    asymmetric - Whether similarity matrix is asymmetric.
  * @param  {array}    data         - Data points.
  * @return {array}                 - List of clusters.
  */
 export default function naive(options, data) {
-  const similarity = options.similarity;
+  const similarity = options.similarity,
+        asymmetric = options.asymmetric === true;
 
   if (typeof similarity !== 'function')
     throw new Error('talisman/clustering/naive: `similarity` option should be a function.');
@@ -29,7 +31,10 @@ export default function naive(options, data) {
     const a = data[i];
     graph[i] = {};
 
-    for (let j = 1 + i; j < l; j++) {
+    for (let j = asymmetric ? 0 : i; j < l; j++) {
+      if (i === j)
+        continue;
+
       const b = data[j];
 
       if (similarity(a, b))
