@@ -25,4 +25,15 @@ describe('blocking', function() {
 
     assert.deepEqual(clusters, [['bde', 'bd', 'bcde'], ['bcde', 'abcde']]);
   });
+
+  it('should be possible to set the minimum cluster size.', function() {
+    const clusters = blockingClusterer({
+      distance: levenshtein,
+      radius: 1,
+      blocks: doc => doc.split(''),
+      minClusterSize: 3
+    }, DATA);
+
+    assert.deepEqual(clusters, [['bde', 'bd', 'bcde']]);
+  });
 });

@@ -11,18 +11,27 @@
  */
 
 /**
+ * Defaults.
+ */
+const DEFAULTS = {
+  minClusterSize: 2
+};
+
+/**
  * Inverted index clustering function.
  *
  * @param  {object}   options - Options:
- * @param  {function}   blocks   - Function returning the documents' blocks.
- * @param  {function}   distance - Distance function to use.
- * @param  {number}     radius   - Radius of the clusters.
+ * @param  {function}   blocks         - Function returning the document blocks.
+ * @param  {function}   distance       - Distance function to use.
+ * @param  {number}     minClusterSize - Minimum number of items in cluster.
+ * @param  {number}     radius         - Radius of the clusters.
  * @param  {array}    data    - Data points.
  * @return {array}            - List of clusters.
  */
 export default function blocking(options, data) {
   const blocker = options.blocks || options.block,
         distance = options.distance,
+        minClusterSize = options.minClusterSize || DEFAULTS.minClusterSize,
         radius = options.radius;
 
   if (typeof blocker !== 'function')
@@ -97,7 +106,8 @@ export default function blocking(options, data) {
   const clusters = [];
 
   clusterMap.forEach(function(set) {
-    clusters.push(Array.from(set));
+    if (set.size >= minClusterSize)
+      clusters.push(Array.from(set));
   });
 
   return clusters;
