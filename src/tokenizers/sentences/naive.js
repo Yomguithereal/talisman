@@ -6,12 +6,7 @@
  *
  * [Author]: Guillaume PLIQUE
  */
-
-/**
- * Regex elements.
- */
-const SIMPLE_QUOTES = '’‘`‛\'';
-const DOUBLE_QUOTES = '«»„‟“”"';
+import {SINGLE_QUOTES, DOUBLE_QUOTES} from '../../regexp/classes';
 
 /**
  * Notable exceptions.
@@ -39,7 +34,7 @@ const REGEX = new RegExp([
   '([.?!…]+)',
     '([' + DOUBLE_QUOTES + '*_]?[*_]?)',
     '[\\s\\r\\n]+',
-  '(?=[' + DOUBLE_QUOTES + SIMPLE_QUOTES + ']?[A-Z0-9])'
+  '(?=[' + DOUBLE_QUOTES + SINGLE_QUOTES + ']?[A-Z0-9])'
 ].join(''), 'g');
 
 /**

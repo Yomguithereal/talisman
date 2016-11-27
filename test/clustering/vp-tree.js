@@ -52,8 +52,24 @@ describe('vp-tree', function() {
       clusters,
       [
         [{word: 'yook'}, {word: 'bolk'}, {word: 'book'}],
-        [{word: 'ted'}, {word: 'red'}],
-        [{word: 'marin'}]
+        [{word: 'ted'}, {word: 'red'}]
+      ]
+    );
+  });
+
+  it('should be possible to set a minimum cluster size.', function() {
+    const data = COMPLEX_DATA.map(word => ({word}));
+
+    const distance = (a, b) => {
+      return levenshtein(a.word, b.word);
+    };
+
+    const clusters = vpTree({distance, radius: 1, minClusterSize: 3}, data);
+
+    assert.deepEqual(
+      clusters,
+      [
+        [{word: 'yook'}, {word: 'bolk'}, {word: 'book'}]
       ]
     );
   });

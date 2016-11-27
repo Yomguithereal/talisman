@@ -9,7 +9,7 @@
 import deburr from 'lodash/deburr';
 import uniq from 'lodash/uniq';
 import ngrams from '../ngrams';
-import {escapeRegexp} from '../../helpers';
+import {escapeRegexp} from '../../regexp';
 
 /**
  * Constants.

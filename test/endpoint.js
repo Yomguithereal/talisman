@@ -36,7 +36,7 @@ describe('classification', function() {
 });
 
 describe('clustering', function() {
-  require('./clustering/inverted-index.js');
+  require('./clustering/blocking.js');
   require('./clustering/k-means.js');
   require('./clustering/key-collision.js');
   require('./clustering/naive.js');
@@ -104,6 +104,8 @@ describe('phonetics', function() {
     require('./phonetics/german/phonem.js');
   });
 });
+
+require('./regexp/index.js');
 
 describe('stats', function() {
   require('./stats/descriptive');

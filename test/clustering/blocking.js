@@ -6,7 +6,7 @@
  *
  */
 import assert from 'assert';
-import invertedIndex from '../../src/clustering/inverted-index';
+import blockingClusterer from '../../src/clustering/blocking';
 import {distance as identity} from '../../src/metrics/distance/identity';
 import levenshtein from '../../src/metrics/distance/levenshtein';
 
@@ -20,10 +20,10 @@ const DATA = [
   'abcde'
 ].map(s => s.split(''));
 
-describe.skip('inverted-index', function() {
+describe.skip('blocking', function() {
 
   it('should cluster as expected.', function() {
-    const clusters = invertedIndex({distance: identity, radius: 0}, DATA);
+    const clusters = blockingClusterer({distance: identity, radius: 0}, DATA);
 
     // FAIRE LES TEST D'EQUIVALENCE DANS REFINE
     console.log(clusters);
@@ -35,7 +35,7 @@ describe.skip('inverted-index', function() {
   });
 
   it('should work with fuzzy cases.', function() {
-    const clusters = invertedIndex({distance: levenshtein, radius: 1}, DATA);
+    const clusters = blockingClusterer({distance: levenshtein, radius: 1}, DATA);
 
     console.log(clusters);
   });

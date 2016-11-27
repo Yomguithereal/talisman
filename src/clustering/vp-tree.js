@@ -4,8 +4,18 @@
  *
  * Clustering method using a Vantage Point Tree (VPTree) to find the clusters
  * more efficiently.
+ *
+ * [Note]: this clusterer actually generates fuzzy clusters, meaning that one
+ * data point may be present in several clusters.
  */
 import VPTree from '../structures/vp-tree';
+
+/**
+ * Defaults.
+ */
+const DEFAULTS = {
+  minClusterSize: 2
+};
 
 /**
  * VPTree clustering function.
@@ -18,7 +28,8 @@ import VPTree from '../structures/vp-tree';
  */
 export default function vpTree(options, data) {
   const distance = options.distance,
-        radius = options.radius;
+        radius = options.radius,
+        minClusterSize = options.minClusterSize || DEFAULTS.minClusterSize;
 
   if (typeof distance !== 'function')
     throw new Error('talisman/clustering/vp-tree: `distance` option should be a function.');
@@ -46,7 +57,8 @@ export default function vpTree(options, data) {
         cluster[j] = neighbors[j].item;
       }
 
-      clusters.push(cluster);
+      if (cluster.length >= minClusterSize)
+        clusters.push(cluster);
     }
   }
 

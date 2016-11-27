@@ -16,7 +16,7 @@ TODO.md
 /metrics
 /parsers
 /phonetics
-/regex
+/regexp
 /stats
 /stemmers
 /structures
