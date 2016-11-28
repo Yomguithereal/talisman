@@ -13,7 +13,7 @@
  * String Matching with Metric Trees Using an Approximate Distance.
  * Ilaria Bartolini, Paolo Ciaccia, and Marco Patella.
  *
- * [Tags]: metric.
+ * [Tags]: metric, string metric.
  */
 
 /**

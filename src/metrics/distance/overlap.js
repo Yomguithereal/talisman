@@ -6,7 +6,7 @@
  *
  * [Reference]: https://en.wikipedia.org/wiki/Overlap_coefficient
  *
- * [Tags]: metric.
+ * [Tags]: metric, string metric.
  */
 
 /**

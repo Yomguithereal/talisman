@@ -11,7 +11,7 @@
  * [Author]:
  * @ticki (https://github.com/ticki)
  *
- * [Tags]: metric.
+ * [Tags]: metric, string metric.
  */
 import eudex from '../../phonetics/eudex';
 import Long from 'long';

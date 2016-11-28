@@ -10,7 +10,7 @@
  * [Original Code]:
  * http://blog.softwx.net/2015/01/optimizing-damerau-levenshtein_15.html
  *
- * [Tags]: metric.
+ * [Tags]: metric, string metric.
  */
 
 /**

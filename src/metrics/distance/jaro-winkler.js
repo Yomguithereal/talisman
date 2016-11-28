@@ -13,7 +13,7 @@
  * Proceedings of the Section on Survey Research Methods
  * (American Statistical Association): 354–359.
  *
- * [Tags]: semimetric.
+ * [Tags]: semimetric, string metric.
  */
 import jaro from './jaro';
 import {seq} from '../../helpers';

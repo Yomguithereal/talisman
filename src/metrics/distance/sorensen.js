@@ -14,7 +14,7 @@
  * analyses of the vegetation on Danish commons".
  * Kongelige Danske Videnskabernes Selskab 5 (4): 1–34.
  *
- * [Tags]: semimetric.
+ * [Tags]: semimetric, string metric.
  */
 import dice, {distance} from './dice';
 

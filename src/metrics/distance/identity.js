@@ -4,7 +4,7 @@
  *
  * Identity distance/similarity.
  *
- * [Tags]: metric.
+ * [Tags]: metric, string metric.
  */
 
 /**
