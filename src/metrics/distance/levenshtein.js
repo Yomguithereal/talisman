@@ -69,21 +69,19 @@ export default function levenshtein(a, b) {
   for (let i = 0; i < lb; i++)
     v0[i] = i + 1;
 
-  let charA = a[0],
-      current = 0;
+  let current = 0;
 
   // Starting the nested loops
   for (let i = 0; i < la; i++) {
-    let charB = b[0],
-        left = i;
+    let left = i;
 
     current = i + 1;
-    charA = a[start + i];
+    const charA = a[start + i];
 
     for (let j = 0; j < lb; j++) {
       const above = current;
 
-      charB = b[j];
+      const charB = b[j];
       v2[j] = current = left;
       left = v0[j];
 
@@ -181,23 +179,21 @@ export function limited(max, a, b) {
   let jStart = 0,
       jEnd = max;
 
-  let charA = a[0],
-      current = 0;
+  let current = 0;
 
   // Starting the nested loops
   for (i = 0; i < la; i++) {
-    let charB = b[0],
-        left = i;
+    let left = i;
 
     current = i + 1;
-    charA = a[start + i];
+    const charA = a[start + i];
     jStart += (i > offset) ? 1 : 0;
     jEnd += (jEnd < lb) ? 1 : 0;
 
     for (let j = jStart; j < jEnd; j++) {
       const above = current;
 
-      charB = b[j];
+      const charB = b[j];
       v2[j] = current = left;
       left = v0[j];
 
