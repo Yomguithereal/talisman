@@ -38,20 +38,24 @@ export default function bag(a, b) {
   if (!db)
     return da;
 
-  for (let i = 0, l = a.length; i < l; i++) {
-    const value = a[i];
+  const longest = Math.max(da, db);
 
-    if (!ma[value])
-      ma[value] = 0;
-    ma[value]++;
-  }
+  for (let i = 0; i < longest; i++) {
+    if (i < da) {
+      const value = a[i];
 
-  for (let i = 0, l = b.length; i < l; i++) {
-    const value = b[i];
+      if (!ma[value])
+        ma[value] = 0;
+      ma[value]++;
+    }
 
-    if (!mb[value])
-      mb[value] = 0;
-    mb[value]++;
+    if (i < db) {
+      const value = b[i];
+
+      if (!mb[value])
+        mb[value] = 0;
+      mb[value]++;
+    }
   }
 
   for (const k in ma) {

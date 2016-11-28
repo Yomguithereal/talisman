@@ -6,7 +6,7 @@
 import assert from 'assert';
 import bag from '../../../src/metrics/distance/bag';
 
-describe.skip('bag', function() {
+describe('bag', function() {
 
   it('should correctly compute the Bag distance.', function() {
     const tests = [
@@ -15,7 +15,7 @@ describe.skip('bag', function() {
       ['', 'cat', 3],
       ['cat', 'hat', 1],
       ['Niall', 'Neil', 2],
-      ['aluminum', 'Catalan', 3],
+      ['aluminum', 'Catalan', 5],
       ['ATCG', 'TAGC', 0]
     ];
 
