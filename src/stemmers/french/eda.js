@@ -6,7 +6,7 @@
  * targets words from the medical world.
  *
  * [Reference]:
- * TODO ADD
+ * https://cedric.cnam.fr/fichiers/RC1314.pdf
  *
  * [Author]:
  * Didier Nakache
