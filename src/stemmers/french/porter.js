@@ -152,7 +152,7 @@ function suffixStem(stem, oldSuffix, newSuffix = '') {
  * @param  {string} word - The word to stem.
  * @return {string}      - The resulting stem.
  */
-export default function(word) {
+export default function porter(word) {
   word = word.toLowerCase();
 
   // State
