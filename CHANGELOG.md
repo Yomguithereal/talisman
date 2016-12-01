@@ -6,6 +6,7 @@
 * Adding the `distance/bag` namespace.
 * Adding the `regexp` namespace.
 * Adding the `stemmers/french/carry` namespace.
+* Adding the `stemmers/french/eda` namespace.
 * Adding the `tokenizers/fingerprint` namespace.
 * Adding the `asymmetric` option to `clustering/naive`.
 * Adding the `minClusterSize` option to clusterers.

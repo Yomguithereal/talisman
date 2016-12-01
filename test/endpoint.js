@@ -122,6 +122,7 @@ describe('stemmers', function() {
   require('./stemmers/uea-lite.js');
 
   describe('french', function() {
+    require('./stemmers/french/eda.js');
     require('./stemmers/french/unine.js');
     require('./stemmers/french/porter.js');
   });
