@@ -18,17 +18,17 @@ describe('carry', function() {
       ['groseilles', 'groseil'],
       ['tentateur', 'ten'],
       ['tentateurs', 'ten'],
-      ['tentatrice', 'tenta'],
+      ['tentatrice', 'ten'],
       ['tenter', 'ten'],
       ['tenteras', 'ten'],
       ['formateur', 'form'],
-      ['formatrice', 'forma'],
+      ['formatrice', 'form'],
       ['former', 'form'],
       ['formes', 'form']
     ];
 
     tests.forEach(function([word, stem]) {
-      assert.strictEqual(carry(word), stem);
+      assert.strictEqual(carry(word), stem, `${word} => ${stem}`);
     });
   });
 });

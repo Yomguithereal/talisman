@@ -10,6 +10,11 @@
  * [Article]:
  * Carry, un algorithme de désuffixation pour le français. M. Paternostre,
  * P. Francq, J. Lamoral, D. Wartel et M. Saerens. 2002
+ *
+ * [Note]:
+ * This algorithm has been edited to handle some more cases and is thus
+ * lightly different from the original paper (modifications by Guillaume
+ * Plique).
  */
 
 /**
@@ -119,6 +124,7 @@ const STEP1 = [
   [0, 'aux', 'al'],
   [0, 'x'],
   [0, 'issante'],
+  [1, 'atrice'], // Added
   [0, 'eresse'],
   [0, 'eante'],
   [0, 'easse'],
@@ -175,6 +181,7 @@ const STEP1 = [
   [0, 'eresses'],
   [0, 'issions'],
   [0, 'assions'],
+  [1, 'atrices'], // Added
   [1, 'iations'],
   [0, 'issants'],
   [0, 'ussions'],
