@@ -1,6 +1,6 @@
 /**
  * Talisman phonetics/french/phonex tests
- * =========================================
+ * =======================================
  *
  */
 import assert from 'assert';
