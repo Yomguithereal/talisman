@@ -4,6 +4,7 @@
 
 * Adding the `clustering/blocking` namespace.
 * Adding the `distance/bag` namespace.
+* Adding the `phonetics/french/fonem` namespace.
 * Adding the `regexp` namespace.
 * Adding the `stemmers/french/carry` namespace.
 * Adding the `stemmers/french/eda` namespace.
