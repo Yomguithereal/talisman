@@ -3,7 +3,8 @@
 ## 0.15.0
 
 * Adding the `clustering/blocking` namespace.
-* Adding the `distance/bag` namespace.
+* Adding the `distance/metrics/bag` namespace.
+* Adding the `distance/metrics/smith-waterman` namespace.
 * Adding the `phonetics/french/fonem` namespace.
 * Adding the `regexp` namespace.
 * Adding the `stemmers/french/carry` namespace.
