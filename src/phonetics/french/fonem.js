@@ -5,8 +5,6 @@
  * Implementation of the French phonetic algorithm "FONEM" designed to match
  * family names from Saguenay.
  *
- * [Author]: Frédéric Brouard
- *
  * [Reference]:
  * http://www.persee.fr/doc/pop_0032-4663_1981_num_36_6_17248
  *
