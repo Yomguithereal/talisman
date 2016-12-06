@@ -11,16 +11,6 @@
  */
 import deburr from 'lodash/deburr';
 
-// NOTE: schizophrénie
-// NOTE: tapecul, doigt, chiroubles, laïque
-// NOTE: ajouter RECUL & CUL comme exception? POESIE PHOENIX JOGGING
-// NOTE: prevent "er" stemming (synchroniser, digitaliser etc.)
-// NOTE: prevent "é" stemming
-// NOTE: dilemme
-// NOTE: le ä dans l'algo original
-// NOTE: ténuité
-// NOTE: move fuel upper
-
 /**
  * Helpers.
  */
