@@ -12,7 +12,9 @@
  *
  * [Tags]: metric, string metric.
  */
-import {similarity as identity} from './identity';
+const SIMILARITY = (a, b) => {
+  return a === b ? 1 : 0;
+};
 
 /**
  * Function returning the Smith-Waterman score between two sequences.
@@ -25,7 +27,7 @@ import {similarity as identity} from './identity';
  * @return {number}                - The Smith-Waterman score between a & b.
  */
 export function score(options, a, b) {
-  const {gap = 1, similarity = identity} = options;
+  const {gap = 1, similarity = SIMILARITY} = options;
 
   // Early terminations
   if (a === b)

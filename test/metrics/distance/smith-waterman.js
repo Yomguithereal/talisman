@@ -15,7 +15,9 @@ describe('smith-waterman', function() {
       ['hello', '', 0],
       ['', 'hello', 0],
       ['cat', 'hat', 2],
+      ['xxxxABCx', 'yABCyyyy', 3],
       ['dva', 'deeve', 1, {gap: 2.2}],
+      [[0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0], [1, 1, 1, 1], 3],
       ['dva', 'deeve', 2, {similarity: (a, b) => a === b ? 2 : -1}],
       ['GCATAGCU', 'GATTACA', 6.5, {gap: 1.4, similarity: (a, b) => a === b ? 1.5 : 0.5}]
     ];
