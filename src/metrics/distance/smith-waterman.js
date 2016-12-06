@@ -15,14 +15,14 @@
 import {similarity as identity} from './identity';
 
 /**
- * Function returning the Smith-Waterman distance between two sequences.
+ * Function returning the Smith-Waterman score between two sequences.
  *
  * @param  {object}   options      - Options:
  * @param  {number}     gap        - Gap cost.
  * @param  {function}   similarity - Similarity function.
  * @param  {mixed}    a            - The first sequence to process.
  * @param  {mixed}    b            - The second sequence to process.
- * @return {number}                - The Smith-Waterman distance between a & b.
+ * @return {number}                - The Smith-Waterman score between a & b.
  */
 export function score(options, a, b) {
   const {gap = 1, similarity = identity} = options;
