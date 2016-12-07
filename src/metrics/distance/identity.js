@@ -12,6 +12,7 @@
  *
  * @param  {array|string} a - First sequence.
  * @param  {array|string} b - Second sequence.
+ * @param  {number}         - Distance between 0 & 1.
  */
 export function distance(a, b) {
   if (typeof a === 'string')
@@ -36,6 +37,7 @@ export function distance(a, b) {
  *
  * @param  {array|string} a - First sequence.
  * @param  {array|string} b - Second sequence.
+ * @param  {number}         - Similarity between 0 & 1.
  */
 export function similarity(a, b) {
   if (typeof a === 'string')

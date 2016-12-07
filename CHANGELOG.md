@@ -5,6 +5,7 @@
 * Adding the `clustering/blocking` namespace.
 * Adding the `distance/metrics/bag` namespace.
 * Adding the `distance/metrics/length` namespace.
+* Adding the `distance/metrics/prefix` namespace.
 * Adding the `distance/metrics/smith-waterman` namespace.
 * Adding the `phonetics/french/fonem` namespace.
 * Adding the `regexp` namespace.
