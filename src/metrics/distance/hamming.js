@@ -13,7 +13,6 @@
  *
  * [Tags]: metric, vector space.
  */
-import {seq} from '../../helpers';
 
 /**
  * Function returning the Hamming distance between two sequences.
@@ -28,9 +27,6 @@ export default function hamming(a, b) {
 
   if (a === b)
     return 0;
-
-  a = seq(a);
-  b = seq(b);
 
   if (a.length !== b.length)
     throw Error('talisman/metrics/distance/hamming: given sequences are not of equal length.');
