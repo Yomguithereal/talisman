@@ -59,6 +59,7 @@ describe('metrics', function() {
     require('./metrics/distance/identity.js');
     require('./metrics/distance/jaccard.js');
     require('./metrics/distance/jaro-winkler.js');
+    require('./metrics/distance/lcs.js');
     require('./metrics/distance/length.js');
     require('./metrics/distance/levenshtein.js');
     require('./metrics/distance/manhattan.js');

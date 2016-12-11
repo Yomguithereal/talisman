@@ -4,6 +4,7 @@
 
 * Adding the `clustering/blocking` namespace.
 * Adding the `distance/metrics/bag` namespace.
+* Adding the `distance/metrics/lcs` namespace.
 * Adding the `distance/metrics/length` namespace.
 * Adding the `distance/metrics/prefix` namespace.
 * Adding the `distance/metrics/smith-waterman` namespace.
