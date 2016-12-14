@@ -40,3 +40,39 @@ export default function hamming(a, b) {
 
   return distance;
 }
+
+/**
+ * Function returning the normalized Hamming distance between two sequences.
+ *
+ * @param  {mixed}  a     - The first sequence to process.
+ * @param  {mixed}  b     - The second sequence to process.
+ * @return {number}       - The normalized Hamming distance between a & b.
+ */
+export function normalizedDistance(a, b) {
+
+  if (a === b)
+    return 0;
+
+  if (a.length > b.length)
+    [a, b] = [b, a];
+
+  let distance = b.length - a.length;
+
+  for (let i = 0, l = a.length; i < l; i++) {
+    if (a[i] !== b[i])
+      distance++;
+  }
+
+  return distance / b.length;
+}
+
+/**
+ * Function returning the normalized Hamming similarity between two sequences.
+ *
+ * @param  {mixed}  a     - The first sequence to process.
+ * @param  {mixed}  b     - The second sequence to process.
+ * @return {number}       - The normalized Hamming similarity between a & b.
+ */
+export function normalizedSimilarity(a, b) {
+  return 1 - normalizedDistance(a, b);
+}

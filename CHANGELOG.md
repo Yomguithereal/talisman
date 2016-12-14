@@ -18,6 +18,7 @@
 * Adding the `minClusterSize` option to clusterers.
 * Adding limited version of `metrics/distance/damerau-levenshtein`.
 * Adding limited version of `metrics/distance/levenshtein`.
+* Adding normalized version of `metrics/distance/hamming`.
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Moving `keyers/omission` to `phonetics/omission`.
 * Moving `keyers/skeleton` to `phonetics/skeleton`.

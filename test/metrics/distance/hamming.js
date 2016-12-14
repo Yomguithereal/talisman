@@ -4,7 +4,10 @@
  *
  */
 import assert from 'assert';
-import hamming from '../../../src/metrics/distance/hamming';
+import hamming, {
+  normalizedDistance,
+  normalizedSimilarity
+} from '../../../src/metrics/distance/hamming';
 
 describe('hamming', function() {
 
@@ -27,6 +30,21 @@ describe('hamming', function() {
 
     tests.forEach(function([a, b, distance]) {
       assert.strictEqual(hamming(a, b), distance, `${a} / ${b}`);
+    });
+  });
+
+  it('should correctly compute the normalized Hamming distance/similarity.', function() {
+    const tests = [
+      ['cat', 'hat', 1 / 3],
+      ['Niall', 'Neil', 0.6],
+      ['aluminum', 'Catalan', 1],
+      ['ATCG', 'TAGC', 1],
+      ['Estelle', 'Estrella', 0.5]
+    ];
+
+    tests.forEach(function([a, b, distance]) {
+      assert.strictEqual(normalizedDistance(a, b), distance, `${a} / ${b}`);
+      assert.strictEqual(normalizedSimilarity(a, b), 1 - distance, `${a} / ${b}`);
     });
   });
 });
