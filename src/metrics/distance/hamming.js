@@ -11,7 +11,7 @@
  * Hamming, Richard W. (1950), "Error detecting and error correcting codes",
  * Bell System Technical Journal 29 (2): 147–160
  *
- * [Tags]: metric, vector space.
+ * [Tags]: metric, vector space, string metric.
  */
 
 /**
