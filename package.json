@@ -95,6 +95,6 @@
     "html-entities": "^1.2.0",
     "lodash": "^4.6.1",
     "long": "^3.1.0",
-    "mnemonist": "0.5.0"
+    "mnemonist": "0.6.0"
   }
 }
