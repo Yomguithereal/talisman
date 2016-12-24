@@ -36,12 +36,14 @@ describe('classification', function() {
 });
 
 describe('clustering', function() {
-  require('./clustering/blocking.js');
   require('./clustering/k-means.js');
-  require('./clustering/key-collision.js');
-  require('./clustering/naive.js');
-  require('./clustering/sorted-neighborhood.js');
-  require('./clustering/vp-tree.js');
+
+  describe('record-linkage', function() {
+    require('./clustering/record-linkage/abstract.js');
+    require('./clustering/record-linkage/helpers.js');
+
+    require('./clustering/record-linkage/naive.js');
+  });
 });
 
 describe('metrics', function() {

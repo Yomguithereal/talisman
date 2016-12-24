@@ -24,6 +24,7 @@
 * Moving `stats/ngrams` to `tokenizers/ngrams`.
 * Moving `keyers/omission` to `phonetics/omission`.
 * Moving `keyers/skeleton` to `phonetics/skeleton`.
+* Moving similarity clusterers to the `clustering/record-linkage` namespace.
 * Dropping the `stats/tfidf` namespace.
 * Dropping the `keyers` namespace.
 
