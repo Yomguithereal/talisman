@@ -31,36 +31,8 @@ export default class RecordLinkageClusterer {
     // Properties
     this.calculations = 0;
     this.items = items;
-    this.graph = {};
     this.params = {
       minClusterSize: params.minClusterSize || DEFAULTS.minClusterSize
     };
-
-    // Handling similarity
-    if ('radius' in params && typeof params.radius !== 'number')
-      throw new Error('talisman/clustering/record-linkage: the given radius should be a number.');
-
-    if (typeof params.distance !== 'function' && typeof params.similarity !== 'function')
-      throw new Error('talisman/clustering/record-linkage: the clusterer should be given a distance or a similarity function.');
-
-    if ('radius' in params) {
-      this.radius = params.radius;
-
-      if (params.distance)
-        this.similarity = (a, b) => {
-          return params.distance(a, b) <= this.radius;
-        };
-      else
-        this.similarity = (a, b) => {
-          return params.similarity(a, b) >= this.radius;
-        };
-    }
-    else {
-
-      if (params.distance)
-        this.similarity = (a, b) => !params.distance(a, b);
-      else
-        this.similarity = params.similarity;
-    }
   }
 }

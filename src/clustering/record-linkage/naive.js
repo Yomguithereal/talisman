@@ -9,7 +9,10 @@
  * Note that the produced clusters are fuzzy.
  */
 import RecordLinkageClusterer from './abstract';
-import {clustersFromArrayGraph} from './helpers';
+import {
+  handleSimilarityPolymorphisms,
+  clustersFromArrayGraph
+} from './helpers';
 
 /**
  * Naive Clusterer class.
@@ -17,6 +20,11 @@ import {clustersFromArrayGraph} from './helpers';
  * @constructor
  */
 export class NaiveClusterer extends RecordLinkageClusterer {
+  constructor(params, items) {
+    super(params, items);
+    handleSimilarityPolymorphisms(this, params);
+  }
+
   run() {
     const graph = {};
 

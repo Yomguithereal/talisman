@@ -527,7 +527,7 @@ const LOOKUPS = {
  * Function taking a single word and computing its double metaphone code.
  *
  * @param  {string}  word - The word to process.
- * @return {string}       - The double metaphone code.
+ * @return {array}        - The double metaphone codes.
  *
  * @throws {Error} The function expects the word to be a string.
  */

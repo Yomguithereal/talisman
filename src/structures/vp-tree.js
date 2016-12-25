@@ -15,6 +15,11 @@ import {median} from '../stats/descriptive';
 
 // TODO: implement random for choice? or better, a function to choose
 
+// NOTE: i => 2i + 1, 2i + 2
+// NOTE: 2^k+1 - 1
+// NOTE: k = log2(n + 1) - 1 (rounded up to the next integer)
+// TODO: use Float64Array * 2 size [index of item, mu]
+
 /**
  * Constants.
  */

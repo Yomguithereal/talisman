@@ -5,8 +5,48 @@
  * Common function used throughout the clustering/record-linkage namespace.
  */
 
+/**
+ * Function handling distance/similarity & radius parameter polymorphisms.
+ *
+ * @param {RecordLinkageClusterer} target - Target instance.
+ * @param {object}                 params - Parameters.
+ */
+export function handleSimilarityPolymorphisms(target, params) {
+  if ('radius' in params && typeof params.radius !== 'number')
+    throw new Error('talisman/clustering/record-linkage: the given radius should be a number.');
+
+  if (typeof params.distance !== 'function' && typeof params.similarity !== 'function')
+    throw new Error('talisman/clustering/record-linkage: the clusterer should be given a distance or a similarity function.');
+
+  if ('radius' in params) {
+    target.radius = params.radius;
+
+    if (params.distance)
+      target.similarity = (a, b) => {
+        return params.distance(a, b) <= target.radius;
+      };
+    else
+      target.similarity = (a, b) => {
+        return params.similarity(a, b) >= target.radius;
+      };
+  }
+  else {
+
+    if (params.distance)
+      target.similarity = (a, b) => !params.distance(a, b);
+    else
+      target.similarity = params.similarity;
+  }
+}
+
 // NOTE: it is possible to sort the clusters by size beforehand to make
-// the largest clusters possible
+// the largest clusters possible, or even to order in reverse
+
+// NOTE: since we'd want to sort by lenghts here, it's possible to use
+// a linear time algorithm such as radix sort
+
+// NOTE: should iterate on graph rather than on items & delete keys from the
+// graph rather than having a set register
 
 /**
  * Function returning a list of clusters from the given items & similarity
