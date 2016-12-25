@@ -45,6 +45,7 @@ describe('clustering', function() {
     require('./clustering/record-linkage/blocking.js');
     require('./clustering/record-linkage/key-collision.js');
     require('./clustering/record-linkage/naive.js');
+    require('./clustering/record-linkage/sorted-neighborhood.js');
     require('./clustering/record-linkage/vp-tree.js');
   });
 });
