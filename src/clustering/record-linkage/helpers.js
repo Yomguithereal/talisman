@@ -92,3 +92,54 @@ export function clustersFromArrayGraph(items, graph, minClusterSize) {
 
   return clusters;
 }
+
+/**
+ * Function returning a list of clusters from the given items & similarity
+ * graph represented as an index of items to the set of neighbors.
+ *
+ * @param  {array}  items          - List of items.
+ * @param  {object} graph          - Similarity graph.
+ * @param  {number} minClusterSize - Minimum number of items in a cluster.
+ */
+export function clustersFromSetGraph(items, graph, minClusterSize) {
+  const clusters = [],
+        visited = new Set();
+
+  let cluster;
+
+  for (let i = 0, l = items.length; i < l; i++) {
+    const item = items[i];
+
+    if (visited.has(i))
+      continue;
+
+    if (!graph[i])
+      continue;
+
+    if (graph[i].size + 1 < minClusterSize)
+      continue;
+
+    cluster = new Array(graph[i].size + 1);
+    cluster[0] = item;
+    visited.add(i);
+
+    // Adding neighbors to the cluster
+    const iterator = graph[i].values();
+
+    let step,
+        j = 1;
+
+    while ((step = iterator.next()) && !step.done) {
+      const neighborIndex = step.value,
+            neighbor = items[neighborIndex];
+
+      cluster[j] = neighbor;
+      visited.add(neighborIndex);
+      j++;
+    }
+
+    clusters.push(cluster);
+  }
+
+  return clusters;
+}

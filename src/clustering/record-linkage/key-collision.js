@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/key-collision
- * ==================================
+ * Talisman clustering/record-linkage/key-collision
+ * =================================================
  *
  * Simple clustering algorithm running in linear time just applying a
  * keying function to each data point and grouping them when the resulting
