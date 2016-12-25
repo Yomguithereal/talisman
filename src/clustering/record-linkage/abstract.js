@@ -29,7 +29,6 @@ export default class RecordLinkageClusterer {
       throw new Error('talisman/clustering/record-linkage: the given items should be an array.');
 
     // Properties
-    this.calculations = 0;
     this.items = items;
     this.params = {
       minClusterSize: params.minClusterSize || DEFAULTS.minClusterSize
