@@ -4,7 +4,8 @@
  *
  * Clusterer dispatching documents to blocks which we will then cluster. A
  * document may be attached to more than one block since the algorithm uses
- * an inverted index.
+ * an inverted index. Time complexity is nb(b-1)/2 where n is the number
+ * of blocks and b the average size of a block.
  */
 import RecordLinkageClusterer from './abstract';
 import {
