@@ -7,7 +7,6 @@
 * Phonetics
 * MVP Tree
 * Higher order VP Tree
-* Canopy clustering
 * Suffix Tree clustering
 * NN-Descent
 * Jaccard Sketch clustering
@@ -18,9 +17,6 @@
 
 ## Clustering
 
-* Make some tests regarding the three methods.
-* Normalize options across similarity clusterers (similarity, distance/radius combo).
-* Move some clusterers to `clustering/similarity`.
 * Abstract a class for similarity clusterers to enable asynchronous work, possibility to abort computation etc.
 * It should be possible to make some optimization to the naive clusterer (whose worst case would perform the same amount of computation) by comparing new elements to only one item of an already existing cluster.
 * Method 3 should be possible to do without computing a graph but by holding a hashmap of items.
@@ -30,3 +26,18 @@
 * SNM clustering is quite efficient when using ngram fingerprinting & a really small window.
 * The similarity graph must be undirected if you want the clusters to have a full diameter instead of radius somehow.
 * Possible to create modes for the naive clusterer `normal`, `minLengthFirst`, `maxLengthFirst`, or even `full`?
+
+## UI
+
+* Pre-processing.
+* Inverted-Index of unique values to cut computations.
+* Should shuffle the values before applying clustering.
+* Difference between merge & harmonize.
+* Cluster expansion through inverted index sorted by occurrences.
+* Suggest methods based on size of the dataset.
+
+## Recipes
+
+* Ngram blocking or SNM.
+* Double Metaphone key collision.
+* Overlap coefficient on names.
