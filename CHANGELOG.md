@@ -2,7 +2,8 @@
 
 ## 0.15.0
 
-* Adding the `clustering/blocking` namespace.
+* Adding the `clustering/record-linkage/blocking` namespace.
+* Adding the `clustering/record-linkage/canopy` namespace.
 * Adding the `distance/metrics/bag` namespace.
 * Adding the `distance/metrics/lcs` namespace.
 * Adding the `distance/metrics/length` namespace.
