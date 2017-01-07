@@ -13,16 +13,51 @@
  *
  * [Tags]: metric, string metric.
  */
-import tversky from './tversky';
 
 /**
- * Jaccard index is just Tversky index with alpha = beta = 1.
+ * Function returning the Jaccard similarity score between two sequences.
+ *
+ * @param  {mixed}  a - The first sequence.
+ * @param  {mixed}  b - The second sequence.
+ * @return {number}   - The Jaccard similarity score between a & b.
  */
-const jaccard = function(x, y) {
-  if (x === y)
+function jaccard(a, b) {
+  if (a === b)
     return 1;
-  return tversky({alpha: 1, beta: 1}, x, y);
-};
+
+  const la = a.length,
+        lb = b.length;
+
+  if (!la || !lb)
+    return 0;
+
+  const setA = {},
+        setB = {};
+
+  let U = 0,
+      I = 0;
+
+  for (let i = 0; i < la; i++)
+    setA[a[i]] = true;
+
+  for (let i = 0; i < lb; i++)
+    setB[b[i]] = true;
+
+  // Computing intersection
+  for (const k in setA) {
+    U++;
+
+    if (setB.hasOwnProperty(k))
+      I++;
+  }
+
+  for (const k in setB) {
+    if (!setA.hasOwnProperty(k))
+      U++;
+  }
+
+  return I / U;
+}
 
 /**
  * Jaccard distance is 1 - the Jaccard index.

@@ -15,6 +15,7 @@
  */
 import RecordLinkageClusterer from './abstract';
 import {
+  createChoice,
   createDangerousButPerformantSample
 } from '../../helpers/random';
 
@@ -79,6 +80,7 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
       throw new Error('talisman/clustering/record-linkage/nn-descent: rng should be a function.');
 
     this.sampleFunction = createDangerousButPerformantSample(this.rng);
+    this.choiceFunction = createChoice(this.rng);
 
     // Checking k
     this.k = params.k;
@@ -98,9 +100,8 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
     if (items.has(forItem)) {
       items.delete(forItem);
 
-      // TODO: use a choice function rather
       while (items.size < this.k)
-        items.add(this.sampleFunction(1, this.items)[0]);
+        items.add(this.choiceFunction(this.items));
     }
 
     return Array.from(items).map(item => {

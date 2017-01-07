@@ -14,6 +14,9 @@ describe('jaccard', function() {
 
  it('should compute the jaccard index & aliases correctly.', function() {
   const tests = [
+    ['abc', '', 0],
+    ['', 'abc', 0],
+    ['', '', 1],
     ['abc', 'abc', 1],
     ['abc', 'xyz', 0],
     ['night', 'nacht', 3 / 7],
