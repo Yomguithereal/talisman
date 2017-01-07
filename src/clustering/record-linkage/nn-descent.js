@@ -90,6 +90,7 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
 
     // Properties
     this.iterations = 0;
+    this.computations = 0;
     this.c = 0;
   }
 
@@ -212,7 +213,7 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
 
   run() {
     const B = new Map(),
-          rhok = this.rho * this.k;
+          rhok = Math.ceil(this.rho * this.k);
 
     for (let i = 0, l = this.items.length; i < l; i++) {
       const item = this.items[i];
@@ -267,6 +268,8 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
             const u2 = currentTargets[k],
                   similarity = this.similarity(u1, u2);
 
+            this.computations++;
+
             this.updateNN(B.get(u1), u2, similarity);
             this.updateNN(B.get(u2), u1, similarity);
           }
@@ -279,6 +282,8 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
 
             const similarity = this.similarity(u1, u2);
 
+            this.computations++;
+
             this.updateNN(B.get(u1), u2, similarity);
             this.updateNN(B.get(u2), u1, similarity);
           }
@@ -286,7 +291,7 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
       }
 
       // Termination?
-      // console.log('iteration', this.c, this.delta * this.items.length * this.k);
+      // console.log('iteration', this.c, this.delta * this.items.length * this.k, this.computations);
       if (this.iterations >= this.maxIterations ||
           this.c < this.delta * this.items.length * this.k)
         break;
