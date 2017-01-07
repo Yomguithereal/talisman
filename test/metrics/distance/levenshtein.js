@@ -51,7 +51,7 @@ describe('levenshtein', function() {
 
   it('should be possible to use the limited version.', function() {
     tests.forEach(function([a, b, distance]) {
-      assert.strictEqual(limited(2, a, b), distance > 2 ? -1 : distance, `${a} <=> ${b}`);
+      assert.strictEqual(limited(2, a, b), distance > 2 ? Infinity : distance, `${a} <=> ${b}`);
     });
   });
 });

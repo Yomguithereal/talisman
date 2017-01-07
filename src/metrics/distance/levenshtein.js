@@ -108,12 +108,12 @@ export default function levenshtein(a, b) {
 /**
  * Function returning the Levenshtein distance between two sequences
  * but with a twist: this version will stop its computation if distance
- * exceed a given maximum and return -1.
+ * exceed a given maximum and return Infinity.
  *
  * @param  {number} max - Maximum distance.
  * @param  {mixed}  a   - The first sequence to process.
  * @param  {mixed}  b   - The second sequence to process.
- * @return {number}     - The Levenshtein distance between a & b or -1.
+ * @return {number}     - The Levenshtein distance between a & b or Infinity.
  */
 export function limited(max, a, b) {
   if (a === b)
@@ -123,9 +123,9 @@ export function limited(max, a, b) {
       lb = b.length;
 
   if (!la)
-    return lb > max ? -1 : lb;
+    return lb > max ? Infinity : lb;
   if (!lb)
-    return la > max ? -1 : la;
+    return la > max ? Infinity : la;
 
   // Swapping the strings so that the shorter string is the first one.
   if (la > lb) {
@@ -152,7 +152,7 @@ export function limited(max, a, b) {
     lb -= start;
 
     if (!la)
-      return lb > max ? -1 : lb;
+      return lb > max ? Infinity : lb;
 
     b = b.slice(start, start + lb);
   }
@@ -162,7 +162,7 @@ export function limited(max, a, b) {
   if (max > lb)
     max = lb;
   else if (diff > max)
-    return -1;
+    return Infinity;
 
   const v0 = new Array(lb),
         v2 = new Array(lb);
@@ -214,8 +214,8 @@ export function limited(max, a, b) {
     }
 
     if (haveMax && v0[i + diff] > max)
-      return -1;
+      return Infinity;
   }
 
-  return current <= max ? current : -1;
+  return current <= max ? current : Infinity;
 }
