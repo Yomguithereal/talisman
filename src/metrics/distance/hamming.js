@@ -76,3 +76,29 @@ export function normalizedDistance(a, b) {
 export function normalizedSimilarity(a, b) {
   return 1 - normalizedDistance(a, b);
 }
+
+/**
+ * Function returning the Hamming distance between two numbers using only
+ * bitwise operators.
+ *
+ * Note that this implementation uses a loop in O(k) time, k being the number
+ * of bits set. There are other implementations possible using arithmetics but
+ * litterature seems to agree that this does not speedup the computation and
+ * since JavaScript does not have a direct access to processor low-level ops
+ * such as popcount, this should be the most performant we can do now.
+ *
+ * @param  {mixed}  a     - The first number to process.
+ * @param  {mixed}  b     - The second number to process.
+ * @return {number}       - The Hamming distance between a & b.
+ */
+export function bitwise(a, b) {
+  let d = 0,
+      xor = a ^ b;
+
+  while (xor) {
+    d++;
+    xor &= xor - 1;
+  }
+
+  return d;
+}

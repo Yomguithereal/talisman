@@ -5,6 +5,7 @@
  */
 import assert from 'assert';
 import hamming, {
+  bitwise,
   normalizedDistance,
   normalizedSimilarity
 } from '../../../src/metrics/distance/hamming';
@@ -45,6 +46,19 @@ describe('hamming', function() {
     tests.forEach(function([a, b, distance]) {
       assert.strictEqual(normalizedDistance(a, b), distance, `${a} / ${b}`);
       assert.strictEqual(normalizedSimilarity(a, b), 1 - distance, `${a} / ${b}`);
+    });
+  });
+
+
+  it('should correctly compute bitwise Hamming distance.', function() {
+    const tests = [
+      ['1011101', '1001001', 2],
+      ['1111', '1111', 0],
+      ['0110', '1001', 4]
+    ].map(t => [parseInt(t[0], 2), parseInt(t[1], 2), t[2]]);
+
+    tests.forEach(function([a, b, distance]) {
+      assert.strictEqual(bitwise(a, b), distance);
     });
   });
 });

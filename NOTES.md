@@ -3,7 +3,6 @@
 ## Roadmap
 
 * SIFT4
-* Hamming bitwise
 * Minhash
 * LSH Binning
 * New algos NNDescent etc.
