@@ -11,6 +11,7 @@
 * Adding the `distance/metrics/mlipns` namespace.
 * Adding the `distance/metrics/prefix` namespace.
 * Adding the `distance/metrics/ratcliff-obershelp` namespace.
+* Adding the `distance/metrics/sift4` namespace.
 * Adding the `distance/metrics/smith-waterman` namespace.
 * Adding the `distance/metrics/suffix` namespace.
 * Adding the `phonetics/french/fonem` namespace.

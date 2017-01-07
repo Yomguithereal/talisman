@@ -77,6 +77,7 @@ describe('metrics', function() {
     require('./metrics/distance/overlap.js');
     require('./metrics/distance/prefix.js');
     require('./metrics/distance/ratcliff-obershelp.js');
+    require('./metrics/distance/sift4.js');
     require('./metrics/distance/smith-waterman.js');
     require('./metrics/distance/suffix.js');
   });

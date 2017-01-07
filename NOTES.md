@@ -2,7 +2,6 @@
 
 ## Roadmap
 
-* SIFT4
 * Minhash
 * LSH Binning
 * New algos NNDescent etc.
