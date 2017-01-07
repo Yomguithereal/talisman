@@ -24,6 +24,44 @@ export function createRandom(rng) {
 export const random = createRandom(Math.random);
 
 /**
+ * Creating a function returning a random index from the given array.
+ *
+ * @param  {function} rng - RNG function returning uniform random.
+ * @return {function}     - The created function.
+ */
+export function createRandomIndex(rng) {
+  const customRandom = createRandom(rng);
+
+  return function(array) {
+    return customRandom(0, array.length - 1);
+  };
+}
+
+/**
+ * Returning default random index using `Math.random`.
+ */
+export const randomIndex = createRandomIndex(Math.random);
+
+/**
+ * Creating a function returning a random item from the given array.
+ *
+ * @param  {function} rng - RNG function returning uniform random.
+ * @return {function}     - The created function.
+ */
+export function createChoice(rng) {
+  const customRandomIndex = createRandomIndex(rng);
+
+  return function(array) {
+    return array[customRandomIndex(array)];
+  };
+}
+
+/**
+ * Returning default choice using `Math.random`.
+ */
+export const choice = createChoice(Math.random);
+
+/**
  * Creating a function returning a sample of size n using the provided RNG.
  *
  * @param  {function} rng - The RNG to use.
@@ -39,10 +77,10 @@ export function createSample(rng) {
     let index = -1;
 
     while (++index < n) {
-      const randomIndex = customRandom(index, lastIndex),
-            value = result[randomIndex];
+      const r = customRandom(index, lastIndex),
+            value = result[r];
 
-      result[randomIndex] = result[index];
+      result[r] = result[index];
       result[index] = value;
     }
 
@@ -77,15 +115,15 @@ export function createDangerousButPerformantSample(rng) {
     let index = -1;
 
     while (++index < n) {
-      const randomIndex = customRandom(index, lastIndex),
-            value = sequence[randomIndex];
+      const r = customRandom(index, lastIndex),
+            value = sequence[r];
 
-      sequence[randomIndex] = sequence[index];
+      sequence[r] = sequence[index];
       sequence[index] = value;
       result[index] = value;
 
       // Storing the swap so we can reverse it
-      swaps[index] = randomIndex;
+      swaps[index] = r;
     }
 
     // Reversing the mutations
@@ -141,10 +179,10 @@ export function createShuffleInPlace(rng) {
     let index = -1;
 
     while (++index < length) {
-      const randomIndex = customRandom(index, lastIndex),
-            value = sequence[randomIndex];
+      const r = customRandom(index, lastIndex),
+            value = sequence[r];
 
-      sequence[randomIndex] = sequence[index];
+      sequence[r] = sequence[index];
       sequence[index] = value;
     }
   };

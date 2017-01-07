@@ -8,6 +8,8 @@ import seedrandom from 'seedrandom';
 import {vec} from '../../src/helpers/vectors';
 import {
   createRandom,
+  createRandomIndex,
+  createChoice,
   createSample,
   createDangerousButPerformantSample,
   createShuffle,
@@ -27,6 +29,30 @@ describe('random', function() {
       const numbers = vec(10, 0).map(() => random(1, 3));
 
       assert.deepEqual(numbers, [2, 1, 1, 2, 2, 1, 2, 3, 2, 3]);
+    });
+  });
+
+  describe('#.createRandomIndex', function() {
+    it('should be possible to create a random index function using the supplied rng.', function() {
+      const randomIndex = createRandomIndex(rng());
+
+      const fruits = ['apple', 'pear', 'orange'];
+
+      const tests = vec(10, 0).map(() => randomIndex(fruits));
+
+      assert.deepEqual(tests, [1, 0, 0, 1, 1, 0, 1, 2, 1, 2]);
+    });
+  });
+
+  describe('#.createChoice', function() {
+    it('should be possible to create a choice function using the supplied rng.', function() {
+      const choice = createChoice(rng());
+
+      const fruits = ['apple', 'pear', 'orange'];
+
+      const tests = vec(10, 0).map(() => choice(fruits));
+
+      assert.deepEqual(tests, [1, 0, 0, 1, 1, 0, 1, 2, 1, 2].map(index => fruits[index]));
     });
   });
 

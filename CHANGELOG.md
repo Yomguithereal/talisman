@@ -2,6 +2,8 @@
 
 ## 0.15.0
 
+* Adding the `helpers/random#createRandomIndex` function.
+* Adding the `helpers/random#createChoice` function.
 * Adding the `helpers/random#createDangerousButPerformantSample` function.
 * Adding the `helpers/random#createSuffleInPlace` function.
 * Adding the `clustering/record-linkage/blocking` namespace.
