@@ -3,6 +3,7 @@
 ## 0.15.0
 
 * Adding the `helpers/random#createDangerousButPerformantSample` function.
+* Adding the `helpers/random#createSuffleInPlace` function.
 * Adding the `clustering/record-linkage/blocking` namespace.
 * Adding the `clustering/record-linkage/canopy` namespace.
 * Adding the `distance/metrics/bag` namespace.

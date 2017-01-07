@@ -11,15 +11,18 @@ import {
   createSample,
   createDangerousButPerformantSample,
   createShuffle,
+  createShuffleInPlace,
   weightedRandomIndex
 } from '../../src/helpers/random';
 
-const rng = seedrandom('shawarma');
+const rng = () => {
+  return seedrandom('shawarma');
+};
 
 describe('random', function() {
   describe('#.createRandom', function() {
     it('should be possible to create a random function using supplied rng.', function() {
-      const random = createRandom(rng);
+      const random = createRandom(rng());
 
       const numbers = vec(10, 0).map(() => random(1, 3));
 
@@ -31,19 +34,19 @@ describe('random', function() {
     const data = [13, 14, 15, 8, 20];
 
     it('should be possible to create a sample function using the supplied rng.', function() {
-      const sample = createSample(rng);
+      const sample = createSample(rng());
 
       const tests = vec(5, 0).map(() => sample(2, data));
-      assert.deepEqual(tests, [[8, 13], [20, 13], [8, 15], [20, 13], [13, 8]]);
+      assert.deepEqual(tests, [[14, 13], [14, 15], [15, 13], [15, 8], [14, 20]]);
     });
   });
 
   describe('#.createShuffle', function() {
     it('should be possible to create a shuffle function using the supplied rng.', function() {
-      const shuffle = createShuffle(rng);
+      const shuffle = createShuffle(rng());
 
       const shuffled = shuffle([1, 2, 3, 4, 5]);
-      assert.deepEqual(shuffled, [4, 5, 1, 2, 3]);
+      assert.deepEqual(shuffled, [2, 1, 3, 4, 5]);
     });
   });
 
@@ -59,14 +62,24 @@ describe('random', function() {
           copy = data.slice();
 
     it('should be possible to create a sample function using the supplied rng.', function() {
-      const sample = createDangerousButPerformantSample(rng);
+      const sample = createDangerousButPerformantSample(rng());
 
       const tests = vec(7, 0).map(() => sample(2, data));
 
-      assert.deepEqual(tests, [[13, 8], [13, 20], [20, 13], [8, 13], [20, 8], [14, 20], [15, 20]]);
+      assert.deepEqual(tests, [[14, 13], [14, 15], [15, 13], [15, 8], [14, 20], [8, 13], [20, 13]]);
 
       // Ensuring the state of the array did not change
       assert.deepEqual(copy, data);
+    });
+  });
+
+  describe('#.createShuffleInPlace', function() {
+    it('should be possible to create a shuffle in place function using the supplied rng.', function() {
+      const shuffle = createShuffleInPlace(rng()),
+            array = [1, 2, 3, 4, 5];
+
+      shuffle(array);
+      assert.deepEqual(array, [2, 1, 3, 4, 5]);
     });
   });
 });

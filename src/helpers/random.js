@@ -126,6 +126,36 @@ export function createShuffle(rng) {
 export const shuffle = createShuffle(Math.random);
 
 /**
+ * Creating a function shuffling an array in place.
+ *
+ * @param  {function} rng - The RNG to use.
+ * @return {function}     - The created function.
+ */
+export function createShuffleInPlace(rng) {
+  const customRandom = createRandom(rng);
+
+  return function(sequence) {
+    const length = sequence.length,
+          lastIndex = length - 1;
+
+    let index = -1;
+
+    while (++index < length) {
+      const randomIndex = customRandom(index, lastIndex),
+            value = sequence[randomIndex];
+
+      sequence[randomIndex] = sequence[index];
+      sequence[index] = value;
+    }
+  };
+}
+
+/**
+ * Exporting default shuffle in place function.
+ */
+export const suffleInPlace = createShuffleInPlace(Math.random);
+
+/**
  * Function taking a length and a list of weights and aiming at
  * returning a random weighted index.
  *

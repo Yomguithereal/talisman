@@ -2,7 +2,7 @@
 
 ## Roadmap
 
-* Minhash
+* Minhash (CRC32?)
 * LSH Binning
 * New algos NNDescent etc.
 
@@ -50,3 +50,4 @@
 * Ngram blocking or SNM.
 * Double Metaphone key collision.
 * Overlap coefficient on names.
+* Minhash + ngrams for documents.
