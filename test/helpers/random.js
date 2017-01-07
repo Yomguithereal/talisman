@@ -9,6 +9,7 @@ import {vec} from '../../src/helpers/vectors';
 import {
   createRandom,
   createSample,
+  createDangerousButPerformantSample,
   createShuffle,
   weightedRandomIndex
 } from '../../src/helpers/random';
@@ -50,6 +51,22 @@ describe('random', function() {
     it('should return a number superior to zero and within the range of the list.', function() {
       const randomIndex = weightedRandomIndex([2 / 3, 1 / 6, 1 / 6]);
       assert(randomIndex >= 0 && randomIndex < 3);
+    });
+  });
+
+  describe('#.createDangerousButPerformantSample', function() {
+    const data = [13, 14, 15, 8, 20],
+          copy = data.slice();
+
+    it('should be possible to create a sample function using the supplied rng.', function() {
+      const sample = createDangerousButPerformantSample(rng);
+
+      const tests = vec(7, 0).map(() => sample(2, data));
+
+      assert.deepEqual(tests, [[13, 8], [13, 20], [20, 13], [8, 13], [20, 8], [14, 20], [15, 20]]);
+
+      // Ensuring the state of the array did not change
+      assert.deepEqual(copy, data);
     });
   });
 });

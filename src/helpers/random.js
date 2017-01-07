@@ -34,8 +34,7 @@ export function createSample(rng) {
 
   return function(n, sequence) {
     const result = sequence.slice(),
-          length = result.length,
-          lastIndex = length - 1;
+          lastIndex = result.length - 1;
 
     let index = -1;
 
@@ -58,6 +57,54 @@ export function createSample(rng) {
  * Exporting default sample function.
  */
 export const sample = createSample(Math.random);
+
+/**
+ * Creating a function returning a sample of size n using the provided RNG in
+ * a performant but dangerous way. O(k) time & space is achieved by mutating
+ * the target array and restoring it back to its original state afterwards.
+ *
+ * @param  {function} rng - The RNG to use.
+ * @return {function}     - The created function.
+ */
+export function createDangerousButPerformantSample(rng) {
+  const customRandom = createRandom(rng);
+
+  return function(n, sequence) {
+    const result = new Array(n),
+          swaps = new Array(n),
+          lastIndex = sequence.length - 1;
+
+    let index = -1;
+
+    while (++index < n) {
+      const randomIndex = customRandom(index, lastIndex),
+            value = sequence[randomIndex];
+
+      sequence[randomIndex] = sequence[index];
+      sequence[index] = value;
+      result[index] = value;
+
+      // Storing the swap so we can reverse it
+      swaps[index] = randomIndex;
+    }
+
+    // Reversing the mutations
+    while (--index >= 0) {
+      const swap = swaps[index],
+            value = sequence[index];
+
+      sequence[index] = sequence[swap];
+      sequence[swap] = value;
+    }
+
+    return result;
+  };
+}
+
+/**
+ * Exporting default sample function.
+ */
+export const dangerousButPerformantSample = createDangerousButPerformantSample(Math.random);
 
 /**
  * Creating a function returning a shuffled array.
