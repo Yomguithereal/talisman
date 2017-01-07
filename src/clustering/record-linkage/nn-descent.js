@@ -292,7 +292,7 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
       // Termination?
       // console.log('iteration', this.c, this.delta * this.items.length * this.k, this.computations);
       if (this.iterations >= this.maxIterations ||
-          this.c < this.delta * this.items.length * this.k)
+          this.c <= this.delta * this.items.length * this.k)
         break;
     }
 
