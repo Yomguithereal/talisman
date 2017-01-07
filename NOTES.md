@@ -2,10 +2,8 @@
 
 ## Roadmap
 
-* Minhash (CRC32?)
+* Minhash (CRC32?) & Fuzzyhash (ssdeep) & simhash
 * LSH Binning
-* New algos NNDescent etc.
-
 * Method to get the number of expected calculations
 * Distances
 * Phonetics

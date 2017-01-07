@@ -1,6 +1,6 @@
 /**
  * Talisman clustering/record-linkage/canopy tests
- * =================================================
+ * ================================================
  *
  */
 import assert from 'assert';
