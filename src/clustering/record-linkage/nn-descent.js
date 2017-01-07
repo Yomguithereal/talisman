@@ -20,7 +20,6 @@ import {
 } from '../../helpers/random';
 
 // TODO: JSDoc
-// TODO: easy to create a eta-NN version instead probably
 
 /**
  * Defaults.
