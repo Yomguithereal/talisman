@@ -34,27 +34,29 @@ function jaccard(a, b) {
   const setA = {},
         setB = {};
 
-  let U = 0,
-      I = 0;
+  let I = 0,
+      sizeA = 0,
+      sizeB = 0;
 
-  for (let i = 0; i < la; i++)
-    setA[a[i]] = true;
-
-  for (let i = 0; i < lb; i++)
-    setB[b[i]] = true;
-
-  // Computing intersection
-  for (const k in setA) {
-    U++;
-
-    if (setB.hasOwnProperty(k))
-      I++;
+  for (let i = 0; i < la; i++) {
+    if (!setA.hasOwnProperty(a[i])) {
+      setA[a[i]] = true;
+      sizeA++;
+    }
   }
 
-  for (const k in setB) {
-    if (!setA.hasOwnProperty(k))
-      U++;
+  for (let i = 0; i < lb; i++) {
+    if (!setB.hasOwnProperty(b[i])) {
+      setB[b[i]] = true;
+      sizeB++;
+
+      if (setA.hasOwnProperty(b[i]))
+        I++;
+    }
   }
+
+  // Size of the union is sum of size of both sets minus intersection
+  const U = sizeA + sizeB - I;
 
   return I / U;
 }

@@ -13,7 +13,6 @@
 * NN-Descent
 * NNCTPH
 * Fast online K-NN
-* Jaccard Sketch clustering
 * Bitap
 * KNN clustering
 * LSH & MinHash & Rabin-Karp
