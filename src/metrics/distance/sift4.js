@@ -8,7 +8,7 @@
  * [Reference]:
  * https://siderite.blogspot.com/2014/11/super-fast-and-accurate-string-distance.html
  *
- * [Author]: Siderite
+ * [Author]: Siderite Zackwehdex
  *
  * [Tags]: string metric, asymmetric.
  */
