@@ -16,6 +16,11 @@ describe('helpers', function() {
   require('./helpers/vectors.js');
 });
 
+describe('hash', function() {
+
+  require('./hash/crc32.js');
+});
+
 describe('features', function() {
 
   describe('extraction', function() {
