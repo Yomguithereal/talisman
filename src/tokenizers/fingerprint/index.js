@@ -25,6 +25,7 @@ const DEFAULTS = {
   digits: true,
   minTokenSize: 1,
   ngrams: false,
+  sort: true,
   split: null,
   stopwords: null
 };
@@ -45,7 +46,8 @@ export function createTokenizer(options) {
 
   const n = options.ngrams || DEFAULTS.ngrams,
         stripDigits = options.digits === false || !DEFAULTS.digits,
-        minTokenSize = options.minTokenSize || DEFAULTS.minTokenSize;
+        minTokenSize = options.minTokenSize || DEFAULTS.minTokenSize,
+        dontSort = options.sort === false;
 
   let stopwords = options.stopwords || DEFAULTS.stopwords;
 
@@ -114,7 +116,8 @@ export function createTokenizer(options) {
     tokens = uniq(tokens);
 
     //-- Sorting tokens
-    tokens.sort();
+    if (!dontSort)
+      tokens.sort();
 
     return tokens;
   };
