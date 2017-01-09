@@ -1,6 +1,6 @@
 /**
- * Talisman vectors
- * =================
+ * Talisman helpers/vectors
+ * =========================
  *
  * Compilation of various helpers to deal with vectors.
  */

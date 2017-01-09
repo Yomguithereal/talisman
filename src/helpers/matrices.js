@@ -1,6 +1,6 @@
 /**
- * Talisman matrices
- * ==================
+ * Talisman helpers/matrices
+ * ==========================
  *
  * Compilation of various helpers to deal with matrices.
  */
