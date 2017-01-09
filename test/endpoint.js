@@ -19,6 +19,7 @@ describe('helpers', function() {
 describe('hash', function() {
 
   require('./hash/crc32.js');
+  require('./hash/minhash.js');
 });
 
 describe('features', function() {

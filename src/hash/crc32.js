@@ -3,6 +3,8 @@
  * ====================
  *
  * JavaScript implementation of the CRC32 hash for UTF-8 strings.
+ *
+ * [Reference]: https://en.wikipedia.org/wiki/Cyclic_redundancy_check
  */
 
 /**

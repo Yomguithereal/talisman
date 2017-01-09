@@ -3,6 +3,7 @@
 ## 0.15.0
 
 * Adding the `hash/crc32` namespace.
+* Adding the `hash/minhash` namespace.
 * Adding the `helpers/random#createRandomIndex` function.
 * Adding the `helpers/random#createChoice` function.
 * Adding the `helpers/random#createDangerousButPerformantSample` function.
