@@ -17,7 +17,6 @@
  *
  * [Tags]: semimetric, string metric.
  */
-import {seq} from '../../helpers';
 import {vec} from '../../helpers/vectors';
 
 /**
@@ -32,10 +31,6 @@ export default function jaro(a, b) {
   // Fast break
   if (a === b)
     return 1;
-
-  // Normalizing sequences
-  a = seq(a);
-  b = seq(b);
 
   let max, min;
 

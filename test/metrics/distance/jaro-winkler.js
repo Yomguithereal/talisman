@@ -17,6 +17,7 @@ describe('jaro', function() {
     const tests = [
       ['Duane', 'Duane', 1],
       ['Dwayne', 'Duane', 0.82],
+      ['Dwayne'.split(''), 'Duane'.split(''), 0.82],
       ['Martha', 'Marhta', 0.94],
       ['Dixon', 'Dicksonx', 0.77],
       ['Duane', 'Freakishlylongstring', 0.47]
@@ -36,6 +37,7 @@ describe('jaro-winkler', function() {
     const tests = [
       ['Duane', 'Duane', 1],
       ['Dwayne', 'Duane', 0.84],
+      ['Dwayne'.split(''), 'Duane'.split(''), 0.84],
       ['Martha', 'Marhta', 0.96],
       ['Dixon', 'Dicksonx', 0.81],
       ['Duane', 'Freakishlylongstring', 0.47]

@@ -16,7 +16,6 @@
  * [Tags]: semimetric, string metric.
  */
 import jaro from './jaro';
-import {seq} from '../../helpers';
 
 /**
  * Function returning the Jaro-Winkler score between two sequences.
@@ -43,10 +42,6 @@ function customJaroWinkler(options, a, b) {
   // Fast break
   if (a === b)
     return 1;
-
-  // Normalizing sequences
-  a = seq(a);
-  b = seq(b);
 
   const maxLength = Math.max(a.length, b.length),
         minLength = Math.min(a.length, b.length);
