@@ -43,6 +43,8 @@ const DEFAULTS = {
  * @return {function}          - The hash function.
  */
 export default function createMinHash(options) {
+  options = options || {};
+
   const pi = options.hashes || DEFAULTS.hashes,
         rng = options.rng || DEFAULTS.rng,
         random = createRandom(rng);
@@ -101,4 +103,38 @@ export default function createMinHash(options) {
 
     return signature;
   };
+}
+
+export function binning(options, items) {
+  const minhash = options.minhash,
+        rows = options.rows;
+
+  if (typeof minhash !== 'function')
+    throw new Error('talisman/hash/minhash#binning: given minhash is not a function.');
+
+  const typicalSignature = minhash(items[0]);
+
+  if (typicalSignature.length % rows !== 0)
+    throw new Error('talisman/hash/minhash#binning: the size of your minhash signatures should be divisible by rows.');
+
+  const bins = new Array(items.length),
+        bands = typicalSignature.length / rows;
+
+  // TODO: optimize to drop bins containing only one item + maybe option to threshold
+  for (let i = 0, l = items.length; i < l; i++) {
+    const item = items[i],
+          signature = minhash(item);
+
+    for (let j = 0; j < bands; j++) {
+      let key = '';
+
+      for (let k = j * rows, m = (j + 1) * rows; k < m; k++)
+        key += signature[k] + '$';
+
+      bins[i] = bins[i] || [];
+      bins[i].push(key);
+    }
+  }
+
+  return bins;
 }
