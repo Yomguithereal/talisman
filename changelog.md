@@ -3,6 +3,44 @@ layout: page
 title: Changelog
 ---
 
+## 0.15.0
+
+* Adding the `hash/crc32` namespace.
+* Adding the `hash/minhash` namespace.
+* Adding the `helpers/random#createRandomIndex` function.
+* Adding the `helpers/random#createChoice` function.
+* Adding the `helpers/random#createDangerousButPerformantSample` function.
+* Adding the `helpers/random#createSuffleInPlace` function.
+* Adding the `clustering/record-linkage/blocking` namespace.
+* Adding the `clustering/record-linkage/canopy` namespace.
+* Adding the `distance/metrics/bag` namespace.
+* Adding the `distance/metrics/lcs` namespace.
+* Adding the `distance/metrics/length` namespace.
+* Adding the `distance/metrics/minhash` namespace.
+* Adding the `distance/metrics/mlipns` namespace.
+* Adding the `distance/metrics/prefix` namespace.
+* Adding the `distance/metrics/ratcliff-obershelp` namespace.
+* Adding the `distance/metrics/sift4` namespace.
+* Adding the `distance/metrics/smith-waterman` namespace.
+* Adding the `distance/metrics/suffix` namespace.
+* Adding the `phonetics/french/fonem` namespace.
+* Adding the `regexp` namespace.
+* Adding the `stemmers/french/carry` namespace.
+* Adding the `stemmers/french/eda` namespace.
+* Adding the `tokenizers/fingerprint` namespace.
+* Adding the `asymmetric` option to `clustering/naive`.
+* Adding the `minClusterSize` option to clusterers.
+* Adding limited version of `metrics/distance/damerau-levenshtein`.
+* Adding limited version of `metrics/distance/levenshtein`.
+* Adding bitwise version of `metrics/distance/hamming`.
+* Adding normalized version of `metrics/distance/hamming`.
+* Moving `stats/ngrams` to `tokenizers/ngrams`.
+* Moving `keyers/omission` to `phonetics/omission`.
+* Moving `keyers/skeleton` to `phonetics/skeleton`.
+* Moving similarity clusterers to the `clustering/record-linkage` namespace.
+* Dropping the `stats/tfidf` namespace.
+* Dropping the `keyers` namespace.
+
 ## 0.14.0
 
 * Dropping the `phonetics/spanish/fonetico` namespace (should use [phonogram](https://github.com/Yomguithereal/phonogram) now).
