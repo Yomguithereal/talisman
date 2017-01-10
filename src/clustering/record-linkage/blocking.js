@@ -41,6 +41,10 @@ export class BlockingClusterer extends RecordLinkageClusterer {
       for (let j = 0, m = tokens.length; j < m; j++) {
         const token = tokens[j];
 
+        // We skip falsey tokens
+        if (!token)
+          continue;
+
         if (!blocks[token])
           blocks[token] = [];
 
