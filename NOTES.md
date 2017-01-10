@@ -19,6 +19,8 @@
 * Inverted Index (Complex & Simple) / Array to store doc id + weight + number of positions + positions for memory efficiency (Integer Array)
 * Write about the rationale behind the naive clustering composition methods
 
+* Create keyers => with phonetics & fingerprint keyers
+
 ## Clustering
 
 * Abstract a class for similarity clusterers to enable asynchronous work, possibility to abort computation etc.
