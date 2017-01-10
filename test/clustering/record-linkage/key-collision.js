@@ -51,6 +51,25 @@ describe('key-collision', function() {
     ]);
   });
 
+  it('should ignore falsey keys.', function() {
+    const clusters = keyCollision({
+      key: a => {
+        if (/smith/i.test(a))
+          return;
+
+        return fingerprint(a).join(' ');
+      }
+    }, SIMPLE);
+
+    assert.deepEqual(clusters, [
+      [
+        'University of North Carolina',
+        'North, Carolina, University of',
+        'university of   north carolIna'
+      ]
+    ]);
+  });
+
   it('should correctly compute clusters with composite keys.', function() {
     const clusters = keyCollision({
       keys: doubleMetaphone

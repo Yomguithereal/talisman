@@ -35,6 +35,10 @@ export class KeyCollisionClusterer extends RecordLinkageClusterer {
       for (let j = 0, m = keys.length; j < m; j++) {
         const key = keys[j];
 
+        // If the key is falsey, we continue
+        if (!key)
+          continue;
+
         if (!map[key])
           map[key] = new Set();
         map[key].add(item);
