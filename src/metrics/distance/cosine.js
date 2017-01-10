@@ -12,9 +12,9 @@
 /**
  * Function returning the cosine similarity between two vectors.
  *
- * @param  {mixed}  a     - The first vector.
- * @param  {mixed}  b     - The second vector.
- * @return {number}       - The cosine similarity between a & b.
+ * @param  {mixed}  a - The first vector.
+ * @param  {mixed}  b - The second vector.
+ * @return {number}   - The cosine similarity between a & b.
  *
  * @throws {Error} The function expects vectors of same dimension.
  */

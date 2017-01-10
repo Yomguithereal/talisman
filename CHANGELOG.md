@@ -13,6 +13,7 @@
 * Adding the `distance/metrics/bag` namespace.
 * Adding the `distance/metrics/lcs` namespace.
 * Adding the `distance/metrics/length` namespace.
+* Adding the `distance/metrics/minhash` namespace.
 * Adding the `distance/metrics/mlipns` namespace.
 * Adding the `distance/metrics/prefix` namespace.
 * Adding the `distance/metrics/ratcliff-obershelp` namespace.
