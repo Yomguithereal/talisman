@@ -191,10 +191,10 @@ export function createShuffleInPlace(rng) {
 /**
  * Exporting default shuffle in place function.
  */
-export const suffleInPlace = createShuffleInPlace(Math.random);
+export const shuffleInPlace = createShuffleInPlace(Math.random);
 
 /**
- * Function taking a length and a list of weights and aiming at
+ * Function taking a length and a list of weights and aiming atuffle
  * returning a random weighted index.
  *
  * @param {array}  weights - List of weights (must sum to 1).
