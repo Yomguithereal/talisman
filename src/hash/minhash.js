@@ -118,21 +118,26 @@ export function binning(options, items) {
     throw new Error('talisman/hash/minhash#binning: the size of your minhash signatures should be divisible by rows.');
 
   const bins = new Array(items.length),
-        bands = typicalSignature.length / rows;
+        bands = typicalSignature.length / rows,
+        identifiers = new Map();
 
-  // TODO: optimize to drop bins containing only one item + maybe option to threshold
+  let integer = 0;
+
   for (let i = 0, l = items.length; i < l; i++) {
     const item = items[i],
           signature = minhash(item);
 
     for (let j = 0; j < bands; j++) {
-      let key = '';
+      let key = '' + j + '§';
 
       for (let k = j * rows, m = (j + 1) * rows; k < m; k++)
-        key += signature[k] + '$';
+        key += signature[k] + (k < m - 1 ? '$' : '');
+
+      if (!identifiers.has(key))
+        identifiers.set(key, integer++);
 
       bins[i] = bins[i] || [];
-      bins[i].push(key);
+      bins[i].push(identifiers.get(key));
     }
   }
 
