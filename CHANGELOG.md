@@ -3,6 +3,7 @@
 ## 0.16.0
 
 * Changing the way the fingerprint API.
+* Providing index of item in some `clustering/record-linkage` callbacks.
 
 ## 0.15.0
 

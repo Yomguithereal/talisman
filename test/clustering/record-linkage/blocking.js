@@ -50,4 +50,19 @@ describe('blocking', function() {
       ['abcde', 'bcde']
     ]);
   });
+
+  it('should provide the index of the item to the blocker function.', function() {
+    const blocks = DATA.map(item => item[0]);
+
+    const clusters = blocking({
+      block: (item, i) => blocks[i],
+      distance: levenshtein,
+      radius: 1
+    }, DATA);
+
+    assert.deepEqual(clusters, [
+      ['abc', 'ab'],
+      ['bde', 'bd', 'bde', 'bcde']
+    ]);
+  });
 });

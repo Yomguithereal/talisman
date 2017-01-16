@@ -30,7 +30,7 @@ export class KeyCollisionClusterer extends RecordLinkageClusterer {
     // Computing buckets map
     for (let i = 0, l = this.items.length; i < l; i++) {
       const item = this.items[i],
-            keys = [].concat(this.keyer(item));
+            keys = [].concat(this.keyer(item, i));
 
       for (let j = 0, m = keys.length; j < m; j++) {
         const key = keys[j];

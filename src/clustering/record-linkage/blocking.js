@@ -36,7 +36,7 @@ export class BlockingClusterer extends RecordLinkageClusterer {
           blocks = Object.create(null);
 
     for (let i = 0, l = this.items.length; i < l; i++) {
-      const tokens = [].concat(this.blocker(this.items[i]));
+      const tokens = [].concat(this.blocker(this.items[i], i));
 
       for (let j = 0, m = tokens.length; j < m; j++) {
         const token = tokens[j];

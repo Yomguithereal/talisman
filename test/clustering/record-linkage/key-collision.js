@@ -82,4 +82,24 @@ describe('key-collision', function() {
       ['Paul', 'Pol']
     ]);
   });
+
+  it('should provide the index of the item to the keyer.', function() {
+    const keys = SIMPLE.map(item => fingerprint(item).join(' '));
+
+    const clusters = keyCollision({
+      key: (item, i) => keys[i]
+    }, SIMPLE);
+
+    assert.deepEqual(clusters, [
+      [
+        'University of North Carolina',
+        'North, Carolina, University of',
+        'university of   north carolIna'
+      ],
+      [
+        'M. Smith',
+        'Smith M.'
+      ]
+    ]);
+  });
 });
