@@ -44,7 +44,7 @@ const DEFAULTS = {
 export function createTokenizer(options) {
   options = options || {};
 
-  const n = options.ngrams || DEFAULTS.ngrams,
+  const ngramsTokenize = options.ngrams || DEFAULTS.ngrams,
         stripDigits = options.digits === false || !DEFAULTS.digits,
         minTokenSize = options.minTokenSize || DEFAULTS.minTokenSize,
         dontSort = options.sort === false;
@@ -74,7 +74,10 @@ export function createTokenizer(options) {
     sizeFilter = new RegExp(`\\b\\S{1,${minTokenSize}}\\b`, 'g');
 
   // Returning the function
-  return function(string) {
+  return function(n, string) {
+
+    if (!ngramsTokenize)
+      string = n;
 
     //-- Splitting
     if (split)
@@ -107,7 +110,7 @@ export function createTokenizer(options) {
     //-- Tokenizing
     let tokens;
 
-    if (!n)
+    if (!ngramsTokenize)
       tokens = string.split(WHITESPACE);
     else
       tokens = ngrams(n, string.replace(WHITESPACE, ''));
@@ -124,3 +127,5 @@ export function createTokenizer(options) {
 }
 
 export default createTokenizer();
+
+export const ngramsFingerprint = createTokenizer({ngrams: true});

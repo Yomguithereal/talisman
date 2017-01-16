@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.16.0
+
+* Changing the way the fingerprint API.
+
 ## 0.15.0
 
 * Adding the `hash/crc32` namespace.

@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import fingerprint, {createTokenizer} from '../../src/tokenizers/fingerprint';
+import fingerprint, {createTokenizer, ngramsFingerprint} from '../../src/tokenizers/fingerprint';
 
 describe('fingerprint', function() {
 
@@ -33,14 +33,8 @@ describe('fingerprint', function() {
       [3, 'PariS', 'ariparris']
     ];
 
-    const keyers = {};
-
-    [1, 2, 3].forEach(n => {
-      keyers[n] = createTokenizer({ngrams: n});
-    });
-
     tests.forEach(function([n, string, key]) {
-      assert.strictEqual(keyers[n](string).join(''), key, `(${n}) ${string} => ${key}`);
+      assert.strictEqual(ngramsFingerprint(n, string).join(''), key, `(${n}) ${string} => ${key}`);
     });
   });
 
