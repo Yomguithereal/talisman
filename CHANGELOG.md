@@ -4,6 +4,7 @@
 
 * Changing the way the fingerprint API.
 * Providing index of item in some `clustering/record-linkage` callbacks.
+* Adding `merge` option to `clustering/record-linkage/key-collision`.
 
 ## 0.15.0
 

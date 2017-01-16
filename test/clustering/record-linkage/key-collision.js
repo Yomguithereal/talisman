@@ -102,4 +102,16 @@ describe('key-collision', function() {
       ]
     ]);
   });
+
+  it('should be possible to attempt to merge clusters.', function() {
+    const clusters = keyCollision({
+      keys: doubleMetaphone,
+      merge: true
+    }, PHONETIC);
+
+    assert.deepEqual(clusters, [
+      ['Smith', 'Smyth', 'Schmidt', 'Smit'],
+      ['Paul', 'Pol']
+    ]);
+  });
 });
