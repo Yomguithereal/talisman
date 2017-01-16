@@ -11,12 +11,10 @@ export function createKeyer(options) {
 
   const tokenizer = createTokenizer(options);
 
-  return function(n, string) {
-    if (options.ngrams)
-      return tokenizer(n, string).join('');
+  if (options.ngrams)
+    return (n, string) => tokenizer(n, string).join('');
 
-    return tokenizer(n).join(' ');
-  };
+  return string => tokenizer(string).join(' ');
 }
 
 export default createKeyer();
