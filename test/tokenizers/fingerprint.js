@@ -5,6 +5,7 @@
  */
 import assert from 'assert';
 import fingerprint, {createTokenizer, ngramsFingerprint} from '../../src/tokenizers/fingerprint';
+import fingerprintKeyer, {createKeyer, ngramsFingerprint as ngramsFingerprintKeyer} from '../../src/keyers/fingerprint';
 
 describe('fingerprint', function() {
 
@@ -21,6 +22,7 @@ describe('fingerprint', function() {
 
     tests.forEach(function([string, key]) {
       assert.strictEqual(fingerprint(string).join(' '), key, `${string} => ${key}`);
+      assert.strictEqual(fingerprintKeyer(string), key, `${string} => ${key}`);
     });
   });
 
@@ -35,15 +37,22 @@ describe('fingerprint', function() {
 
     tests.forEach(function([n, string, key]) {
       assert.strictEqual(ngramsFingerprint(n, string).join(''), key, `(${n}) ${string} => ${key}`);
+      assert.strictEqual(ngramsFingerprintKeyer(n, string), key, `(${n}) ${string} => ${key}`);
     });
   });
 
   it('should be possible to filter stopwords.', function() {
-    const tokenizer = createTokenizer({stopwords: ['de']});
+    const tokenizer = createTokenizer({stopwords: ['de']}),
+          keyer = createKeyer({stopwords: ['de']});
 
     assert.deepEqual(
       tokenizer('Université de Paris'),
       ['paris', 'universite']
+    );
+
+    assert.strictEqual(
+      keyer('Université de Paris'),
+      'paris universite'
     );
   });
 
