@@ -21,11 +21,14 @@
  * @param  {mixed}  b - The second sequence to process.
  * @return {number}   - The Levenshtein distance between a & b.
  */
+const vector = [],
+      codes = [];
+
 function levenshteinForStrings(a, b) {
   if (a === b)
     return 0;
 
-  var tmp;
+  let tmp;
 
   // Swapping the strings so that the shorter string is the first one.
   if (a.length > b.length) {
@@ -63,12 +66,14 @@ function levenshteinForStrings(a, b) {
   if (!la)
     return lb;
 
-  const v0 = new Array(lb);
+  const v0 = vector;
 
   let i = 0;
 
-  while (i < lb)
+  while (i < lb) {
+    codes[i] = b.charCodeAt(i);
     v0[i] = ++i;
+  }
 
   let current = 0;
 
@@ -82,11 +87,10 @@ function levenshteinForStrings(a, b) {
     for (let j = 0; j < lb; j++) {
       const above = current;
 
-      const charB = b.charCodeAt(j);
       current = left;
       left = v0[j];
 
-      if (charA !== charB) {
+      if (charA !== codes[j]) {
 
         // Insertion
         if (left < current)
