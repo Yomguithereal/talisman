@@ -28,11 +28,10 @@ function levenshteinForStrings(a, b) {
   if (a === b)
     return 0;
 
-  let tmp;
+  let tmp = a;
 
   // Swapping the strings so that the shorter string is the first one.
   if (a.length > b.length) {
-    tmp = a;
     a = b;
     b = tmp;
   }
@@ -76,17 +75,21 @@ function levenshteinForStrings(a, b) {
     v0[i] = ++i;
   }
 
-  let current = 0;
+  let current = 0,
+      left,
+      above,
+      charA,
+      j;
 
   // Starting the nested loops
   for (i = 0; i < la; i++) {
-    let left = i;
-
+    left = i;
     current = i + 1;
-    const charA = a.charCodeAt(start + i);
 
-    for (let j = 0; j < lb; j++) {
-      const above = current;
+    charA = a.charCodeAt(start + i);
+
+    for (j = 0; j < lb; j++) {
+      above = current;
 
       current = left;
       left = v0[j];
@@ -118,6 +121,14 @@ export default function levenshtein(a, b) {
   if (a === b)
     return 0;
 
+  let tmp = a;
+
+  // Swapping the strings so that the shorter string is the first one.
+  if (a.length > b.length) {
+    a = b;
+    b = tmp;
+  }
+
   let la = a.length,
       lb = b.length;
 
@@ -126,59 +137,55 @@ export default function levenshtein(a, b) {
   if (!lb)
     return la;
 
-  // Swapping the strings so that the shorter string is the first one.
-  if (la > lb) {
-    [a, b] = [b, a];
-    [la, lb] = [lb, la];
-  }
-
   // Ignoring common suffix
-  while (la > 0 && (a[la - 1] === b[lb - 1])) {
+  // NOTE: ~- is a fast - 1 operation, it does not work on big number though
+  while (la > 0 && (a[~-la] === b[~-lb])) {
     la--;
     lb--;
   }
 
+  if (!la)
+    return lb;
+
   let start = 0;
 
-  // If a common prefix exists of if a is a full b suffix
-  if (a[0] === b[0] || !la) {
+  // Ignoring common prefix
+  while (start < la && (a[start] === b[start]))
+    start++;
 
-    // Common prefix can also be ignored
-    while (start < la && a[start] === b[start])
-      start++;
+  la -= start;
+  lb -= start;
 
-    la -= start;
-    lb -= start;
+  if (!la)
+    return lb;
 
-    if (!la)
-      return lb;
+  const v0 = vector;
 
-    b = b.slice(start, start + lb);
-  }
+  let i = 0;
 
-  const v0 = new Array(lb),
-        v2 = new Array(lb);
+  while (i < lb)
+    v0[i] = ++i;
 
-  for (let i = 0; i < lb; i++)
-    v0[i] = i + 1;
-
-  let current = 0;
+  let current = 0,
+      left,
+      above,
+      charA,
+      j;
 
   // Starting the nested loops
-  for (let i = 0; i < la; i++) {
-    let left = i;
-
+  for (i = 0; i < la; i++) {
+    left = i;
     current = i + 1;
-    const charA = a[start + i];
 
-    for (let j = 0; j < lb; j++) {
-      const above = current;
+    charA = a[start + i];
 
-      const charB = b[j];
-      v2[j] = current = left;
+    for (j = 0; j < lb; j++) {
+      above = current;
+
+      current = left;
       left = v0[j];
 
-      if (charA !== charB) {
+      if (charA !== b[j]) {
 
         // Insertion
         if (left < current)
@@ -197,6 +204,8 @@ export default function levenshtein(a, b) {
 
   return current;
 }
+
+// TODO: adapt the optimizations above
 
 /**
  * Function returning the Levenshtein distance between two sequences

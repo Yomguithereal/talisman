@@ -7,6 +7,7 @@
 * Adding `merge` option to `clustering/record-linkage/key-collision`.
 * Adding the `keyers/fingerprint` namespace back.
 * Moving `phonetics/omission` & `phonetics/skeleton` back to the `keyers` namespace.
+* Improving `metrics/distance/levenshtein` performance.
 
 ## 0.15.0
 
