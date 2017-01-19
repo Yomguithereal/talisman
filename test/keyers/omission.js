@@ -1,9 +1,9 @@
 /**
- * Talisman phonetics/omission tests
- * ==================================
+ * Talisman keyers/omission tests
+ * ===============================
  */
 import assert from 'assert';
-import omission from '../../src/phonetics/omission';
+import omission from '../../src/keyers/omission';
 
 describe('omission', function() {
 

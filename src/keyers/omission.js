@@ -1,6 +1,6 @@
 /**
- * Talisman phonetics/omission
- * ============================
+ * Talisman keyers/omission
+ * =========================
  *
  * Keyer taking a string and normalizing it into a "omission key".
  *

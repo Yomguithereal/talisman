@@ -1,9 +1,9 @@
 /**
- * Talisman phonetics/skeleton tests
- * ==================================
+ * Talisman keyers/skeleton tests
+ * ===============================
  */
 import assert from 'assert';
-import skeleton from '../../src/phonetics/skeleton';
+import skeleton from '../../src/keyers/skeleton';
 
 describe('skeleton', function() {
 
