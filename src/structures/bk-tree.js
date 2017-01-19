@@ -44,6 +44,7 @@ function searchWord(distance, tree, word, n, acc) {
   if (d <= n)
     acc.push(tree.word);
 
+  // NOTE: this can be improved by for in iteration!
   for (let i = d - n, l = d + n + 1; i < l; i++) {
     const children = tree.children[i];
 

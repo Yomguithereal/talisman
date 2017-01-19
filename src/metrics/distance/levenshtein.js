@@ -21,7 +21,95 @@
  * @param  {mixed}  b - The second sequence to process.
  * @return {number}   - The Levenshtein distance between a & b.
  */
+function levenshteinForStrings(a, b) {
+  if (a === b)
+    return 0;
+
+  var tmp;
+
+  // Swapping the strings so that the shorter string is the first one.
+  if (a.length > b.length) {
+    tmp = a;
+    a = b;
+    b = tmp;
+  }
+
+  let la = a.length,
+      lb = b.length;
+
+  if (!la)
+    return lb;
+  if (!lb)
+    return la;
+
+  // Ignoring common suffix
+  while (la > 0 && (a.charCodeAt(la - 1) === b.charCodeAt(lb - 1))) {
+    la--;
+    lb--;
+  }
+
+  if (!la)
+    return lb;
+
+  let start = 0;
+
+  // Ignoring common prefix
+  while (start < la && (a.charCodeAt(start) === b.charCodeAt(start)))
+    start++;
+
+  la -= start;
+  lb -= start;
+
+  if (!la)
+    return lb;
+
+  const v0 = new Array(lb);
+
+  let i = 0;
+
+  while (i < lb)
+    v0[i] = ++i;
+
+  let current = 0;
+
+  // Starting the nested loops
+  for (i = 0; i < la; i++) {
+    let left = i;
+
+    current = i + 1;
+    const charA = a.charCodeAt(start + i);
+
+    for (let j = 0; j < lb; j++) {
+      const above = current;
+
+      const charB = b.charCodeAt(j);
+      current = left;
+      left = v0[j];
+
+      if (charA !== charB) {
+
+        // Insertion
+        if (left < current)
+          current = left;
+
+        // Deletion
+        if (above < current)
+          current = above;
+
+        current++;
+      }
+
+      v0[j] = current;
+    }
+  }
+
+  return current;
+};
+
 export default function levenshtein(a, b) {
+  if (typeof a === 'string')
+    return levenshteinForStrings(a, b);
+
   if (a === b)
     return 0;
 

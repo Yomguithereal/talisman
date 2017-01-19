@@ -1,4 +1,6 @@
 node_modules
+experiments
+benchmark
 .gitignore
 .npmignore
 *.yml
