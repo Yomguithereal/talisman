@@ -2,7 +2,7 @@
  * Talisman structure/bk-tree
  * ===========================
  *
- * Implementation of a Buckhard-Keller tree, allowing fast lookups of words
+ * Implementation of a Burkhard-Keller tree, allowing fast lookups of words
  * that lie within a specified distance of the query word.
  *
  * [Reference]:
