@@ -21,7 +21,6 @@
   },
   "keywords": [
     "bayes",
-    "bk tree",
     "bloom filter",
     "canberra",
     "caverphone",
@@ -56,7 +55,6 @@
     "sorensen",
     "soundex",
     "stats",
-    "symspell",
     "tfidf",
     "tokenizer",
     "tversky",
