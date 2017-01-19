@@ -3,6 +3,8 @@ require('babel-core/register');
 var levenshtein = require('../src/metrics/distance/levenshtein');
 var leven = require('leven');
 
+var limited = levenshtein.limited;
+
 function run(fn) {
   fn('a', 'b');
   fn('ab', 'ac');
@@ -28,5 +30,9 @@ suite('Levenshtein', function() {
 
   bench('leven', function() {
     run(leven);
+  });
+
+  bench('limited', function() {
+    run(limited.bind(null, 2));
   });
 });

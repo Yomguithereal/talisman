@@ -13,22 +13,23 @@
  *
  * [Tags]: metric, string metric.
  */
+const VECTOR = [],
+      CODES = [];
 
 /**
- * Function returning the Levenshtein distance between two sequences.
+ * Function returning the Levenshtein distance between two sequences. This
+ * version only works on strings and leverage the `.charCodeAt` method to
+ * perform fast comparisons between 16 bits integers.
  *
- * @param  {mixed}  a - The first sequence to process.
- * @param  {mixed}  b - The second sequence to process.
- * @return {number}   - The Levenshtein distance between a & b.
+ * @param  {string}  a - The first string to process.
+ * @param  {string}  b - The second string to process.
+ * @return {number}    - The Levenshtein distance between a & b.
  */
-const vector = [],
-      codes = [];
-
 function levenshteinForStrings(a, b) {
   if (a === b)
     return 0;
 
-  let tmp = a;
+  const tmp = a;
 
   // Swapping the strings so that the shorter string is the first one.
   if (a.length > b.length) {
@@ -66,12 +67,12 @@ function levenshteinForStrings(a, b) {
   if (!la)
     return lb;
 
-  const v0 = vector;
+  const v0 = VECTOR;
 
   let i = 0;
 
   while (i < lb) {
-    codes[i] = b.charCodeAt(i);
+    CODES[i] = b.charCodeAt(i);
     v0[i] = ++i;
   }
 
@@ -94,7 +95,7 @@ function levenshteinForStrings(a, b) {
       current = left;
       left = v0[j];
 
-      if (charA !== codes[j]) {
+      if (charA !== CODES[j]) {
 
         // Insertion
         if (left < current)
@@ -112,16 +113,25 @@ function levenshteinForStrings(a, b) {
   }
 
   return current;
-};
+}
 
+/**
+ * Function returning the Levenshtein distance between two arbitrary sequences.
+ *
+ * @param  {mixed}  a - The first sequence to process.
+ * @param  {mixed}  b - The second sequence to process.
+ * @return {number}   - The Levenshtein distance between a & b.
+ */
 export default function levenshtein(a, b) {
+
+  // If the sequences are string, we use the optimized version
   if (typeof a === 'string')
     return levenshteinForStrings(a, b);
 
   if (a === b)
     return 0;
 
-  let tmp = a;
+  const tmp = a;
 
   // Swapping the strings so that the shorter string is the first one.
   if (a.length > b.length) {
@@ -159,7 +169,7 @@ export default function levenshtein(a, b) {
   if (!la)
     return lb;
 
-  const v0 = vector;
+  const v0 = VECTOR;
 
   let i = 0;
 
@@ -205,7 +215,129 @@ export default function levenshtein(a, b) {
   return current;
 }
 
-// TODO: adapt the optimizations above
+/**
+ * Function returning the Levenshtein distance between two sequences
+ * but with a twist: this version will stop its computation if distance
+ * exceed a given maximum and return Infinity. This version only works on
+ * strings and leverage the `.charCodeAt` method to perform fast comparisons
+ * between 16 bits integers.
+ *
+ * @param  {number} max - Maximum distance.
+ * @param  {string} a   - The first string to process.
+ * @param  {string} b   - The second string to process.
+ * @return {number}     - The Levenshtein distance between a & b or Infinity.
+ */
+function limitedLevenshteinForStrings(max, a, b) {
+  if (a === b)
+    return 0;
+
+  const tmp = a;
+
+  // Swapping the strings so that the shorter string is the first one.
+  if (a.length > b.length) {
+    a = b;
+    b = tmp;
+  }
+
+  let la = a.length,
+      lb = b.length;
+
+  if (!la)
+    return lb > max ? Infinity : lb;
+  if (!lb)
+    return la > max ? Infinity : la;
+
+  // Ignoring common suffix
+  // NOTE: ~- is a fast - 1 operation, it does not work on big number though
+  while (la > 0 && (a.charCodeAt(~-la) === b.charCodeAt(~-lb))) {
+    la--;
+    lb--;
+  }
+
+  if (!la)
+    return lb > max ? Infinity : lb;
+
+  let start = 0;
+
+  // Ignoring common prefix
+  while (start < la && (a.charCodeAt(start) === b.charCodeAt(start)))
+    start++;
+
+  la -= start;
+  lb -= start;
+
+  if (!la)
+    return lb > max ? Infinity : lb;
+
+  const diff = lb - la;
+
+  if (max > lb)
+    max = lb;
+  else if (diff > max)
+    return Infinity;
+
+  const v0 = VECTOR;
+
+  let i = 0;
+
+  while (i < max) {
+    CODES[i] = b.charCodeAt(i);
+    v0[i] = ++i;
+  }
+  while (i < lb) {
+    CODES[i] = b.charCodeAt(i++);
+    v0[i] = max + 1;
+  }
+
+  const offset = max - diff,
+        haveMax = max < lb;
+
+  let jStart = 0,
+      jEnd = max;
+
+  let current = 0,
+      left,
+      above,
+      charA,
+      j;
+
+  // Starting the nested loops
+  for (i = 0; i < la; i++) {
+    left = i;
+    current = i + 1;
+
+    charA = a.charCodeAt(start + i);
+    jStart += (i > offset) ? 1 : 0;
+    jEnd += (jEnd < lb) ? 1 : 0;
+
+    for (j = jStart; j < jEnd; j++) {
+      above = current;
+
+      current = left;
+      left = v0[j];
+
+      if (charA !== CODES[j]) {
+
+        // Insertion
+        if (left < current)
+          current = left;
+
+        // Deletion
+        if (above < current)
+          current = above;
+
+        current++;
+      }
+
+      v0[j] = current;
+    }
+
+    if (haveMax && v0[i + diff] > max)
+      return Infinity;
+  }
+
+  return current <= max ? current : Infinity;
+}
 
 /**
  * Function returning the Levenshtein distance between two sequences
@@ -218,8 +350,21 @@ export default function levenshtein(a, b) {
  * @return {number}     - The Levenshtein distance between a & b or Infinity.
  */
 export function limited(max, a, b) {
+
+  // If the sequences are string, we use the optimized version
+  if (typeof a === 'string')
+    return limitedLevenshteinForStrings(max, a, b);
+
   if (a === b)
     return 0;
+
+  const tmp = a;
+
+  // Swapping the strings so that the shorter string is the first one.
+  if (a.length > b.length) {
+    a = b;
+    b = tmp;
+  }
 
   let la = a.length,
       lb = b.length;
@@ -229,35 +374,27 @@ export function limited(max, a, b) {
   if (!lb)
     return la > max ? Infinity : la;
 
-  // Swapping the strings so that the shorter string is the first one.
-  if (la > lb) {
-    [a, b] = [b, a];
-    [la, lb] = [lb, la];
-  }
-
   // Ignoring common suffix
-  while (la > 0 && (a[la - 1] === b[lb - 1])) {
+  // NOTE: ~- is a fast - 1 operation, it does not work on big number though
+  while (la > 0 && (a[~-la] === b[~-lb])) {
     la--;
     lb--;
   }
 
+  if (!la)
+    return lb > max ? Infinity : lb;
+
   let start = 0;
 
-  // If a common prefix exists of if a is a full b suffix
-  if (a[0] === b[0] || !la) {
+  // Ignoring common prefix
+  while (start < la && (a[start] === b[start]))
+    start++;
 
-    // Common prefix can also be ignored
-    while (start < la && a[start] === b[start])
-      start++;
+  la -= start;
+  lb -= start;
 
-    la -= start;
-    lb -= start;
-
-    if (!la)
-      return lb > max ? Infinity : lb;
-
-    b = b.slice(start, start + lb);
-  }
+  if (!la)
+    return lb > max ? Infinity : lb;
 
   const diff = lb - la;
 
@@ -266,14 +403,16 @@ export function limited(max, a, b) {
   else if (diff > max)
     return Infinity;
 
-  const v0 = new Array(lb),
-        v2 = new Array(lb);
+  const v0 = VECTOR;
 
-  let i;
-  for (i = 0; i < max; i++)
-    v0[i] = i + 1;
-  for (; i < lb; i++)
-    v0[i] = max + 1;
+  let i = 0;
+
+  while (i < max) {
+    v0[i] = ++i;
+  }
+  while (i < lb) {
+    v0[i++] = max + 1;
+  }
 
   const offset = max - diff,
         haveMax = max < lb;
@@ -281,25 +420,28 @@ export function limited(max, a, b) {
   let jStart = 0,
       jEnd = max;
 
-  let current = 0;
+  let current = 0,
+      left,
+      above,
+      charA,
+      j;
 
   // Starting the nested loops
   for (i = 0; i < la; i++) {
-    let left = i;
-
+    left = i;
     current = i + 1;
-    const charA = a[start + i];
+
+    charA = a[start + i];
     jStart += (i > offset) ? 1 : 0;
     jEnd += (jEnd < lb) ? 1 : 0;
 
-    for (let j = jStart; j < jEnd; j++) {
-      const above = current;
+    for (j = jStart; j < jEnd; j++) {
+      above = current;
 
-      const charB = b[j];
-      v2[j] = current = left;
+      current = left;
       left = v0[j];
 
-      if (charA !== charB) {
+      if (charA !== b[j]) {
 
         // Insertion
         if (left < current)
