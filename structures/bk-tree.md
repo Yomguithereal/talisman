@@ -1,13 +1,13 @@
 ---
 layout: page
-title: Buckhard-Keller Tree
+title: Burkhard-Keller Tree
 ---
 
 <span class="marginnote">
   Reference: <a href="https://en.wikipedia.org/wiki/BK-tree">https://en.wikipedia.org/wiki/BK-tree</a>
 </span>
 
-Buckhard-Keller trees are data structures usually used to index strings that one can then query using distance metrics such as the [Levenshtein]({{ site.baseurl }}/metrics/distance#levenshtein) distance.
+Burkhard-Keller trees are data structures usually used to index strings that one can then query using distance metrics such as the [Levenshtein]({{ site.baseurl }}/metrics/distance#levenshtein) distance.
 
 ## Use case
 
@@ -25,7 +25,7 @@ const suggestions = terms.filter(term => {
 
 But, even if this works with few terms, it will soon become hard to compute if the list of terms grows too much.
 
-Buckhard-Keller trees solves this problem by indexing the list of terms such as it becomes efficient to query them using a distance metric.
+Burkhard-Keller trees solves this problem by indexing the list of terms such as it becomes efficient to query them using a distance metric.
 
 ```js
 import BKTree from 'talisman/structures/bk-tree';
