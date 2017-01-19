@@ -46,7 +46,8 @@ function levenshteinForStrings(a, b) {
     return la;
 
   // Ignoring common suffix
-  while (la > 0 && (a.charCodeAt(la - 1) === b.charCodeAt(lb - 1))) {
+  // NOTE: ~- is a fast - 1 operation, it does not work on big number though
+  while (la > 0 && (a.charCodeAt(~-la) === b.charCodeAt(~-lb))) {
     la--;
     lb--;
   }
