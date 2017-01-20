@@ -163,9 +163,10 @@ export function quantile(options, sequence) {
   // Computing the index
   let index = (length * p) - 1;
 
-  // If the index is not an integer, we need to interpolate
-  if (index === (index | 0))
+  // If the index is an integer, we need to interpolate
+  if (index === (index | 0)) {
     return interpolation([sorted[index], sorted[index + 1]]);
+  }
 
   index = Math.ceil(index);
   return sorted[index];
