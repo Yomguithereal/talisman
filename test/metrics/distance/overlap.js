@@ -14,6 +14,8 @@ describe('overlap', function() {
       ['abc', 'def', 0],
       ['abc', 'abd', 2 / 3],
       ['abc', 'abcde', 1],
+      ['abcdefij', 'abc', 1],
+      ['abcdefij'.split(''), 'abc'.split(''), 1],
       [[1, 2, 3], [1, 2], 1]
     ];
 

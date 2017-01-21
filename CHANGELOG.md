@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.17.0
+
+* Improving `metrics/distance/overlap` performance.
+
 ## 0.16.0
 
 * Changing the way the fingerprint API.
