@@ -3,6 +3,7 @@
 ## 0.17.0
 
 * Improving `metrics/distance/overlap` performance.
+* Dropping the `structures` namespace in favor of [mnemonist](https://github.com/Yomguithereal/mnemonist).
 
 ## 0.16.0
 

@@ -5,7 +5,7 @@
  * Clustering method using a Vantage Point Tree (VPTree) to find the clusters
  * more efficiently.
  */
-import VPTree from '../../structures/vp-tree';
+import VPTree from 'mnemonist/vp-tree';
 import RecordLinkageClusterer from './abstract';
 
 /**
@@ -45,7 +45,7 @@ export class VPTreeClusterer extends RecordLinkageClusterer {
       if (visited.has(item))
         continue;
 
-      const neighbors = tree.neighborsInRange(this.radius, item);
+      const neighbors = tree.neighbors(this.radius, item);
 
       const cluster = new Array(neighbors.length);
 
