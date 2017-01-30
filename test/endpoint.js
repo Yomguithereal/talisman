@@ -42,6 +42,10 @@ describe('keyers', function() {
   require('./keyers/skeleton.js');
 });
 
+describe('keyword-extraction', function() {
+  require('./keyword-extraction/rake.js');
+});
+
 describe('classification', function() {
   require('./classification/naive-bayes.js');
   require('./classification/perceptron.js');
