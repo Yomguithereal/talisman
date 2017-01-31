@@ -43,25 +43,27 @@ function customJaroWinkler(options, a, b) {
   if (a === b)
     return 1;
 
-  const maxLength = Math.max(a.length, b.length),
-        minLength = Math.min(a.length, b.length);
+  // Computing Jaro-Winkler score
+  const dj = jaro(a, b);
 
-  // Computing prefix
-  let prefix = 0;
-  for (let i = 0, l = minLength; i < l; i++) {
+  if (dj < boostThreshold)
+    return dj;
+
+
+  const p = scalingFactor;
+  let l = 0;
+
+  const prefixLimit = Math.min(a.length, b.length, 4);
+
+  // Common prefix (up to 4 characters)
+  for (let i = 0; i < prefixLimit; i++) {
     if (a[i] === b[i])
-      prefix++;
+      l++;
     else
       break;
   }
 
-  // Computing Jaro-Winkler score
-  const j = jaro(a, b);
-
-  if (j < boostThreshold)
-    return j;
-
-  return j + Math.min(scalingFactor, 1 / maxLength) * prefix * (1 - j);
+  return dj + (l * p * (1 - dj));
 }
 
 /**

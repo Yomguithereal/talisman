@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.17.1
+
+* Fixing `metrics/distance/jaro-winkler`.
+
 ## 0.17.0
 
 * Improving `metrics/distance/overlap` performance.
