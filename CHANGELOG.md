@@ -1,11 +1,8 @@
 # Changelog
 
-## 0.17.1
-
-* Fixing `metrics/distance/jaro-winkler`.
-
 ## 0.17.0
 
+* Fixing `metrics/distance/jaro-winkler`.
 * Improving `metrics/distance/overlap` performance.
 * Dropping the `structures` namespace in favor of [mnemonist](https://github.com/Yomguithereal/mnemonist).
 
