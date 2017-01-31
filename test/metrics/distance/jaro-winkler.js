@@ -40,7 +40,8 @@ describe('jaro-winkler', function() {
       ['Dwayne'.split(''), 'Duane'.split(''), 0.84],
       ['Martha', 'Marhta', 0.96],
       ['Dixon', 'Dicksonx', 0.81],
-      ['Duane', 'Freakishlylongstring', 0.47]
+      ['Duane', 'Freakishlylongstring', 0.47],
+      ['commonlongprefixword', 'commonlongprefixworm', 0.9983]
     ];
 
     tests.forEach(function([a, b, d]) {

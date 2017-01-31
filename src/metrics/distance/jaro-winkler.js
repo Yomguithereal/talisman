@@ -61,7 +61,7 @@ function customJaroWinkler(options, a, b) {
   if (j < boostThreshold)
     return j;
 
-  return j + Math.min(scalingFactor, maxLength) * prefix * (1 - j);
+  return j + Math.min(scalingFactor, 1 / maxLength) * prefix * (1 - j);
 }
 
 /**
