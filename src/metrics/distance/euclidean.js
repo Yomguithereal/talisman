@@ -12,9 +12,9 @@
 /**
  * Function returning the squared euclidean distance between two vectors.
  *
- * @param  {mixed}  a     - The first vector.
- * @param  {mixed}  b     - The second vector.
- * @return {number}       - The squared euclidean distance between a & b.
+ * @param  {mixed}  a - The first vector.
+ * @param  {mixed}  b - The second vector.
+ * @return {number}   - The squared euclidean distance between a & b.
  *
  * @throws {Error} The function expects vectors of same dimension.
  */
@@ -33,9 +33,9 @@ export function squared(a, b) {
 /**
  * Function returning the euclidean distance between two vectors.
  *
- * @param  {mixed}  a     - The first vector.
- * @param  {mixed}  b     - The second vector.
- * @return {number}       - The euclidean distance between a & b.
+ * @param  {mixed}  a - The first vector.
+ * @param  {mixed}  b - The second vector.
+ * @return {number}   - The euclidean distance between a & b.
  *
  * @throws {Error} The function expects vector of same dimensions.
  */
