@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.0 (provisional)
+
+* Adding the `metrics/distance/guth` namespace.
+
 ## 0.17.0
 
 * Fixing `metrics/distance/jaro-winkler`.
