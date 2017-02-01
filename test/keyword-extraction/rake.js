@@ -36,6 +36,17 @@ describe('rake', function() {
   it('should properly extract keywords.', function() {
     const rake = createExtractor({stopwords: STOPWORDS});
 
-    rake(TOKENIZED_DOCUMENT);
+    const keywords = rake(TOKENIZED_DOCUMENT);
+
+    assert.deepEqual(keywords, [
+      ['minimal', 'generating', 'sets'],
+      ['linear', 'diophantine', 'equations'],
+      ['minimal', 'supporting', 'set'],
+      ['minimal', 'set'],
+      ['linear', 'constraints'],
+      ['nonstrict', 'inequations'],
+      ['upper', 'bounds'],
+      ['strict', 'inequations']
+    ]);
   });
 });
