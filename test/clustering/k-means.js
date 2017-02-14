@@ -81,6 +81,6 @@ describe('k-means', function() {
 
     const clusters = kMeans({k: 2}, data);
 
-    assert.deepEqual(clusters, [k1, k2]);
+    assert.sameDeepMembers(clusters, [k1, k2]);
   });
 });
