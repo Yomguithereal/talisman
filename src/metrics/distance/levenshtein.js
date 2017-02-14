@@ -72,7 +72,7 @@ function levenshteinForStrings(a, b) {
   let i = 0;
 
   while (i < lb) {
-    CODES[i] = b.charCodeAt(i);
+    CODES[start + i] = b.charCodeAt(start + i);
     v0[i] = ++i;
   }
 
@@ -95,7 +95,7 @@ function levenshteinForStrings(a, b) {
       current = left;
       left = v0[j];
 
-      if (charA !== CODES[j]) {
+      if (charA !== CODES[start + j]) {
 
         // Insertion
         if (left < current)
@@ -195,7 +195,7 @@ export default function levenshtein(a, b) {
       current = left;
       left = v0[j];
 
-      if (charA !== b[j]) {
+      if (charA !== b[start + j]) {
 
         // Insertion
         if (left < current)
@@ -281,11 +281,11 @@ function limitedLevenshteinForStrings(max, a, b) {
   let i = 0;
 
   while (i < max) {
-    CODES[i] = b.charCodeAt(i);
-    v0[i] = ++i;
+    CODES[start + i] = b.charCodeAt(start + i);
+    v0[start + i] = ++i;
   }
   while (i < lb) {
-    CODES[i] = b.charCodeAt(i++);
+    CODES[start + i] = b.charCodeAt(start + (i++));
     v0[i] = max + 1;
   }
 
@@ -316,7 +316,7 @@ function limitedLevenshteinForStrings(max, a, b) {
       current = left;
       left = v0[j];
 
-      if (charA !== CODES[j]) {
+      if (charA !== CODES[start + j]) {
 
         // Insertion
         if (left < current)
@@ -441,7 +441,7 @@ export function limited(max, a, b) {
       current = left;
       left = v0[j];
 
-      if (charA !== b[j]) {
+      if (charA !== b[start + j]) {
 
         // Insertion
         if (left < current)

@@ -41,7 +41,9 @@ describe('levenshtein', function() {
     ['a', '', 1],
     ['', 'a', 1],
     ['abc', '', 3],
-    ['', 'abc', 3]
+    ['', 'abc', 3],
+    ['因為我是中國人所以我會說中文', '因為我是英國人所以我會說英文', 2],
+    ['因為我是中國人所以我會說中文'.split(''), '因為我是英國人所以我會說英文'.split(''), 2]
   ];
 
   it('should correctly compute the Levenshtein distance.', function() {
