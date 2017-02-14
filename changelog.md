@@ -3,6 +3,27 @@ layout: page
 title: Changelog
 ---
 
+## 0.18.0
+
+* Adding the `metrics/distance/guth` namespace.
+* Fixing a bug related to Levenshtein distance prefix trimming.
+* Fixing a bug related to `clustering/k-means`.
+
+## 0.17.0
+
+* Fixing `metrics/distance/jaro-winkler`.
+* Improving `metrics/distance/overlap` performance.
+* Dropping the `structures` namespace in favor of [mnemonist](https://github.com/Yomguithereal/mnemonist).
+
+## 0.16.0
+
+* Changing the way the fingerprint API.
+* Providing index of item in some `clustering/record-linkage` callbacks.
+* Adding `merge` option to `clustering/record-linkage/key-collision`.
+* Adding the `keyers/fingerprint` namespace back.
+* Moving `phonetics/omission` & `phonetics/skeleton` back to the `keyers` namespace.
+* Improving `metrics/distance/levenshtein` performance.
+
 ## 0.15.0
 
 * Adding the `hash/crc32` namespace.
