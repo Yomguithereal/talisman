@@ -11,6 +11,7 @@ describe('levenshtein', function() {
     [['b', 'o', 'o', 'k'], ['b', 'a', 'c', 'k'], 2],
     [['the', 'cat', 'eats', 'mouse'], ['the', 'mouse', 'likes', 'mouse'], 2],
     ['book', 'back', 2],
+    ['bbbbookkkk', 'bbbbackkkk', 2],
     ['hello', 'helo', 1],
     ['good sir', 'baal', 8],
     ['say', 'shiver', 5],

@@ -282,7 +282,7 @@ function limitedLevenshteinForStrings(max, a, b) {
 
   while (i < max) {
     CODES[start + i] = b.charCodeAt(start + i);
-    v0[start + i] = ++i;
+    v0[i] = ++i;
   }
   while (i < lb) {
     CODES[start + i] = b.charCodeAt(start + (i++));
