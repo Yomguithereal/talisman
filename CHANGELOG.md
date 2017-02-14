@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.18.0 (provisional)
+## 0.18.0
 
 * Adding the `metrics/distance/guth` namespace.
 * Fixing a bug related to Levenshtein distance prefix trimming.
