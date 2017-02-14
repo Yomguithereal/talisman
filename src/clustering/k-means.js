@@ -145,7 +145,7 @@ export class KMeans {
       let min = Infinity,
           minIndex = 0;
 
-      for (let j = 0, m = this.dimensions; j < m; j++) {
+      for (let j = 0; j < this.k; j++) {
         const d = this.distance(vector, this.centroids[j]);
 
         if (d < min) {

@@ -73,4 +73,14 @@ describe('k-means', function() {
 
     assert.deepEqual(clustering.centroids, [[1, 2], [3, 4]]);
   });
+
+  it('should work when k and dimension of the vectors is different (Issue #103).', function() {
+    const k1 = [[1, 2, 3], [2, 1, 1], [3, 1, 4], [2, 4, 2]],
+          k2 = [[50, 45, 45], [40, 55, 64], [46, 52, 62]],
+          data = k1.concat(k2);
+
+    const clusters = kMeans({k: 2}, data);
+
+    assert.deepEqual(clusters, [k1, k2]);
+  });
 });

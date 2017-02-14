@@ -4,6 +4,7 @@
 
 * Adding the `metrics/distance/guth` namespace.
 * Fixing a bug related to Levenshtein distance prefix trimming.
+* Fixing a bug related to `clustering/k-means`.
 
 ## 0.17.0
 
