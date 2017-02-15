@@ -5,10 +5,9 @@
  */
 import {assert} from 'chai';
 import kMeans, {KMeans} from '../../src/clustering/k-means';
-import {createSample} from '../../src/helpers/random';
 import seedrandom from 'seedrandom';
 
-const createSampler = () => createSample(seedrandom('test'));
+const rng = () => seedrandom('test');
 
 describe('k-means', function() {
 
@@ -42,7 +41,7 @@ describe('k-means', function() {
     }, / k /);
 
     assert.throws(function() {
-      kMeans({sampler: 'test', k: 1}, [[1, 2]]);
+      kMeans({rng: 'test', k: 1}, [[1, 2]]);
     }, /function/);
 
     assert.throws(function() {
@@ -55,7 +54,7 @@ describe('k-means', function() {
           k2 = [[50, 45], [40, 55], [46, 52]],
           data = k1.concat(k2);
 
-    const clusters = kMeans({k: 2, sampler: createSampler()}, data);
+    const clusters = kMeans({k: 2, rng: rng()}, data);
 
     assert.deepEqual(clusters, [k2, k1]);
   });
@@ -83,8 +82,16 @@ describe('k-means', function() {
           k2 = [[50, 45, 45], [40, 55, 64], [46, 52, 62]],
           data = k1.concat(k2);
 
-    const clusters = kMeans({k: 2, sampler: createSampler()}, data);
+    const clusters = kMeans({k: 2, rng: rng()}, data);
 
     assert.deepEqual(clusters, [k2, k1]);
+  });
+
+  it('should not fail to fill empty clusters.', function() {
+    const data = [[1, 2, 1], [1, 2, 1], [1, 2, 1]];
+
+    const clusters = kMeans({k: 3, rng: rng()}, data);
+
+    assert.deepEqual(clusters, data.map(vector => [vector]));
   });
 });
