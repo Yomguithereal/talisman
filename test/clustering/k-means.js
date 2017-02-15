@@ -5,6 +5,10 @@
  */
 import {assert} from 'chai';
 import kMeans, {KMeans} from '../../src/clustering/k-means';
+import {createSample} from '../../src/helpers/random';
+import seedrandom from 'seedrandom';
+
+const createSampler = () => createSample(seedrandom('test'));
 
 describe('k-means', function() {
 
@@ -51,9 +55,9 @@ describe('k-means', function() {
           k2 = [[50, 45], [40, 55], [46, 52]],
           data = k1.concat(k2);
 
-    const clusters = kMeans({k: 2}, data);
+    const clusters = kMeans({k: 2, sampler: createSampler()}, data);
 
-    assert.sameDeepMembers(clusters, [k1, k2]);
+    assert.deepEqual(clusters, [k2, k1]);
   });
 
   it('should be possible to pass initial centroids.', function() {
@@ -79,8 +83,8 @@ describe('k-means', function() {
           k2 = [[50, 45, 45], [40, 55, 64], [46, 52, 62]],
           data = k1.concat(k2);
 
-    const clusters = kMeans({k: 2}, data);
+    const clusters = kMeans({k: 2, sampler: createSampler()}, data);
 
-    assert.sameDeepMembers(clusters, [k1, k2]);
+    assert.deepEqual(clusters, [k2, k1]);
   });
 });
