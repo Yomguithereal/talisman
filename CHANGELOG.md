@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.1 (provisional)
+
+* Fixing & optimizing `clustering/k-means`.
+
 ## 0.18.0
 
 * Adding the `metrics/distance/guth` namespace.

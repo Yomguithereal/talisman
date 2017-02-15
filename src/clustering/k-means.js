@@ -18,7 +18,8 @@ const DEFAULTS = {
   distance: euclidean,
   maxIterations: 300,
   initialCentroids: null,
-  rng: Math.random
+  rng: Math.random,
+  vector: null
 };
 
 /**
@@ -42,14 +43,14 @@ function compareCentroids(a, b) {
  * @constructor
  * @param {array}          data                       - Array of vectors.
  * @param {object}         options                    - Possible options:
- * @param {number}         [options.k]                - Number of clusters.
- * @param {function}       [options.distance]         - Distance function.
- * @param {number}         [options.maxIterations]
+ * @param {number}            [k]                     - Number of clusters.
+ * @param {function}          [distance]              - Distance function.
+ * @param {number}            [maxIterations]
  *   - Maximum number of iterations.
- * @param {array|function} [options.initialCentroids]
+ * @param {array|function}    [initialCentroids]
  *   - Either an array of initial centroids or a function computing them.
- * @param {function}       [options.sampler]          - Sampling function.
- * @param {function}       [options.rng]              - RNG function to use.
+ * @param {function}          [rng]                   - RNG function to use.
+ * @param {function}          [vector]                - Returning the vector.
  */
 export class KMeans {
   constructor(data, options = {}) {
@@ -70,6 +71,14 @@ export class KMeans {
 
     if (typeof rng !== 'function')
       throw new Error('talisman/clustering/k-means: `rng` should be a function.');
+
+    const vectorGetter = ('vector' in options) ? options.vector : null;
+
+    if (vectorGetter && typeof vectorGetter !== 'function')
+      throw new Error('talisman/clustering/k-means: `vector` should be a function.');
+
+    if (vectorGetter)
+      this.vectorGetter = vectorGetter;
 
     this.k = options.k || DEFAULTS.k;
     this.distance = options.distance || DEFAULTS.distance;
