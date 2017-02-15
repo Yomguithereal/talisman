@@ -136,7 +136,7 @@ export class KMeans {
       return this;
 
     // Initializing clusters states
-    const clusterStates = new Uint8Array();
+    const clusterStates = new Uint8Array(this.k);
 
     // Iterating through the dataset's vectors
     for (let i = 0, l = this.data.length; i < l; i++) {
