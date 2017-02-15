@@ -163,11 +163,19 @@ export class KMeans {
     }
 
     // If any of the clusters is empty, we need to give it a random vector
+    const alreadyPluckedVectors = new Set();
+
     for (let i = 0; i < this.k; i++) {
       if (!clusterStates[i]) {
 
         // Finding a random vector
-        const randomVectorIndex = this.randomVectorIndex();
+        let randomVectorIndex;
+        do {
+          randomVectorIndex = this.randomVectorIndex();
+        }
+        while (alreadyPluckedVectors.has(randomVectorIndex));
+
+        alreadyPluckedVectors.add(randomVectorIndex);
 
         // Let's put it in our empty cluster
         this.clusters[randomVectorIndex] = i;
