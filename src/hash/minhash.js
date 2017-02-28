@@ -13,7 +13,7 @@
  * Amalfitan Coast, Salerno, Italy, June 11-13, 1997.
  */
 import crc32 from './crc32';
-import {createRandom} from '../helpers/random';
+import {createRandom} from 'pandemonium/random';
 
 // TODO: cleanup the type specification to be able to return an Int32Array
 // rather than what I feel seems to be buggy.

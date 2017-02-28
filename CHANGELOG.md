@@ -3,6 +3,7 @@
 ## 0.18.1 (provisional)
 
 * Fixing & optimizing `clustering/k-means`.
+* Dropping the `helpers/random` namespace inf favor of [pandemonium](https://github.com/Yomguithereal/pandemonium).
 
 ## 0.18.0
 

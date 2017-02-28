@@ -8,7 +8,8 @@
  */
 import euclidean from '../metrics/distance/euclidean';
 import {vec} from '../helpers/vectors';
-import {createRandom, createSample} from '../helpers/random';
+import {createRandom} from 'pandemonium/random';
+import {createSample} from 'pandemonium/sample';
 
 /**
  * Default options for k-means clustering.

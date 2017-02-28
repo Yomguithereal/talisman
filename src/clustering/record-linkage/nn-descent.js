@@ -14,10 +14,8 @@
  * Measures" Wei Dong, Moses Charikar, Kai Li.
  */
 import RecordLinkageClusterer from './abstract';
-import {
-  createChoice,
-  createDangerousButPerformantSample
-} from '../../helpers/random';
+import {createChoice} from 'pandemonium/choice';
+import {createDangerousButPerformantSample} from 'pandemonium/dangerous-but-performant-sample';
 
 // TODO: JSDoc
 

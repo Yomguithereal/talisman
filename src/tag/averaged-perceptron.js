@@ -8,7 +8,7 @@
  *
  * [Reference]: http://spacy.io/blog/part-of-speech-POS-tagger-in-python/
  */
-import {createShuffle} from '../helpers/random';
+import {createShuffle} from 'pandemonium/shuffle';
 
 /**
  * Constants.
