@@ -19,7 +19,8 @@ describe('normalize', function() {
       ['Straß', 'strass', 'Strass'],
       ['What now…', 'what now...', 'What now...'],
       ['It’s uncanny!', 'it\'s uncanny!', 'It\'s uncanny!'],
-      ['Not      a «problem»      \t \t\n', 'not a "problem"', 'Not a "problem"']
+      ['Not      a «problem»      \t \t\n', 'not a "problem"', 'Not a "problem"'],
+      ['so — annoying', 'so - annoying']
     ];
 
     const keepCaseNormalizer = createNormalizer({keepCase: true}),

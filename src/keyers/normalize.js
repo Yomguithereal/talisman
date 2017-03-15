@@ -9,7 +9,8 @@
 import deburr from 'lodash/deburr';
 import {
   SINGLE_QUOTES as SINGLE_QUOTES_CLASS,
-  DOUBLE_QUOTES as DOUBLE_QUOTES_CLASS
+  DOUBLE_QUOTES as DOUBLE_QUOTES_CLASS,
+  HYPHENS as HYPHENS_CLASS
 } from '../regexp/classes';
 
 /**
@@ -18,6 +19,7 @@ import {
 const CONTROL_CHARACTERS = new RegExp('[\\x00-\\x08\\x0A-\\x1F\\x7F]', 'g'),
       SINGLE_QUOTES = new RegExp(`[${SINGLE_QUOTES_CLASS}]`, 'g'),
       DOUBLE_QUOTES = new RegExp(`[${DOUBLE_QUOTES_CLASS}]`, 'g'),
+      HYPHENS = new RegExp(`[${HYPHENS_CLASS}]`, 'g'),
       WHITESPACE_COMPRESSION = /\s+/g;
 
 const CONVERSIONS = [
@@ -56,7 +58,8 @@ export function createNormalizer(params) {
       .replace(WHITESPACE_COMPRESSION, ' ')
       .replace(CONTROL_CHARACTERS, '')
       .replace(SINGLE_QUOTES, '\'')
-      .replace(DOUBLE_QUOTES, '"');
+      .replace(DOUBLE_QUOTES, '"')
+      .replace(HYPHENS, '-');
 
     for (let i = 0, l = CONVERSIONS.length; i < l; i++) {
       const pattern = CONVERSIONS[i][0],
