@@ -2,6 +2,7 @@
 
 ## 0.18.1 (provisional)
 
+* Adding the `clustering/record-linkage/leader` namespace.
 * Fixing & optimizing `clustering/k-means`.
 * Dropping the `helpers/random` namespace inf favor of [pandemonium](https://github.com/Yomguithereal/pandemonium).
 

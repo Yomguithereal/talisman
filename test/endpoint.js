@@ -60,6 +60,7 @@ describe('clustering', function() {
     require('./clustering/record-linkage/blocking.js');
     require('./clustering/record-linkage/canopy.js');
     require('./clustering/record-linkage/key-collision.js');
+    require('./clustering/record-linkage/leader.js');
     require('./clustering/record-linkage/naive.js');
     require('./clustering/record-linkage/nn-descent.js');
     require('./clustering/record-linkage/sorted-neighborhood.js');
