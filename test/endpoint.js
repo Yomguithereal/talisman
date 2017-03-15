@@ -37,6 +37,7 @@ describe('inflectors', function() {
 
 describe('keyers', function() {
 
+  require('./keyers/normalize.js');
   require('./keyers/omission.js');
   require('./keyers/skeleton.js');
 });
