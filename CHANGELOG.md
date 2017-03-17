@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.19.0 (provisional)
+## 0.19.0
 
 * Adding the `clustering/record-linkage/leader` namespace.
 * Adding the `keyers/name-power-set` namespace.
