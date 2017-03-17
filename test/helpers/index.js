@@ -6,7 +6,6 @@
 import assert from 'assert';
 import {
   findall,
-  numericSort,
   seq,
   squeeze,
   translation
@@ -27,25 +26,6 @@ describe('index', function() {
         findall(/t/, 'test').map(m => ([m[0], m.index])),
         [['t', 0]]
       );
-    });
-  });
-
-  describe('#.numericSort', function() {
-
-    it('should properly sort numbers.', function() {
-      assert.deepEqual(
-        numericSort([4, 1, 3, 2, 5]),
-        [1, 2, 3, 4, 5]
-      );
-    });
-
-    it('should not mutate the given array.', function() {
-      const array = [2, 1, 3],
-            sortedArray = numericSort(array);
-
-      assert(array !== sortedArray);
-      assert.deepEqual(array, [2, 1, 3]);
-      assert.deepEqual(sortedArray, [1, 2, 3]);
     });
   });
 
