@@ -1,6 +1,6 @@
 /**
- * Talisman keyers/normalize tests
- * ================================
+ * Talisman keyers/name-power-set tests
+ * =====================================
  */
 import assert from 'assert';
 import namePowerSet from '../../src/keyers/name-power-set';
