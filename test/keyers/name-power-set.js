@@ -8,6 +8,10 @@ import namePowerSet from '../../src/keyers/name-power-set';
 describe('name-power-set', function() {
 
   it('should return a correct name power set.', function() {
+    assert.deepEqual(namePowerSet('Henry'), [
+      ['Henry']
+    ]);
+
     assert.deepEqual(namePowerSet('John Henry'), [
       ['Henry', 'John'],
       ['H', 'John'],
