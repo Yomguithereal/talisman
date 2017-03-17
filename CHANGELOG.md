@@ -8,7 +8,7 @@
 * Adding the `tokenizers/fingerprint/name` namespace.
 * Adding the `tokenizers/skipgrams` namespace.
 * Fixing & optimizing `clustering/k-means`.
-* Dropping the `helpers/random` namespace inf favor of [pandemonium](https://github.com/Yomguithereal/pandemonium).
+* Dropping the `helpers/random` namespace in favor of [pandemonium](https://github.com/Yomguithereal/pandemonium).
 
 ## 0.18.0
 
