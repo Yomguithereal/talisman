@@ -76,13 +76,17 @@ function permutations(code) {
 /**
  * Function returning the name power set.
  *
- * @param  {string} name - Target name.
+ * @param  {string|array} name - Target name.
  * @param  {array}
  */
 export default function namePowerSet(name) {
 
+  // If the name is not yet tokenized, we do so
+  if (typeof name === 'string')
+    name = words(name);
+
   // Gathering items which are the sorted unique tokens of the name
-  const tokens = uniq(words(name)).sort();
+  const tokens = uniq(name).sort();
 
   if (tokens.length < 2)
     return [tokens];

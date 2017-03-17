@@ -43,4 +43,12 @@ describe('name-power-set', function() {
       ['R', 'Tolkien']
     ]);
   });
+
+  it('should also work on already tokenized names.', function() {
+    assert.deepEqual(namePowerSet(['john', 'henry']), [
+      ['henry', 'john'],
+      ['h', 'john'],
+      ['henry', 'j']
+    ]);
+  });
 });
