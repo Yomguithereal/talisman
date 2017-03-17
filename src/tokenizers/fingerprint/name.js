@@ -77,7 +77,5 @@ export default function nameFingerprint(name) {
   for (let i = 0, l = RULES.length; i < l; i++)
     name = name.replace(RULES[i][0], RULES[i][1]);
 
-  name = squeeze(name);
-
-  return tokenizer(name);
+  return tokenizer(name).map(squeeze);
 }
