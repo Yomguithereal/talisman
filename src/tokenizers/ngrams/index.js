@@ -6,7 +6,6 @@
  *
  * [Reference]: https://en.wikipedia.org/wiki/N-gram
  */
-import {seq} from '../../helpers';
 
 /**
  * Function taking a sequence and computing its ngrams.
@@ -22,8 +21,6 @@ export default function ngrams(n, sequence) {
     throw Error('talisman/tokenizers/ngrams: first argument should be a positive integer > 0.');
 
   const isString = typeof sequence === 'string';
-
-  sequence = seq(sequence);
 
   const subsequences = [];
 
