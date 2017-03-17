@@ -5,6 +5,7 @@
  * Keyer based on the fingerprint tokenizer.
  */
 import {createTokenizer} from '../tokenizers/fingerprint';
+import nameFingerprintTokenizer from '../tokenizers/fingerprint/name';
 
 export function createKeyer(options) {
   options = options || {};
@@ -21,4 +22,6 @@ export default createKeyer();
 
 const ngramsFingerprint = createKeyer({ngrams: true});
 
-export {ngramsFingerprint};
+const nameFingerprint = name => nameFingerprintTokenizer(name).join(' ');
+
+export {ngramsFingerprint, nameFingerprint};

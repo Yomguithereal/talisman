@@ -5,7 +5,12 @@
  */
 import assert from 'assert';
 import fingerprint, {createTokenizer, ngramsFingerprint} from '../../src/tokenizers/fingerprint';
-import fingerprintKeyer, {createKeyer, ngramsFingerprint as ngramsFingerprintKeyer} from '../../src/keyers/fingerprint';
+import fingerprintKeyer, {
+  createKeyer,
+  ngramsFingerprint as ngramsFingerprintKeyer,
+  nameFingerprint as nameFingerprintKeyer
+} from '../../src/keyers/fingerprint';
+import nameFingerprint from '../../src/tokenizers/fingerprint/name';
 
 describe('fingerprint', function() {
 
@@ -81,5 +86,27 @@ describe('fingerprint', function() {
       tokenizer('l\'université de Bade-Wurt'),
       tokenizer('Bade-Wurt, université')
     );
+  });
+
+  it('should be possible to use the name fingerprint tokenizer.', function() {
+    const names = [
+      ['Pape N\'Diaye', ['ndiaye', 'pape']],
+      ['McCallister', ['macalister']],
+      ['Mac Callister', ['macalister']],
+      ['Moussorgski', ['mousorgsky']],
+      ['Jet Lee', ['jet', 'li']],
+      ['Van Mergereen', ['mergeren', 'von']],
+      ['Dörk', ['doerk']],
+      ['Düring', ['duering']],
+      ['Jean-Michel Jarre', ['jare', 'jean', 'michel']],
+      ['Johnatan Coe Sr.', ['coe', 'johnatan']],
+      ['Johnatan Coe (Senior.)', ['coe', 'johnatan']],
+      ['O\'Connell', ['oconel']]
+    ];
+
+    names.forEach(function([name, tokens]) {
+      assert.deepEqual(nameFingerprint(name), tokens, `"${name}" => [${tokens.join(', ')}]`);
+      assert.strictEqual(nameFingerprintKeyer(name), tokens.join(' '));
+    });
   });
 });
