@@ -3,18 +3,18 @@
  * ================================
  */
 import assert from 'assert';
-import namePowertSet from '../../src/keyers/name-power-set';
+import namePowerSet from '../../src/keyers/name-power-set';
 
 describe('name-power-set', function() {
 
   it('should return a correct name power set.', function() {
-    assert.deepEqual(namePowertSet('John Henry'), [
+    assert.deepEqual(namePowerSet('John Henry'), [
       ['Henry', 'John'],
       ['H', 'John'],
       ['Henry', 'J']
     ]);
 
-    assert.deepEqual(namePowertSet('John Philip Henry'), [
+    assert.deepEqual(namePowerSet('John Philip Henry'), [
       ['Henry', 'John'],
       ['H', 'John'],
       ['Henry', 'J'],
@@ -33,7 +33,7 @@ describe('name-power-set', function() {
       ['John', 'P']
     ]);
 
-    assert.deepEqual(namePowertSet('J.R.R. Tolkien'), [
+    assert.deepEqual(namePowerSet('J.R.R. Tolkien'), [
       ['J', 'R', 'Tolkien'],
       ['J', 'Tolkien'],
       ['R', 'Tolkien']

@@ -14,6 +14,7 @@ import words from '../tokenizers/words';
 // TODO: disallow single token (on option)
 // TODO: option to skip or not
 // TODO: possibility to pass tokens rather than a string
+// TODO: tweak power set token number threshold (heuristic function genre n or n - 1 etc.)
 
 /**
  * Function expanding token by multiplexing tokens that are not initials.
