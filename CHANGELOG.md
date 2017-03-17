@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.18.1 (provisional)
+## 0.19.0 (provisional)
 
 * Adding the `clustering/record-linkage/leader` namespace.
 * Adding the `keyers/normalize` namespace.
+* Adding the `tokenizers/skipgrams` namespace.
 * Fixing & optimizing `clustering/k-means`.
 * Dropping the `helpers/random` namespace inf favor of [pandemonium](https://github.com/Yomguithereal/pandemonium).
 

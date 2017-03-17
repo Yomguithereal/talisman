@@ -1,6 +1,6 @@
 /**
- * Talisman tokenizers/ngram tests
- * ================================
+ * Talisman tokenizers/ngrams tests
+ * =================================
  *
  */
 import assert from 'assert';

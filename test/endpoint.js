@@ -190,7 +190,7 @@ describe('tokenizers', function() {
     require('./tokenizers/lines/naive.js');
   });
 
-  require('./tokenizers/ngrams');
+  require('./tokenizers/ngrams.js');
 
   describe('paragraphs', function() {
     require('./tokenizers/paragraphs/naive.js');
@@ -200,6 +200,8 @@ describe('tokenizers', function() {
     require('./tokenizers/sentences/naive.js');
     require('./tokenizers/sentences/punkt.js');
   });
+
+  require('./tokenizers/skipgrams.js');
 
   describe('syllables', function() {
     require('./tokenizers/syllables/legalipy.js');
