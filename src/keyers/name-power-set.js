@@ -15,6 +15,9 @@ import words from '../tokenizers/words';
 // TODO: option to skip or not
 // TODO: possibility to pass tokens rather than a string
 // TODO: tweak power set token number threshold (heuristic function genre n or n - 1 etc.)
+// TODO: option to convert to acronym or not
+// TODO: predicate to know if we acronym or not (like do it only on firstName for instance)
+// TODO: return sets as strings, not tokens
 
 /**
  * Function expanding token by multiplexing tokens that are not initials.
