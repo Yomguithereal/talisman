@@ -23,6 +23,10 @@ describe('html-text', function() {
     const tests = [
       ['<a href="test.com">Hello World!</a>', 'Hello World!'],
       ['<div><p>Hello</p><p>World!</p></div>', 'HelloWorld!'],
+      ['<!-- This is a comment --><p>Hello</p>', 'Hello'],
+      ['<!--This is a comment--><p>Hello</p>', 'Hello'],
+      ['<p>This is a &eacute; no?</p>', 'This is a é no?'],
+      ['<p>Some text <link />ok?', 'Some text ok?']
       // [BASIC_HTML, 'Hello What are you doing?Link towards somethingWorld!']
     ];
 

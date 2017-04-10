@@ -4,21 +4,18 @@
  *
  * Function extracting raw text from HTML representation.
  */
-// import {AllHtmlEntities} from 'html-entities';
+import {AllHtmlEntities} from 'html-entities';
 
-// const ENTITIES = new AllHtmlEntities();
+const ENTITIES = new AllHtmlEntities();
 
 /**
  * State constants.
  */
 const STATE_TEXT = 0,
       STATE_HTML = 1,
-      STATE_TAG_NAME = 2;
-      // STATE_COMMENT = 3,
-      // STATE_SCRIPT = 4,
-      // STATE_STYLE = 5,
-      // STATE_CDATA = 6,
-      // STATE_DOCTYPE = 7;
+      STATE_TAG_NAME = 2,
+      STATE_COMMENT = 3,
+      STATE_SKIP = 4;
 
 /**
  * Regexes.
@@ -72,6 +69,13 @@ export function createKeyer() {
           state = STATE_HTML;
         }
 
+        // Comments
+        else if (char === '!' && html[i + 1] === '-' && html[i + 2] === '-') {
+          state = STATE_COMMENT;
+          i += 2;
+          buffer = '';
+        }
+
         else if (!tagName) {
           if (!TAG_START.test(char)) {
             state = STATE_TEXT;
@@ -79,17 +83,21 @@ export function createKeyer() {
             buffer = '';
           }
           else {
-            tagName = char;
+            tagName = char.toLowerCase();
           }
         }
         else {
           if (!TAG_SPACE.test(char)) {
-            tagName += char;
+            tagName += char.toLowerCase();
           }
           else {
 
-            // TODO: here we know the full tagName
-            state = char === '>' ? STATE_TEXT : STATE_HTML;
+            if (tagName === 'script' || tagName === 'style') {
+              state = STATE_SKIP;
+            }
+            else {
+              state = char === '>' ? STATE_TEXT : STATE_HTML;
+            }
           }
         }
       }
@@ -111,19 +119,30 @@ export function createKeyer() {
           tagName = '';
         }
       }
+
+      // In comments
+      else if (state === STATE_COMMENT) {
+        if (buffer === '--' && char === '>') {
+          state = STATE_TEXT;
+        }
+        else {
+          if (buffer.length === 2)
+            buffer = buffer[1];
+          buffer += char;
+        }
+      }
     }
 
-    return output;
+    return ENTITIES.decode(output);
   };
 }
 
 export default createKeyer();
 
-// TODO: handle entities
 // TODO: clean JS
 // TODO: clean style
 // TODO: CDATA
 // TODO: handle <br>, <hr> etc.
-// TODO: handle self closing
-// TODO: handle doctype
+// TODO: handle doctype & DTD declaration
+// TODO: handle xml declaration
 // TODO: innerText && textContent
