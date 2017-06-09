@@ -6,7 +6,7 @@
  * write the given name so that one can try to perform fuzzy matching on
  * partial names such as "P. Henry" & "Philip Henry", for instance.
  */
-import generatorics from 'generatorics';
+import powerSet from 'obliterator/power-set';
 import uniq from 'lodash/uniq';
 import words from '../tokenizers/words';
 
@@ -94,16 +94,23 @@ export default function namePowerSet(name) {
   if (tokens.length < 2)
     return [tokens];
 
-  const powerSet = Array
-    .from(generatorics.clone.powerSet(tokens))
+  let pset = [],
+      step;
+
+  const iterator = powerSet(tokens);
+
+  while ((step = iterator.next(), !step.done))
+    pset.push(step.value.slice());
+
+  pset = pset
     .filter(set => set.length > 1)
     .map(expand)
     .map(permutations);
 
   const possibilities = [];
 
-  for (let i = 0, l = powerSet.length; i < l; i++) {
-    const set = powerSet[i];
+  for (let i = 0, l = pset.length; i < l; i++) {
+    const set = pset[i];
 
     for (let j = 0, m = set.length; j < m; j++) {
       if (!set[j].every(token => token.length < 2))

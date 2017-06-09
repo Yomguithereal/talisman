@@ -3,6 +3,7 @@
 ## 0.19.1
 
 * Improving `tokenizers/sentences/naive`.
+* Dropping `generatorics` in favoir of [obliterator](https://github.com/Yomguithereal/obliterator).
 
 ## 0.19.0
 

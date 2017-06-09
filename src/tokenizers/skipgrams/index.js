@@ -6,7 +6,7 @@
  *
  * [Reference]: https://en.wikipedia.org/wiki/N-gram#Skip-gram
  */
-import generatorics from 'generatorics';
+import combinations from 'obliterator/combinations';
 import {seq} from '../../helpers';
 import {vec} from '../../helpers/vectors';
 import ngrams from '../ngrams';
@@ -52,7 +52,7 @@ export default function skipgrams(k, n, sequence) {
     const head = grams[i][0],
           tail = grams[i].slice(1);
 
-    const iterator = generatorics.combination(tail, n - 1);
+    const iterator = combinations(tail, n - 1);
 
     let step;
 

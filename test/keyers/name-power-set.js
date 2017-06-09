@@ -2,23 +2,27 @@
  * Talisman keyers/name-power-set tests
  * =====================================
  */
-import assert from 'assert';
+import {assert} from 'chai';
 import namePowerSet from '../../src/keyers/name-power-set';
 
 describe('name-power-set', function() {
 
-  it('should return a correct name power set.', function() {
-    assert.deepEqual(namePowerSet('Henry'), [
-      ['Henry']
-    ]);
+  const hasher = list => list.join('§');
 
-    assert.deepEqual(namePowerSet('John Henry'), [
+  const hashedNamePowerSet = name => namePowerSet(name).map(hasher);
+
+  it('should return a correct name power set.', function() {
+    assert.sameMembers(hashedNamePowerSet('Henry'), [
+      ['Henry']
+    ].map(hasher));
+
+    assert.sameMembers(hashedNamePowerSet('John Henry'), [
       ['Henry', 'John'],
       ['H', 'John'],
       ['Henry', 'J']
-    ]);
+    ].map(hasher));
 
-    assert.deepEqual(namePowerSet('John Philip Henry'), [
+    assert.sameMembers(hashedNamePowerSet('John Philip Henry'), [
       ['Henry', 'John'],
       ['H', 'John'],
       ['Henry', 'J'],
@@ -35,20 +39,20 @@ describe('name-power-set', function() {
       ['John', 'Philip'],
       ['J', 'Philip'],
       ['John', 'P']
-    ]);
+    ].map(hasher));
 
-    assert.deepEqual(namePowerSet('J.R.R. Tolkien'), [
+    assert.sameMembers(hashedNamePowerSet('J.R.R. Tolkien'), [
       ['J', 'R', 'Tolkien'],
       ['J', 'Tolkien'],
       ['R', 'Tolkien']
-    ]);
+    ].map(hasher));
   });
 
   it('should also work on already tokenized names.', function() {
-    assert.deepEqual(namePowerSet(['john', 'henry']), [
+    assert.sameMembers(hashedNamePowerSet(['john', 'henry']), [
       ['henry', 'john'],
       ['h', 'john'],
       ['henry', 'j']
-    ]);
+    ].map(hasher));
   });
 });
