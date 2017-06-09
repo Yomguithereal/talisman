@@ -210,4 +210,21 @@ describe('naive', function() {
       ['Voir la lune.', 'Éternelle.']
     );
   });
+
+  it('should work with some common abbreviations.', function() {
+    assert.deepEqual(
+      sentences('This book p. 14.'),
+      ['This book p. 14.']
+    );
+
+    assert.deepEqual(
+      sentences('This book pp. 14-15.'),
+      ['This book pp. 14-15.']
+    );
+
+    assert.deepEqual(
+      sentences('This book e.g. red.'),
+      ['This book e.g. red.']
+    );
+  });
 });

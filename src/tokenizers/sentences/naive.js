@@ -24,7 +24,9 @@ const EXCEPTIONS = [
   'Mlle',
   'Prof',
   'Sr',
-  'St'
+  'St',
+  'p',
+  'pp'
 ];
 
 /**
