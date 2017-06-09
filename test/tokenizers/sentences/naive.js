@@ -166,6 +166,31 @@ describe('naive', function() {
       sentences('Hello, this is __horse.__ What now?'),
       ['Hello, this is __horse.__', 'What now?']
     );
+
+    assert.deepEqual(
+      sentences('Hello. **What**?'),
+      ['Hello.', '**What**?']
+    );
+
+    assert.deepEqual(
+      sentences('Hello. *What*?'),
+      ['Hello.', '*What*?']
+    );
+
+    assert.deepEqual(
+      sentences('Hello. __What__?'),
+      ['Hello.', '__What__?']
+    );
+
+    assert.deepEqual(
+      sentences('Hello. _What_?'),
+      ['Hello.', '_What_?']
+    );
+
+    assert.deepEqual(
+      sentences('Hello. [What]'),
+      ['Hello.', '[What]']
+    );
   });
 
   it('should handle weirdos.', function() {
