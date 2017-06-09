@@ -197,4 +197,17 @@ describe('naive', function() {
       ['A. We are going to do this.', 'B. We are going to do that.']
     );
   });
+
+  it('should handle accentuated capital letters.', function() {
+
+    assert.deepEqual(
+      sentences('Je suis mort. À partir du mois prochain.'),
+      ['Je suis mort.', 'À partir du mois prochain.']
+    );
+
+    assert.deepEqual(
+      sentences('Voir la lune. Éternelle.'),
+      ['Voir la lune.', 'Éternelle.']
+    );
+  });
 });

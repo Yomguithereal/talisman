@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.19.1
+
+* Improving `tokenizers/sentences/naive`.
+
 ## 0.19.0
 
 * Adding the `clustering/record-linkage/leader` namespace.

@@ -34,7 +34,7 @@ const REGEX = new RegExp([
   '([.?!…]+)',
     '([' + DOUBLE_QUOTES + '*_]?[*_]?)',
     '[\\s\\r\\n]+',
-  '(?=[' + DOUBLE_QUOTES + SINGLE_QUOTES + ']?[A-Z0-9])'
+  '(?=[' + DOUBLE_QUOTES + SINGLE_QUOTES + ']?[A-Z0-9\\u00C0-\\u00DC])'
 ].join(''), 'g');
 
 /**
