@@ -13,7 +13,10 @@ describe('omission', function() {
       ['hello', 'HLEO'],
       ['The quick brown fox jumped over the lazy dog.', 'JKQXZVWYBFMGPDHCLNTREUIOA'],
       ['Christopher', 'PHCTSRIOE'],
-      ['Niall', 'LNIA']
+      ['Niall', 'LNIA'],
+      ['caramel', 'MCLRAE'],
+      ['Carlson', 'CLNSRAO'],
+      ['Karlsson', 'KLNSRAO']
     ];
 
     tests.forEach(function([string, key]) {

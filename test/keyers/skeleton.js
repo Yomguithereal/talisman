@@ -13,7 +13,8 @@ describe('skeleton', function() {
       ['hello', 'HLEO'],
       ['The quick brown fox jumped over the lazy dog.', 'THQCKBRWNFXJMPDVLZYGEUIOA'],
       ['Christopher', 'CHRSTPIOE'],
-      ['Niall', 'NLIA']
+      ['Niall', 'NLIA'],
+      // ['chemomagnetic', 'CHMGNTCEOAI'] THIS SHOULD WORK!
     ];
 
     tests.forEach(function([string, key]) {
