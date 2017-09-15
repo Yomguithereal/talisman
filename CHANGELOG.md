@@ -1,7 +1,8 @@
 # Changelog
 
-## 0.19.2 (provisional)
+## 0.20.0 (provisional)
 
+* Adding the `phonetics/sound-d` namespace.
 * Fixing `keyers/omission` & `keyers/skeleton` and better unit tests.
 
 ## 0.19.1

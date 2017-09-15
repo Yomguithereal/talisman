@@ -123,6 +123,7 @@ describe('phonetics', function() {
   require('./phonetics/onca.js');
   require('./phonetics/phonex.js');
   require('./phonetics/roger-root.js');
+  require('./phonetics/sound-d.js');
   require('./phonetics/soundex.js');
   require('./phonetics/statcan.js');
 
