@@ -36,11 +36,11 @@ function consume(set) {
  */
 export default function skeleton(string) {
 
-  // Normalizing case
-  string = string.toUpperCase();
-
   // Deburring
   string = deburr(string);
+
+  // Normalizing case
+  string = string.toUpperCase();
 
   // Dropping useless characters
   string = string.replace(UNDESIRABLES, '');

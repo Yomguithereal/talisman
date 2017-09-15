@@ -30,11 +30,11 @@ const UNDESIRABLES = /[^A-Z]/g,
  */
 export default function omission(string) {
 
-  // Normalizing case
-  string = string.toUpperCase();
-
   // Deburring
   string = deburr(string);
+
+  // Normalizing case
+  string = string.toUpperCase();
 
   // Dropping useless characters
   string = string.replace(UNDESIRABLES, '');

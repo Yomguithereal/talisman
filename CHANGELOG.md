@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.19.2 (provisional)
+
+* Fixing `keyers/omission` & `keyers/skeleton` and better unit tests.
+
 ## 0.19.1
 
 * Improving `tokenizers/sentences/naive`.

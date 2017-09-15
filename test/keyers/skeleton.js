@@ -14,7 +14,16 @@ describe('skeleton', function() {
       ['The quick brown fox jumped over the lazy dog.', 'THQCKBRWNFXJMPDVLZYGEUIOA'],
       ['Christopher', 'CHRSTPIOE'],
       ['Niall', 'NLIA'],
-      // ['chemomagnetic', 'CHMGNTCEOAI'] THIS SHOULD WORK!
+      ['CHEMOGENIC', 'CHMGNEOI'],
+      ['chemomagnetic', 'CHMGNTEOAI'],
+      ['Chemcal', 'CHMLEA'],
+      ['Chemcial', 'CHMLEIA'],
+      ['Chemical', 'CHMLEIA'],
+      ['Chemicial', 'CHMLEIA'],
+      ['Chimical', 'CHMLIA'],
+      ['Chemiluminescence', 'CHMLNSEIU'],
+      ['Chemiluminescent', 'CHMLNSTEIU'],
+      ['Chemically', 'CHMLYEIA']
     ];
 
     tests.forEach(function([string, key]) {

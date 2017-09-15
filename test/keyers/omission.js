@@ -16,7 +16,19 @@ describe('omission', function() {
       ['Niall', 'LNIA'],
       ['caramel', 'MCLRAE'],
       ['Carlson', 'CLNSRAO'],
-      ['Karlsson', 'KLNSRAO']
+      ['Karlsson', 'KLNSRAO'],
+      ['microeletronics', 'MCLNTSRIOE'],
+      ['Circumstantial', 'MCLNTSRIUA'],
+      ['LUMINESCENT', 'MCLNTSUIE'],
+      ['multinucleate', 'MCLNTUIEA'],
+      ['multinucleon', 'MCLNTUIEO'],
+      ['cumulene', 'MCLNUE'],
+      ['luminance', 'MCLNUIAE'],
+      ['cœlomic', 'MCLOEI'],
+      ['Molecule', 'MCLOEU'],
+      ['Cameral', 'MCLRAE'],
+      ['Maceral', 'MCLRAE'],
+      ['Lacrimal', 'MCLRAI']
     ];
 
     tests.forEach(function([string, key]) {
