@@ -2,6 +2,7 @@
 
 ## 0.20.0 (provisional)
 
+* Adding the `keyers/name-sig` namespace.
 * Adding the `phonetics/sound-d` namespace.
 * Fixing `keyers/omission` & `keyers/skeleton` and better unit tests.
 

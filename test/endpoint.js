@@ -39,6 +39,7 @@ describe('keyers', function() {
 
   require('./keyers/html-text.js');
   require('./keyers/name-power-set.js');
+  require('./keyers/name-sig.js');
   require('./keyers/normalize.js');
   require('./keyers/omission.js');
   require('./keyers/skeleton.js');
