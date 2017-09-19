@@ -97,7 +97,7 @@
     "html-entities": "^1.2.0",
     "lodash": "^4.6.1",
     "long": "^3.1.0",
-    "mnemonist": "^0.10.0",
+    "mnemonist": "^0.14.0",
     "obliterator": "^1.2.0",
     "pandemonium": "^1.0.2"
   }

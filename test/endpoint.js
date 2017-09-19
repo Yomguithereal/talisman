@@ -91,6 +91,7 @@ describe('metrics', function() {
     require('./metrics/distance/lcs.js');
     require('./metrics/distance/length.js');
     require('./metrics/distance/levenshtein.js');
+    require('./metrics/distance/lig.js');
     require('./metrics/distance/manhattan.js');
     require('./metrics/distance/minkowski.js');
     require('./metrics/distance/mlipns.js');
