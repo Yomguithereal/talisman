@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.20.0 (provisional)
+## 0.20.0
 
 * Adding the `keyers/name-sig` namespace.
 * Adding the `metrics/distance/lig` namespace.
