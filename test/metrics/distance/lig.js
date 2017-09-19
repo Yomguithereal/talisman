@@ -11,6 +11,9 @@ describe('lig', function() {
 
   it('should correctly compute the LIG1, LIG2 & LIG3 distance.', function() {
     const tests = [
+      ['', '', 1, 1, 1],
+      ['Hello', 'Hello', 1, 1, 1],
+      ['abc', 'def', 0, 0, 0],
       ['Glavin', 'Glawyn', 0.5, 0.67, 0.80],
       ['Williams', 'Vylliems', 0.45, 0.63, 0.77],
       ['Lewis', 'Louis', 0.43, 0.6, 0.75],
