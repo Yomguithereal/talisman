@@ -8,6 +8,10 @@
 import {createTokenizer} from './';
 import {squeeze} from '../../helpers';
 
+// TODO: handle roman numerals
+// TODO: O'
+// TODO: sort stopwords by length then alphabet
+
 const RULES = [
 
   // McCallister / MacCallister
@@ -35,14 +39,20 @@ const OPTIONS = {
   split: ['-'],
   stopwords: [
 
-    // Articles
+    // Articles etc.
     'the',
     'le',
     'la',
+    'da',
+    'di',
+    'of',
 
     // Title
+    'doctor',
     'dr',
+    'esq',
     'mgr',
+    'professor',
     'prof',
     'md',
     'phd',
