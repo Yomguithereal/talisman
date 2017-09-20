@@ -1,4 +1,5 @@
 /* eslint brace-style: 0 */
+/* eslint no-multi-spaces: 0 */
 /**
  * Talisman tokenizers/syllables/sonoripy
  * =======================================

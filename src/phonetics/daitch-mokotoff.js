@@ -239,5 +239,6 @@ export default function daitchMokotoff(name) {
     start = false;
   }
 
-  return permutations(code).map(pad);
+  // NOTE: it's probably possible to have better performance here
+  return Array.from(new Set(permutations(code).map(pad)));
 }

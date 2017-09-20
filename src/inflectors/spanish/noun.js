@@ -78,7 +78,7 @@ function transferCase(source, target) {
   let cased = '';
 
   for (let i = 0, l = target.length; i < l; i++) {
-    const c = source[i].toLowerCase() === source[i].toLowerCase() ?
+    const c = source[i].toLowerCase() === source[i] ?
       'toLowerCase' :
       'toUpperCase';
 
