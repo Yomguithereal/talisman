@@ -8,7 +8,7 @@ title: Ngrams
 </span>
 
 
-The `stats/ngrams` module gather functions used to compute ngrams from the given sequences.
+The `tokenizers/ngrams` module gather functions used to compute ngrams from the given sequences.
 
 n-grams are a sequence's subsequences of size n.
 
