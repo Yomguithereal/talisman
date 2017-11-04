@@ -26,11 +26,11 @@ The library's full documentation can be found [here](http://yomguithereal.github
 ## Goals
 
 * :package: **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
-* :bulb: **Straightfoward & simple**: just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
+* :bulb: **Straightfoward & simple**: just want to compute a Jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
 * :dango: **Consistent API**: the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
 * :postal_horn: **Functional**: except for cases where classes might be useful (classifiers notably), *Talisman* only uses functions, consumes raw data and order functions' arguments to make partial application & currying etc. as easy as possible.
 * :zap: **Performant**: the library should be as performant as possible for a high-level programming language library.
-* :globe_with_meridians: **Cross-platform**: the library is cross-platform and can be used both with node.js and in the browser.
+* :globe_with_meridians: **Cross-platform**: the library is cross-platform and can be used both with Node.js and in the browser.
 
 ## Contribution
 
@@ -55,4 +55,4 @@ npm run lint
 
 ## License
 
-[MIT](./LICENSE.txt)
+This project is available as open source under the terms of the [MIT License](./LICENSE.txt).
