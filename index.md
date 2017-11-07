@@ -144,7 +144,6 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/stats/descriptive">descriptive</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stats/frequencies">frequencies</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/stats/inferential">inferential</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats/ngrams">ngrams</a></em></li>
       </ul>
     </li>
     <li id="stemmers">
@@ -195,6 +194,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
           <a href="{{ site.baseurl }}/tokenizers/lines">lines</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/lines#naive">naive</a></em></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ site.baseurl }}/tokenizers/ngrams">ngrams</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/ngrams">ngrams</a></em></li>
           </ul>
         </li>
         <li>

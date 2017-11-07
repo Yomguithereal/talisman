@@ -8,18 +8,18 @@ title: Ngrams
 </span>
 
 
-The `stats/ngrams` module gather functions used to compute ngrams from the given sequences.
+The `tokenizers/ngrams` module gather functions used to compute ngrams from the given sequences.
 
 n-grams are a sequence's subsequences of size n.
 
 ```js
-import ngrams from 'talisman/stats/ngrams';
+import ngrams from 'talisman/tokenizers/ngrams';
 // Alternatively, you can use these convenient shortcuts
 import {
   bigrams,
   trigrams,
   quadrigrams
-} from 'talisman/stats/ngrams';
+} from 'talisman/tokenizers/ngrams';
 
 ngrams(2, ['The', 'cat', 'is', 'happy']);
 >>> [
