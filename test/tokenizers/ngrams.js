@@ -37,11 +37,4 @@ describe('ngrams', function() {
     assert.deepEqual(trigrams('hello'), ngrams(3, 'hello'));
     assert.deepEqual(quadrigrams('hello'), ngrams(4, 'hello'));
   });
-
-  it('should be possible to hash the ngrams using custom logic.', function() {
-    assert.deepEqual(
-      trigrams('hello', s => s.join('')),
-      ['hel', 'ell', 'llo']
-    );
-  });
 });
