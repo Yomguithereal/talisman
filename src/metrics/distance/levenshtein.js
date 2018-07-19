@@ -285,8 +285,8 @@ function limitedLevenshteinForStrings(max, a, b) {
     v0[i] = ++i;
   }
   while (i < lb) {
-    CODES[i] = b.charCodeAt(start + (i++));
-    v0[i] = max + 1;
+    CODES[i] = b.charCodeAt(start + i);
+    v0[i++] = max + 1;
   }
 
   const offset = max - diff,
