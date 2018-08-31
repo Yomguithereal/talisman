@@ -319,19 +319,6 @@ export class PunktToken {
 }
 
 /**
- * Customization variables.
- */
-const ABBREV = 0.3,
-      IGNORE_ABBREV_PENALTY = false,
-      ABBREV_BACKOFF = 5,
-      COLLOCATION = 7.88,
-      SENT_STARTER = 30,
-      INCLUDE_ALL_COLLOCS = false,
-      INCLUDE_ABBREV_COLLOCS = false,
-      MIN_COLLOC_FREQ = 1,
-      PUNCTUATION = new Set(';:,.!?');
-
-/**
  * Punkt abstract class used by both the Trainer & the Tokenizer classes.
  *
  * @constructor
@@ -524,6 +511,46 @@ export class PunktTrainer extends PunktBaseClass {
     // collocations and sentence starters, or whether training still needs to be
     // finalized
     this.finalized = true;
+
+    /**
+     * Customization variables.
+     */
+
+    // cut-off value whether a 'token' is an abbreviation
+    this.ABBREV = 0.3;
+
+    // allows the disabling of the abbreviation penalty heuristic, which
+    // exponentially disadvantages words that are found at times without a
+    // final period.
+    this.IGNORE_ABBREV_PENALTY = false;
+
+    // upper cut-off for Mikheev's(2002) abbreviation detection algorithm
+    this.ABBREV_BACKOFF = 5;
+
+    // minimal log-likelihood value that two tokens need to be considered
+    // as a collocation
+    this.COLLOCATION = 7.88;
+
+    // minimal log-likelihood value that a token requires to be considered
+    // as a frequent sentence starter.
+    this.SENT_STARTER = 30;
+
+    // this includes as potential collocations all word pairs where the first
+    // word ends in a period. It may be useful in corpora where there is a lot
+    // of variation that makes abbreviations like Mr difficult to identify.
+    this.INCLUDE_ALL_COLLOCS = false;
+
+    // this includes as potential collocations all word pairs where the first
+    // word is an abbreviation. Such collocations override the orthographic
+    // heuristic, but not the sentence starter heuristic. This is overridden by
+    // INCLUDE_ALL_COLLOCS, and if both are false, only collocations with initials
+    // and ordinals are considered.
+    this.INCLUDE_ABBREV_COLLOCS = false;
+
+    // this sets a minimum bound on the number of times a bigram needs to
+    // appear before it can be considered a collocation, in addition to log
+    // likelihood statistics. This is useful when INCLUDE_ALL_COLLOCS is True.
+    this.MIN_COLLOC_FREQ = 1;
   }
 
   /**---------------------------------------------------------------------------
@@ -652,9 +679,9 @@ export class PunktTrainer extends PunktBaseClass {
     //   * fPenalty: penalize occurences without a period
     const fLength = Math.exp(-nonPeriodsCount),
           fPeriods = periodsCount,
-          fPenalty = !IGNORE_ABBREV_PENALTY ?
+          fPenalty = !this.IGNORE_ABBREV_PENALTY ?
             Math.pow(nonPeriodsCount, -withoutPeriodCount) :
-            IGNORE_ABBREV_PENALTY;
+            this.IGNORE_ABBREV_PENALTY;
 
     const score = ll * fLength * fPeriods * fPenalty;
 
@@ -686,7 +713,7 @@ export class PunktTrainer extends PunktBaseClass {
     // already, and is sufficiently rare.
     const count = this.typeFdist.get(type) + this.typeFdist.get(type.slice(0, -1));
 
-    if (this.params.abbreviationTypes.has(type) || count >= ABBREV_BACKOFF)
+    if (this.params.abbreviationTypes.has(type) || count >= this.ABBREV_BACKOFF)
       return false;
 
     // Record this type as an abbreviation if the next token is a
@@ -724,8 +751,8 @@ export class PunktTrainer extends PunktBaseClass {
    */
   _isPotentialCollocation(firstToken, secondToken) {
     return (
-      (INCLUDE_ALL_COLLOCS ||
-       (INCLUDE_ABBREV_COLLOCS && firstToken.abbreviation) ||
+      (this.INCLUDE_ALL_COLLOCS ||
+       (this.INCLUDE_ABBREV_COLLOCS && firstToken.abbreviation) ||
        (firstToken.sentenceBreak && (firstToken.isNumber || firstToken.isInitial))) &&
       firstToken.isNonPunctuation &&
       secondToken.isNonPunctuation
@@ -758,7 +785,7 @@ export class PunktTrainer extends PunktBaseClass {
 
       if (type1Count > 1 &&
           type2Count > 1 &&
-          MIN_COLLOC_FREQ < colCount &&
+          this.MIN_COLLOC_FREQ < colCount &&
           colCount <= Math.min(type1Count, type2Count)) {
 
         const ll = colLogLikelihood(
@@ -768,7 +795,7 @@ export class PunktTrainer extends PunktBaseClass {
           this.typeFdist.N
         );
 
-        if (ll >= COLLOCATION &&
+        if (ll >= this.COLLOCATION &&
             (this.typeFdist.N / type1Count > type2Count / colCount))
           results.push([hash, ll]);
       }
@@ -832,7 +859,7 @@ export class PunktTrainer extends PunktBaseClass {
         this.typeFdist.N
       );
 
-      if (ll >= SENT_STARTER &&
+      if (ll >= this.SENT_STARTER &&
           this.typeFdist.N / this.sentenceBreakCount > typeCount / typeAtBreakCount) {
         results.push([type, ll]);
       }
@@ -887,7 +914,7 @@ export class PunktTrainer extends PunktBaseClass {
         isAdd
       ] = result;
 
-      if (score >= ABBREV) {
+      if (score >= this.ABBREV) {
         if (isAdd) {
           this.params.abbreviationTypes.add(abbreviation);
 
@@ -1015,6 +1042,12 @@ export class PunktSentenceTokenizer extends PunktBaseClass {
     super();
 
     this.params = params;
+
+    /**
+     * Customization variables.
+     */
+
+    this.PUNCTUATION = new Set(';:,.!?');
   }
 
   /**---------------------------------------------------------------------------
@@ -1032,7 +1065,7 @@ export class PunktSentenceTokenizer extends PunktBaseClass {
   _orthographicHeuristic(token) {
 
     // Sentences don't start with punctuation marks
-    if (PUNCTUATION.has(token.string))
+    if (this.PUNCTUATION.has(token.string))
       return false;
 
     const context = this.params.orthographicContext[token.typeNoSentencePeriod()];
