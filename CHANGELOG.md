@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.21.0
+
+* Exposing Punkt Trainer's configuration options.
+
 ## 0.20.0
 
 * Adding the `keyers/name-sig` namespace.
