@@ -1,12 +1,12 @@
 /**
- * Talisman metrics/distance/sif4
+ * Talisman metrics/distance/sift4
  * ===============================
  *
  * Implementation of the SIFT4 distance which is a linear time approximation of
  * the Levenshtein or Damerau-Levenshtein distance.
  *
  * [Reference]:
- * https://siderite.blogspot.com/2014/11/super-fast-and-accurate-string-distance.html
+ * http://web.archive.org/web/20190613223908/https://siderite.blogspot.com/2014/11/super-fast-and-accurate-string-distance.html
  *
  * [Author]: Siderite Zackwehdex
  *
