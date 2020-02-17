@@ -128,15 +128,6 @@ const RULES = {
 };
 
 /**
- * Helpers.
- */
-function pad(code) {
-  while (code.length < 10)
-    code += '1';
-  return code.slice(0, 10);
-}
-
-/**
  * Function taking a single name and computing its caverphone code.
  *
  * @param  {array}  rules - The rules to use.
@@ -162,7 +153,7 @@ function caverphone(rules, name) {
   }
 
   // Returning the padded code
-  return pad(name);
+  return name;
 }
 
 /**
