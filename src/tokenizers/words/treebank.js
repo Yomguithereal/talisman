@@ -125,5 +125,3 @@ export default function tokenize(text) {
 
   return finalize(text);
 }
-
-// FRENCH aujourd'hui & weird apostrophe

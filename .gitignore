@@ -4,6 +4,7 @@ experiments
 build
 *.log
 *.lock
+*.pl
 .DS_Store
 TODO.md
 

@@ -190,6 +190,7 @@ describe('tokenizers', function() {
   });
 
   describe('words', function() {
+    require('./tokenizers/words/gersam.js');
     require('./tokenizers/words/treebank.js');
   });
 });

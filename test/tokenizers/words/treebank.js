@@ -22,6 +22,10 @@ describe('treebank', function() {
         tokens: ['hi', ',', 'my', 'name', 'ca', "n't", 'hello', ',']
       },
       {
+        text: 'O.N.U.',
+        tokens: ['O.N.U', '.']
+      },
+      {
         text: '"Hello", Good sir (this is appaling)...',
         tokens: ['``', 'Hello', '\'\'', ',', 'Good', 'sir', '(', 'this', 'is', 'appaling', ')', '...']
       }
