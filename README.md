@@ -2,7 +2,7 @@
 
 # Talisman
 
-[Full documentation](http://yomguithereal.github.io/talisman/)
+[Full documentation](https://yomguithereal.github.io/talisman/)
 
 Talisman is a JavaScript library collecting algorithms, functions and various building blocks for [fuzzy matching](https://en.wikipedia.org/wiki/Approximate_string_matching), [information retrieval](https://en.wikipedia.org/wiki/Information_retrieval) and [natural language processing](https://en.wikipedia.org/wiki/Natural_language_processing).
 
@@ -16,7 +16,7 @@ npm install talisman
 
 ## Documentation
 
-The library's full documentation can be found [here](http://yomguithereal.github.io/talisman/).
+The library's full documentation can be found [here](https://yomguithereal.github.io/talisman/).
 
 ## Goals
 
