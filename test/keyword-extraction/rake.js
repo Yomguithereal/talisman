@@ -44,9 +44,9 @@ describe('rake', function() {
       ['minimal', 'supporting', 'set'],
       ['minimal', 'set'],
       ['linear', 'constraints'],
-      ['nonstrict', 'inequations'],
       ['upper', 'bounds'],
-      ['strict', 'inequations']
+      ['strict', 'inequations'],
+      ['nonstrict', 'inequations']
     ]);
   });
 });
