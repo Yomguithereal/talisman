@@ -5,7 +5,7 @@
  */
 import assert from 'assert';
 import leader from '../../src/clustering/leader';
-import levenshtein from '../../src/metrics/distance/levenshtein';
+import levenshtein from '../../src/metrics/levenshtein';
 
 const BASIC_DATA = [
   1,

@@ -5,7 +5,7 @@
  */
 import assert from 'assert';
 import createMinHash from '../../src/hash/minhash';
-import {similarity, distance} from '../../src/metrics/distance/minhash';
+import {similarity, distance} from '../../src/metrics/minhash';
 import seedrandom from 'seedrandom';
 
 describe('minhash', function() {

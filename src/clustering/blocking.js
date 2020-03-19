@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/record-linkage/blocking
- * ============================================
+ * Talisman clustering/blocking
+ * =============================
  *
  * Clusterer dispatching documents to blocks which we will then cluster. A
  * document may be attached to more than one block since the algorithm uses

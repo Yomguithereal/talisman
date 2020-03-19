@@ -5,7 +5,7 @@
  */
 import assert from 'assert';
 import naive from '../../src/clustering/naive';
-import levenshtein from '../../src/metrics/distance/levenshtein';
+import levenshtein from '../../src/metrics/levenshtein';
 
 const SIMPLE = [
   'a',

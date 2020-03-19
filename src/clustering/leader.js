@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/record-linkage/leader
- * ==========================================
+ * Talisman clustering/leader
+ * ===========================
  *
  * The Leader clustering algorithm is a quite simple algorithm used to partition
  * arbitrary data and running in O(ln) time complexity, l being the number of

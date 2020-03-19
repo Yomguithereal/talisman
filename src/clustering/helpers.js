@@ -1,8 +1,8 @@
 /**
- * Talisman clustering/record-linkage/helpers
- * ===========================================
+ * Talisman clustering/helpers
+ * ============================
  *
- * Common function used throughout the clustering/record-linkage namespace.
+ * Common function used throughout the clustering namespace.
  */
 
 /**

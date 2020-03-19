@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/record-linkage/sorted-neighborhood
- * =======================================================
+ * Talisman clustering/sorted-neighborhood
+ * ========================================
  *
  * Clustering method first sorting the dataset before applying pairwise
  * comparisons only within the given window. Time complexity is quite

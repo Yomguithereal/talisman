@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/record-linkage/vp-tree
- * ===========================================
+ * Talisman clustering/vp-tree
+ * ============================
  *
  * Clustering method using a Vantage Point Tree (VPTree) to find the clusters
  * more efficiently.

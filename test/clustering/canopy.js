@@ -5,7 +5,7 @@
  */
 import assert from 'assert';
 import canopy from '../../src/clustering/canopy';
-import levenshtein from '../../src/metrics/distance/levenshtein';
+import levenshtein from '../../src/metrics/levenshtein';
 
 const DATA = [
   'abc',

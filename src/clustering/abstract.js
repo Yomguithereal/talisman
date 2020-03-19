@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/record-linkage/abstract
- * ============================================
+ * Talisman clustering/abstract
+ * =============================
  *
  * Abstract class used by every record-linkage clusterer to expose a same
  * interface.

@@ -1,7 +1,7 @@
 /* eslint no-constant-condition: 0 */
 /**
- * Talisman clustering/record-linkage/nn-descent
- * ==============================================
+ * Talisman clustering/nn-descent
+ * ===============================
  *
  * JavaScript implementation of the NN-Descent algorithm designed to generate
  * k-NN graphs approximations in a performant fashion.

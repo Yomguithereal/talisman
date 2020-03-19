@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/record-linkage/canopy
- * ==========================================
+ * Talisman clustering/canopy
+ * ===========================
  *
  * Canopy clustering implementation.
  */

@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import levenshtein from '../../src/metrics/distance/levenshtein';
+import levenshtein from '../../src/metrics/levenshtein';
 import sortedNeighborhood from '../../src/clustering/sorted-neighborhood';
 
 const DATA = [

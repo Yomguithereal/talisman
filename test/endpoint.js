@@ -58,36 +58,34 @@ describe('clustering', function() {
 
 describe('metrics', function() {
 
-  describe('distance', function() {
-    require('./metrics/distance/bag.js');
-    require('./metrics/distance/canberra.js');
-    require('./metrics/distance/chebyshev.js');
-    require('./metrics/distance/cosine.js');
-    require('./metrics/distance/damerau-levenshtein.js');
-    require('./metrics/distance/dice.js');
-    require('./metrics/distance/euclidean.js');
-    require('./metrics/distance/eudex.js');
-    require('./metrics/distance/guth.js');
-    require('./metrics/distance/hamming.js');
-    require('./metrics/distance/identity.js');
-    require('./metrics/distance/jaccard.js');
-    require('./metrics/distance/jaro-winkler.js');
-    require('./metrics/distance/lcs.js');
-    require('./metrics/distance/length.js');
-    require('./metrics/distance/levenshtein.js');
-    require('./metrics/distance/lig.js');
-    require('./metrics/distance/manhattan.js');
-    require('./metrics/distance/minkowski.js');
-    require('./metrics/distance/mlipns.js');
-    require('./metrics/distance/monge-elkan.js');
-    require('./metrics/distance/mra.js');
-    require('./metrics/distance/overlap.js');
-    require('./metrics/distance/prefix.js');
-    require('./metrics/distance/ratcliff-obershelp.js');
-    require('./metrics/distance/sift4.js');
-    require('./metrics/distance/smith-waterman.js');
-    require('./metrics/distance/suffix.js');
-  });
+  require('./metrics/bag.js');
+  require('./metrics/canberra.js');
+  require('./metrics/chebyshev.js');
+  require('./metrics/cosine.js');
+  require('./metrics/damerau-levenshtein.js');
+  require('./metrics/dice.js');
+  require('./metrics/euclidean.js');
+  require('./metrics/eudex.js');
+  require('./metrics/guth.js');
+  require('./metrics/hamming.js');
+  require('./metrics/identity.js');
+  require('./metrics/jaccard.js');
+  require('./metrics/jaro-winkler.js');
+  require('./metrics/lcs.js');
+  require('./metrics/length.js');
+  require('./metrics/levenshtein.js');
+  require('./metrics/lig.js');
+  require('./metrics/manhattan.js');
+  require('./metrics/minkowski.js');
+  require('./metrics/mlipns.js');
+  require('./metrics/monge-elkan.js');
+  require('./metrics/mra.js');
+  require('./metrics/overlap.js');
+  require('./metrics/prefix.js');
+  require('./metrics/ratcliff-obershelp.js');
+  require('./metrics/sift4.js');
+  require('./metrics/smith-waterman.js');
+  require('./metrics/suffix.js');
 });
 
 describe('parsers', function() {

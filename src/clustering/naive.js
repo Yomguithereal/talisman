@@ -1,6 +1,6 @@
 /**
- * Talisman clustering/record-linkage/naive
- * =========================================
+ * Talisman clustering/naive
+ * ==========================
  *
  * Naive clustering working by performing the n(n-1)/2 distance calculations
  * between all relevant pairs. Time complexity of such a clustering is therefore
