@@ -7,3 +7,4 @@ benchmark
 build
 src
 test
+babel-plugin.js
