@@ -15,6 +15,7 @@ Modules under the `talisman/tokenizers` namespace:
 
 * [hyphenation]({{ site.baseurl }}/tokenizers/hyphenation)
 * [lines]({{ site.baseurl }}/tokenizers/lines)
+* [ngrams]({{ site.baseurl }}/tokenizers/../../ngrams)
 * [paragraphs]({{ site.baseurl }}/tokenizers/paragraphs)
 * [sentences]({{ site.baseurl }}/tokenizers/sentences)
 * [syllables]({{ site.baseurl }}/tokenizers/syllables)

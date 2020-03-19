@@ -164,6 +164,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
           </ul>
         </li>
         <li>
+          <a href="{{ site.baseurl }}/tokenizers/ngrams">ngrams</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/ngrams">ngrams</a></em></li>
+          </ul>
+        </li>
+        <li>
           <a href="{{ site.baseurl }}/tokenizers/paragraphs">paragraphs</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/paragraphs#naive">naive</a></em></li>
