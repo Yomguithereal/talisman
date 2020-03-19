@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import nnDescent from '../../../src/clustering/record-linkage/nn-descent';
+import nnDescent from '../../src/clustering/nn-descent';
 
 describe('nn-descent', function() {
 

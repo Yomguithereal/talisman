@@ -4,7 +4,7 @@
  *
  */
 import assert from 'assert';
-import {clustersFromArrayGraph} from '../../../src/clustering/record-linkage/helpers';
+import {clustersFromArrayGraph} from '../../src/clustering/helpers';
 
 describe('helpers', function() {
 

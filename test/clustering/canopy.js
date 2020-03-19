@@ -4,8 +4,8 @@
  *
  */
 import assert from 'assert';
-import canopy from '../../../src/clustering/record-linkage/canopy';
-import levenshtein from '../../../src/metrics/distance/levenshtein';
+import canopy from '../../src/clustering/canopy';
+import levenshtein from '../../src/metrics/distance/levenshtein';
 
 const DATA = [
   'abc',

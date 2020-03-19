@@ -4,8 +4,8 @@
  *
  */
 import assert from 'assert';
-import levenshtein from '../../../src/metrics/distance/levenshtein';
-import blocking from '../../../src/clustering/record-linkage/blocking';
+import levenshtein from '../../src/metrics/distance/levenshtein';
+import blocking from '../../src/clustering/blocking';
 
 const DATA = [
   'abc',

@@ -4,8 +4,8 @@
  *
  */
 import assert from 'assert';
-import vpTree from '../../../src/clustering/record-linkage/vp-tree';
-import levenshtein from '../../../src/metrics/distance/levenshtein';
+import vpTree from '../../src/clustering/vp-tree';
+import levenshtein from '../../src/metrics/distance/levenshtein';
 
 const CHAIN = [
   'abc',

@@ -4,8 +4,8 @@
  *
  */
 import assert from 'assert';
-import naive from '../../../src/clustering/record-linkage/naive';
-import levenshtein from '../../../src/metrics/distance/levenshtein';
+import naive from '../../src/clustering/naive';
+import levenshtein from '../../src/metrics/distance/levenshtein';
 
 const SIMPLE = [
   'a',

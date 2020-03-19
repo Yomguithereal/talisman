@@ -43,21 +43,17 @@ describe('keyword-extraction', function() {
 });
 
 describe('clustering', function() {
-  require('./clustering/k-means.js');
+  require('./clustering/abstract.js');
+  require('./clustering/helpers.js');
 
-  describe('record-linkage', function() {
-    require('./clustering/record-linkage/abstract.js');
-    require('./clustering/record-linkage/helpers.js');
-
-    require('./clustering/record-linkage/blocking.js');
-    require('./clustering/record-linkage/canopy.js');
-    require('./clustering/record-linkage/key-collision.js');
-    require('./clustering/record-linkage/leader.js');
-    require('./clustering/record-linkage/naive.js');
-    require('./clustering/record-linkage/nn-descent.js');
-    require('./clustering/record-linkage/sorted-neighborhood.js');
-    require('./clustering/record-linkage/vp-tree.js');
-  });
+  require('./clustering/blocking.js');
+  require('./clustering/canopy.js');
+  require('./clustering/key-collision.js');
+  require('./clustering/leader.js');
+  require('./clustering/naive.js');
+  require('./clustering/nn-descent.js');
+  require('./clustering/sorted-neighborhood.js');
+  require('./clustering/vp-tree.js');
 });
 
 describe('metrics', function() {

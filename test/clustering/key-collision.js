@@ -4,9 +4,9 @@
  *
  */
 import assert from 'assert';
-import fingerprint from '../../../src/tokenizers/fingerprint';
-import doubleMetaphone from '../../../src/phonetics/double-metaphone';
-import keyCollision from '../../../src/clustering/record-linkage/key-collision';
+import fingerprint from '../../src/tokenizers/fingerprint';
+import doubleMetaphone from '../../src/phonetics/double-metaphone';
+import keyCollision from '../../src/clustering/key-collision';
 
 const SIMPLE = [
   'University of North Carolina',

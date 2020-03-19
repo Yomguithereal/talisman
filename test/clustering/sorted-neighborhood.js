@@ -4,8 +4,8 @@
  *
  */
 import assert from 'assert';
-import levenshtein from '../../../src/metrics/distance/levenshtein';
-import sortedNeighborhood from '../../../src/clustering/record-linkage/sorted-neighborhood';
+import levenshtein from '../../src/metrics/distance/levenshtein';
+import sortedNeighborhood from '../../src/clustering/sorted-neighborhood';
 
 const DATA = [
   'aaa',

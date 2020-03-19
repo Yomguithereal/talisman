@@ -5,7 +5,7 @@
  *
  */
 import assert from 'assert';
-import RecordLinkageClusterer from '../../../src/clustering/record-linkage/abstract';
+import RecordLinkageClusterer from '../../src/clustering/abstract';
 
 describe('abstract', function() {
 

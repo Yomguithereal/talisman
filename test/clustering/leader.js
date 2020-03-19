@@ -4,8 +4,8 @@
  *
  */
 import assert from 'assert';
-import leader from '../../../src/clustering/record-linkage/leader';
-import levenshtein from '../../../src/metrics/distance/levenshtein';
+import leader from '../../src/clustering/leader';
+import levenshtein from '../../src/metrics/distance/levenshtein';
 
 const BASIC_DATA = [
   1,
