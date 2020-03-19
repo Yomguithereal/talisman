@@ -9,6 +9,11 @@
  */
 
 /**
+ * Patterns.
+ */
+const WHITESPACE_SPLITTER = /\s+/g;
+
+/**
  * Contractions.
  */
 const CONTRACTIONS2 = [
@@ -75,11 +80,32 @@ function applyRules(rules, text) {
   return text;
 }
 
+function finalize(text) {
+  const splitted = text.split(WHITESPACE_SPLITTER);
+
+  const tokens = new Array(splitted.length);
+
+  let i, l, token;
+
+  let j = 0;
+
+  for (i = 0, l = splitted.length; i < l; i++) {
+    token = splitted[i].trim();
+
+    if (token)
+      tokens[j++] = token;
+  }
+
+  tokens.length = j;
+
+  return tokens;
+}
+
 /**
  * Function tokenizing raw sentences into words.
  *
- * @param  {string} text       - The text to tokenize.
- * @return {array}             - The tokens.
+ * @param  {string} text - The text to tokenize.
+ * @return {array}       - The tokens.
  */
 export default function tokenize(text) {
 
@@ -97,10 +123,7 @@ export default function tokenize(text) {
   text = applyContractions(CONTRACTIONS3, ' $1 $2 ', text);
   text = applyContractions(CONTRACTIONS4, ' $1 $2 $3 ', text);
 
-  const tokens = text
-    .split(/\s+/)
-    .map(token => token.trim())
-    .filter(token => token);
-
-  return tokens;
+  return finalize(text);
 }
+
+// FRENCH aujourd'hui & weird apostrophe
