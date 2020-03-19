@@ -2,12 +2,7 @@
 layout: home
 ---
 
-**Talisman** is a JavaScript library collecting series of algorithms related to the following domains:
-
-* [Statistics](https://en.wikipedia.org/wiki/Statistics)
-* [Fuzzy logic & fuzzy matching](https://en.wikipedia.org/wiki/Approximate_string_matching)
-* [Natural Language Processing](https://en.wikipedia.org/wiki/Natural_language_processing)
-* [Machine learning](https://en.wikipedia.org/wiki/Machine_learning)
+**Talisman** is a JavaScript library collecting algorithms, functions and various building blocks for [fuzzy matching](https://en.wikipedia.org/wiki/Approximate_string_matching), [information retrieval](https://en.wikipedia.org/wiki/Information_retrieval) and [natural language processing](https://en.wikipedia.org/wiki/Natural_language_processing).
 
 ## Installation
 
@@ -28,9 +23,6 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 <div>
   <ul>
     <li>
-      <a href="{{ site.baseurl }}/clustering">clustering</a>
-    </li>
-    <li>
       <a href="{{ site.baseurl }}/keyers">keyers</a>
     </li>
     <li>
@@ -40,13 +32,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <a href="{{ site.baseurl }}/phonetics">phonetics</a>
     </li>
     <li>
-      <a href="{{ site.baseurl }}/stats">stats</a>
-    </li>
-    <li>
       <a href="{{ site.baseurl }}/stemmers">stemmers</a>
-    </li>
-    <li>
-      <a href="{{ site.baseurl }}/structures">structures</a>
     </li>
     <li>
       <a href="{{ site.baseurl }}/tokenizers">tokenizers</a>
@@ -58,12 +44,6 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 <div class="modules-list">
   <ul>
-    <li id="clustering">
-      <a href="{{ site.baseurl }}/clustering">clustering</a>
-      <ul>
-        <li>&middot; <em><a href="{{ site.baseurl }}/clustering#k-means">k-means</a></em></li>
-      </ul>
-    </li>
     <li id="keyers">
       <a href="{{ site.baseurl }}/keyers">keyers</a>
       <ul>
@@ -76,29 +56,24 @@ The library's source code can be found on its Github [repository]({{ site.url }}
     <li id="metrics">
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
-        <li>
-          <a href="{{ site.baseurl }}/metrics/distance">distance</a>
-          <ul>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#canberra">canberra</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#chebyshev">chebyshev</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#cosine">cosine</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#damerau-levenshtein">damerau-levenshtein</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#dice">dice</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#euclidean">euclidean</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#eudex">eudex</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#hamming">hamming</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaccard">jaccard</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaro">jaro</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#jaro-winkler">jaro-winkler</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#levenshtein">levenshtein</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#manhattan">manhattan</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#minkowski">minkowski</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#mra">mra</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#overlap">overlap</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#sorensen">sorensen</a></em></li>
-            <li>&middot; <em><a href="{{ site.baseurl }}/metrics/distance#tversky">tversky</a></em></li>
-          </ul>
-        </li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#canberra">canberra</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#chebyshev">chebyshev</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#damerau-levenshtein">damerau-levenshtein</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#dice">dice</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#euclidean">euclidean</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#eudex">eudex</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#hamming">hamming</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaccard">jaccard</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro">jaro</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro-winkler">jaro-winkler</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#levenshtein">levenshtein</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#manhattan">manhattan</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#minkowski">minkowski</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#mra">mra</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#overlap">overlap</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#sorensen">sorensen</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#tversky">tversky</a></em></li>
       </ul>
     </li>
     <li id="phonetics">
@@ -136,15 +111,6 @@ The library's source code can be found on its Github [repository]({{ site.url }}
             <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/german#phonem">phonem</a></em></li>
           </ul>
         </li>
-      </ul>
-    </li>
-    <li id="stats">
-      <a href="{{ site.baseurl }}/stats">stats</a>
-      <ul>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats/descriptive">descriptive</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats/frequencies">frequencies</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats/inferential">inferential</a></em></li>
-        <li>&middot; <em><a href="{{ site.baseurl }}/stats/ngrams">ngrams</a></em></li>
       </ul>
     </li>
     <li id="stemmers">
@@ -239,13 +205,13 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 * **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
 * **Straightfoward & simple**: just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
 * **Consistent API**: the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
-* **Functional**: except for cases where classes might be useful (classifiers notably), *Talisman* only uses functions, consumes raw data and order functions' arguments to make partial application & currying etc. as easy as possible.
+* **Functional**: except for cases where classes might be useful (clustering notably), *Talisman* only uses functions, consumes raw data and order functions' arguments to make partial application & currying etc. as easy as possible.
 * **Performant**: the library should be as performant as possible for a high-level programming language library.
 * **Cross-platform**: the library is cross-platform and can be used both with node.js and in the browser.
 
 ## Changelog
 
-A full list of the changes made by each version of the library is available [here]({{ site.baseurl }}/changelog).
+A full list of the changes made by each version of the library is available [here](https://github.com/Yomguithereal/talisman/blob/master/CHANGELOG.md).
 
 ## Contribution
 
