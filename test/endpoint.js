@@ -21,13 +21,6 @@ describe('hash', function() {
   require('./hash/minhash.js');
 });
 
-describe('features', function() {
-
-  describe('extraction', function() {
-    require('./features/extraction/vectorizers.js');
-  });
-});
-
 describe('inflectors', function() {
 
   describe('spanish', function() {
@@ -47,11 +40,6 @@ describe('keyers', function() {
 
 describe('keyword-extraction', function() {
   require('./keyword-extraction/rake.js');
-});
-
-describe('classification', function() {
-  require('./classification/naive-bayes.js');
-  require('./classification/perceptron.js');
 });
 
 describe('clustering', function() {

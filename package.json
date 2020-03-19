@@ -17,17 +17,15 @@
     "url": "git+https://github.com/yomguithereal/talisman.git"
   },
   "talisman": {
-    "folders": "classification clustering features hash helpers inflectors keyers keyword-extraction metrics parsers phonetics regexp stats stemmers tag tokenizers"
+    "folders": "clustering hash helpers inflectors keyers keyword-extraction metrics parsers phonetics regexp stats stemmers tag tokenizers"
   },
   "keywords": [
-    "bayes",
     "bloom filter",
     "canberra",
     "caverphone",
     "chebyshev",
     "cologne",
     "cosine",
-    "classifier",
     "clustering",
     "daitch-mokotoff",
     "dice",
@@ -40,14 +38,12 @@
     "lancaster",
     "levenshtein",
     "lig",
-    "machine learning",
     "metaphone",
     "mra",
     "natural language processing",
     "ngrams",
     "nlp",
     "nysiis",
-    "perceptron",
     "phonetic",
     "porter",
     "punkt",
@@ -55,11 +51,8 @@
     "schinke",
     "sorensen",
     "soundex",
-    "stats",
-    "tfidf",
     "tokenizer",
     "tversky",
-    "vectorizer",
     "winkler"
   ],
   "author": {

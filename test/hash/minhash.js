@@ -14,7 +14,7 @@ describe('minhash', function() {
     const rng = seedrandom('shawarma'),
           minhash = createMinHash({rng, hashes: 6});
 
-    assert.deepEqual(minhash('this is a string'), [
+    assert.deepEqual(Array.from(minhash('this is a string')), [
       75288857,
       241855118,
       149375312,
@@ -23,7 +23,7 @@ describe('minhash', function() {
       369835310
     ]);
 
-    assert.deepEqual(minhash(['this', 'is', 'a', 'string']), [
+    assert.deepEqual(Array.from(minhash(['this', 'is', 'a', 'string'])), [
       -2497302731,
       -2872246020,
       -3540234138,
