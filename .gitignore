@@ -8,9 +8,7 @@ build
 TODO.md
 
 # Transpiled modules
-/classification
 /clustering
-/features
 /hash
 /helpers
 /inflectors
@@ -22,5 +20,4 @@ TODO.md
 /regexp
 /stats
 /stemmers
-/tag
 /tokenizers
