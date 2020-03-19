@@ -23,6 +23,9 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 <div>
   <ul>
     <li>
+      <a href="{{ site.baseurl }}/inflectors">inflectors</a>
+    </li>
+    <li>
       <a href="{{ site.baseurl }}/keyers">keyers</a>
     </li>
     <li>
@@ -44,6 +47,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 <div class="modules-list">
   <ul>
+    <li id="inflectors">
+      <a href="{{ site.baseurl }}/inflectors">inflectors</a>
+      <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/inflectors/spanish">spanish</a></em></li>
+      </ul>
+    </li>
     <li id="keyers">
       <a href="{{ site.baseurl }}/keyers">keyers</a>
       <ul>
