@@ -1,10 +1,10 @@
 /**
- * Talisman stats/frequencies
- * ===========================
+ * Talisman helpers/frequencies
+ * =============================
  *
  * Functions related to sequences' frequencies.
  */
-import {seq} from '../helpers';
+import {seq} from './';
 
 /**
  * Function taking a sequence and computing its frequencies.

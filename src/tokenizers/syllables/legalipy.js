@@ -12,7 +12,7 @@
  * [Author]:
  * Christopher Hench (UC Berkeley)
  */
-import {updateFrequencies, relative} from '../../stats/frequencies';
+import {updateFrequencies, relative} from '../../helpers/frequencies';
 
 /**
  * Constants.

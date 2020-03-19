@@ -1,6 +1,6 @@
 /**
- * Talisman stats/frequencies tests
- * =================================
+ * Talisman helpers/frequencies tests
+ * ===================================
  *
  */
 import assert from 'assert';
@@ -8,7 +8,7 @@ import {
   absolute,
   relative,
   updateFrequencies
-  } from '../../src/stats/frequencies';
+} from '../../src/helpers/frequencies';
 
 describe('frequencies', function() {
 

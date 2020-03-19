@@ -10,6 +10,7 @@ if (util.inspect.defaultOptions)
   util.inspect.defaultOptions.depth = null;
 
 describe('helpers', function() {
+  require('./helpers/frequencies.js');
   require('./helpers/index.js');
   require('./helpers/matrices.js');
   require('./helpers/vectors.js');
@@ -127,12 +128,6 @@ describe('phonetics', function() {
 });
 
 require('./regexp/index.js');
-
-describe('stats', function() {
-  require('./stats/descriptive');
-  require('./stats/frequencies.js');
-  require('./stats/inferential.js');
-});
 
 describe('stemmers', function() {
   require('./stemmers/lancaster.js');
