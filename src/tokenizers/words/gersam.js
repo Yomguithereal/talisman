@@ -23,47 +23,55 @@ const LINES = /[\n\r]+/g;
 const ASCII_JUNK = /[\000-\037]/g;
 const SQUEEZE = /\s+/g;
 
-const FI_COLON1 = new RegExp(`([^${NUMBER}${LETTER}\\s.:'\`,\\-])`, 'g');
+const FI_COLON1 = new RegExp(`([^${NUMBER}${LETTER}\\s.:’'\`,\\-])`, 'g');
 const FI_COLON2 = new RegExp(`(:)(?=$|[^${LOWERCASE_LETTER}])`, 'g');
 
-const SPECIAL_SEPARATOR = new RegExp(`([^${NUMBER}${LETTER}\\s.'\`,\\-])`, 'g');
+const SPECIAL_SEPARATOR = new RegExp(`([^${NUMBER}${LETTER}\\s.’'\`,\\-])`, 'g');
 
 const COMMA_SEPARATOR1 = new RegExp(`([^${NUMBER}])([,.])`, 'g');
 const COMMA_SEPARATOR2 = new RegExp(`([,.])([^${NUMBER}])`, 'g');
 const COMMA_SEPARATOR3 = new RegExp(`([${NUMBER}])([,.])$`);
 
 const ENGLISH_CONTRACTIONS = [
-  [new RegExp(`([^${LETTER}])['’]([^${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([^${LETTER}${NUMBER}])['’]([${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([${LETTER}])['’]([^${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([${LETTER}])['’]([${LETTER}])`, 'g'), '$1 \'$2'],
-  [new RegExp(`([${LETTER}])['’]s`, 'g'), '$1 \'s']
+  [new RegExp(`([^${LETTER}])(['’])([^${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([^${LETTER}${NUMBER}])(['’])([${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([${LETTER}])(['’])([^${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([${LETTER}])(['’])([${LETTER}])`, 'g'), '$1 $2$3'],
+  [new RegExp(`([${NUMBER}])(['’])s`, 'g'), '$1 $2s']
 ];
 
 const LATIN_CONTRACTIONS = [
-  [new RegExp(`([^${LETTER}])['’]([^${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([^${LETTER}])['’]([${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([${LETTER}])['’]([^${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([${LETTER}])['’]([${LETTER}])`, 'g'), '$1\' $2']
+  [new RegExp(`([^${LETTER}])(['’])([^${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([^${LETTER}])(['’])([${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([${LETTER}])(['’])([^${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([${LETTER}])(['’])([${LETTER}])`, 'g'), '$1$2 $3']
 ];
 
 const SOMALIAN_CONTRACTIONS = [
-  [new RegExp(`([^${LETTER}])['’]([^${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([^${LETTER}])['’]([${LETTER}])`, 'g'), '$1 \' $2'],
-  [new RegExp(`([${LETTER}])['’]([^${LETTER}])`, 'g'), '$1 \' $2'],
+  [new RegExp(`([^${LETTER}])(['’])([^${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([^${LETTER}])(['’])([${LETTER}])`, 'g'), '$1 $2 $3'],
+  [new RegExp(`([${LETTER}])(['’])([^${LETTER}])`, 'g'), '$1 $2 $3'],
 ];
 
-const APOSTROPHE = /['’]/g;
-const ELLIPSIS = /\.{2,}/g;
+const APOSTROPHE = /(['’])/g;
 
-// FRENCH aujourd'hui & weird apostrophe, punctuation, accents etc. ’
+const FRENCH_EXCEPTIONS = [
+  [/aujourd(['’])\s+hui/ig, 'aujourd$1hui'],
+  [/presqu(['’])\s+([iî]le)/ig, 'presqu$1$2']
+];
+
 // TODO: abbrev
+
 /**
  * Helpers.
  */
-function applyContractions(text, rules) {
-  for (let i = 0, l = rules.length; i < l; i++)
-    text = text.replace(rules[i][0], rules[i][1]);
+function applyRules(text, rules) {
+  let rule;
+
+  for (let i = 0, l = rules.length; i < l; i++) {
+    rule = rules[i];
+    text = text.replace(rule[0], rule[1]);
+  }
 
   return text;
 }
@@ -81,7 +89,6 @@ export default function tokenize(lang, text) {
   text = text.trim();
   text = text.replace(LINES, ' ');
   text = text.replace(ASCII_JUNK, '');
-  text = text.replace(ELLIPSIS, '…');
   text = text.replace(SQUEEZE, ' ');
 
   // Separating special characters
@@ -100,13 +107,17 @@ export default function tokenize(lang, text) {
 
   // Contractions
   if (lang === 'en')
-    text = applyContractions(text, ENGLISH_CONTRACTIONS);
+    text = applyRules(text, ENGLISH_CONTRACTIONS);
   else if (lang === 'fr' || lang === 'it' || lang === 'ga')
-    text = applyContractions(text, LATIN_CONTRACTIONS);
+    text = applyRules(text, LATIN_CONTRACTIONS);
   else if (lang === 'so')
-    text = applyContractions(text, SOMALIAN_CONTRACTIONS);
+    text = applyRules(text, SOMALIAN_CONTRACTIONS);
   else
-    text = text.replace(APOSTROPHE, ' \' ');
+    text = text.replace(APOSTROPHE, ' $1 ');
+
+  // Exceptions
+  if (lang === 'fr')
+    text = applyRules(text, FRENCH_EXCEPTIONS);
 
   return text
     .trim()
