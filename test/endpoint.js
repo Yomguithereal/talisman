@@ -167,10 +167,6 @@ describe('stemmers', function() {
   });
 });
 
-describe('tag', function() {
-  require('./tag/averaged-perceptron.js');
-});
-
 describe('tokenizers', function() {
 
   require('./tokenizers/fingerprint.js');

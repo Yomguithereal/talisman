@@ -17,7 +17,7 @@
     "url": "git+https://github.com/yomguithereal/talisman.git"
   },
   "talisman": {
-    "folders": "clustering hash helpers inflectors keyers keyword-extraction metrics parsers phonetics regexp stats stemmers tag tokenizers"
+    "folders": "clustering hash helpers inflectors keyers keyword-extraction metrics parsers phonetics regexp stats stemmers tokenizers"
   },
   "keywords": [
     "bloom filter",
