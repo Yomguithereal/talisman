@@ -12,7 +12,6 @@ if (util.inspect.defaultOptions)
 describe('helpers', function() {
   require('./helpers/frequencies.js');
   require('./helpers/index.js');
-  require('./helpers/matrices.js');
   require('./helpers/vectors.js');
 });
 
