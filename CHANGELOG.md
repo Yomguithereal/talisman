@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0
+
+* Dropping some namespaces & consolidating a stable release.
+
 ## 0.21.0
 
 * Exposing Punkt Trainer's configuration options.
