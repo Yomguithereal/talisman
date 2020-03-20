@@ -20,7 +20,7 @@ Words tokenizers take raw text and output a list of this text's words.
   Reference: <a href="http://www.statmt.org/moses/">http://www.statmt.org/moses/</a>
 </span>
 
-This heuristic word tokenizer is inspired by the Moses machine translation system's one. It supports a lot of languages and is able to handle many tricky cases.
+This heuristical word tokenizer is inspired by the Moses machine translation system's one. It supports a lot of languages and is able to handle many tricky cases.
 
 Gersam is the Latin name of Moses' firstborn child.
 
