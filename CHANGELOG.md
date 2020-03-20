@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+* Dropping `.babelrc` from npm package file to avoid bundling issues.
+
 ## 1.1.0
 
 * Adding the `tokenizers/words/gersam` namespace.
