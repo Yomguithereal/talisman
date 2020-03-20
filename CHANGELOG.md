@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+* Adding the `tokenizers/words/gersam` namespace.
+
 ## 1.0.0
 
 * Dropping some namespaces & consolidating a stable release.
