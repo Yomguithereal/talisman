@@ -206,6 +206,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>
           <a href="{{ site.baseurl }}/tokenizers/words">words</a>
           <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/words#gersam">gersam</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/words#naive">naive</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/words#treebank">treebank</a></em></li>
           </ul>

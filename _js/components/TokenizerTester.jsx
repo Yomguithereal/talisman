@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {compose, withState} from 'recompose';
 import TextInput from './TextInput.jsx';
 import TextArea from './TextArea.jsx';
