@@ -48,11 +48,15 @@ describe('gersam', function() {
         lang: 'fr',
         text: 'Il fait beau aujourd’hui sur la presqu\'île.',
         tokens: ['Il', 'fait', 'beau', 'aujourd’hui', 'sur', 'la', 'presqu\'île', '.']
+      },
+      {
+        lang: 'it',
+        text: 'O.N.U. La vie.est foutue.',
+        tokens: ['O.N.U.', 'La', 'vie', '.', 'est', 'foutue', '.']
       }
     ];
 
     tests.forEach(function({lang, text, tokens}) {
-      // console.log(words(lang, text))
       assert.deepEqual(words(lang, text), tokens);
     });
   });
