@@ -35,7 +35,25 @@ const COMMA_SEPARATOR3 = new RegExp(`([${NUMBER}])([,.])$`);
 
 const POINT_SEPARATOR = new RegExp(`\\.([${LETTER}])`, 'g');
 
-const ABBREV = new RegExp(`\\b(?:[${UPPERCASE_LETTER}]\\.){2,}`, 'g');
+const ABBREV_EXCEPTIONS = [
+  'Dr',
+  'etc',
+  'Jr',
+  'M',
+  'Mgr',
+  'Mr',
+  'Mrs',
+  'Ms',
+  'Mme',
+  'Mlle',
+  'Prof',
+  'Sr',
+  'St',
+  'p',
+  'pp'
+];
+
+const ABBREV = new RegExp(`(?:^|\\s)(?:(?:[${UPPERCASE_LETTER}]\\.){2,}|(?:${ABBREV_EXCEPTIONS.join('|')})\\.)`, 'g');
 const ABBREV_POINT = /\./g;
 const ABBREV_SYMBOL = /KTZABBREVZTK/g;
 
@@ -66,8 +84,6 @@ const FRENCH_EXCEPTIONS = [
   [/aujourd(['’])\s+hui/ig, 'aujourd$1hui'],
   [/presqu(['’])\s+([iî]le)/ig, 'presqu$1$2']
 ];
-
-// TODO: abbrev
 
 /**
  * Helpers.

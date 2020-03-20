@@ -53,6 +53,16 @@ describe('gersam', function() {
         lang: 'it',
         text: 'O.N.U. La vie.est foutue.',
         tokens: ['O.N.U.', 'La', 'vie', '.', 'est', 'foutue', '.']
+      },
+      {
+        lang: 'en',
+        text: 'Mrs. Langley is back from the market.',
+        tokens: ['Mrs.', 'Langley', 'is', 'back', 'from', 'the', 'market', '.']
+      },
+      {
+        lang: 'fr',
+        text: 'Les É.U. sont nuls.',
+        tokens: ['Les', 'É.U.', 'sont', 'nuls', '.']
       }
     ];
 
