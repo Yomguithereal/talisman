@@ -11,6 +11,7 @@ import damerauLevenshtein from 'talisman/metrics/damerau-levenshtein';
 import dice from 'talisman/metrics/dice';
 import euclidean, {squared} from 'talisman/metrics/euclidean';
 import {distance as eudexDistance, isSimilar as eudexSimilarity} from 'talisman/metrics/eudex';
+import guth from 'talisman/metrics/guth';
 import hamming from 'talisman/metrics/hamming';
 import {similarity as identity} from 'talisman/metrics/identity';
 import jaccard from 'talisman/metrics/jaccard';
@@ -40,6 +41,7 @@ render(<MetricTester metric={euclidean} enforceNumbers={true} sameDimension={tru
 render(<MetricTester metric={eudexDistance} integerResult={true} />, document.getElementById('eudex-distance-mount'));
 render(<MetricTester metric={eudexSimilarity} />, document.getElementById('eudex-similarity-mount'));
 render(<MetricTester metric={squared} enforceNumbers={true} sameDimension={true} />, document.getElementById('euclidean-squared-mount'));
+render(<MetricTester metric={guth} integerResult={true} />, document.getElementById('guth-mount'));
 render(<MetricTester metric={hamming} integerResult={true} sameDimension={true} />, document.getElementById('hamming-mount'));
 render(<MetricTester metric={identity} integerResult={true} />, document.getElementById('identity-mount'));
 render(<MetricTester metric={jaccard} />, document.getElementById('jaccard-mount'));

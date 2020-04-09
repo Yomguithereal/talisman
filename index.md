@@ -75,6 +75,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#euclidean">euclidean</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#eudex">eudex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#hamming">hamming</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#guth">guth</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#identity">identity</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaccard">jaccard</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro">jaro</a></em></li>

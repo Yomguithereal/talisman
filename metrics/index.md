@@ -21,6 +21,7 @@ Modules under the `talisman/metrics` namespace:
 * [dice](#dice)
 * [euclidean](#euclidean)
 * [eudex](#eudex)
+* [guth](#guth)
 * [hamming](#hamming)
 * [identity](#identity)
 * [jaccard](#jaccard)
@@ -289,6 +290,23 @@ hamming([1, 0, 1, 1, 1, 0, 1], [1, 0, 0, 1, 0, 0, 1]);
 ```
 
 <div id="hamming-mount"></div>
+
+<h2 id="guth">guth</h2>
+
+<span class="marginnote">
+  <em>Gloria J. A. Guth (1976) Surname Spellings and Computerized Record Linkage, Historical Methods Newsletter, 10:1, 10-19 DOI: 10.1080/00182494.1976.10112645</em>
+</span>
+
+The Guth distance function basically perfoms a linear scan of both strings while allowing a small window of error. This is quite close to a linear time approximation of the [Damerau-Levenshtein](#damerau-levenshtein) distance with a threshold of 1 or 2.
+
+```js
+import guth from 'talisman/metrics/guth';
+
+guth('SMITH', 'SMYSS');
+>>> 3
+```
+
+<div id="guth-mount"></div>
 
 <h2 id="identity">identity</h2>
 
