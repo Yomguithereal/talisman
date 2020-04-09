@@ -678,6 +678,62 @@ similarity('Niall', 'Neil');
 
 <div id="prefix-mount"></div>
 
+<h2 id="ratcliff-obershelp">ratcliff-obershelp</h2>
+
+<span class="marginnote">
+  Reference: <a href="https://xlinux.nist.gov/dads/HTML/ratcliffObershelp.html">https://xlinux.nist.gov/dads/HTML/ratcliffObershelp.html</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>PATTERN MATCHING: THE GESTALT APPROACH - John W. Ratcliff, David E. Metzener, Paul E. Black, "Ratcliff/Obershelp pattern recognition", in Dictionary of Algorithms and Data Structures [online], Vreda Pieterse and Paul E. Black, eds. 17 December 2004.</em>
+</span>
+
+The Ratcliff-Obershelp similarity is a normalized number of matches between both strings, matches being found by identifying the longest common subsquence between two strings then recursively applying the same logic on the left and right of this common subsequence.
+
+```js
+import {similarity, distance} from 'talisman/metrics/ratcliff-obershelp';
+
+similarity('mathematics', 'matematica');
+>>> ~0.86
+
+distance('mathematics', 'matematica');
+>>> ~0.14
+```
+
+<div id="ratcliff-obershelp-mount"></div>
+
+<h2 id="sift4">sift4</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://web.archive.org/web/20190613223908/https://siderite.blogspot.com/2014/11/super-fast-and-accurate-string-distance.html">http://web.archive.org/web/20190613223908/https://siderite.blogspot.com/2014/11/super-fast-and-accurate-string-distance.html</a><br><br>
+</span>
+
+The SIFT4 distance function, invented by Siderite Zackwehdex, is a linear time approximation of the [Damerau-Levenshtein](#damerau-levenshtein) distance.
+
+```js
+import sift4, {custom} from 'talisman/metrics/sift4';
+
+sift4('cat', 'hat');
+>>> 1
+
+// It is possible to customize the function
+custom({
+  symmetric: true,
+  transpositions: false,
+  maxDistance: 2,
+  maxOffset: 5
+}, 'cat', 'hat');
+```
+
+*Custom options*
+
+* **[symmetric]** <code class="type">boolean</code> (false) - whether to ensure the function's output will be symmetric.
+* **[transpositions]** <code class="type">boolean</code> (true) - whether to allow transpositions, like with the [Damerau-Levenshtein](#damerau-levenshtein) distance.
+* **[maxDistance]** <code class="type">number</code> (undefined) - whether to break computations as soon as this maximum distance is reached.
+* **[maxOffset]** <code class="type">number</code> (5) - maximum window size to search for editions. Bigger numbers will hurt performance.
+
+<div id="sift4-mount"></div>
+
 <h2 id="sorensen">sorensen</h2>
 
 The `sorensen` module is just an alias of the [dice](#dice) one.

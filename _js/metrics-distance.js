@@ -26,6 +26,8 @@ import mongeElkan, {symmetric as symmetricMongeElkan} from 'talisman/metrics/mon
 import mra from 'talisman/metrics/mra';
 import overlap from 'talisman/metrics/overlap';
 import {similarity as prefix} from 'talisman/metrics/prefix';
+import {similarity as ratcliffObershelp} from 'talisman/metrics/ratcliff-obershelp';
+import sift4 from 'talisman/metrics/sift4';
 import {similarity as suffix} from 'talisman/metrics/suffix';
 
 render(<MetricTester metric={bag} integerResult={true} />, document.getElementById('bag-mount'));
@@ -55,4 +57,6 @@ render(<MetricTester metric={symmetricMongeElkan.bind(null, identity)} />, docum
 render(<MRATester metric={mra} />, document.getElementById('mra-mount'));
 render(<MetricTester metric={overlap} />, document.getElementById('overlap-mount'));
 render(<MetricTester metric={prefix} />, document.getElementById('prefix-mount'));
+render(<MetricTester metric={ratcliffObershelp} />, document.getElementById('ratcliff-obershelp-mount'));
+render(<MetricTester metric={sift4} integerResult={true} />, document.getElementById('sift4-mount'));
 render(<MetricTester metric={suffix} />, document.getElementById('suffix-mount'));
