@@ -292,7 +292,7 @@ hamming([1, 0, 1, 1, 1, 0, 1], [1, 0, 0, 1, 0, 0, 1]);
 
 <h2 id="identity">identity</h2>
 
-The identity distance is simply <code class="type">0</code> if given strings are identical and <code class="type">1</code> if they are not.
+The identity similarity is simply <code class="type">1</code> if given strings are identical and <code class="type">0</code> if they are not.
 
 The module also exports a similarity function which is just the reverse, for convenience.
 
@@ -424,6 +424,24 @@ Options are the following:
 * **[boostThreshold]** <code class="type">number</code> (0.7): boost threshold comprised between 0 and 1.
 * **[scalingFactor]** <code class="type">number</code> (0.1): scaling factor. Should not exceed 0.25.
 
+<h2 id="length">length</h2>
+
+The length similarity is the ratio between the length of the shortest string and the length of the longest one.
+
+The module also exports a similarity function which is just the reverse, for convenience.
+
+```js
+import {distance, similarity} from 'talisman/metrics/length';
+
+distance('Niall', 'Neil');
+>>> 0.2
+
+similarity('Niall', 'Neil');
+>>> 0.8
+```
+
+<div id="length-mount"></div>
+
 <h2 id="levenshtein">levenshtein</h2>
 
 <span class="marginnote">
@@ -542,9 +560,45 @@ overlap('abc', 'abcde');
 
 <div id="overlap-mount"></div>
 
+<h2 id="prefix">prefix</h2>
+
+The prefix similarity is the ratio between the number of characters matching at the beginning of both string and the length of the shortest string.
+
+The module also exports a similarity function which is just the reverse, for convenience.
+
+```js
+import {distance, similarity} from 'talisman/metrics/prefix';
+
+distance('Niall', 'Neil');
+>>> 0.75
+
+similarity('Niall', 'Neil');
+>>> 0.25
+```
+
+<div id="prefix-mount"></div>
+
 <h2 id="sorensen">sorensen</h2>
 
 The `sorensen` module is just an alias of the [dice](#dice) one.
+
+<h2 id="suffix">suffix</h2>
+
+The suffix similarity is the ratio between the number of characters matching at the end of both string and the length of the shortest string.
+
+The module also exports a similarity function which is just the reverse, for convenience.
+
+```js
+import {distance, similarity} from 'talisman/metrics/suffix';
+
+distance('Niall', 'Neil');
+>>> 0.75
+
+similarity('Niall', 'Neil');
+>>> 0.25
+```
+
+<div id="suffix-mount"></div>
 
 <h2 id="tversky">tversky</h2>
 
