@@ -58,6 +58,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
       <ul>
         <li>&middot; <em><a href="{{ site.baseurl }}/keyers#fingerprint">fingerprint</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/keyers#ngram-fingerprint">ngram-fingerprint</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/keyers#name-sig">name-sig</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/keyers#omission">omission</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/keyers#skeleton">skeleton</a></em></li>
       </ul>
@@ -65,6 +66,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
     <li id="metrics">
       <a href="{{ site.baseurl }}/metrics">metrics</a>
       <ul>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#bag">bag</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#canberra">canberra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#chebyshev">chebyshev</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#cosine">cosine</a></em></li>
@@ -73,15 +75,25 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#euclidean">euclidean</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#eudex">eudex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#hamming">hamming</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#identity">identity</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaccard">jaccard</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro">jaro</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#jaro-winkler">jaro-winkler</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#lcs">lcs</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#length">length</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#levenshtein">levenshtein</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#lig">lig</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#manhattan">manhattan</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#minkowski">minkowski</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#mlipns">mlipns</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#monge-elkan">monge-elkan</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#mra">mra</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#overlap">overlap</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#prefix">prefix</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#ratcliff-obershelp">ratcliff-obershelp</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#sift4">sift4</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#sorensen">sorensen</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/metrics#suffix">suffix</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/metrics#tversky">tversky</a></em></li>
       </ul>
     </li>

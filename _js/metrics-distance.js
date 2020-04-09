@@ -3,6 +3,7 @@ import {render} from 'react-dom';
 import MetricTester from './components/MetricTester.jsx';
 import MRATester from './components/MRATester.jsx';
 
+import bag from 'talisman/metrics/bag';
 import canberra from 'talisman/metrics/canberra';
 import chebyshev from 'talisman/metrics/chebyshev';
 import cosine from 'talisman/metrics/cosine';
@@ -11,6 +12,7 @@ import dice from 'talisman/metrics/dice';
 import euclidean, {squared} from 'talisman/metrics/euclidean';
 import {distance as eudexDistance, isSimilar as eudexSimilarity} from 'talisman/metrics/eudex';
 import hamming from 'talisman/metrics/hamming';
+import {distance as identity} from 'talisman/metrics/identity';
 import jaccard from 'talisman/metrics/jaccard';
 import jaro from 'talisman/metrics/jaro';
 import jaroWinkler from 'talisman/metrics/jaro-winkler';
@@ -18,9 +20,8 @@ import levenshtein from 'talisman/metrics/levenshtein';
 import manhattan from 'talisman/metrics/manhattan';
 import mra from 'talisman/metrics/mra';
 import overlap from 'talisman/metrics/overlap';
-import sorensen from 'talisman/metrics/sorensen';
-import tversky from 'talisman/metrics/tversky';
 
+render(<MetricTester metric={bag} integerResult={true} />, document.getElementById('bag-mount'));
 render(<MetricTester metric={canberra} enforceNumbers={true} sameDimension={true} />, document.getElementById('canberra-mount'));
 render(<MetricTester metric={cosine} enforceNumbers={true} sameDimension={true} />, document.getElementById('cosine-mount'));
 render(<MetricTester metric={chebyshev} enforceNumbers={true} sameDimension={true} />, document.getElementById('chebyshev-mount'));
@@ -31,6 +32,7 @@ render(<MetricTester metric={eudexDistance} integerResult={true} />, document.ge
 render(<MetricTester metric={eudexSimilarity} />, document.getElementById('eudex-similarity-mount'));
 render(<MetricTester metric={squared} enforceNumbers={true} sameDimension={true} />, document.getElementById('euclidean-squared-mount'));
 render(<MetricTester metric={hamming} integerResult={true} sameDimension={true} />, document.getElementById('hamming-mount'));
+render(<MetricTester metric={identity} integerResult={true} />, document.getElementById('identity-mount'));
 render(<MetricTester metric={jaccard} />, document.getElementById('jaccard-mount'));
 render(<MetricTester metric={jaro} />, document.getElementById('jaro-mount'));
 render(<MetricTester metric={jaroWinkler} />, document.getElementById('jaro-winkler-mount'));

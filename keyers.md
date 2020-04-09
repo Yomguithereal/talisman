@@ -9,6 +9,7 @@ The `keyers` module gathers several methods aiming at producing string fingerpri
 
 * [fingerprint](#fingerprint)
 * [ngram-fingerprint](#ngram-fingerprint)
+* [name-sig](#name-sig)
 * [omission](#omission)
 * [skeleton](#skeleton)
 
@@ -77,6 +78,23 @@ ngramFingerprint(2, 'University of north Carolina');
 *Trigrams*
 
 <div id="trigram-fingerprint-mount"></div>
+
+<h2 id="name-sig">name-sig</h2>
+
+<span class="marginnote">
+  <em>Similarity Analysis of Patients’ Data: Bangladesh Perspective. Shahidul Islam Khan, Abu Sayed Md. Latiful Hoque. December 17, 2016</em>
+</span>
+
+The name significance "NameSig" similarity key. A keyer attempting to simplify names in order to make variations match.
+
+```js
+import namesig from 'talisman/keyers/name-sig';
+
+namesig('Mr. Abdul Haque');
+>>> 'abdlhk'
+```
+
+<div id="name-sig-mount"></div>
 
 <h2 id="omission">omission</h2>
 
