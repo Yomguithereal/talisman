@@ -3,7 +3,7 @@ layout: page
 title: Metrics
 ---
 
-The `metrics` module typically gathers varioues metrics and mostly "distances" excelling at expressing the theoretical space between two sequences.
+The `metrics` module typically gathers various distance and similarity functions.
 
 They range from computing the edit distance between two strings to retrieving the distance between two points in space.
 
@@ -11,7 +11,7 @@ They range from computing the edit distance between two strings to retrieving th
 
 ## Summary
 
-Modules under the `talisman/metrics/distance` namespace:
+Modules under the `talisman/metrics` namespace:
 
 * [bag](#bag)
 * [canberra](#canberra)
@@ -32,7 +32,7 @@ Modules under the `talisman/metrics/distance` namespace:
 * [lig](#lig)
 * [manhattan](#manhattan)
 * [minkowski](#minkowski)
-* [mlipns](mlipns)
+* [mlipns](#mlipns)
 * [monge-elkan](#monge-elkan)
 * [mra](#mra)
 * [overlap](#overlap)
@@ -424,6 +424,22 @@ Options are the following:
 * **[boostThreshold]** <code class="type">number</code> (0.7): boost threshold comprised between 0 and 1.
 * **[scalingFactor]** <code class="type">number</code> (0.1): scaling factor. Should not exceed 0.25.
 
+<h2 id="lcs">lcs</h2>
+
+The LCS similarity is the ratio between the length of the Longest Common Subsequence of both strings and the length of the longest string.
+
+```js
+import {distance, similarity} from 'talisman/metrics/lcs';
+
+similarity('aluminum', 'Catalan');
+>>> 0.25
+
+distance('aluminum', 'Catalan');
+>>> 0.75
+```
+
+<div id="lcs-mount"></div>
+
 <h2 id="length">length</h2>
 
 The length similarity is the ratio between the length of the shortest string and the length of the longest one.
@@ -464,6 +480,28 @@ levenshtein('book', 'back');
 ```
 
 <div id="levenshtein-mount"></div>
+
+<h2 id="lig">lig</h2>
+
+<span class="marginnote">
+  <em>An Interface for Mining Genealogical Nominal Data Using the Concept of linkage and a Hybrid Name Matching Algorithm. Chakkrit Snae, Bernard Diaz Department of Computer Science, The University of Liverpool Peach Street, Liverpool, UK, L69 7ZF</em>
+</span>
+
+The LIG2 and LIG3 similarity functions are both attempts to normalize the [Levenshtein](#levenshtein) distance.
+
+```js
+import {lig2, lig3} from 'talisman/metrics/lig';
+
+lig2('Glavin', 'Glawyn');
+>>> 0.67
+
+
+lig3('Glavin', 'Glawyn');
+>>> 0.80
+```
+
+<div id="lig2-mount"></div>
+<div id="lig3-mount"></div>
 
 <h2 id="manhattan">manhattan</h2>
 
@@ -507,6 +545,68 @@ const euclidean = minkowski.bind(null, 2);
 * **p** <code class="type">number</code> - value for p. Must >= 1.
 * **a** <code class="type">array</code> - the first vector.
 * **b** <code class="type">array</code> - the second vector.
+
+<h2 id="mlipns">mlipns</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://www.sial.iias.spb.su/files/386-386-1-PB.pdf">http://www.sial.iias.spb.su/files/386-386-1-PB.pdf</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Shannaq, Boumedyen A. N. and Victor V. Alexandrov. 2010. "Using Product Similarity for Adding Business." Global Journal of Computer Science and Technology. 10(12). 2-8.</em>
+</span>
+
+Modified Language-Independent Product Name Search similarity function. It will only return <code class="type">0</code> or <code class="type">1</code>.
+
+```js
+import mlipns, {custom} from 'talisman/metrics/mlipns';
+
+mlipns('Niall', 'Neil');
+>>> 0
+
+// It is possible to customize the function
+custom({threshold: 0.3, maxMismatches: 3}, 'Niall', 'Neil');
+```
+
+*Custom options*
+
+* **[threshold]** <code class="type">boolean</code> (0.25) - threshold parameter, i.e. fraction of total length the function will search for transpositions.
+* **[maxMismatches]** <code class="type">number</code> (2) - maximum number of mismatches to tolerate.
+
+<div id="mlipns-mount"></div>
+
+<h2 id="monge-elkan">monge-elkan</h2>
+
+<span class="marginnote">
+  Reference: <a href="http://www.aaai.org/Papers/KDD/1996/KDD96-044.pdf">http://www.aaai.org/Papers/KDD/1996/KDD96-044.pdf</a><br><br>
+</span>
+
+<span class="marginnote">
+  <em>Monge, Alvaro E. and Charles P. Elkan. 1996. "The field matching problem: Algorithms and applications." KDD-9 Proceedings.</em>
+</span>
+
+The Monge-Elkan function is a higher-order similarity function returning the averaged maximum of token to token similarity.
+
+The module also exports a symmetric version of the procedure that is basically the mean of applying the function on A & B, then on B & A.
+
+Note that both functions can also take arbitrary sequences given as arrays.
+
+```js
+import identity from 'talisman/metrics/identity';
+import mongeElkan, {symmetric} from 'talisman/metrics/monge-elkan';
+
+mongeElkan(identity, 'A', 'AB');
+>>> 1
+
+symmetric(identity, 'AB', 'A');
+>>> 0.75
+```
+
+<div id="monge-elkan-mount"></div>
+
+*Symmetric version*
+
+<div id="monge-elkan-symmetric-mount"></div>
 
 <h2 id="mra">mra</h2>
 
