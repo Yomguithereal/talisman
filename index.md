@@ -120,6 +120,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>
           <a href="{{ site.baseurl }}/phonetics/french">french</a>
           <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#fonem">fonem</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#phonetic">phonetic</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#phonex">phonex</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/phonetics/french#sonnex">sonnex</a></em></li>
