@@ -15,6 +15,7 @@ import onca from 'talisman/phonetics/onca';
 import nysiis, {refined} from 'talisman/phonetics/nysiis';
 import phonex from 'talisman/phonetics/phonex';
 import rogerRoot from 'talisman/phonetics/roger-root';
+import soundD from 'talisman/phonetics/sound-d';
 import soundex, {refined as refinedSoundex} from 'talisman/phonetics/soundex';
 import statcan from 'talisman/phonetics/statcan';
 
@@ -43,6 +44,7 @@ render(<PhoneticTester algorithm={refined} />, document.getElementById('nysiis-r
 render(<PhoneticTester algorithm={onca} />, document.getElementById('onca-mount'));
 render(<PhoneticTester algorithm={phonex} />, document.getElementById('phonex-mount'));
 render(<PhoneticTester algorithm={rogerRoot} />, document.getElementById('roger-root-mount'));
+render(<PhoneticTester algorithm={soundD} />, document.getElementById('sound-d-mount'));
 render(<PhoneticTester algorithm={soundex} />, document.getElementById('soundex-mount'));
 render(<PhoneticTester algorithm={refinedSoundex} />, document.getElementById('soundex-refined-mount'));
 render(<PhoneticTester algorithm={statcan} />, document.getElementById('statcan-mount'));

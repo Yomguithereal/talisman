@@ -32,6 +32,7 @@ Modules under the `talisman/phonetics` namespace:
 * [onca](#onca)
 * [phonex](#phonex)
 * [roger-root](#roger-root)
+* [sound-d](#sound-d)
 * [soundex](#soundex)
 * [statcan](#statcan)
 
@@ -383,6 +384,23 @@ rogerRoot('Michael');
 ```
 
 <div id="roger-root-mount"></div>
+
+<h2 id="sound-d">sound-d</h2>
+
+<span class="marginnote">
+  <em>Hybrid Matching Algorithm for Personal Names. Cihan Varol, Coskun Bayrak.</em>
+</span>
+
+The SoundD algorithm is a slight variant of the [Soundex](#soundex) algorithm.
+
+```js
+import soundD from 'talisman/phonetics/sound-d';
+
+soundD('Martha');
+>>> '5630'
+```
+
+<div id="sound-d-mount"></div>
 
 <h2 id="soundex">soundex</h2>
 

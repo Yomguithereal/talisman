@@ -114,6 +114,7 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#onca">onca</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#phonex">phonex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#roger-root">roger-root</a></em></li>
+        <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#sound-d">sound-d</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#soundex">soundex</a></em></li>
         <li>&middot; <em><a href="{{ site.baseurl }}/phonetics#statcan">statcan</a></em></li>
         <li>
