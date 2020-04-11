@@ -15,9 +15,10 @@ Modules under the `talisman/tokenizers` namespace:
 
 * [hyphenation]({{ site.baseurl }}/tokenizers/hyphenation)
 * [lines]({{ site.baseurl }}/tokenizers/lines)
-* [ngrams]({{ site.baseurl }}/tokenizers/../../ngrams)
+* [ngrams]({{ site.baseurl }}/tokenizers/ngrams)
 * [paragraphs]({{ site.baseurl }}/tokenizers/paragraphs)
 * [sentences]({{ site.baseurl }}/tokenizers/sentences)
+* [skipgrams]({{ site.baseurl }}/tokenizers/skipgrams)
 * [syllables]({{ site.baseurl }}/tokenizers/syllables)
 * [tweets]({{ site.baseurl }}/tokenizers/tweets)
 * [words]({{ site.baseurl }}/tokenizers/words)

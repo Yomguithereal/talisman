@@ -16,6 +16,15 @@ npm install talisman
 
 The library's source code can be found on its Github [repository]({{ site.url }}).
 
+## Goals
+
+* **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
+* **Straightfoward & simple**: just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
+* **Consistent API**: the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
+* **Functional**: except for cases where classes might be useful (clustering notably), *Talisman* only uses functions, consumes raw data and order functions' arguments to make partial application & currying etc. as easy as possible.
+* **Performant**: the library should be as performant as possible for a high-level programming language library.
+* **Cross-platform**: the library is cross-platform and can be used both with node.js and in the browser.
+
 ## List of available modules
 
 *Top level*
@@ -206,6 +215,12 @@ The library's source code can be found on its Github [repository]({{ site.url }}
           </ul>
         </li>
         <li>
+          <a href="{{ site.baseurl }}/tokenizers/skipgrams">skipgrams</a>
+          <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/skipgrams">skipgrams</a></em></li>
+          </ul>
+        </li>
+        <li>
           <a href="{{ site.baseurl }}/tokenizers/syllables">syllables</a>
           <ul>
             <li>&middot; <em><a href="{{ site.baseurl }}/tokenizers/syllables#legalipy">legalipy</a></em></li>
@@ -230,15 +245,6 @@ The library's source code can be found on its Github [repository]({{ site.url }}
     </li>
   </ul>
 </div>
-
-## Goals
-
-* **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
-* **Straightfoward & simple**: just want to compute a jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
-* **Consistent API**: the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
-* **Functional**: except for cases where classes might be useful (clustering notably), *Talisman* only uses functions, consumes raw data and order functions' arguments to make partial application & currying etc. as easy as possible.
-* **Performant**: the library should be as performant as possible for a high-level programming language library.
-* **Cross-platform**: the library is cross-platform and can be used both with node.js and in the browser.
 
 ## Changelog
 
