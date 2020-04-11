@@ -157,6 +157,8 @@ The library's source code can be found on its Github [repository]({{ site.url }}
         <li>
           <a href="{{ site.baseurl }}/stemmers/french">french</a>
           <ul>
+            <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/french#carry">carry</a></em></li>
+            <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/french#eda">eda</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/french#porter">porter</a></em></li>
             <li>&middot; <em><a href="{{ site.baseurl }}/stemmers/french#unine">unine</a></em></li>
           </ul>
