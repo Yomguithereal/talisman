@@ -42,6 +42,10 @@ describe('sonnex', function() {
       ['passionnant', 'pasion2'],
       ['passionnante', 'pasion2t'],
       ['petit', 'peti'],
+      ['écusson', 'Ekus3'],
+      ['robuste', 'robust'],
+      ['usinage', 'uzinaj'],
+      ['intrus', '1tru'],
 
       // Those are hard to define and are not completely satisfactory but hey...
       ['schizophrénie', 'sCizofrEni'],
@@ -112,6 +116,7 @@ describe('sonnex', function() {
       ['quelque', 'quelques'],
       ['mur', 'mûr', 'mûre', 'mure'],
       ['dis', 'dit', 'dix'],
+      ['plus', 'plu'],
       ['tous', 'tout', 'toux'],
       ['si', 's\'y', 'scie']
     ];

@@ -410,7 +410,7 @@ const RULES = {
   u: [
     ['un', '1'],
     ['ussent', 'us'],
-    [/^us(.*)/, (c, cs) => {
+    [/^us(.)(.*)/, (c, cs) => {
       if (c === 's')
         return ['us', cs];
       if (isConsonant(c))
