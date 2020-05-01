@@ -14,7 +14,9 @@ describe('name-sig', function() {
       ['Abdul Hoque', 'abdlhk'],
       ['Mr. Sobuj Saha', 'sbgsh'],
       ['Sree sabuj saha', 'sbgsh'],
-      ['Sree Sobuz saha', 'sbgsh']
+      ['Sree Sobuz saha', 'sbgsh'],
+      ['Marjorie', 'mrgr'],
+      ['Amrishnav', 'amrshnv']
     ];
 
     tests.forEach(function([string, key]) {

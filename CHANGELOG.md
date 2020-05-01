@@ -3,6 +3,7 @@
 ## 1.1.2 (provisional)
 
 * Fixing `phonetics/french/sonnex` (@tuzepoito).
+* Fixing `keyers/name-sig`.
 
 ## 1.1.1
 

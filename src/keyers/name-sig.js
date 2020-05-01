@@ -33,7 +33,7 @@ const TITLES = [
   'Sr'
 ];
 
-const TITLE_REGEX = new RegExp(`(?:${TITLES.join('|')})\.?`, 'gi'),
+const TITLE_REGEX = new RegExp(`(?:${TITLES.join('|')})\\.?\\s+`, 'gi'),
       UNDESIRABLES_REGEX = /[^a-z]/g,
       VOWELS_REGEX = /(\S)[aeiou]+/g,
       WHITESPACE_REGEX = /\s/g;
