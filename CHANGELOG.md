@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2 (provisional)
+
+* Fixing `phonetics/french/sonnex` (@tuzepoito).
+
 ## 1.1.1
 
 * Dropping `.babelrc` from npm package file to avoid bundling issues.
