@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.2 (provisional)
+## 1.1.2
 
 * Fixing `phonetics/french/sonnex` (@tuzepoito).
 * Fixing `keyers/name-sig`.
