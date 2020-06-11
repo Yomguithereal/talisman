@@ -46,4 +46,6 @@ Those building blocks can then be used to perform and improve the following task
 * Record linkage, entity resolution etc.
 * Natural language processing
 
+Finally, one has to note that, being a code library, **Talisman** is able to archive a standardized way to implement some functions and algorithms whose descriptions are known to be somehow unclear, or imprecise, sometimes by consecrating typical implementation used in an industrial context and sometimes by chosing to respect the spirit of the original paper, against a faulty explanation of how the algorithm should behave.
+
 # References
