@@ -1,5 +1,5 @@
 ---
-title: 'Talisman: a JavaScript library of fuzzy matching, information retrieval and record linkage building blocks.'
+title: 'Talisman: a JavaScript archive of fuzzy matching, information retrieval and record linkage building blocks'
 tags:
   - javascript
   - fuzzy matching
@@ -11,6 +11,8 @@ tags:
   - record linkage
   - entity resolution
   - similarity metrics
+  - information retrieval
+  - search engines
   - tokenizers
 authors:
   - name: Guillaume Plique
