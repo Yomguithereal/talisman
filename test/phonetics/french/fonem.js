@@ -136,6 +136,8 @@ describe('fonem', function() {
       ['STE-CROIX', 'STE-KROIX'],
       ['LAVALLEE', 'LAVALE'],
       ['CORINNE', 'KORINE'],
+      ['MACCENCE', 'MAXENSE'],
+      ['MASSON', 'MASSON'],
       ['DUTILE', 'DUTILLE'],
 
       // https://github.com/Yomguithereal/talisman/issues/175
