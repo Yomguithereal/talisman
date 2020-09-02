@@ -142,7 +142,9 @@ describe('fonem', function() {
 
       // https://github.com/Yomguithereal/talisman/issues/175
       ['TYOU', 'TIOU'],
-      ['YOU', 'IOU']
+      ['YOU', 'IOU'],
+      ['ARSSON', 'ARSON'],
+      ['OSSRIN', 'OSRIN']
     ];
 
     tests.forEach(function([name, code]) {
