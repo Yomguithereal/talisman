@@ -136,7 +136,11 @@ describe('fonem', function() {
       ['STE-CROIX', 'STE-KROIX'],
       ['LAVALLEE', 'LAVALE'],
       ['CORINNE', 'KORINE'],
-      ['DUTILE', 'DUTILLE']
+      ['DUTILE', 'DUTILLE'],
+
+      // https://github.com/Yomguithereal/talisman/issues/175
+      ['TYOU', 'TIOU'],
+      ['YOU', 'IOU']
     ];
 
     tests.forEach(function([name, code]) {
