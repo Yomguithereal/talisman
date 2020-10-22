@@ -4,6 +4,7 @@
   "description": "Straightforward fuzzy matching, information retrieval and NLP building blocks for JavaScript.",
   "main": "index.js",
   "scripts": {
+    "bib": "node ./scripts/format-bibliography.js > BIBLIOGRAPHY.md",
     "check": "npm test && npm run lint",
     "clean": "rimraf $npm_package_talisman_folders",
     "dist": "npm run clean && babel src --out-dir ./",
@@ -72,6 +73,7 @@
     "babel-plugin-transform-es2015-destructuring": "^6.6.5",
     "babel-preset-es2015": "^6.6.0",
     "chai": "^4.2.0",
+    "citation-js": "^0.5.0-alpha.9",
     "csv": "^5.3.2",
     "csv-parse": "^4.12.0",
     "eslint": "^7.11.0",
