@@ -27,15 +27,15 @@ bibliography: paper.bib
 
 # Summary
 
-Information retrieval and record linkage have always relied on crafty and heuristical routines aimed at implementing what is often called *fuzzy matching*. Indeed, even if fuzzy logic feels natural to humans, one needs to find various strategies to coerce computers into acknowledging that strings, for instance, are not always strictly delimited. But if some of those techniques, such as the Soundex phonetic algorithm invented by Robert Russell and Margaret King Odell at the beginning of the 20th century, are still well known and used, a lot of them were unfortunately lost to time.
+Information retrieval [@manning2008introduction; @baeza1999modern] and record linkage [@fellegi1969theory; christen_data_2012; herzog_data_2007] have always relied on crafty and heuristical routines aimed at implementing what is often called *fuzzy matching*. Indeed, even if fuzzy logic feels natural to humans, one needs to find various strategies to coerce computers into acknowledging that strings, for instance, are not always strictly delimited. But if some of those techniques, such as the Soundex phonetic algorithm [@odell1956profit] invented at the beginning of the 20th century, are still well known and used, a lot of them were unfortunately lost to time.
 
-As such, the JavaScript library **Talisman** aims at being an archive of a wide variety of techniques that have been used throughout computer sciences' history to perform fuzzy comparisons between words, names, sentences etc. Thus, even if **Talisman** obviously provides state-of-the-art functions that are still being used in an industrial context, it also aims at being a safe harbor for less known or clunkier techniques, for historical and archival purposes.
+As such, the **Talisman** JavaScript library aims at being an archive of a wide variety of techniques that have been used throughout computer sciences' history to perform fuzzy comparisons between words, names, sentences etc. Thus, even if **Talisman** obviously provides state-of-the-art functions that are still being used in an industrial context, it also aims at being a safe harbor for less known or clunkier techniques, for historical and archival purposes.
 
 The library therefore compiles a large array of implementations of the following techniques:
 
 * **keyers**: functions used to normalize strings in order to drop or simplify artifacts that could impair comparisons.
 * **similarity metrics**: functions used to compute a similarity or distance between two strings, such as the Levenshtein distance [@levenshtein1966binary] or the Jaccard similarity [@jaccard1912distribution], etc.
-* **phonetic algorithms**: functions aiming at producing a fuzzy phonetical representation of the given strings to enable comparisons such as the Soundex [@odell1956profit] or the Metaphone [@philips1990hanging], etc.
+* **phonetic algorithms**: functions aiming at producing a fuzzy phonetical representation of the given strings to enable comparisons such as the *Kölner phonetik* [@postel1969kolner] or the *Metaphone* [@philips1990hanging], etc.
 * **stemmers**: functions reducing given strings to a *stem* to ease comparisons of a word's various inflections such as the Porter stemmer [@van1980new], etc.
 * **tokenizers**: functions used to cut strings into relevant pieces such as words, sentences etc.
 
