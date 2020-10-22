@@ -25,6 +25,10 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 * **Performant**: the library should be as performant as possible for a high-level programming language library.
 * **Cross-platform**: the library is cross-platform and can be used both with node.js and in the browser.
 
+## Bibliography
+
+An extensive bibliography of the methods & functions implemented by the library can be found [here](https://github.com/Yomguithereal/talisman/blob/master/BIBLIOGRAPHY.md).
+
 ## List of available modules
 
 *Top level*
