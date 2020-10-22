@@ -34,9 +34,9 @@ As such, the JavaScript library **Talisman** aims at being an archive of a wide 
 The library therefore compiles a large array of implementations of the following techniques:
 
 * **keyers**: functions used to normalize strings in order to drop or simplify artifacts that could impair comparisons.
-* **similarity metrics**: functions used to compute a similarity or distance between two strings, such as the Levenshtein distance, for instance.
-* **phonetic algorithms**: functions aiming at producing a fuzzy phonetical representation of the given strings to enable comparisons.
-* **stemmers**: functions reducing given strings to a *stem* to ease comparisons of a word's various inflections.
+* **similarity metrics**: functions used to compute a similarity or distance between two strings, such as the Levenshtein distance [@levenshtein1966binary] or the Jaccard similarity [@jaccard1912distribution], etc.
+* **phonetic algorithms**: functions aiming at producing a fuzzy phonetical representation of the given strings to enable comparisons such as the Soundex [@odell1956profit] or the Metaphone [@philips1990hanging], etc.
+* **stemmers**: functions reducing given strings to a *stem* to ease comparisons of a word's various inflections such as the Porter stemmer [@van1980new], etc.
 * **tokenizers**: functions used to cut strings into relevant pieces such as words, sentences etc.
 
 Those building blocks can then be used to perform and improve the following tasks:
@@ -47,5 +47,12 @@ Those building blocks can then be used to perform and improve the following task
 * Natural language processing
 
 Finally, one should note that, being a code library, **Talisman** is able to archive a standardized way to implement some functions and algorithms whose descriptions are known to be somehow unclear, or imprecise, sometimes by consecrating typical implementation used in an industrial context and sometimes by chosing to respect the spirit of the original paper, against a faulty explanation of how the algorithm should behave.
+
+# Related works
+
+* [abydos](https://github.com/chrislit/abydos): a python library implementing similar utilities.
+* [java-string-similarity](https://github.com/tdebatty/java-string-similarity): a Java library implementing string similarity function.
+* [OpenRefine](https://openrefine.org/): a fully-fledged application designed to apply similar methods to typical data cleaning tasks.
+* [clj-fuzzy](https://github.com/Yomguithereal/clj-fuzzy): a Clojure library which stands as an earlier version of **Talisman**
 
 # References
