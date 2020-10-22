@@ -29,6 +29,21 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 An extensive bibliography of the methods & functions implemented by the library can be found [here](https://github.com/Yomguithereal/talisman/blob/master/BIBLIOGRAPHY.md).
 
+## Importing modules
+
+Since **Talisman** is a large library, and to ensure to you will only load code that is relevant to your use case in order not to needlessly bloat your browser bundles, this documentation's examples encourage you to import modules one at a time thusly:
+
+```js
+import levenshtein from 'talisman/metrics/levenshtein';
+```
+
+Note also that even if all of this documentation's examples use [ES imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), the library remains completely consumable using [CommonJS](https://nodejs.org/docs/latest/api/modules.html) as used by Node.js with the `require` function:
+
+```js
+// This is the same as above
+const levenshtein = require('talisman/metrics/levenshtein');
+```
+
 ## List of available modules
 
 *Top level*
