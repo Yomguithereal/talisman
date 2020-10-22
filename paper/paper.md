@@ -51,7 +51,7 @@ Finally, one should note that, being a code library, **Talisman** is able to arc
 # Related works
 
 * [abydos](https://github.com/chrislit/abydos): a python library implementing similar utilities.
-* [java-string-similarity](https://github.com/tdebatty/java-string-similarity): a Java library implementing string similarity function.
+* [java-string-similarity](https://github.com/tdebatty/java-string-similarity), [stringdistance](https://github.com/vickumar1981/stringdistance): Java libraries implementing string distance/similarity functions.
 * [OpenRefine](https://openrefine.org/): a fully-fledged application designed to apply similar methods to typical data cleaning tasks.
 * [clj-fuzzy](https://github.com/Yomguithereal/clj-fuzzy): a Clojure library which stands as an earlier version of **Talisman**
 
