@@ -18,6 +18,10 @@ npm install talisman
 
 The library's full documentation can be found [here](https://yomguithereal.github.io/talisman/).
 
+## Bibliography
+
+An extensive bibliography of the methods & functions implemented by the library can be found [here](./BIBLIOGRAPHY.md).
+
 ## Goals
 
 * :package: **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
