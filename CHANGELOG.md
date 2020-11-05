@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+* Initial JOSS release.
+
 ## 1.1.2
 
 * Fixing `phonetics/french/sonnex` (@tuzepoito).
