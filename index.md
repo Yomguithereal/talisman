@@ -29,6 +29,10 @@ The library's source code can be found on its Github [repository]({{ site.url }}
 
 An extensive bibliography of the methods & functions implemented by the library can be found [here](https://github.com/Yomguithereal/talisman/blob/master/BIBLIOGRAPHY.md).
 
+## How to cite
+
+**Talisman** has been published as a [paper](https://joss.theoj.org/papers/10.21105/joss.02405) on the [Journal Of Open Source Software (JOSS)](https://joss.theoj.org/).
+
 ## Importing modules
 
 Since **Talisman** is a large library, and to ensure to you will only load code that is relevant to your use case in order not to needlessly bloat your browser bundles, this documentation's examples encourage you to import modules one at a time thusly:
