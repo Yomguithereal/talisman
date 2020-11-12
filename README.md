@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Yomguithereal/talisman.svg)](https://travis-ci.org/Yomguithereal/talisman)
+[![Build Status](https://travis-ci.org/Yomguithereal/talisman.svg)](https://travis-ci.org/Yomguithereal/talisman) [![DOI](https://joss.theoj.org/papers/10.21105/joss.02405/status.svg)](https://doi.org/10.21105/joss.02405)
 
 # Talisman
 
@@ -30,6 +30,10 @@ An extensive bibliography of the methods & functions implemented by the library 
 * :postal_horn: **Functional**: except for cases where classes might be useful (clustering notably), *Talisman* only uses functions, consumes raw data and order functions' arguments to make partial application & currying etc. as easy as possible.
 * :zap: **Performant**: the library should be as performant as possible for a high-level programming language library.
 * :globe_with_meridians: **Cross-platform**: the library is cross-platform and can be used both with Node.js and in the browser.
+
+## How to cite
+
+**Talisman** has been published as a [paper](https://joss.theoj.org/papers/10.21105/joss.02405) on the [Journal Of Open Source Software (JOSS)](https://joss.theoj.org/).
 
 ## Contribution
 
