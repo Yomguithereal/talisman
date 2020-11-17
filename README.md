@@ -25,7 +25,7 @@ An extensive bibliography of the methods & functions implemented by the library 
 ## Goals
 
 * :package: **Modular**: the library is completely modular. This means that if you only need to compute a `levenshtein` distance, you will only load the relevant code.
-* :bulb: **Straightfoward & simple**: just want to compute a Jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
+* :bulb: **Straightforward & simple**: just want to compute a Jaccard index? No need to instantiate a class and use two methods to pass options and then finally succeed in getting the index. Just apply the `jaccard` function and get going.
 * :dango: **Consistent API**: the library's API is fully consistent and one should not struggle to understand how to apply two different distance metrics.
 * :postal_horn: **Functional**: except for cases where classes might be useful (clustering notably), *Talisman* only uses functions, consumes raw data and order functions' arguments to make partial application & currying etc. as easy as possible.
 * :zap: **Performant**: the library should be as performant as possible for a high-level programming language library.
