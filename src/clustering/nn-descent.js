@@ -15,7 +15,7 @@
  */
 import RecordLinkageClusterer from './abstract';
 import {createChoice} from 'pandemonium/choice';
-import {createDangerousButPerformantSample} from 'pandemonium/dangerous-but-performant-sample';
+import {createGeometricReservoirSample} from 'pandemonium/geometric-reservoir-sample';
 
 // TODO: JSDoc
 
@@ -76,7 +76,7 @@ export class NNDescentClusterer extends RecordLinkageClusterer {
     if (typeof this.rng !== 'function')
       throw new Error('talisman/clustering/record-linkage/nn-descent: rng should be a function.');
 
-    this.sampleFunction = createDangerousButPerformantSample(this.rng);
+    this.sampleFunction = createGeometricReservoirSample(this.rng);
     this.choiceFunction = createChoice(this.rng);
 
     // Checking k
