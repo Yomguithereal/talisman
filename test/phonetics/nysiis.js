@@ -27,7 +27,8 @@ describe('nysiis', function() {
       ['LANDGRAN', 'Lundgren'],
       ['FFALBAD', 'Philbert'],
       ['HARY', 'Harry'],
-      ['MCANSY', 'Mackenzie']
+      ['MCANSY', 'Mackenzie'],
+      ['ANAD', 'ANANND']
     ];
 
     tests.forEach(function([code, word]) {
@@ -48,7 +49,8 @@ describe('nysiis', function() {
       ['LANGRAN', 'Lundgren'],
       ['FALBAD', 'Philbert'],
       ['HARY', 'Harry'],
-      ['MCANSY', 'Mackenzie']
+      ['MCANSY', 'Mackenzie'],
+      ['ANAD', 'ANANND']
     ];
 
     tests.forEach(function([code, word]) {

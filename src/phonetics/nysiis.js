@@ -24,7 +24,7 @@ const PATTERNS = {
       [/^(PH|PF)/g, 'FF'],
       [/^SCH/g, 'SSS'],
       [/(EE|IE)$/g, 'Y'],
-      [/(DT|RT|RD|NT|ND)$/g, 'D'],
+      [/(DT|RT|R+D|N+T|N+D)$/g, 'D'],
     ],
     second: [
       [/EV/g, 'AF'],
@@ -53,7 +53,7 @@ const PATTERNS = {
       [/IX$/g, 'IC'],
       [/EX$/g, 'EC'],
       [/(YE|EE|IE)/g, 'Y'],
-      [/(DT|RT|RD|NT|ND)$/g, 'D'],
+      [/(DT|RT|R+D|N+T|N+D)$/g, 'D'],
       [/(.+)EV/g, '$1EF'],
     ],
     second: [
