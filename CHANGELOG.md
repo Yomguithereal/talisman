@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.4
+
+* Fixing `phonetics/nysiis`.
+
 ## 1.1.3
 
 * Initial JOSS release.
