@@ -63,6 +63,11 @@ describe('gersam', function() {
         lang: 'fr',
         text: 'Les É.U. sont nuls.',
         tokens: ['Les', 'É.U.', 'sont', 'nuls', '.']
+      },
+      {
+        lang: 'en',
+        text: 'This is a very nice cat 🐱! No?',
+        tokens: ['This', 'is', 'a', 'very', 'nice', 'cat', '🐱', '!', 'No', '?']
       }
     ];
 
