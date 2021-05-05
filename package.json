@@ -6,10 +6,11 @@
   "scripts": {
     "bib": "node ./scripts/format-bibliography.js > BIBLIOGRAPHY.md",
     "check": "npm test && npm run lint",
-    "clean": "rimraf $npm_package_talisman_folders",
+    "clean": "rimraf $npm_package_config_folders",
     "dist": "npm run clean && babel src --out-dir ./",
     "lint": "eslint src test",
     "prepublish": "npm run lint && npm test && npm run dist",
+    "prepublishOnly": "npm run prepublish",
     "postpublish": "npm run clean",
     "test": "mocha --require babel-core/register -R spec ./test/endpoint.js"
   },
@@ -17,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/yomguithereal/talisman.git"
   },
-  "talisman": {
+  "config": {
     "folders": "clustering hash helpers inflectors keyers keyword-extraction metrics parsers phonetics regexp stemmers tokenizers"
   },
   "keywords": [
