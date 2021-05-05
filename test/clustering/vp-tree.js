@@ -29,6 +29,16 @@ const COMPLEX = [
   'abcdefg'
 ];
 
+function serializeClusters(clusters) {
+  const result = new Set();
+
+  clusters.forEach(cluster => {
+    result.add(cluster.sort().join('$'));
+  });
+
+  return result;
+}
+
 describe('vp-tree', function() {
 
   it('should throw if the arguments are invalid.', function() {
@@ -47,12 +57,12 @@ describe('vp-tree', function() {
       radius: 2
     }, CHAIN);
 
-    assert.deepEqual(clusters, [
+    assert.deepStrictEqual(serializeClusters(clusters), serializeClusters([
       ['bcd', 'abc'],
       ['def', 'cde', 'bcd'],
       ['fgh', 'efg', 'def'],
       ['ghi', 'fgh']
-    ]);
+    ]));
   });
 
   it('should correctly cluster complex data.', function() {
@@ -61,10 +71,10 @@ describe('vp-tree', function() {
       radius: 2
     }, COMPLEX);
 
-    assert.deepEqual(clusters, [
+    assert.deepStrictEqual(serializeClusters(clusters), serializeClusters([
       ['abcde', 'bd', 'abc', 'abc'],
       ['abcde', 'bcde', 'bde', 'bd', 'bde'],
       ['abcdefg', 'abcdef', 'bcde', 'abcde']
-    ]);
+    ]));
   });
 });
