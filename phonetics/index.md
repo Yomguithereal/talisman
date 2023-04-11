@@ -417,7 +417,7 @@ You are also free to use the refined version of this algorithm, as found in the 
 ```js
 import soundex from 'talisman/phonetics/soundex';
 // Alternatively
-import {refined} from 'talisman/phonetics/refined';
+import {refined} from 'talisman/phonetics/soundex';
 
 soundex('Michael');
 >>> 'M240'
