@@ -196,7 +196,7 @@ doubleMetaphone('Smith');
 
 Eudex is a phonetic hashing algorithm that will produce a 64bits integer holding information about the given word.
 
-The produced hashed can be used afterwards by specific [distance metrics]({{ site.baseurl }}/metrics/distance#eudex) to determine whether two given words seem phonetically similar or not.
+The produced hashed can be used afterwards by specific [distance metrics]({{ site.baseurl }}/metrics/#eudex) to determine whether two given words seem phonetically similar or not.
 
 **Important**: this function will return a 64bits integer wrapped in a `Long` object from the [long](https://www.npmjs.com/package/long) node library since JavaScript is natively unable to deal with such integers.
 
