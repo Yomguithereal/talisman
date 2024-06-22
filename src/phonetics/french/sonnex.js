@@ -70,7 +70,7 @@ const RULES = {
     ['a', 'a'],
     ['aient', 'E'],
     ['ain', '1'],
-    [/ain(.)(.*)$/, (v, cs) => {
+    [/^ain(.)(.*)/, (v, cs) => {
       if (isVowel(v))
         return ['E', v + cs];
       return ['1', v + cs];
