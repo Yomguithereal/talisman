@@ -59,7 +59,7 @@ export default function soundex2(name) {
 
   let code = deburr(name.trim())
     .toUpperCase()
-    .replace(/[^A-Z]/, '');
+    .replace(/[^A-Z]/g, '');
 
   // Replacing some letter groups
   for (let i = 0, l = GROUPS.length; i < l; i++)

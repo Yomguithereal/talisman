@@ -49,4 +49,18 @@ describe('soundex2', function() {
 
     assert.strictEqual(soundex2('Faure'), soundex2('Phaure'));
   });
+
+  it('should ignore every non-letter.', function() {
+    [
+      ['c(o)lin', 'KLN'],
+      ['c+o-limasson', 'KLMS'],
+      ['c!!o--lin', 'KLN'],
+      ['c1 2o-limasson', 'KLMS'],
+      ['c(o)lín', 'KLN'],
+      ['', ''],
+      ['123 -!?', '']
+    ].forEach(function([word, code]) {
+      assert.strictEqual(soundex2(word), code, `${word} => ${code}`);
+    });
+  });
 });
