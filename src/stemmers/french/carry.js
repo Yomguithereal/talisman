@@ -26,7 +26,7 @@ const VOWELS = 'aeiouyâàëéêèïîôûùœæ',
 
 const LC = new RegExp(`^${C}+`),
       TV = new RegExp(`${V}+$`),
-      M = new RegExp(`(${V}+${C}+)`);
+      M = new RegExp(`(${V}+${C}+)`, 'g');
 
 /**
  * Helpers.
