@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.5
+
+* Fixing `phonetics/french/soundex2` wrt non-alphabetic characters.
+* Fixing `stemmers/french/carry`.
+
 ## 1.1.4
 
 * Fixing `phonetics/nysiis`.
