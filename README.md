@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Yomguithereal/talisman.svg)](https://travis-ci.org/Yomguithereal/talisman) [![DOI](https://joss.theoj.org/papers/10.21105/joss.02405/status.svg)](https://doi.org/10.21105/joss.02405)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02405/status.svg)](https://doi.org/10.21105/joss.02405)
 
 # Talisman
 
