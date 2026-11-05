@@ -16,7 +16,7 @@ import {escapeRegexp} from '../../regexp';
  */
 const WHITESPACE = /\s+/g,
       DIGITS = /\d/g,
-      PUNCTUATION_CONTROL = new RegExp('[\\u2000-\\u206F\\u2E00-\\u2E7F\'!"#$%&()*+,\\-.\\/:;<=>?@\\[\\]^_`{|}~\\x00-\\x08\\x0A-\\x1F\\x7F]', 'g');
+      PUNCTUATION_CONTROL = new RegExp('[\\u00AB\\u00BB\\u2000-\\u206F\\u2E00-\\u2E7F\'!"#$%&()*+,\\-.\\/:;<=>?@\\[\\]^_`{|}~\\x00-\\x08\\x0A-\\x1F\\x7F]', 'g');
 
 /**
  * Defaults.

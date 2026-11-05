@@ -22,7 +22,12 @@ describe('fingerprint', function() {
       ['The mouse is a mouse', 'a is mouse the'],
       ['électricité', 'electricite'],
       ['\x00Hello', 'hello'],
-      ['Hello?', 'hello']
+      ['Hello?', 'hello'],
+      ['"très bien!"', 'bien tres'],
+      ['« très bien ! »', 'bien tres'],
+      ['«très bien»', 'bien tres'],
+      ['«très bien', 'bien tres'],
+      ['très bien»', 'bien tres']
     ];
 
     tests.forEach(function([string, key]) {
@@ -37,7 +42,11 @@ describe('fingerprint', function() {
       [2, 'Paris', 'arispari'],
       [1, 'Paris', 'aiprs'],
       [2, 'bébé', 'beeb'],
-      [3, 'PariS', 'ariparris']
+      [3, 'PariS', 'ariparris'],
+      [2, '« très bien ! »', 'bienesieresbtr'],
+      [2, '«Paris»', 'arispari'],
+      [2, '«Paris', 'arispari'],
+      [2, 'Paris»', 'arispari']
     ];
 
     tests.forEach(function([n, string, key]) {
