@@ -134,7 +134,8 @@ const RULES = {
     ['c', ''],
     [/^c(a.*)/, 'k'],
     [/^cc(.)(.*)/, (v, cs) => {
-      if (v === 'o' || v === 'u')
+// NOTE: adding 'a' for words like 'accabler', 'impeccable', etc.
+      if (v === 'a' || v === 'o' || v === 'u')
         return ['k', v + cs];
       return ['ks', cs];
     }],
