@@ -205,10 +205,9 @@ export default function eudex(word) {
   firstByte = new Long(firstByte);
 
   let res = Long.UZERO,
-      n = 0,
-      b = 1;
+      n = 0;
 
-  while (n < 8 && b < array.length) {
+  for (let b = 1; n < 8 && b < array.length; b++) {
     entry = ((array[b] | 32) - A) & 0xFF;
 
     if (entry <= Z) {
@@ -227,8 +226,6 @@ export default function eudex(word) {
         n++;
       }
     }
-
-    b++;
   }
 
   return res.or(firstByte.shiftLeft(56));

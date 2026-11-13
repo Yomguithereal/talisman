@@ -8,6 +8,17 @@ import eudex from '../../src/phonetics/eudex';
 
 describe('eudex', function() {
 
+  it('should skip unsupported characters without getting stuck.', function() {
+    const characters = '[\\]^_{|}~\u00a0\u00a9\u00bf';
+
+    characters.split('').forEach(function(character) {
+      assert(eudex(`co${character}mputer`).equals(eudex('computer')));
+      assert(eudex(`computer${character}`).equals(eudex('computer')));
+      assert(eudex(character.repeat(16)).isZero());
+      assert(eudex(`co${character.repeat(16)}mputer`).equals(eudex('computer')));
+    });
+  });
+
   it('should produce correct hashes.', function() {
 
     const identicalHashes = [
