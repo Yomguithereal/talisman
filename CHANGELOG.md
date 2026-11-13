@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.6 (provisional)
+## 1.1.6
 
 * Fixing `phonetics/eudex` non-termination when processing special characters.
 * Fixing `phonetics/soundex`.
