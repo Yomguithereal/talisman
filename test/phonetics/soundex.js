@@ -39,7 +39,13 @@ describe('soundex', function() {
       ['B634', 'Barthélémy'],
       ['H560', 'Henry'],
       ['M450', 'Moulin'],
-      ['R200', 'Rousseau']
+      ['R200', 'Rousseau'],
+      ['W252', 'Washington'],
+      ['L000', 'Lee'],
+      ['L000', 'L'],
+      ['G362', 'Gutierrez'],
+      ['J250', 'Jackson'],
+      ['S150', 'Szczepan']
     ];
 
     tests.forEach(function([code, word]) {

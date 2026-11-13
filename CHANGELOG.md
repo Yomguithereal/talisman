@@ -3,6 +3,7 @@
 ## 1.1.6 (provisional)
 
 * Fixing `phonetics/eudex` non-termination when processing special characters.
+* Fixing `phonetics/soundex`.
 
 ## 1.1.5
 
