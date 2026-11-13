@@ -59,12 +59,14 @@ export default function soundex(name) {
       tail += TRANSLATIONS[name[i]];
   }
 
-  // Dropping first code's letter if duplicate
+  // Collapse duplicates before dropping the code matching the first letter
+  tail = squeeze(tail);
+
   if (tail.charAt(0) === TRANSLATIONS[firstLetter])
     tail = tail.slice(1);
 
   // Composing the code from the tail
-  const code = squeeze(tail).replace(/0/g, '');
+  const code = tail.replace(/0/g, '');
 
   return pad(firstLetter + code);
 }

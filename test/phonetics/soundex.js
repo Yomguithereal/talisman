@@ -47,6 +47,39 @@ describe('soundex', function() {
     });
   });
 
+  it('should collapse a run of consonants matching the first letter.', function() {
+    const tests = [
+      ['S150', 'Szczepan'],
+      ['S530', 'Sssmith'],
+      ['P236', 'Pffister'],
+      ['B650', 'Bbbrown'],
+      ['D460', 'Ddtaylor'],
+      ['L300', 'Llloyd'],
+      ['M460', 'Mnmiller'],
+      ['R163', 'Rrrupert'],
+      ['B650', 'Bhwbfrown']
+    ];
+
+    tests.forEach(function([code, word]) {
+      assert.strictEqual(soundex(word), code, `${word} => ${code}`);
+    });
+  });
+
+  it('should retain same-code consonants separated from the first letter by a vowel.', function() {
+    const tests = [
+      ['B165', 'Babbrown'],
+      ['B165', 'Bebbrown'],
+      ['B165', 'Bibbrown'],
+      ['B165', 'Bobbrown'],
+      ['B165', 'Bubbrown'],
+      ['B165', 'Bybbrown']
+    ];
+
+    tests.forEach(function([code, word]) {
+      assert.strictEqual(soundex(word), code, `${word} => ${code}`);
+    });
+  });
+
   it('should compute the refined soundex code correctly.', function() {
     const tests = [
       ['T6036084', 'testing'],
