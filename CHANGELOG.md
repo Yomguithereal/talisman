@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.6 (provisional)
+
+* Fixing `phonetics/eudex` non-termination when processing special characters.
+
 ## 1.1.5
 
 * Fixing `phonetics/french/soundex2` wrt non-alphabetic characters.

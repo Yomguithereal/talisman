@@ -21,7 +21,8 @@ describe('eudex', function() {
       ['riiiindom', 'ryyyyyndom'],
       ['riyiyiiindom', 'ryyyyyndom'],
       ['triggered', 'TRIGGERED'],
-      ['repert', 'ropert']
+      ['repert', 'ropert'],
+      ['trad[ition', 'tradition']
     ];
 
     identicalHashes.forEach(function([one, two]) {
@@ -38,7 +39,8 @@ describe('eudex', function() {
       ['rupirt', 'ropert'],
       ['ripert', 'ropyrt'],
       ['rrr', 'rraaaa'],
-      ['randomal', 'randomai']
+      ['randomal', 'randomai'],
+      ['t[radition', 't[adition']
     ];
 
     differentHashes.forEach(function([one, two]) {
